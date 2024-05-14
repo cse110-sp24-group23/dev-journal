@@ -7,12 +7,16 @@ assignees: ''
 
 ---
 
-** Requirements **
+**Requirements**
 Put your requirements for the task here
 
+**Sub-Issue**
+Make sure to link these issues.
 
-** Prerequisite issues, if any **
-Put any prereq issues (include their number) here
+**Parent Issue**
+If this is a child issue, link the main issue here.
 
-** Is this a prerequisite for other issues? **
-If yes, put their issue number here as soon as they are created
+**Blocked By**
+Note any issues that need to be completed before this one.
+
+**Additional Context**

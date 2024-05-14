@@ -7,14 +7,17 @@ assignees: ''
 
 ---
 
-**Feature to be implemented.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+**Feature Description**
+A clear and concise description of what the problem is.
 
-**Prerequisite issues*
-Make sure to include the issue number.
+**Sub-Issue**
+Make sure to link these issues.
 
-**Is this issue a prerequisite for any other issues?**
-If so, make sure to include the issue number as soon as it's created.
+**Parent Issue**
+If this is a child issue, link the main issue here.
+
+**Blocked By**
+Note any issues that need to be completed before this one. 
 
 **Additional context**
 Add any other context or screenshots about the feature request here.

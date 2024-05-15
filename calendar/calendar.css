@@ -1,0 +1,17 @@
+.calendar-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.calendar-table td {
+    text-align: center;
+}
+
+thead {
+    color: rgb(224, 113, 131);
+}
+
+.calendar-table th,
+.calendar-table td {
+    border: 1px solid;
+}

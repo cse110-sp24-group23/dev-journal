@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Daily Log</title>
+    </head>
+    <body>
+        <main>
+            <!-- Heading: Date -->
+            <h1>Date:</h1>
+            <form>
+                <!-- Form to wrap the whole daily log -->
+                <p>What did you get done today?</p>
+                <label for="done-today">
+                    <!-- used textarea to input what was done today -->
+                    <textarea
+                        name="done-today"
+                        id="done-today"
+                        cols="30"
+                        rows="10"
+                        placeholder="Enter text here:"
+                    ></textarea>
+                </label>
+                <br />
+                <label for="hours">
+                    <!-- input number for hours with step 0.25 -->
+                    Enter hours here:
+                    <input type="number" step="0.25" id="hours" name="hours" />
+                </label>
+                <p>Reflection</p>
+                <label for="reflection">
+                    <!-- textarea for reflection -->
+                    <textarea
+                        name="reflection"
+                        id="reflection"
+                        cols="30"
+                        rows="10"
+                        placeholder="What did you learn?       
+What challenges did you face?
+What things can you do in the future?"
+                    ></textarea>
+                </label>
+                <br />
+                <!-- button to save log -->
+                <button type="button" id="save-button">Save</button>
+                <br />
+                <!-- button for back button -->
+                <button type="button" id="back-button">Back to Calendar</button>
+            </form>
+        </main>
+    </body>
+</html>

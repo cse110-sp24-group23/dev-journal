@@ -1,5 +1,3 @@
-Here is the content of the style guide turned into a Markdown file:
-
 ```markdown
 # Style Guide for Web Application
 

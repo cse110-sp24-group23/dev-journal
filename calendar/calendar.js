@@ -5,7 +5,6 @@
     Returns: None
 */
 async function dateLink(link) {
-
     //Link to daily log page for the specific day that was clicked
 
     //First time clicking a date: creates a new Daily Log page for it
@@ -32,17 +31,17 @@ async function dateLink(link) {
     Returns: None
 */
 function todaysDate() {
-    // gets date like "2022-06-17"
+    // gets date like "2022/06/17"
     let currentDate = new Date()
         .toLocaleString("en", {
             timeZone: "US/Pacific",
         })
-        .slice(2, 4); 
+        .slice(2, 4);
 
     //gets all days of the month from calendar
     let cells = document.querySelectorAll(".js-calendar-table td");
 
-    //styles the current day of the month 
+    //checks and styles the current day of the month
     console.log(currentDate);
     for (let cell of cells) {
         if (cell.textContent === currentDate) {

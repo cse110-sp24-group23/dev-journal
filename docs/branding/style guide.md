@@ -29,5 +29,3 @@ For the styles listed below, the layout may change as the user switches from web
 
 - **Margins and Padding:** Standardize spacing across all pages to create a uniform look. Suggest 15px for padding in containers and 20px between sections.
 ```
-
-You can copy and paste this text into a Markdown file (e.g., `STYLE_GUIDE.md`) for your GitHub repository.

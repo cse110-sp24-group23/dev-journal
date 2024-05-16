@@ -1,16 +1,20 @@
+/* Adjustable Calendar */
 .calendar-table {
     border-collapse: collapse;
     width: 100%;
 }
 
-.calendar-table td {
-    text-align: center;
-}
-
+/* Days of the Week */
 thead {
     color: rgb(224, 113, 131);
 }
 
+/* Day of the Month  */
+.calendar-table td {
+    text-align: center;
+}
+
+/* Calendar border */
 .calendar-table th,
 .calendar-table td {
     border: 1px solid;

@@ -1,12 +1,10 @@
 /*
-Opens a new Daily Log page for the day that was clicked 
-Parameters:
-- link: receives a link of the page of the Daily Log associated with it 
-Returns:
-- None
+    dateLink(): Opens a new Daily Log page for the day that was clicked 
+    Parameters:
+    - link: receives a link of the page of the Daily Log associated with it 
+    Returns: None
 */
 async function dateLink(link) {
-    //alert("You clicked on " + link.textContent)
 
     //Link to daily log page for the specific day that was clicked
 
@@ -28,15 +26,23 @@ async function dateLink(link) {
     }
 }
 
+/*
+    todaysDate(): Indicate the current date
+    Parameters: None
+    Returns: None
+*/
 function todaysDate() {
+    // gets date like "2022-06-17"
     let currentDate = new Date()
         .toLocaleString("en", {
             timeZone: "US/Pacific",
         })
-        .slice(2, 4); // gets date like "2022-06-17"
+        .slice(2, 4); 
 
+    //gets all days of the month from calendar
     let cells = document.querySelectorAll(".js-calendar-table td");
 
+    //styles the current day of the month 
     console.log(currentDate);
     for (let cell of cells) {
         if (cell.textContent === currentDate) {

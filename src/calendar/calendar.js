@@ -1,20 +1,20 @@
 /*
     dateLink(): Opens a new Daily Log page for the day that was clicked 
-    Parameters:
-    - link: receives a link of the page of the Daily Log associated with it 
+    Parameters: None
     Returns: None
 */
-async function dateLink(link) {
+async function dateLink() {
     //Link to daily log page for the specific day that was clicked
-
     //First time clicking a date: creates a new Daily Log page for it
     try {
-        let response = await fetch("../dailyLog/index.html"); //path to the html boiler plate, please update it changed
-        let htmlDailyLog = await response.text(); //get the html out of the response, if successful
-        let newDailyLog = document.createElement("link-for-date"); //creating a new element,
-        //later when the storage is up we have to go through all of them and maybe match id or date?
+        const response = await fetch("../dailyLog/index.html"); //path to the html boiler plate, please update if changed
+        const htmlDailyLog = await response.text(); //get the html out of the response, if successful
+        const newDailyLog = document.createElement("link-for-date"); //creating a new element for daily log,
+        //later when the storage is up, we have to go through all of them and maybe match id or date?
+
+        // !! add classname when months are done to assist saving.
         newDailyLog.innerHTML = htmlDailyLog;
-        let main = document.querySelector("main"); //reference to main element
+        const main = document.querySelector("main"); //reference to main element
         main.append(newDailyLog); //add daily log to main
         for (let i = 0; i < main.children.length - 1; i++) {
             main.children[i].style.display = "none"; //hide other elements, only works when the current addedlog is the last one
@@ -22,6 +22,18 @@ async function dateLink(link) {
         }
     } catch (error) {
         console.error("Error fetching daily log:", error);
+    }
+}
+
+/*
+    addClickToDays(): Adds event listeners to each date. 
+    Parameters: None
+    Returns: None
+*/
+function addClickToDays() {
+    const calendarDays = document.querySelectorAll(".js-calendar-day");
+    for (let day of calendarDays) {
+        day.addEventListener("click", dateLink);
     }
 }
 
@@ -39,17 +51,17 @@ function todaysDate() {
         .slice(2, 4);
 
     //gets all days of the month from calendar
-    let cells = document.querySelectorAll(".js-calendar-table td");
+    const cells = document.querySelectorAll(".js-calendar-table td");
 
     //checks and styles the current day of the month
-    console.log(currentDate);
     for (let cell of cells) {
         if (cell.textContent === currentDate) {
-            cell.style.backgroundColor = "lightBlue";
+            cell.classList.add("current-date");
         }
     }
 }
 
 window.onload = function () {
     todaysDate();
+    addClickToDays();
 };

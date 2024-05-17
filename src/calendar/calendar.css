@@ -19,3 +19,8 @@ thead {
 .calendar-table td {
     border: 1px solid;
 }
+
+/* Current Date */
+.current-date {
+    background-color: lightblue;
+}

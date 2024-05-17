@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "description": "Dev Journal Project CSE 110",
     "scripts": {
-      "unittest": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/unit/",
-      "integrationtest" : "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/integration/"
+      "unittest": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/unit/",
+      "integrationtest" : "node --experimental-vm-modules node_modules/jest/bin/jest.js test/integration/"
     },
     "devDependencies": {
       "jest": "^27.0.0"

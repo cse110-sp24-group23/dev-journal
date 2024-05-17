@@ -1,0 +1,35 @@
+/* Navbar */
+.app-title {
+    color: #333333;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+/* Navbar */
+.navbar {
+    width: 250px;
+    height: 100vh;
+    background-color: #f4f4f4;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+/* Navigation list */
+.nav-list {
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+/* Navigation text */
+.nav-text {
+    padding-top: 15px;
+}
+
+/* Navigation links */
+.nav-link {
+    text-decoration: none;
+    color: #333333;
+    font-size: 21px;
+}

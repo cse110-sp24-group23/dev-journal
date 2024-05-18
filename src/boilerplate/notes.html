@@ -29,6 +29,12 @@
         .sidebar ul li {
             margin: 10px 0;
             cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .sidebar ul li.active, .sidebar ul li:hover {
+            background-color: #f0f4f8;
+            color: #7d5a5a;
         }
         .content {
             flex-grow: 1;
@@ -109,11 +115,11 @@
 <body>
     <div class="sidebar">
         <h2>Noted</h2>
-        <ul>
-            <li>Calendar</li>
-            <li>Today</li>
-            <li>Notes</li>
-            <li>Accomplishments</li>
+        <ul id="navList">
+            <li class="nav-item active">Calendar</li>
+            <li class="nav-item">Today</li>
+            <li class="nav-item">Notes</li>
+            <li class="nav-item">Accomplishments</li>
         </ul>
     </div>
     <div class="content">
@@ -207,5 +213,18 @@
             </div>
         </div>
     </div>
+    <script>
+        // JavaScript to handle active class on navigation items
+        const navItems = document.querySelectorAll('.nav-item');
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all items
+                navItems.forEach(nav => nav.classList.remove('active'));
+                // Add active class to the clicked item
+                item.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>

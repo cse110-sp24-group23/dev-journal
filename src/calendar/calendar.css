@@ -1,3 +1,9 @@
+:root {
+    --table-head-color: rgb(224, 113, 131);
+    --today-background-color: lightblue;
+    --rolover-date-color: gray;
+}
+
 /* Adjustable Calendar */
 .calendar-table {
     border-collapse: collapse;
@@ -6,7 +12,7 @@
 
 /* Days of the Week */
 thead {
-    color: rgb(224, 113, 131);
+    color: var(--table-head-color);
 }
 
 /* Day of the Month  */
@@ -22,5 +28,9 @@ thead {
 
 /* Current Date */
 .current-date {
-    background-color: lightblue;
+    background-color: var(--today-background-color);
+}
+
+.rollover-date {
+    color: var(--rolover-date-color);
 }

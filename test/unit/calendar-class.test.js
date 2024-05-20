@@ -1,5 +1,5 @@
 import expect from "expect";
-import { Calendar } from "../src/calendar/calendar-class.js";
+import { Calendar } from "../../src/calendar/calendar-class.js";
 
 describe("Calendar Class Unit Tests", () => {
     // create a new instance of the Calendar class, with elements to edit being
@@ -7,6 +7,24 @@ describe("Calendar Class Unit Tests", () => {
     // This is because we don't test it's UI updates (that's for E2E testing)
     // and we don't want it to keep running after tests are complete (while checking for midnight)
     const calendar = new Calendar(null, Array(42), false);
+
+    /*
+    test constructor: given an html element for the header, one for a list of elements of calendar Day cells, and an optional asyncUpdate parameter for updating dates (set to false here), 
+    initialize private member variables on current and displayed dates
+    */
+    test("test constructor refreshes date", () => {
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth();
+        const currentDate = now.getDate();
+        // check current dates got initialized
+        expect(calendar._currentYear).toBe(currentYear);
+        expect(calendar._currentMonth).toBe(currentMonth);
+        expect(calendar._currentDate).toBe(currentDate);
+        // check displayed dates got initialized
+        expect(calendar._displayedYear).toBe(currentYear);
+        expect(calendar._displayedMonth).toBe(currentMonth);
+    });
 
     // test _handleMonthInput: takes in int, returns int between 0, 11 inclusive
     test("Test _handleMonthInput", () => {
@@ -47,24 +65,14 @@ describe("Calendar Class Unit Tests", () => {
     // test _getMonthLastDay: given a YearInt and monthInt, returns a day (0->6) inclusive
     test("test _getMonthLastDay gets correct day", () => {
         // test various hardcoded years/months
+        // January 2023
+        // March 2024
+        // September 2025
     });
 
     // test _getMonthLastDay: given a YearInt and monthInt, returns a day (0->6) inclusive
     test("test _getMonthLastDay gets correct day", () => {
         // test various hardcoded years/months
-    });
-
-    test("test constructor refreshes date", () => {
-        const now = new Date();
-        const currentYear = now.getFullYear();
-        const currentMonth = now.getMonth();
-        const currentDate = now.getDate();
-        expect(calendar._currentYear).toBe(currentYear);
-        expect(calendar._currentMonth).toBe(currentMonth);
-        expect(calendar._currentDate).toBe(currentDate);
-        // check displayed dates got initialized too
-        expect(calendar._displayedYear).toBe(currentYear);
-        expect(calendar._displayedMonth).toBe(currentMonth);
     });
 
     test("_getPrevMonthRollOverDates, February 2023", () => {

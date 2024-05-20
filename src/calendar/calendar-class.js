@@ -150,7 +150,12 @@ class Calendar {
             throw new Error("monthInt must be an integer");
         }
         // take absolute value to make positive, then mod by 12 to get between 0 and 11
-        return Math.abs(monthInt) % 12;
+        // if input is negative, mod it by 12 and add to 12 to put between 0 and 11
+        if (monthInt < 0) {
+            return 12 + (monthInt % 12);
+        }
+        // otherwise, it's a whole number, so just mod by 12
+        return monthInt % 12;
     }
 
     /*

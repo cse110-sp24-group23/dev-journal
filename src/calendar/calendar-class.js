@@ -25,12 +25,15 @@ class Calendar {
     Given a list of calendar day cells (most likely td elements of classname js-calendar-day)
     Sets current date, display date, and montiors current date (updates every midnight)
     */
-    constructor(calendarHeading, calendarCellElements) {
+    constructor(calendarHeading, calendarCellElements, asyncUpdate = true) {
         this.calendarHeading = calendarHeading;
         this.calendarCellElements = calendarCellElements;
         this._refreshCurrentDate();
         this._initDisplayDate();
-        this._monitorCurrDate();
+        // asynchronous portion of the code - every midnight updates curent date member variables
+        if (asyncUpdate) {
+            this._monitorCurrDate();
+        }
     }
 
     /*

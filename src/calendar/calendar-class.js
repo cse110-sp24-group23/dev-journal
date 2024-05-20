@@ -1,7 +1,6 @@
 /*
 TODO: 
     - add dateLink function from calendar.js as a public method
-    - rename this to calendarClass.js or something along those lines
     - keep track that we don't have highlighted days for Internet Explorer 9 or Lower
 */
 class Calendar {

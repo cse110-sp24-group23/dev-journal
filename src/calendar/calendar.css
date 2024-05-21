@@ -4,7 +4,7 @@
     --today-background-color: rgb(226, 227, 254);
     --rollover-date-color: gray;
     --month-button-color: gray;
-    --month-button-hover-color: #21528B;
+    --month-button-hover-color: #21528b;
     --calendar-background: rgb(244, 249, 255);
     --calendar-heading: rgb(185, 209, 238);
     --calendar-border: rgb(33, 83, 138);
@@ -43,23 +43,27 @@
     justify-content: space-between;
 }
 
-
+h1 {
+    font-weight: normal;
+}
 /* Button container */
 .button-container {
     display: flex;
     gap: 15px;
 }
 /* Month Button Styling */
-.prev-month, .next-month {
+.prev-month,
+.next-month {
     background: none;
     border: none;
-    font-size: 40px; 
+    font-size: 40px;
     cursor: pointer;
     color: var(--month-button-color);
 }
 
 /* Month Button Hover Styling */
-.prev-month:hover, .next-month:hover {
+.prev-month:hover,
+.next-month:hover {
     color: var(--month-button-hover-color);
 }
 

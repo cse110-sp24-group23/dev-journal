@@ -10,7 +10,7 @@
     --font-size-placeholder: 18px;
     --margin-save-button-top: 15px;
 }
-/* Vary size of rating tool based on screen size */
+/* Vary size of text based on screen size */
 /* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {
     :root {

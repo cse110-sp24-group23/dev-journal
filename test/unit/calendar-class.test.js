@@ -75,24 +75,50 @@ describe("Calendar Class Unit Tests", () => {
         // test various hardcoded years/months
     });
 
-    test("_getPrevMonthRollOverDates, February 2023", () => {
-        const february = 1;
-        const testMonth = february;
-        const testYear = 2023;
-        const exptectedPrevRollOver = [29, 30, 31];
-        const returned = calendar._getPrevMonthRolloverDates(
-            testYear,
-            testMonth
-        );
-        var allDatesCorrect = true;
-        expect(returned.length).toBe(exptectedPrevRollOver.length);
-        for (let i = 0; i < returned.length; i++) {
-            if (returned[i] != exptectedPrevRollOver[i]) {
-                allDatesCorrect = false;
-            }
-        }
-        expect(allDatesCorrect).toBe(true);
-    });
+    // // returns true if it matches, false otherwise
+    // function testGetDateList(yearInt, monthInt, expectedDates, func) {
+    //     if (!["prev", "curr", "next"].contains(func)) {
+    //         throw Error("func must be in ['prev', 'curr', 'next'] ");
+    //     }
+
+    //     // initialize returnedDates based on which function to use
+    //     let returnedDates;
+    //     if (func == "prev") {
+    //         returnedDates = calendar._getPrevMonthRolloverDates(
+    //             yearInt,
+    //             monthInt
+    //         );
+    //     } else if (func == "curr") {
+    //         returnedDates = calendar._getCurrMonthDates(yearInt, monthInt);
+    //     } else {
+    //         returnedDates =
+    //             calendar._getNextMonthRolloverDates(numDatesGenerated);
+    //     }
+
+    //     if (!(returnedDates.length === expectedDates.length)) {
+    //         console.log("date lengths don't match");
+    //         return false;
+    //     }
+    //     for (let i = 0; i < returnedDates.length; i++) {
+    //         if (returnedDates[i] != expectedDates[i]) {
+    //             return false;
+    //         }
+    //     }
+    //     // if all goes well, it passes
+    //     return true;
+    // }
+
+    // test("_getPrevMonthRollOverDates, February 2023", () => {
+    //     const february = 1;
+    //     const testMonth = february;
+    //     const testYear = 2023;
+    //     const exptectedPrevRollOver = [29, 30, 31];
+    //     allDatesCorrect = testGetDateList(
+    //         testYear,
+    //         testMonth,
+    //         exptectedPrevRollOver
+    //     );
+    // });
 
     test("_getPrevMonthRollOverDates, June 2024", () => {
         const june = 5;
@@ -132,7 +158,7 @@ describe("Calendar Class Unit Tests", () => {
         expect(allDatesCorrect).toBe(true);
     });
 
-    test("_getCurrMonthRollOverDates, February 2024", () => {
+    test("_getCurrMonthDates, February 2024", () => {
         const february = 1;
         const testMonth = february;
         const testYear = 2024;

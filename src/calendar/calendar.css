@@ -29,6 +29,9 @@ thead {
 /* Day of the Month  */
 .calendar-table td {
     text-align: center;   
+    height: 8vh;
+    width: 5vh;
+
 }
 
 /* Calendar border */

@@ -43,20 +43,19 @@ function addClickToDays() {
     Returns: None
 */
 function todaysDate() {
-    // gets date like "2022/06/17"
-    let currentDate = new Date()
-        .toLocaleString("en", {
-            timeZone: "US/Pacific",
-        })
-        .slice(2, 4);
+
+    //gets the current day of the month 
+    let currentDate = new Date();
+    let todayDate = currentDate.getDate();
+
 
     //gets all days of the month from calendar
     const cells = document.querySelectorAll(".js-calendar-table td");
 
-    //checks and styles the current day of the month
+    //checks the current day of the month
     for (let cell of cells) {
-        if (cell.textContent === currentDate) {
-            cell.classList.add("current-date");
+        if (parseInt(cell.textContent,10) === todayDate) {
+            cell.classList.add("todayDate");
         }
     }
 }

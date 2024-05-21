@@ -1,26 +1,47 @@
+:root {
+    --table-heading-color: #1D1C1D;
+    --current-date-color: rgba(226,227,255,255);
+    --calendar-background-color: rgba(244,249,255,255);
+    --calendar-grid-color: rgba(86,124,168,255);
+}
+
 /* Adjustable Calendar */
 .calendar-table {
     border-collapse: collapse;
     width: 100%;
 }
 
+/* Month and Year Header */
+h1 {
+    font-family: 'Lato', sans-serif;
+}
+
+/* Body */
+body {
+    font-family: 'Lato', sans-serif;
+}
+
 /* Days of the Week */
 thead {
-    color: rgb(224, 113, 131);
+    color: var(--table-heading-color);
 }
 
 /* Day of the Month  */
 .calendar-table td {
-    text-align: center;
+    text-align: center;   
 }
 
 /* Calendar border */
 .calendar-table th,
-.calendar-table td {
+.calendar-table td:not(.todayDate) {
     border: 1px solid;
+    background-color: var(--calendar-background-color);
+    border-color: var(--calendar-grid-color);
+    border-width: 2px;
 }
 
 /* Current Date */
-.current-date {
-    background-color: lightblue;
+.todayDate {
+    background-color: var(--current-date-color);
+    font-weight: bold;
 }

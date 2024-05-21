@@ -1,10 +1,16 @@
 :root {
+    --font: "Lato", sans-serif;
     --table-head-color: rgb(185, 209, 238);
     --today-background-color: rgb(226, 227, 254);
     --rolover-date-color: gray;
     --calendar-background: rgb(244, 249, 255);
     --calendar-heading: rgb(185, 209, 238);
     --calendar-border: rgb(33, 83, 138);
+}
+
+/* Body */
+body {
+    font-family: var(--font);
 }
 
 /* Adjustable Calendar */
@@ -23,18 +29,21 @@ thead {
 /* Day of the Month  */
 .calendar-table td {
     text-align: center;
+    height: 8vh;
+    width: 5vh;
 }
 
 /* Calendar border */
 .calendar-table th,
 .calendar-table td {
-    border: 1.5px solid var(--calendar-border);
-    padding: 30px;
+    border: 1px solid var(--calendar-border);
+    border-width: 2px;
 }
 
 /* Current Date */
 .current-date {
     background-color: var(--today-background-color);
+    font-weight: bold;
 }
 
 .rollover-date {

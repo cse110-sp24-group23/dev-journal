@@ -1,0 +1,17 @@
+:root {
+    --font: "Lato", sans-serif;
+    --margin-page: 25px;
+}
+
+body {
+    font-family: var(--font);
+}
+
+main {
+    margin-left: var(--margin-page);
+    font-size: larger;
+}
+
+#hours {
+    margin-top: 20px;
+}

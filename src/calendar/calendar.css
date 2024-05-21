@@ -2,7 +2,9 @@
     --font: "Lato", sans-serif;
     --table-head-color: rgb(185, 209, 238);
     --today-background-color: rgb(226, 227, 254);
-    --rolover-date-color: gray;
+    --rollover-date-color: gray;
+    --month-button-color: gray;
+    --month-button-hover-color: #21528B;
     --calendar-background: rgb(244, 249, 255);
     --calendar-heading: rgb(185, 209, 238);
     --calendar-border: rgb(33, 83, 138);
@@ -32,6 +34,33 @@
     :root {
         --cell-padding: 20px;
     }
+}
+
+/* Flexbox container for header */
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+
+/* Button container */
+.button-container {
+    display: flex;
+    margin-left: 10px;
+    gap: 5px;
+    margin-left: 250px;
+    position: absolute;
+}
+.prev-month, .next-month {
+    background: none;
+    border: none;
+    font-size: 35px; 
+    cursor: pointer;
+    color: var(--month-button-color);
+}
+
+.prev-month:hover, .next-month:hover {
+    color: var(--month-button-hover-color);
 }
 
 /* Body */
@@ -74,5 +103,5 @@ thead {
 }
 
 .rollover-date {
-    color: var(--rolover-date-color);
+    color: var(--rollover-date-color);
 }

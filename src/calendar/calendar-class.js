@@ -11,6 +11,8 @@ class Calendar {
     // displayed date
     _displayedMonth;
     _displayedYear;
+    // array that holds all dates in the current displayed month view (including rollovers)
+    _calendarDatesList;
     // public member variables initialized in constructor
     calendarHeading; // Header tag that has month and year text
     calendarCellElements; // list of calendar day cells that this class edits
@@ -27,7 +29,13 @@ class Calendar {
     */
     constructor(calendarHeading, calendarCellElements, asyncUpdate = true) {
         this.calendarHeading = calendarHeading;
+        // make sure calendarCellELements is an array, rather than an array-like of HTML elements
+        if (!Array.isArray(calendarCellElements)) {
+            calendarCellElements = Array.from(calendarCellElements);
+        }
+        // initialize member variables
         this.calendarCellElements = calendarCellElements;
+        this._calendarDatesList = [];
         this._refreshCurrentDate();
         this._initDisplayDate();
         // asynchronous portion of the code - every midnight updates curent date member variables
@@ -50,6 +58,9 @@ class Calendar {
     ) {
         // handle input for month - year doesn't need it since there is no cyclic nature like months
         monthInt = this._handleMonthInput(monthInt);
+        // update displayed date member variables to match passed in arguments
+        this._displayedYear = yearInt;
+        this._displayedMonth = monthInt;
         // create array of dates in calendar table (42 when full - 6 rows, 7 columns)
         let datesList = [];
         // get final days from previous month and update datesList
@@ -62,6 +73,9 @@ class Calendar {
         // datesList is passed in to calculate how mnay days left to generate
         const nextRollover = this._getNextMonthRolloverDates(datesList.length);
         datesList = datesList.concat(nextRollover);
+
+        // update this.calendarDatesList with newly calculated datesist
+        this._calendarDatesList = datesList;
 
         // update the calendar heading text
         const monthStr = this._getMonthStrFromInt(monthInt);
@@ -114,6 +128,51 @@ class Calendar {
         this.populateMonthView(this._displayedYear, this._displayedMonth);
     }
 
+    getDateOfDayCell(calendarCellElem) {
+        // cellIdx correspond to the cell's index in calendarCellElements, which also corresponds
+        // to this._calendarDatesList, since they have a one-to-one correspondance
+        const cellIdx = this.calendarCellElements.indexOf(calendarCellElem);
+        // handle if cell not in initialized cells
+        if (cellIdx == -1) {
+            throw Error(
+                "calendarCellElem not in list of calendar cells. Make sure you are passing in the correct calendar cell element"
+            );
+        }
+        // handle if getDateOfDayCell is called before month view is populated
+        const numCalendarDates = this._calendarDatesList.length;
+        const EXPECTED_DATESLIST_LENGTH = 42;
+        if (numCalendarDates !== EXPECTED_DATESLIST_LENGTH) {
+            let errorMsg = `this._calendarDatesList should be ${EXPECTED_DATESLIST_LENGTH} but was ${numCalendarDates}.`;
+            if (numCalendarDates < EXPECTED_DATESLIST_LENGTH) {
+                errorMsg +=
+                    "this is most likely because getDateOfDayCell was called before populateMonthView. Make sure the dates are populated before retrieving them.";
+            }
+            throw Error(errorMsg);
+        }
+        // There are exactly 2 `1`s in calendarDateList: start of curr month & start of next month
+        // Use them later to figure out which month the calendarCellElem belongs to
+        const currMonthStartIdx = this._calendarDatesList.indexOf(1);
+        const nextMonthStartIdx = this._calendarDatesList.lastIndexOf(1);
+        // find the full date of the cell to return it
+        let cellMonth;
+        const cellYear = this._displayedYear;
+        const cellDate = calendarCellElem.innerText;
+        // initialize cellMonth. It will either be the current displayed month or 1 up/down from it
+        if (cellIdx < currMonthStartIdx) {
+            // cell month is previous month (in rollover)
+            cellMonth = this._displayedMonth - 1;
+            cellMonth = this._handleMonthInput(cellMonth);
+        } else if (cellIdx < nextMonthStartIdx) {
+            // cell month is current month - no need to handle input
+            cellMonth = this._displayedMonth;
+        } else {
+            // cell month is next month (in rollover)
+            cellMonth = this._displayedMonth + 1;
+            cellMonth = this._handleMonthInput(cellMonth);
+        }
+        // return the date that the calendarCellElem corresponds to
+        return new Date(cellYear, cellMonth, cellDate);
+    }
     /*
     ================================================
                     PRIVATE METHODS

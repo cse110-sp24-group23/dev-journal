@@ -4,10 +4,11 @@
     --margin-form: 25px;
     --height-textarea: 30vh;
     --button-background-hover: rgb(188, 208, 237);
+    --delete-button-background-hover: red;
     --button-background: rgb(244, 249, 255);
     --font-size-heading: 30px;
     --font-size-form: 22px;
-    --font-size-placeholder: 18px;
+    --font-size-placeholder: 22px;
     --margin-save-button-top: 15px;
 }
 /* Vary size of text based on screen size */
@@ -43,12 +44,36 @@
 body {
     font-family: var(--font);
 }
+/* Main form elements */
+form textarea {
+    border: none;
+    background: var(--textarea-background);
+    padding: var(--textarea-padding);
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding does not affect width */
+    font-family: var(--font);
+}
+
+form input[type="number"] {
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.header-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 h1 {
     font-size: var(--font-size-heading);
     font-weight: normal;
     margin-left: var(--margin-heading);
     margin-right: var(--margin-heading);
+}
+
+p {
+    margin-left: 9px;
 }
 
 form {
@@ -75,10 +100,16 @@ button {
     background-color: var(--button-background);
     border-width: 0;
     border-radius: 10px;
+    cursor: pointer;
 }
+
 button:hover {
     background-color: var(--button-background-hover);
     border-width: 0;
+}
+
+#delete-button:hover{
+    background-color: var(--delete-button-background-hover);
 }
 
 #save-button {

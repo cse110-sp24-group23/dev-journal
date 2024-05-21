@@ -6,7 +6,11 @@
         <title>Daily Log</title>
 
         <!-- Stylesheet-->
-        <link rel="stylesheet" href="dailyLog.css" />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../dailyLog/dailyLog.css"
+        />
     </head>
     <body>
         <main>
@@ -20,8 +24,6 @@
                     <textarea
                         name="done-today"
                         id="done-today"
-                        cols="30"
-                        rows="10"
                         placeholder="Enter text here:"
                     ></textarea>
                 </label>
@@ -37,8 +39,6 @@
                     <textarea
                         name="reflection"
                         id="reflection"
-                        cols="30"
-                        rows="10"
                         placeholder="What did you learn?       
 What challenges did you face?
 What things can you do in the future?"
@@ -46,10 +46,10 @@ What things can you do in the future?"
                 </label>
                 <br />
                 <!-- button to save log -->
-                <button type="button" id="save-button">Save</button>
+                <button type="button" id="save-button">Submit</button>
                 <br />
                 <!-- button for back button -->
-                <button type="button" id="back-button">Back to Calendar</button>
+                <button type="button" id="back-button">Delete Log</button>
             </form>
         </main>
     </body>

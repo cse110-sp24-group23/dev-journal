@@ -40,21 +40,19 @@
 .header-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 
 /* Button container */
 .button-container {
     display: flex;
-    margin-left: 10px;
-    gap: 5px;
-    margin-left: 250px;
-    position: absolute;
+    gap: 15px;
 }
 .prev-month, .next-month {
     background: none;
     border: none;
-    font-size: 35px; 
+    font-size: 40px; 
     cursor: pointer;
     color: var(--month-button-color);
 }

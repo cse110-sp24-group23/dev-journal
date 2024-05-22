@@ -77,7 +77,7 @@ describe("Calendar Class Unit Tests", () => {
         expect(calendar._getMonthLastDay(2026, 11)).toBe(4);
     });
 
-    // test _getMonthLastDay: given a YearInt and monthInt, returns a date (0->31) inclusive
+    // test _getMonthLastDat: given a YearInt and monthInt, returns a date (0->31) inclusive
     test("test _getMonthLastDate gets correct date", () => {
         // test various hardcoded years/months
         //February (1) 2024 - should have a last date of 29

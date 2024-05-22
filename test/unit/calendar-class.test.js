@@ -65,14 +65,26 @@ describe("Calendar Class Unit Tests", () => {
     // test _getMonthLastDay: given a YearInt and monthInt, returns a day (0->6) inclusive
     test("test _getMonthLastDay gets correct day", () => {
         // test various hardcoded years/months
-        // January 2023
-        // March 2024
-        // September 2025
+        // August (7) 2022 -  should have a last day of Wednesday (3)
+        expect(calendar._getMonthLastDay(2024, 7)).toBe(3);
+        // January (0) 2023 - should have a last day of Tuesday (2)
+        expect(calendar._getMonthLastDay(2024, 0)).toBe(2);
+        // February (1) 2024 - should have a last day of Thursday (4)
+        expect(calendar._getMonthLastDay(2024, 1)).toBe(4);
+        // November (10) 2025 - should have a last day of Sunday (0)
+        expect(calendar._getMonthLastDay(2024, 10)).toBe(0);
+        // December (11) 2026 - should have a last day of Thursday (4)
+        expect(calendar._getMonthLastDay(2024, 11)).toBe(4);
     });
 
     // test _getMonthLastDay: given a YearInt and monthInt, returns a day (0->6) inclusive
     test("test _getMonthLastDay gets correct day", () => {
         // test various hardcoded years/months
+        // August 2022 -  should have a last day of Wednesday (3)
+        // January 2023 - should have a last day of Tuesday (2)
+        // February 2024 - should have a last day of Thursday (4)
+        // November 2025 - should have a last day of Sunday (0)
+        // December 2026 - should have a last day of Thursday (4)
     });
 
     // // returns true if it matches, false otherwise

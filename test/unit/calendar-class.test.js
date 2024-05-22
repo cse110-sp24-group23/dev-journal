@@ -202,4 +202,26 @@ describe("Calendar Class Unit Tests", () => {
         const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
+    
+    test("_getMonthStrFromInt", () => {
+        //set up test
+        const months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+        ];
+        //test that each int from 0-11 returns the correct corresponding string of the month 
+        for (let i = 0; i < 12; i++){
+            expect(calendar._getMonthStrFromInt(i)).toBe(months[i])
+        }
+    })
 });

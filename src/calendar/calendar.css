@@ -1,36 +1,132 @@
+/* Variables */
 :root {
-    --table-head-color: rgb(224, 113, 131);
-    --today-background-color: lightblue;
-    --rolover-date-color: gray;
+    --font: "Lato", sans-serif;
+    --table-head-color: rgb(185, 209, 238);
+    --today-background-color: rgb(226, 227, 254);
+    --rollover-date-color: gray;
+    --month-button-color: gray;
+    --month-button-hover-color: #21528b;
+    --calendar-background: rgb(244, 249, 255);
+    --calendar-heading: rgb(185, 209, 238);
+    --calendar-border: rgb(33, 83, 138);
+    --cell-padding: 12px;
+    --gap-buttons: 15px;
+    --prev-next-buttons: 30px;
+    --font-size-calendar-heading: 20px;
+    --font-size-calendar-text: 17px;
+    --font-size-heading: 30px;
+    --border-calendar: 1.5px;
+    --font-weight-table: 570;
+}
+/* Vary size of cell padding based on screen size */
+/* Narrow devices (phones, 320px and up) */
+@media only screen and (min-width: 320px) {
+    :root {
+        --cell-padding: 15px;
+        --prev-next-buttons: 32px;
+        --font-size-heading: 32px;
+    }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    :root {
+        --cell-padding: 15px;
+        --prev-next-buttons: 35px;
+        --font-size-heading: 35px;
+    }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    :root {
+        --cell-padding: 18px;
+        --prev-next-buttons: 35px;
+        --font-size-heading: 38px;
+    }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    :root {
+        --cell-padding: 20px;
+        --prev-next-buttons: 40px;
+        --font-size-heading: 40px;
+    }
 }
 
-/* Adjustable Calendar */
+/* Flexbox container for header */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+/* Main heading */
+h1 {
+    font-weight: normal;
+    font-size: var(--font-size-heading);
+}
+/* Button container */
+.button-container {
+    display: flex; /* using flex box to place the buttons */
+    gap: var(--gap-buttons);
+}
+/* Month Button Styling */
+.prev-month,
+.next-month {
+    background: none;
+    border: none;
+    font-size: var(--prev-next-buttons);
+    cursor: pointer;
+    color: var(--month-button-color);
+}
+
+/* Month Button Hover Styling */
+.prev-month:hover,
+.next-month:hover {
+    color: var(--month-button-hover-color);
+}
+
+/* Setting the font for the whole body */
+body {
+    font-family: var(--font);
+}
+
+/* Adjustable Calendar and border */
 .calendar-table {
     border-collapse: collapse;
     width: 100%;
+    background-color: var(--calendar-background);
 }
 
 /* Days of the Week */
 thead {
-    color: var(--table-head-color);
+    background-color: var(--table-head-color);
 }
-
+/* Making font lighter for heading */
+th {
+    font-size: var(--font-size-calendar-heading);
+    font-weight: var(--font-weight-table);
+}
 /* Day of the Month  */
 .calendar-table td {
     text-align: center;
+    height: 8vh;
+    width: 5vh;
+    vertical-align: top;
+    font-size: var(--font-size-calendar-text);
 }
 
 /* Calendar border */
 .calendar-table th,
 .calendar-table td {
-    border: 1px solid;
+    border: var(--border-calendar) solid var(--calendar-border);
+    padding: var(--cell-padding);
 }
 
 /* Current Date */
 .current-date {
     background-color: var(--today-background-color);
+    font-weight: bold;
 }
-
+/* Changing the color of the rolover dates */
 .rollover-date {
-    color: var(--rolover-date-color);
+    color: var(--rollover-date-color);
 }

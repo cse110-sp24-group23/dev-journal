@@ -112,7 +112,7 @@ describe("Calendar Class Unit Tests", () => {
         const testMonth = february;
         const testYear = 2023;
         const expectedDates = [29, 30, 31];
-        returnedDates = calendar._getPrevMonthRolloverDates(
+        const returnedDates = calendar._getPrevMonthRolloverDates(
             testYear,
             testMonth
         );

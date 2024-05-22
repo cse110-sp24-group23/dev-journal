@@ -66,25 +66,30 @@ describe("Calendar Class Unit Tests", () => {
     test("test _getMonthLastDay gets correct day", () => {
         // test various hardcoded years/months
         // August (7) 2022 -  should have a last day of Wednesday (3)
-        expect(calendar._getMonthLastDay(2024, 7)).toBe(3);
+        expect(calendar._getMonthLastDay(2022, 7)).toBe(3);
         // January (0) 2023 - should have a last day of Tuesday (2)
-        expect(calendar._getMonthLastDay(2024, 0)).toBe(2);
+        expect(calendar._getMonthLastDay(2023, 0)).toBe(2);
         // February (1) 2024 - should have a last day of Thursday (4)
         expect(calendar._getMonthLastDay(2024, 1)).toBe(4);
         // November (10) 2025 - should have a last day of Sunday (0)
-        expect(calendar._getMonthLastDay(2024, 10)).toBe(0);
+        expect(calendar._getMonthLastDay(2025, 10)).toBe(0);
         // December (11) 2026 - should have a last day of Thursday (4)
-        expect(calendar._getMonthLastDay(2024, 11)).toBe(4);
+        expect(calendar._getMonthLastDay(2026, 11)).toBe(4);
     });
 
-    // test _getMonthLastDay: given a YearInt and monthInt, returns a day (0->6) inclusive
+    // test _getMonthLastDat: given a YearInt and monthInt, returns a date (0->31) inclusive
     test("test _getMonthLastDate gets correct date", () => {
         // test various hardcoded years/months
-        // August 2022 -  should have a last day of Wednesday (3)
-        // January 2023 - should have a last day of Tuesday (2)
-        // February 2024 - should have a last day of Thursday (4)
-        // November 2025 - should have a last day of Sunday (0)
-        // December 2026 - should have a last day of Thursday (4)
+        //February (1) 2024 - should have a last date of 29
+        expect(calendar._getMonthLastDate(2024, 1)).toBe(29);
+        //June (5) 2022 - should have a last date of 30
+        expect(calendar._getMonthLastDate(2022, 5)).toBe(30);
+        //April (3) 2024 - should have a last date of 30
+        expect(calendar._getMonthLastDate(2024, 3)).toBe(30);
+        //May (11) 2025 - should have a last date of 31
+        expect(calendar._getMonthLastDate(2025, 4)).toBe(31);
+        //February (1) 2023 - should have a last date of 28
+        expect(calendar._getMonthLastDate(2023, 1)).toBe(28);
     });
 
     // returns true if it matches, false otherwise

@@ -1,4 +1,8 @@
 {
+
+  "name": "dev-journal",
+  "version": "1.0.0",
+  "description": "Dev Journal Project CSE 110",
   "devDependencies": {
     "@babel/core": "^7.24.5",
     "@babel/preset-env": "^7.24.5",

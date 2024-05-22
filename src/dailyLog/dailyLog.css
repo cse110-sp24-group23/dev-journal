@@ -17,7 +17,7 @@
 /* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {
     :root {
-        --font-size-heading: 30px;
+        --font-size-heading: 32px;
         --font-size-form: 22px;
         --font-size-text-input: 18px;
     }

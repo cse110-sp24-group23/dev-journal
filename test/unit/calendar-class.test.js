@@ -111,11 +111,12 @@ describe("Calendar Class Unit Tests", () => {
             testYear,
             testMonth
         );
-        allDatesCorrect = compareDateLists(expectedDates, returnedDates);
+        const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
 
     test("_getPrevMonthRollOverDates, June 2024", () => {
+        // set up test
         const june = 5;
         const testMonth = june;
         const testYear = 2024;
@@ -124,55 +125,43 @@ describe("Calendar Class Unit Tests", () => {
             testYear,
             testMonth
         );
-        var allDatesCorrect = true;
-        expect(returned.length).toBe(expectedPrevRollOver.length);
-        for (let i = 0; i < returned.length; i++) {
-            if (returned[i] != expectedPrevRollOver[i]) {
-                allDatesCorrect = false;
-            }
-        }
+        // check returned vs expected
+        const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
 
     test("_getCurrMonthRollOverDates, November 2025", () => {
+        // set up test
         const november = 10;
         const testMonth = november;
         const testYear = 2025;
-        const exptectedCurrDates = [];
+        const exptectedDates = [];
         for (let i = 1; i <= 30; i++) {
-            exptectedCurrDates.push(i);
+            exptectedDates.push(i);
         }
-        const returned = calendar._getCurrMonthDates(testYear, testMonth);
-        var allDatesCorrect = true;
-        expect(returned.length).toBe(exptectedCurrDates.length);
-        for (let i = 0; i < returned.length; i++) {
-            if (returned[i] != exptectedCurrDates[i]) {
-                allDatesCorrect = false;
-            }
-        }
+        // check returned vs expected
+        const returnedDates = calendar._getCurrMonthDates(testYear, testMonth);
+        const allDatesCorrect = compareDateLists(exptectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
 
     test("_getCurrMonthDates, February 2024", () => {
+        // set up test
         const february = 1;
         const testMonth = february;
         const testYear = 2024;
-        const expectedCurrDates = [];
+        const expectedDates = [];
         for (let i = 1; i <= 29; i++) {
-            expectedCurrDates.push(i);
+            expectedDates.push(i);
         }
-        const returned = calendar._getCurrMonthDates(testYear, testMonth);
-        var allDatesCorrect = true;
-        expect(returned.length).toBe(expectedCurrDates.length);
-        for (let i = 0; i < returned.length; i++) {
-            if (returned[i] != expectedCurrDates[i]) {
-                allDatesCorrect = false;
-            }
-        }
+        // check returned vs expected
+        const returnedDates = calendar._getCurrMonthDates(testYear, testMonth);
+        const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
 
     test("_getNextMonthRollOverDates, September 2023", () => {
+        // set up test
         const september = 8;
         const testMonth = september;
         const testYear = 2023;
@@ -182,19 +171,16 @@ describe("Calendar Class Unit Tests", () => {
         );
         const currDates = calendar._getCurrMonthDates(testYear, testMonth);
         const numDatesGenerated = prevRollOver.length + currDates.length;
-        const expectedNextRollOver = [1, 2, 3, 4, 5, 6, 7];
-        var allDatesCorrect = true;
-        const returned = calendar._getNextMonthRolloverDates(numDatesGenerated);
-        expect(returned.length).toBe(expectedNextRollOver.length);
-        for (let i = 0; i < returned.length; i++) {
-            if (returned[i] != expectedNextRollOver[i]) {
-                allDatesCorrect = false;
-            }
-        }
+        const expectedDates = [1, 2, 3, 4, 5, 6, 7];
+        const returnedDates =
+            calendar._getNextMonthRolloverDates(numDatesGenerated);
+        // check returned vs expected
+        const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
 
     test("_getNextMonthRollOverDates, January 2024", () => {
+        // set up test
         const january = 0;
         const testMonth = january;
         const testYear = 2024;
@@ -204,15 +190,11 @@ describe("Calendar Class Unit Tests", () => {
         );
         const currDates = calendar._getCurrMonthDates(testYear, testMonth);
         const numDatesGenerated = prevRollOver.length + currDates.length;
-        const expectedNextRollOver = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        var allDatesCorrect = true;
-        const returned = calendar._getNextMonthRolloverDates(numDatesGenerated);
-        expect(returned.length).toBe(expectedNextRollOver.length);
-        for (let i = 0; i < returned.length; i++) {
-            if (returned[i] != expectedNextRollOver[i]) {
-                allDatesCorrect = false;
-            }
-        }
+        const expectedDates = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        const returnedDates =
+            calendar._getNextMonthRolloverDates(numDatesGenerated);
+        // check returned vs expected
+        const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
 });

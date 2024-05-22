@@ -73,11 +73,11 @@ form {
 form textarea {
     border: none;
     background: var(--textarea-background);
-    padding: var(--textarea-padding);
     width: 100%;
     box-sizing: border-box; /* Ensures padding does not affect width */
     height: 24vh;
     font-size: var(--font-size-text-input);
+    resize: vertical;
 }
 
 form input[type="number"] {

@@ -93,25 +93,7 @@ describe("Calendar Class Unit Tests", () => {
     });
 
     // returns true if it matches, false otherwise
-    function testGetDateList(yearInt, monthInt, expectedDates, func) {
-        if (!["prev", "curr", "next"].contains(func)) {
-            throw Error("func must be in ['prev', 'curr', 'next'] ");
-        }
-
-        // initialize returnedDates based on which function to use
-        let returnedDates;
-        if (func == "prev") {
-            returnedDates = calendar._getPrevMonthRolloverDates(
-                yearInt,
-                monthInt
-            );
-        } else if (func == "curr") {
-            returnedDates = calendar._getCurrMonthDates(yearInt, monthInt);
-        } else {
-            returnedDates =
-                calendar._getNextMonthRolloverDates(numDatesGenerated);
-        }
-
+    function compareDateLists(expectedDates, returnedDates) {
         if (!(returnedDates.length === expectedDates.length)) {
             console.log("date lengths don't match");
             return false;
@@ -129,20 +111,21 @@ describe("Calendar Class Unit Tests", () => {
         const february = 1;
         const testMonth = february;
         const testYear = 2023;
-        const exptectedPrevRollOver = [29, 30, 31];
-        allDatesCorrect = testGetDateList(
+        const expectedDates = [29, 30, 31];
+        returnedDates = calendar._getPrevMonthRolloverDates(
             testYear,
-            testMonth,
-            exptectedPrevRollOver
+            testMonth
         );
+        allDatesCorrect = compareDateLists(expectedDates, returnedDates);
+        expect(allDatesCorrect).toBe(true);
     });
 
     test("_getPrevMonthRollOverDates, June 2024", () => {
         const june = 5;
         const testMonth = june;
         const testYear = 2024;
-        const expectedPrevRollOver = [26, 27, 28, 29, 30, 31];
-        const returned = calendar._getPrevMonthRolloverDates(
+        const expectedDates = [26, 27, 28, 29, 30, 31];
+        const returnedDates = calendar._getPrevMonthRolloverDates(
             testYear,
             testMonth
         );

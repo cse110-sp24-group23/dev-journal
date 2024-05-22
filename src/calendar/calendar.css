@@ -1,3 +1,4 @@
+/* Variables */
 :root {
     --font: "Lato", sans-serif;
     --table-head-color: rgb(185, 209, 238);
@@ -42,13 +43,13 @@
     align-items: center;
     justify-content: space-between;
 }
-
+/* Main heading */
 h1 {
     font-weight: normal;
 }
 /* Button container */
 .button-container {
-    display: flex;
+    display: flex; /* using flex box to place the buttons */
     gap: 15px;
 }
 /* Month Button Styling */
@@ -67,12 +68,12 @@ h1 {
     color: var(--month-button-hover-color);
 }
 
-/* Body */
+/* Setting the font for the whole body */
 body {
     font-family: var(--font);
 }
 
-/* Adjustable Calendar */
+/* Adjustable Calendar and border */
 .calendar-table {
     border-collapse: collapse;
     width: 100%;
@@ -105,7 +106,7 @@ thead {
     background-color: var(--today-background-color);
     font-weight: bold;
 }
-
+/* Changing the color of the rolover dates */
 .rollover-date {
     color: var(--rollover-date-color);
 }

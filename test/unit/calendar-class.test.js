@@ -78,7 +78,7 @@ describe("Calendar Class Unit Tests", () => {
     });
 
     // test _getMonthLastDay: given a YearInt and monthInt, returns a day (0->6) inclusive
-    test("test _getMonthLastDay gets correct day", () => {
+    test("test _getMonthLastDay gets correct date", () => {
         // test various hardcoded years/months
         // August 2022 -  should have a last day of Wednesday (3)
         // January 2023 - should have a last day of Tuesday (2)
@@ -87,50 +87,50 @@ describe("Calendar Class Unit Tests", () => {
         // December 2026 - should have a last day of Thursday (4)
     });
 
-    // // returns true if it matches, false otherwise
-    // function testGetDateList(yearInt, monthInt, expectedDates, func) {
-    //     if (!["prev", "curr", "next"].contains(func)) {
-    //         throw Error("func must be in ['prev', 'curr', 'next'] ");
-    //     }
+    // returns true if it matches, false otherwise
+    function testGetDateList(yearInt, monthInt, expectedDates, func) {
+        if (!["prev", "curr", "next"].contains(func)) {
+            throw Error("func must be in ['prev', 'curr', 'next'] ");
+        }
 
-    //     // initialize returnedDates based on which function to use
-    //     let returnedDates;
-    //     if (func == "prev") {
-    //         returnedDates = calendar._getPrevMonthRolloverDates(
-    //             yearInt,
-    //             monthInt
-    //         );
-    //     } else if (func == "curr") {
-    //         returnedDates = calendar._getCurrMonthDates(yearInt, monthInt);
-    //     } else {
-    //         returnedDates =
-    //             calendar._getNextMonthRolloverDates(numDatesGenerated);
-    //     }
+        // initialize returnedDates based on which function to use
+        let returnedDates;
+        if (func == "prev") {
+            returnedDates = calendar._getPrevMonthRolloverDates(
+                yearInt,
+                monthInt
+            );
+        } else if (func == "curr") {
+            returnedDates = calendar._getCurrMonthDates(yearInt, monthInt);
+        } else {
+            returnedDates =
+                calendar._getNextMonthRolloverDates(numDatesGenerated);
+        }
 
-    //     if (!(returnedDates.length === expectedDates.length)) {
-    //         console.log("date lengths don't match");
-    //         return false;
-    //     }
-    //     for (let i = 0; i < returnedDates.length; i++) {
-    //         if (returnedDates[i] != expectedDates[i]) {
-    //             return false;
-    //         }
-    //     }
-    //     // if all goes well, it passes
-    //     return true;
-    // }
+        if (!(returnedDates.length === expectedDates.length)) {
+            console.log("date lengths don't match");
+            return false;
+        }
+        for (let i = 0; i < returnedDates.length; i++) {
+            if (returnedDates[i] != expectedDates[i]) {
+                return false;
+            }
+        }
+        // if all goes well, it passes
+        return true;
+    }
 
-    // test("_getPrevMonthRollOverDates, February 2023", () => {
-    //     const february = 1;
-    //     const testMonth = february;
-    //     const testYear = 2023;
-    //     const exptectedPrevRollOver = [29, 30, 31];
-    //     allDatesCorrect = testGetDateList(
-    //         testYear,
-    //         testMonth,
-    //         exptectedPrevRollOver
-    //     );
-    // });
+    test("_getPrevMonthRollOverDates, February 2023", () => {
+        const february = 1;
+        const testMonth = february;
+        const testYear = 2023;
+        const exptectedPrevRollOver = [29, 30, 31];
+        allDatesCorrect = testGetDateList(
+            testYear,
+            testMonth,
+            exptectedPrevRollOver
+        );
+    });
 
     test("_getPrevMonthRollOverDates, June 2024", () => {
         const june = 5;

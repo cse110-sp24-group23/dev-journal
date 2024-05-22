@@ -40,11 +40,11 @@
 
 /*hover and focus states*/
 .nav-link:hover {
-    background-color: rgba(224, 234, 252, 0.8);;
+    background-color: rgba(226, 227, 254, 0.6);;
 }
 
 .nav-link.active {
-    background-color: rgba(173, 216, 230, 0.8);;
+    background-color: rgb(226, 227, 254);
     font-weight: bold;
 }
 

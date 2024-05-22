@@ -5,7 +5,7 @@ describe("Calendar Class Unit Tests", () => {
     // create a new instance of the Calendar class, with elements to edit being
     // null (or empty array of the same length as calendarDayCells) and asyncUpdate being false.
     // This is because we don't test it's UI updates (that's for E2E testing)
-    // and we don't want it to keep running after tests are complete (while checking for midnight)
+    // and we don't want it to keep running after tests are complete (while it checks for midnight)
     const calendar = new Calendar(null, Array(42), false);
 
     /*
@@ -13,6 +13,7 @@ describe("Calendar Class Unit Tests", () => {
     initialize private member variables on current and displayed dates
     */
     test("test constructor refreshes date", () => {
+        // Get the current dates to check against constructor
         const now = new Date();
         const currentYear = now.getFullYear();
         const currentMonth = now.getMonth();
@@ -94,10 +95,11 @@ describe("Calendar Class Unit Tests", () => {
 
     // returns true if it matches, false otherwise
     function compareDateLists(expectedDates, returnedDates) {
+        // check that dates arrays are the same length
         if (!(returnedDates.length === expectedDates.length)) {
-            console.log("date lengths don't match");
             return false;
         }
+        // check that each element in the arrays match
         for (let i = 0; i < returnedDates.length; i++) {
             if (returnedDates[i] != expectedDates[i]) {
                 return false;
@@ -108,6 +110,7 @@ describe("Calendar Class Unit Tests", () => {
     }
     //test _getPrevMonthRollOverDates: given a year and a month, return all of the dates from the previous month that will roll over to the current month's calendar.
     test("_getPrevMonthRollOverDates, February 2023", () => {
+        // set up test
         const february = 1;
         const testMonth = february;
         const testYear = 2023;
@@ -116,6 +119,7 @@ describe("Calendar Class Unit Tests", () => {
             testYear,
             testMonth
         );
+        // check returned vs expected
         const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
@@ -145,8 +149,8 @@ describe("Calendar Class Unit Tests", () => {
         for (let i = 1; i <= 30; i++) {
             exptectedDates.push(i);
         }
-        // check returned vs expected
         const returnedDates = calendar._getCurrMonthDates(testYear, testMonth);
+        // check returned vs expected
         const allDatesCorrect = compareDateLists(exptectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
@@ -160,8 +164,8 @@ describe("Calendar Class Unit Tests", () => {
         for (let i = 1; i <= 29; i++) {
             expectedDates.push(i);
         }
-        // check returned vs expected
         const returnedDates = calendar._getCurrMonthDates(testYear, testMonth);
+        // check returned vs expected
         const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
@@ -171,6 +175,7 @@ describe("Calendar Class Unit Tests", () => {
         const september = 8;
         const testMonth = september;
         const testYear = 2023;
+        // nextMonthRollOverDates needs how many dates were generated from the previous months
         const prevRollOver = calendar._getPrevMonthRolloverDates(
             testYear,
             testMonth
@@ -190,6 +195,7 @@ describe("Calendar Class Unit Tests", () => {
         const january = 0;
         const testMonth = january;
         const testYear = 2024;
+        // nextMonthRollOverDates needs how many dates were generated from the previous months
         const prevRollOver = calendar._getPrevMonthRolloverDates(
             testYear,
             testMonth

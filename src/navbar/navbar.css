@@ -1,15 +1,35 @@
-/* Navbar */
+/* Variables */
+
+:root {
+    --font: "Lato", sans-serif;
+    --font-color: #333333;
+    --navbar-color: #f4f4f4;
+    --active-color: rgb(226, 227, 254);
+    --hover-color: rgba(226, 227, 254, 0.6);
+}
+
+
+/* Noted title */
 .app-title {
-    color: #333333;
-    font-size: 28px;
+    color: var(--font-color);
+    font-size: 16px;
     font-weight: 800;
+    display: flex;
+    align-items: center;
+}
+
+/* Noted logo */
+.app-icon {
+    width: 24px;
+    height: 24px;
 }
 
 /* Navbar */
 .navbar {
-    width: 250px;
+    width: 80px;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: var(--navbar-color);
+    font-family: var(--font);
     position: fixed;
     z-index: 1;
     top: 0;
@@ -31,26 +51,35 @@
 /* Navigation links */
 .nav-link {
     text-decoration: none;
-    color: #333333;
-    font-size: 21px;
+    color: var(--font-color);
+    font-size: 7px;
     display: block;
     padding: 20px 2px;
-    transition: background-color 0.3s
+    transition: background-color 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Navigation icons */
+.nav-icon{
+    width: 16px;
+    height: 16px;
 }
 
 /*hover and focus states*/
 .nav-link:hover {
-    background-color: rgba(226, 227, 254, 0.6);;
+    background-color: var(--hover-color);
 }
 
 .nav-link.active {
-    background-color: rgb(226, 227, 254);
+    background-color: var(--active-color);
     font-weight: bold;
 }
 
 /* Margin for main page */
 main {
-    margin-left: 250px;
+    margin-left: 80px;
 }
 
 /* Vary size of navbar based on screen size */
@@ -60,10 +89,21 @@ main {
         width: 100px;
     }
     .nav-link {
-        font-size: 12px;
+        font-size: 10px;
     }
     main{
         margin-left: 100px;
+    }
+    .app-icon {
+        height: 32px;
+        width: 32px;
+    }
+    .app-title {
+        font-size: 20px;
+    }
+    .nav-icon {
+        height: 16px;
+        width: 16px;
     }
 }
 
@@ -73,10 +113,21 @@ main {
         width: 120px;
     }
     .nav-link {
-        font-size: 15px;
+        font-size: 12px;
     }
     main{
         margin-left: 120px;
+    }
+    .app-icon {
+        height: 40px;
+        width: 40px;
+    }
+    .app-title {
+        font-size: 22px;
+    }
+    .nav-icon {
+        height: 20px;
+        width: 20px;
     }
 }
 
@@ -86,10 +137,21 @@ main {
         width: 150px;
     }
     .nav-link {
-        font-size: 18px;
+        font-size: 15px;
     }
     main{
         margin-left: 150px;
+    }
+    .app-icon {
+        height: 48px;
+        width: 48px;
+    }
+    .app-title {
+        font-size: 25px;
+    }
+    .nav-icon {
+        height: 26px;
+        width: 26px;
     }
 }
 
@@ -99,9 +161,20 @@ main {
         width: 200px;
     }
     .nav-link {
-        font-size: 21px;
+        font-size: 20px;
     }
     main{
         margin-left: 200px;
+    }
+    .app-icon {
+        height: 64px;
+        width: 64px;
+    }
+    .app-title {
+        font-size: 28px;
+    }
+    .nav-icon {
+        height: 32px;
+        width: 32px;
     }
 }

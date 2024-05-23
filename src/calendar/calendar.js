@@ -29,6 +29,7 @@ function calendarFunctionality() {
 
 /*
     TODO: change this to use localStorage once localStorage functionality is complete
+        - this whole function will likely be rewritten.
     dateLink(): Opens a new Daily Log page for the day that was clicked 
     Parameters: None
     Returns: None

@@ -349,6 +349,7 @@ class Calendar {
             // get the date (e.g. 14) and put it into the cell
             const cellDate = calendarDateList[i];
             calendarDayCell.innerText = cellDate;
+            calendarDayCell.tabIndex = "0";
             // highlight the cell if it matches the current date
             this._highlightIfCurrDate(calendarDayCell, cellDate);
             // if it isn't the current month, gray it out

@@ -1,7 +1,7 @@
 import { Calendar } from "./calendar-class.js";
 
 /*
-    Uses the Calendar class from ./calendar-class.js to populate the month view and show the next
+    This uses the Calendar class from ./calendar-class.js to populate the month view and show the next
     or previous month when you click the `<` or `>` buttons on the calendar web page.
     Also highlights the current day and grays out the rollover dates from the prev/next month.
     Parameters: None

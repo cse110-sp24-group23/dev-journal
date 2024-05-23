@@ -4,124 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            background-color: #f0f4f8;
-            margin: 0;
-            padding: 0;
-        }
-        .sidebar {
-            width: 200px;
-            background-color: #7d5a5a;
-            color: white;
-            padding: 20px;
-        }
-        .sidebar h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-        .sidebar ul li {
-            margin: 10px 0;
-            cursor: pointer;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .sidebar ul li.active, .sidebar ul li:hover {
-            background-color: #f0f4f8;
-            color: #7d5a5a;
-        }
-        .content {
-            flex-grow: 1;
-            padding: 20px;
-        }
-        .content h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .buttons {
-            margin-bottom: 20px;
-        }
-        .buttons button {
-            padding: 10px 20px;
-            margin-right: 10px;
-            cursor: pointer;
-            background-color: #ccc;
-            border: none;
-            border-radius: 5px;
-        }
-        .notes {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        .note {
-            background-color: #e0f7fa;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .note h3 {
-            margin-top: 0;
-        }
-        .note ul {
-            list-style: none;
-            padding: 0;
-        }
-        .note ul li {
-            margin: 5px 0;
-        }
 
-        /* Media Queries for Responsive Design */
-        @media only screen and (min-width: 320px) {
-            .note {
-                width: 240px;
-            }
-            h1 {
-                color: blue;
-            }
-        }
-        @media only screen and (min-width: 600px) {
-            .note {
-                width: 300px;
-            }
-            h1 {
-                color: green;
-            }
-        }
-        @media only screen and (min-width: 768px) {
-            .note {
-                width: 400px;
-            }
-            h1 {
-                color: red;
-            }
-        }
-        @media only screen and (min-width: 1200px) {
-            .note {
-                width: 500px;
-            }
-            h1 {
-                color: purple;
-            }
-        }
-    </style>
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="notes.css" />
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Noted</h2>
-        <ul id="navList">
-            <li class="nav-item active">Calendar</li>
-            <li class="nav-item">Today</li>
-            <li class="nav-item">Notes</li>
-            <li class="nav-item">Accomplishments</li>
-        </ul>
-    </div>
     <div class="content">
         <h2>Notes</h2>
         <div class="buttons">
@@ -213,18 +100,5 @@
             </div>
         </div>
     </div>
-    <script>
-        // JavaScript to handle active class on navigation items
-        const navItems = document.querySelectorAll('.nav-item');
-        
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Remove active class from all items
-                navItems.forEach(nav => nav.classList.remove('active'));
-                // Add active class to the clicked item
-                item.classList.add('active');
-            });
-        });
-    </script>
 </body>
 </html>

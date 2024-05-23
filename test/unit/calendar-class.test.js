@@ -108,7 +108,7 @@ describe("Calendar Class Unit Tests", () => {
         // if all goes well, it passes
         return true;
     }
-
+    //test _getPrevMonthRollOverDates: given a year and a month, return all of the dates from the previous month that will roll over to the current month's calendar.
     test("_getPrevMonthRollOverDates, February 2023", () => {
         // set up test
         const february = 1;
@@ -124,6 +124,7 @@ describe("Calendar Class Unit Tests", () => {
         expect(allDatesCorrect).toBe(true);
     });
 
+    //test _getPrevMonthRollOverDates: given a year and a month, return all of the dates from the previous month that will roll over to the current month's calendar.
     test("_getPrevMonthRollOverDates, June 2024", () => {
         // set up test
         const june = 5;
@@ -138,7 +139,7 @@ describe("Calendar Class Unit Tests", () => {
         const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
-
+    //test _getCurrMonthRollOverDates: given a year and a month, return all of the dates of the current month.
     test("_getCurrMonthRollOverDates, November 2025", () => {
         // set up test
         const november = 10;
@@ -153,7 +154,7 @@ describe("Calendar Class Unit Tests", () => {
         const allDatesCorrect = compareDateLists(exptectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
-
+    //test _getCurrMonthRollOverDates: given a year and a month, return all of the dates of the current month.
     test("_getCurrMonthDates, February 2024", () => {
         // set up test
         const february = 1;
@@ -168,7 +169,7 @@ describe("Calendar Class Unit Tests", () => {
         const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
-
+    //test _getNextMonthRollOverDates: given a year and a month, return all of the dates of the next month that will roll over on the current month's calendar
     test("_getNextMonthRollOverDates, September 2023", () => {
         // set up test
         const september = 8;
@@ -188,7 +189,7 @@ describe("Calendar Class Unit Tests", () => {
         const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
-
+    //test _getNextMonthRollOverDates: given a year and a month, return all of the dates of the next month that will roll over on the current month's calendar
     test("_getNextMonthRollOverDates, January 2024", () => {
         // set up test
         const january = 0;
@@ -208,7 +209,7 @@ describe("Calendar Class Unit Tests", () => {
         const allDatesCorrect = compareDateLists(expectedDates, returnedDates);
         expect(allDatesCorrect).toBe(true);
     });
-    
+    //test _getMonthStrFromInt: given an int, return the corresponding string of the month eg. 1 -> February
     test("_getMonthStrFromInt", () => {
         //set up test
         const months = [

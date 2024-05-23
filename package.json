@@ -1,21 +1,15 @@
 {
-
-  "name": "dev-journal",
-  "version": "1.0.0",
-  "description": "Dev Journal Project CSE 110",
-  "devDependencies": {
-    "@babel/core": "^7.24.5",
-    "@babel/preset-env": "^7.24.5",
-    "babel-jest": "^29.7.0",
-    "jest": "^29.7.0",
-    "jest-puppeteer": "^10.0.0",
-    "puppeteer": "^22.7.1"
-  },
-  "scripts": {
-    "test": "jest"
-  },
-  "jest": {
-    "preset": "jest-puppeteer",
-    "verbose": true
-  }
+    "name": "dev-journal",
+    "version": "1.0.0",
+    "description": "Dev Journal Project CSE 110",
+    "scripts": {
+        "unittest": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/unit/",
+        "integrationtest": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/integration/"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.24.5",
+        "@babel/preset-env": "^7.24.5",
+        "babel-jest": "^29.7.0",
+        "jest": "^27.0.0"
+    }
 }

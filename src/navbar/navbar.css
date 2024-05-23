@@ -16,6 +16,7 @@
     font-weight: 800;
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 /* Noted logo */
@@ -100,6 +101,7 @@ main {
     }
     .app-title {
         font-size: 20px;
+        gap: 6px;
     }
     .nav-icon {
         height: 16px;
@@ -124,6 +126,7 @@ main {
     }
     .app-title {
         font-size: 22px;
+        gap: 8px;
     }
     .nav-icon {
         height: 20px;

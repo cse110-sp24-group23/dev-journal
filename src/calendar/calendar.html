@@ -12,20 +12,25 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
 
         <!-- Script -->
-        <script src="calendar.js"></script>
+        <script src="/src/navbar/navbar.js"></script>
+        <script src="calendar.js" type="module"></script>
     </head>
 
     <body>
+        <div id="navbar"></div>
+
         <main>
             <!-- Header: Month and Year -->
-            <h1>May 2024</h1>
+            <div class="header-container">
+                <h1>May 2024</h1>
+                <div class="button-container">
+                    <button class="prev-month js-prev-month">&lt;</button>
+                    <button class="next-month js-next-month">&gt;</button>
+                </div>
+            </div>
             <br />
             <!-- Table: 6x7 grid Calendar -->
-            <table
-                class="calendar-table js-calendar-table"
-                cellspacing="21"
-                cellpadding="21"
-            >
+            <table class="calendar-table js-calendar-table">
                 <!-- Column Labels: Day of the Week  -->
                 <thead>
                     <tr>
@@ -42,58 +47,58 @@
                 <!-- Table Body: Day of the Month -->
                 <tbody>
                     <tr>
-                        <td class="calendar-day js-calendar-day">28</td>
-                        <td class="calendar-day js-calendar-day">29</td>
-                        <td class="calendar-day js-calendar-day">30</td>
-                        <td class="calendar-day js-calendar-day">1</td>
-                        <td class="calendar-day js-calendar-day">2</td>
-                        <td class="calendar-day js-calendar-day">3</td>
-                        <td class="calendar-day js-calendar-day">4</td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
                     </tr>
                     <tr>
-                        <td class="calendar-day js-calendar-day">5</td>
-                        <td class="calendar-day js-calendar-day">6</td>
-                        <td class="calendar-day js-calendar-day">7</td>
-                        <td class="calendar-day js-calendar-day">8</td>
-                        <td class="calendar-day js-calendar-day">9</td>
-                        <td class="calendar-day js-calendar-day">10</td>
-                        <td class="calendar-day js-calendar-day">11</td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
                     </tr>
                     <tr>
-                        <td class="calendar-day js-calendar-day">12</td>
-                        <td class="calendar-day js-calendar-day">13</td>
-                        <td class="calendar-day js-calendar-day">14</td>
-                        <td class="calendar-day js-calendar-day">15</td>
-                        <td class="calendar-day js-calendar-day">16</td>
-                        <td class="calendar-day js-calendar-day">17</td>
-                        <td class="calendar-day js-calendar-day">18</td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
                     </tr>
                     <tr>
-                        <td class="calendar-day js-calendar-day">19</td>
-                        <td class="calendar-day js-calendar-day">20</td>
-                        <td class="calendar-day js-calendar-day">21</td>
-                        <td class="calendar-day js-calendar-day">22</td>
-                        <td class="calendar-day js-calendar-day">23</td>
-                        <td class="calendar-day js-calendar-day">24</td>
-                        <td class="calendar-day js-calendar-day">25</td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
                     </tr>
                     <tr>
-                        <td class="calendar-day js-calendar-day">26</td>
-                        <td class="calendar-day js-calendar-day">27</td>
-                        <td class="calendar-day js-calendar-day">28</td>
-                        <td class="calendar-day js-calendar-day">29</td>
-                        <td class="calendar-day js-calendar-day">30</td>
-                        <td class="calendar-day js-calendar-day">31</td>
-                        <td class="calendar-day js-calendar-day">1</td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
                     </tr>
                     <tr>
-                        <td class="calendar-day js-calendar-day">2</td>
-                        <td class="calendar-day js-calendar-day">3</td>
-                        <td class="calendar-day js-calendar-day">4</td>
-                        <td class="calendar-day js-calendar-day">5</td>
-                        <td class="calendar-day js-calendar-day">6</td>
-                        <td class="calendar-day js-calendar-day">7</td>
-                        <td class="calendar-day js-calendar-day">8</td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
+                        <td class="calendar-day js-calendar-day"></td>
                     </tr>
                 </tbody>
             </table>

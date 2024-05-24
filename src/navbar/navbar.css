@@ -36,11 +36,13 @@
     z-index: 1;
     top: 0;
     left: 0;
+    font-family: var(--font);
 }
 
 /* Navigation list */
 .nav-list {
     padding-left: 0px;
+    list-style-type: none;
     list-style-type: none;
 }
 
@@ -94,6 +96,7 @@ main {
         font-size: 10px;
     }
     main {
+    main {
         margin-left: 100px;
     }
     .app-icon {
@@ -118,6 +121,7 @@ main {
     .nav-link {
         font-size: 12px;
     }
+    main {
     main {
         margin-left: 120px;
     }
@@ -144,6 +148,7 @@ main {
         font-size: 15px;
     }
     main {
+    main {
         margin-left: 150px;
     }
     .app-icon {
@@ -167,6 +172,7 @@ main {
     .nav-link {
         font-size: 20px;
     }
+    main {
     main {
         margin-left: 200px;
     }

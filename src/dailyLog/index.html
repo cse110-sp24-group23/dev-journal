@@ -6,18 +6,14 @@
         <title>Daily Log</title>
 
         <!-- Stylesheet-->
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="../dailyLog/dailyLog.css"
-        />
+        <link rel="stylesheet" type="text/css" href="dailyLog.css" />
 
         <!-- Script -->
         <script src="/src/navbar/navbar.js"></script>
     </head>
     <body>
         <div id="navbar"></div>
-        
+
         <main>
             <!-- Heading: Date -->
             <div class="header-container">
@@ -44,16 +40,9 @@
                 <br />
                 <label for="hours">
                     <!-- input number for hours with step 0.25 -->
-                    <p>
-                        Enter hours here:
-                        <input
-                            type="number"
-                            step="0.25"
-                            id="hours"
-                            name="hours"
-                        />
-                    </p>
+                    Enter hours here:
                 </label>
+                <input type="number" step="0.25" id="hours" name="hours" />
                 <p>Reflection</p>
                 <label for="reflection">
                     <!-- textarea for reflection -->
@@ -66,6 +55,11 @@ What things can you do in the future?"
                     ></textarea>
                 </label>
                 <br />
+                <!-- button to submit log -->
+                <button type="button" id="submit-button">Submit</button>
+                <br />
+                <!-- button for deleting log -->
+                <button type="button" id="delete-button">Delete Log</button>
             </form>
         </main>
     </body>

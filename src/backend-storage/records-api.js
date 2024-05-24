@@ -5,6 +5,7 @@
 // - title: a string field for the title of the record
 //      - For Notes, it will be the title of the note
 //      - For Daily Logs, it will be the date of the log, via Date().toDateString() eg "Wed May 22 2024"
+// - hours: a number field for the logging hours
 // - field1: a string field for the Markdown 1st field
 // - field2: a string field for the Markdown 2nd field
 // - created: the date and time the record was created in ISO
@@ -89,6 +90,7 @@ export default class LocalStorageRecordsApi extends RecordsApi {
             );
         }
         existingRecord.title = recordObject.title;
+        existingRecord.hours = recordObject.hours;
         existingRecord.field1 = recordObject.field1;
         existingRecord.field2 = recordObject.field2;
         existingRecord.updated = new Date().toISOString();

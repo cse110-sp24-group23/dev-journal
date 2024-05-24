@@ -49,8 +49,15 @@ export default class LocalStorageRecordsApi extends RecordsApi {
     - Array of Records
     */
     static getAllRecords() {
-        const Records = JSON.parse(localStorage.getItem("Records")) || [];
-        return Records;
+        try {
+            const Records = JSON.parse(localStorage.getItem("Records")) || [];
+            return Records;
+        }
+        catch (error) {
+            console.error(error);
+            console.error("Returning Empty List");
+            return [];
+        }
     }
 
     /*

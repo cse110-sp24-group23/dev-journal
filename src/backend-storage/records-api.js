@@ -20,9 +20,20 @@ export class RecordsApi {
     static getAllRecords() {
         throw new Error("getAllRecords not implemented");
     }
+    static createRecord(recordToCreate) {
+        throw new Error("createRecord not implemented");
+    }
 
-    static saveRecord(recordToSave) {
-        throw new Error("saveRecord not implemented");
+    static updateRecord(recordToUpdate) {
+        throw new Error("updateRecord not implemented");
+    }
+
+    static getRecordById(id) {
+        throw new Error("getRecordById not implemented");
+    }
+
+    static getRecordByDate(date) {
+        throw new Error("getRecordByDate not implemented");
     }
 
     static deleteRecord(id) {

@@ -1,3 +1,7 @@
+:root {
+    --font: "Lato", sans-serif;
+}
+
 /* Navbar */
 .app-title {
     color: #333333;
@@ -14,12 +18,13 @@
     z-index: 1;
     top: 0;
     left: 0;
+    font-family: var(--font);
 }
 
 /* Navigation list */
 .nav-list {
     padding-left: 0px;
-    list-style-type: none;   
+    list-style-type: none;
 }
 
 /* Navigation text */
@@ -35,12 +40,12 @@
     font-size: 21px;
     display: block;
     padding: 20px 2px;
-    transition: background-color 0.3s
+    transition: background-color 0.3s;
 }
 
 /*hover and focus states*/
 .nav-link:hover {
-    background-color: rgba(226, 227, 254, 0.6);;
+    background-color: rgba(226, 227, 254, 0.6);
 }
 
 .nav-link.active {
@@ -62,7 +67,7 @@ main {
     .nav-link {
         font-size: 12px;
     }
-    main{
+    main {
         margin-left: 100px;
     }
 }
@@ -75,7 +80,7 @@ main {
     .nav-link {
         font-size: 15px;
     }
-    main{
+    main {
         margin-left: 120px;
     }
 }
@@ -88,7 +93,7 @@ main {
     .nav-link {
         font-size: 18px;
     }
-    main{
+    main {
         margin-left: 150px;
     }
 }
@@ -101,7 +106,7 @@ main {
     .nav-link {
         font-size: 21px;
     }
-    main{
+    main {
         margin-left: 200px;
     }
 }

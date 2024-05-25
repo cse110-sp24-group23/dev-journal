@@ -10,6 +10,11 @@ assignees: ''
 **Feature Description**
 A clear and concise description of what the problem is.
 
+Requirements/steps:
+ - []
+ - []
+ - []
+
 **Sub-Issue**
 Make sure to link these issues.
 

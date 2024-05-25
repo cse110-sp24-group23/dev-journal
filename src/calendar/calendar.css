@@ -135,7 +135,6 @@ th {
 /* Calendar border */
 .calendar-table th,
 .calendar-table td {
-    background-color: var(--calendar-background-color);
     border-color: var(--calendar-grid-color);
     border: var(--border-calendar) solid var(--calendar-border);
     padding: var(--cell-padding);

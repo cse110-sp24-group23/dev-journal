@@ -1,7 +1,11 @@
 /* Variables */
 :root {
+    --table-head-text-color: #1D1C1D;
+    --current-date-color: rgba(226,227,255,255);
+    --calendar-background-color: rgba(244,249,255,255);
+    --calendar-grid-color: rgba(86,124,168,255);
     --font: "Lato", sans-serif;
-    --table-head-color: rgb(185, 209, 238);
+    --table-head-background-color: rgb(185, 209, 238);
     --today-background-color: rgb(226, 227, 254);
     --rollover-date-color: gray;
     --month-button-color: gray;
@@ -18,6 +22,8 @@
     --border-calendar: 1.5px;
     --font-weight-table: 570;
 }
+
+/* Adjustable Calendar */
 /* Vary size of cell padding based on screen size */
 /* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {
@@ -96,15 +102,27 @@ body {
     background-color: var(--calendar-background);
 }
 
+/* Month and Year Header */
+h1 {
+    font-family: 'Lato', sans-serif;
+}
+
+/* Body */
+body {
+    font-family: 'Lato', sans-serif;
+}
+
 /* Days of the Week */
 thead {
-    background-color: var(--table-head-color);
+    color: var(--table-head-text-color);
+    background-color: var(--table-head-background-color);
 }
 /* Making font lighter for heading */
 th {
     font-size: var(--font-size-calendar-heading);
     font-weight: var(--font-weight-table);
 }
+
 /* Day of the Month  */
 .calendar-table td {
     text-align: center;
@@ -117,6 +135,7 @@ th {
 /* Calendar border */
 .calendar-table th,
 .calendar-table td {
+    border-color: var(--calendar-grid-color);
     border: var(--border-calendar) solid var(--calendar-border);
     padding: var(--cell-padding);
 }

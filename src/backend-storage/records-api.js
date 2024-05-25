@@ -77,13 +77,7 @@ export default class LocalStorageRecordsApi extends RecordsApi {
                 recordObject.id
             );
         }
-        const currentDate = new Date();
-        // Assign an id for a note, versus should be fed in one for a daily log
-        if (!recordObject.id) {
-            recordObject.id = currentDate.getTime();
-        }
-        recordObject.updated = currentDate.toISOString();
-        recordObject.created = currentDate.toISOString();
+
         Records.push(recordObject);
         localStorage.setItem("Records", JSON.stringify(Records));
     }
@@ -147,7 +141,7 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         }
         return record;
     }
-
+    //TODO: add comment
     static hasRecord(date) {
         const Records = LocalStorageRecordsApi.getAllRecords();
         const record = Records.find((record) => record.id === date.getTime());

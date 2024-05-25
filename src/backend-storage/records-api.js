@@ -52,8 +52,7 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         try {
             const Records = JSON.parse(localStorage.getItem("Records")) || [];
             return Records;
-        }
-        catch (error) {
+        } catch (error) {
             console.error(error);
             console.error("Returning Empty List");
             return [];
@@ -131,6 +130,7 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         }
         return record;
     }
+
     /*
     getRecordByDate(): Gets a record from LocalStorage by date
     Parameters:
@@ -146,6 +146,15 @@ export default class LocalStorageRecordsApi extends RecordsApi {
             throw new Error("Record not found", date.getTime());
         }
         return record;
+    }
+
+    static hasRecord(date) {
+        const Records = LocalStorageRecordsApi.getAllRecords();
+        const record = Records.find((record) => record.id === date.getTime());
+        if (!record) {
+            return false;
+        }
+        return true;
     }
 
     /*

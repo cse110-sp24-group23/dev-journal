@@ -77,7 +77,6 @@ export default class LocalStorageRecordsApi extends RecordsApi {
                 recordObject.id
             );
         }
-
         Records.push(recordObject);
         localStorage.setItem("Records", JSON.stringify(Records));
     }
@@ -124,7 +123,6 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         }
         return record;
     }
-
     /*
     getRecordByDate(): Gets a record from LocalStorage by date
     Parameters:

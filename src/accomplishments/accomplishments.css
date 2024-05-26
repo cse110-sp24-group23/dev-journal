@@ -1,0 +1,11 @@
+/* Variables */
+:root {
+    --font: "Lato", sans-serif;
+}
+/* Setting the font for the whole body */
+body {
+    font-family: var(--font);
+}
+h1 {
+    font-weight: normal;
+}

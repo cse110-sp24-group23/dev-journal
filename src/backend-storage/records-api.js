@@ -48,10 +48,23 @@ export default class LocalStorageRecordsApi extends RecordsApi {
     Returns: 
     - Array of Records
     */
-    static getAllRecords() {
+    static getAllRecords(type=null) {
+        const types = ['log', 'note', null];
+        if(!types.contains(type)){
+            throw Error('type must be "log", "note", or null.');
+        }
         try {
+            let filteredRecords = [];a
             const Records = JSON.parse(localStorage.getItem("Records")) || [];
-            return Records;
+            if(!type){
+                return Records;
+            };
+            for(const record of Records){
+                if(record.type == type){
+                    filteredRecords.push(record);
+                };
+            };
+            return filteredRecords;
         } catch (error) {
             console.error(error);
             console.error("Returning Empty List");

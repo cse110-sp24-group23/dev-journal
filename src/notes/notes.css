@@ -48,6 +48,27 @@ body {
     border: none;
     border-radius: 5px;
 }
+button:hover {
+    background-color: #cccccc8e;
+    border-width: 0;
+}
+
+.add-notes textarea{
+    background-color: #e0f7fa;
+    padding: 20px;
+    width: 100%;
+    height: 120px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#submitNoteBtn {
+    position: absolute;
+    top: 40px;
+    right: 10px;
+    cursor: pointer;
+    display: none;
+}
+
 .notes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -68,6 +89,12 @@ body {
 }
 .note ul li {
     margin: 5px 0;
+}
+.note textarea{
+    width: 100%;
+    height: 80px;
+    border: none;
+    background-color: #e0f7fa;
 }
 
 /* Media Queries for Responsive Design */

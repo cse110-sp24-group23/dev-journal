@@ -33,10 +33,10 @@ function calendarFunctionality(calendar) {
     Parameters: None
     Returns: None
 */
-async function dateLink(calendar) {
+/*async function dateLink(calendar) {
     //Link to daily log page for the specific day that was clicked
     //First time clicking a date: creates a new Daily Log page for it
-    /*try {
+    try {
         //path to the html boiler plate, please update if changed
         const dailyLogPath = "../dailyLog/index.html";
         // hello
@@ -55,8 +55,8 @@ async function dateLink(calendar) {
         }
     } catch (error) {
         console.error("Error fetching daily log:", error);
-    }*/
-}
+    
+}}*/
 
 /*
     addClickToDays(): Adds event listeners to each date. 

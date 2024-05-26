@@ -19,7 +19,16 @@
         <div id="navbar"></div>
 
         <main>
-            <h1>Accomplishments</h1>
+            <div class="header-container">
+                <h1>Accomplishments</h1>
+                <div class="button-container">
+                    <button class="add-button js-add-button">Add</button>
+                    <button class="delete-button js-delete-button">
+                        Delete
+                    </button>
+                </div>
+            </div>
+            <br />
             <!-- Table: Accomplishments with Date -->
             <table class="accomplishments-table js-accomplishments-table">
                 <!-- Column Labels: Date and Accomplishments  -->
@@ -32,7 +41,10 @@
 
                 <!-- Table Body: all accomplishments with the date attached to them -->
                 <tbody>
-                    <tr class="add-accomplishment js-add-accomplishment"></tr>
+                    <tr class="add-accomplishment js-add-accomplishment">
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
         </main>

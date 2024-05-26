@@ -11,7 +11,7 @@
 // - created: the date and time the record was created in ISO
 // - updated: the date and time the record was last updated in ISO
 
-export class RecordsApi {
+class RecordsApi {
     constructor() {
         if (this.constructor === RecordsApi) {
             throw new Error("Cannot instantiate an abstract class");
@@ -41,7 +41,7 @@ export class RecordsApi {
     }
 }
 
-export default class LocalStorageRecordsApi extends RecordsApi {
+class LocalStorageRecordsApi extends RecordsApi {
     /*
     getAllRecords(): Gets all Records from LocalStorage
     Parameters: None
@@ -163,3 +163,5 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         localStorage.setItem("Records", JSON.stringify(newRecords));
     }
 }
+
+export { LocalStorageRecordsApi };

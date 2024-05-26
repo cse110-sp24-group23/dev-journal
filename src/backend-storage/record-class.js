@@ -16,7 +16,7 @@ export class Record {
         date = null
     ) {
         const types = ["log", "note"];
-        if (!types.contains(type)) {
+        if (!types.includes(type)) {
             throw Error("The parameter type must be 'log' or 'note'.");
         }
         if (type === "note" && field2) {
@@ -25,6 +25,7 @@ export class Record {
         if (type === "log" && !date) {
             throw Error("Logs must have date.");
         }
+        this.type = type;
         this.hours = hours;
         this.field1 = field1;
         this.field2 = field2;

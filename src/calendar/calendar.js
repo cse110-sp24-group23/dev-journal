@@ -1,7 +1,7 @@
 import { Calendar } from "./calendar-class.js";
-import { populateDefaultLog } from "../dailyLog/dailyLog.js";
-import { LocalStorageRecordsApi as RecordsStorage } from "../backend-storage/records-api.js";
-import { Record } from "../backend-storage/record-class.js";
+//import { populateDefaultLog } from "../dailyLog/dailyLog.js";
+//import { LocalStorageRecordsApi as RecordsStorage } from "../backend-storage/records-api.js";
+//import { Record } from "../backend-storage/record-class.js";
 
 /*
     Uses Calendar class from ./calendar-class.js to populate the month view and show the next

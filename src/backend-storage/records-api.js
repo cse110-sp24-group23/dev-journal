@@ -141,7 +141,7 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         }
         return record;
     }
-    //TODO: add comment
+    //TODO: add comment and potentially change to include search by type
     static hasRecord(date) {
         const Records = LocalStorageRecordsApi.getAllRecords();
         const record = Records.find((record) => record.id === date.getTime());

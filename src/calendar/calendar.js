@@ -1,4 +1,7 @@
 import { Calendar } from "./calendar-class.js";
+import { populateDefaultLog } from "../dailyLog/dailyLog.js";
+import { LocalStorageRecordsApi as RecordsStorage } from "../backend-storage/records-api.js";
+import { Record } from "../backend-storage/record-class.js";
 
 /*
     Uses Calendar class from ./calendar-class.js to populate the month view and show the next
@@ -7,14 +10,10 @@ import { Calendar } from "./calendar-class.js";
     Parameters: None
     Returns: None
 */
-function calendarFunctionality() {
-    // select relevant calendar elements
-    const calendarHeading = document.querySelector("h1");
-    const calendarDayCells = document.getElementsByClassName("js-calendar-day");
+function calendarFunctionality(calendar) {
     const prevMonthButton = document.getElementsByClassName("js-prev-month")[0];
     const nextMonthButton = document.getElementsByClassName("js-next-month")[0];
-    // instantiate Calendar class, passing in Heading and day cells since they will be edited
-    const calendar = new Calendar(calendarHeading, calendarDayCells);
+
     // populate table upon page load with defaults (current month and year)
     calendar.populateMonthView();
     // go to prev month when prev button is clicked
@@ -34,10 +33,10 @@ function calendarFunctionality() {
     Parameters: None
     Returns: None
 */
-async function dateLink() {
+async function dateLink(calendar) {
     //Link to daily log page for the specific day that was clicked
     //First time clicking a date: creates a new Daily Log page for it
-    try {
+    /*try {
         //path to the html boiler plate, please update if changed
         const dailyLogPath = "../dailyLog/index.html";
         // hello
@@ -56,7 +55,7 @@ async function dateLink() {
         }
     } catch (error) {
         console.error("Error fetching daily log:", error);
-    }
+    }*/
 }
 
 /*
@@ -64,15 +63,35 @@ async function dateLink() {
     Parameters: None
     Returns: None
 */
-function addClickToDays() {
+/*function addClickToDays(calendar) {
     const calendarDays = document.querySelectorAll(".js-calendar-day");
     for (let day of calendarDays) {
-        day.addEventListener("click", dateLink);
+        //day.innerHTML = "<a href= '../dailyLog/index.html'>helloo</a>";
+        day.addEventListener("click", () => {
+            window.location.href = "../dailyLog/index.html";
+            alert("first");
+            let record;
+            const dateObject = calendar.getDateOfDayCell(day);
+            if (RecordsStorage.hasRecord(dateObject)) {
+                record = RecordsStorage.getRecordByDate(dateObject);
+            } else {
+                record = new Record("log", { date: dateObject });
+            }
+
+            populateDefaultLog(record);
+            alert("second");
+        });
+
+        //day.innerText = "helloo";
     }
-}
+}*/
 
 window.onload = function () {
-    // todaysDate();
-    addClickToDays();
-    calendarFunctionality();
+    // select relevant calendar elements
+    const calendarHeading = document.querySelector("h1");
+    const calendarDayCells = document.getElementsByClassName("js-calendar-day");
+    // instantiate Calendar class, passing in Heading and day cells since they will be edited
+    const calendar = new Calendar(calendarHeading, calendarDayCells);
+    calendarFunctionality(calendar);
+    //addClickToDays(calendar);
 };

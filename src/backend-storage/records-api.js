@@ -41,7 +41,7 @@ export class RecordsApi {
     }
 }
 
-export default class LocalStorageRecordsApi extends RecordsApi {
+class LocalStorageRecordsApi extends RecordsApi {
     /*
     getAllRecords(): Gets all Records from LocalStorage
     Parameters: None
@@ -50,11 +50,11 @@ export default class LocalStorageRecordsApi extends RecordsApi {
     */
     static getAllRecords(type=null) {
         const types = ['log', 'note', null];
-        if(!types.contains(type)){
+        if(!types.includes(type)){
             throw Error('type must be "log", "note", or null.');
         }
         try {
-            let filteredRecords = [];a
+            let filteredRecords = [];
             const Records = JSON.parse(localStorage.getItem("Records")) || [];
             if(!type){
                 return Records;
@@ -183,3 +183,4 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         localStorage.setItem("Records", JSON.stringify(newRecords));
     }
 }
+export { LocalStorageRecordsApi };

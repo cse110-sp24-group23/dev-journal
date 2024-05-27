@@ -19,7 +19,7 @@ function submitToStorage() {
     // the title of the note
     const noteTitle = document.getElementById("note-heading");
     // the textbox to enter notes in
-    const noteTextContent = document.getElementById("add-note-textbox");
+    const noteTextContent = document.getElementById("note-content");
     const noteContent = noteTextContent.value;
     const noteTitleContent = noteTitle.innerText;
     const noteRecord = new Record("note", {
@@ -35,26 +35,24 @@ function deleteFromStorage(noteId) {
 }
 
 function _addNoteTextbox() {
-    const addNotes = document.querySelector(".add-notes");
-    const submitBtn = document.getElementById("submitNoteBtn");
-    const noteTextBox = document.createElement("div");
-    const noteHeading = document.createElement("h3");
-    const addNote = document.createElement("textarea");
-    const note = document.createElement("textarea");
-    const saveBtn = document.createElement("button");
-    saveBtn.innerText = "Save";
-    submitBtn.style.display = "block";
-    noteTextBox.className = "note";
-    noteTextBox.type = "text";
-    noteHeading.id = "note-heading";
-    noteHeading.setAttribute("contenteditable", "true");
-    addNote.id = "add-note-textbox";
-    addNotes.appendChild(noteHeading);
-    addNotes.appendChild(addNote);
-    addNotes.appendChild(saveBtn);
-    saveBtn.addEventListener("click", (event) => {
+    const notesDisplay = document.querySelector(".notes-display");
+    const note = document.createElement("div");
+    const noteTitle = document.createElement("h3");
+    const noteContent = document.createElement("textarea");
+    const noteSaveBtn = document.createElement("button");
+    note.className = "note";
+    noteTitle.id = "note-heading";
+    // noteTextBox.type = "text";
+    noteSaveBtn.innerText = "Save";
+    noteTitle.setAttribute("contenteditable", "true");
+    noteContent.id = "note-content";
+    notesDisplay.appendChild(noteTitle);
+    notesDisplay.appendChild(noteContent);
+    notesDisplay.appendChild(noteSaveBtn);
+    noteSaveBtn.addEventListener("click", (event) => {
         submitToStorage();
-        addNote.style.display = "none";
+        note.style.display = "none";
+        loadFromStorage();
     });
     // notes.appendChild(noteTextBox).appendChild(noteHeading).appendChild(note);
     // document.getElementById('add-note-textbox').style.display = 'block';

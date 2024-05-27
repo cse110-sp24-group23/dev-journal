@@ -5,7 +5,7 @@ class Note extends HTMLElement {
 
     constructor() {
         super();
-        this.shadow = this.attachShadow({ mode: "closed" });
+        this.shadow = this.attachShadow({ mode: "open" });
         this.shadow.innerHTML = `
         <h4>${this.date}</h4>
         <textarea disabled>${this.preview}</textarea>

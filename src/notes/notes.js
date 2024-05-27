@@ -12,6 +12,19 @@ function loadFromStorage() {
         newNote.content = note.field1;
         notesDisplay.appendChild(newNote);
     }
+    _addDeleteButtonListeners();
+}
+
+function _addDeleteButtonListeners() {
+    const notesDisplay = document.querySelector(".notes-display");
+    const notes = notesDisplay.querySelectorAll("my-note");
+    notes.forEach((note) => {
+        const deleteButton = note.shadowRoot.querySelector("button");
+        deleteButton.addEventListener("click", () => {
+            const noteId = note.id;
+            deleteFromStorage(noteId);
+        });
+    });
 }
 
 // submit to local storage
@@ -29,9 +42,12 @@ function submitToStorage() {
     RecordsStorage.createRecord(noteRecord);
 }
 
-// TODO: delete from local storage
 function deleteFromStorage(noteId) {
-    RecordsStorage.deleteRecord(noteId);
+    // Comes in as string, so we convert to a Number
+    RecordsStorage.deleteRecord(Number(noteId));
+    const notesDisplay = document.querySelector(".notes-display");
+    const note = notesDisplay.querySelector(`my-note[id="${noteId}"]`);
+    note.remove();
 }
 
 function _addNoteTextbox() {

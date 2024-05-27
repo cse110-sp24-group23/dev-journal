@@ -7,7 +7,7 @@ function loadFromStorage() {
     for (const note of notesList) {
         let newNote = document.createElement("my-note");
         newNote.id = note.id;
-        // newNote.title = note.title;
+        newNote.title = note.title;
         newNote.date = note.date;
         newNote.content = note.field1;
         notesDisplay.appendChild(newNote);
@@ -17,7 +17,7 @@ function loadFromStorage() {
 // submit to local storage
 function submitToStorage() {
     // the title of the note
-    const noteTitle = document.getElementById("note-heading");
+    const noteTitle = document.getElementById("note-title");
     // the textbox to enter notes in
     const noteTextContent = document.getElementById("note-content");
     const noteContent = noteTextContent.value;
@@ -41,7 +41,7 @@ function _addNoteTextbox() {
     const noteContent = document.createElement("textarea");
     const noteSaveBtn = document.createElement("button");
     note.className = "note";
-    noteTitle.id = "note-heading";
+    noteTitle.id = "note-title";
     // noteTextBox.type = "text";
     noteSaveBtn.innerText = "Save";
     noteTitle.setAttribute("contenteditable", "true");
@@ -60,9 +60,7 @@ function _addNoteTextbox() {
 }
 
 window.onload = function () {
-    const notes = document.querySelector(".notes");
+    loadFromStorage();
     const addNoteBtn = document.getElementById("addNoteBtn");
     addNoteBtn.addEventListener("click", _addNoteTextbox);
-
-    window.addEventListener("DOMContentLoaded", loadFromStorage);
 };

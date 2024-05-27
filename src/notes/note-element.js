@@ -5,7 +5,6 @@ class Note extends HTMLElement {
 
     constructor() {
         super();
-        // this.classList.add('note');
         this.shadow = this.attachShadow({ mode: "closed" });
         this.shadow.innerHTML = `
         <h4>${this.date}</h4>
@@ -93,15 +92,16 @@ class Note extends HTMLElement {
     */
     connectedCallback() {
         this._id = this.getAttribute("id");
-        // this.title = this.getAttribute('title');
+        this._title = this.getAttribute("title");
         this._date = this.getAttribute("date");
         this._content = this.getAttribute("content");
         this.shadow.innerHTML = `
-        <h4>${this._date}</h4>
-        <textarea disabled>${this.preview}</textarea>
+        <h3>${this._title}</h3>
+        <p>${this.preview}</p>
+        <p>Date: ${this._date}</p>
         <button>Delete</button>
         `;
-        this.class = "note";
+        this.classList.add("note");
     }
 }
 customElements.define("my-note", Note);

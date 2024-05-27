@@ -25,7 +25,8 @@ body {
     padding: 10px;
     border-radius: 5px;
 }
-.sidebar ul li.active, .sidebar ul li:hover {
+.sidebar ul li.active,
+.sidebar ul li:hover {
     background-color: #f0f4f8;
     color: #7d5a5a;
 }
@@ -53,7 +54,7 @@ button:hover {
     border-width: 0;
 }
 
-.add-notes textarea{
+.add-notes textarea {
     background-color: #e0f7fa;
     padding: 20px;
     width: 100%;
@@ -69,9 +70,9 @@ button:hover {
     display: none;
 }
 
-.notes {
+.notes-display {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 .note {
@@ -90,7 +91,7 @@ button:hover {
 .note ul li {
     margin: 5px 0;
 }
-.note textarea{
+.note textarea {
     width: 100%;
     height: 80px;
     border: none;

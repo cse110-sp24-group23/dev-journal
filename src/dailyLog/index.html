@@ -7,11 +7,32 @@
         <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
         <script src="simpleMDE.js"></script>
         <title>Daily Log</title>
+
+        <!-- Stylesheet-->
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../dailyLog/dailyLog.css"
+        />
+
+        <!-- Script -->
+        <script src="/src/navbar/navbar.js"></script>
     </head>
     <body>
+        <div id="navbar"></div>
+
         <main>
             <!-- Heading: Date -->
-            <h1>Date:</h1>
+            <div class="header-container">
+                <h1>Date:</h1>
+                <div class="button-container">
+                    <!-- button to save log -->
+                    <button type="button" id="save-button">Submit</button>
+                    <!-- button for deleting log -->
+                    <button type="button" id="delete-button">Delete Log</button>
+                </div>
+            </div>
+
             <form>
                 <!-- Form to wrap the whole daily log -->
                 <p>What did you get done today?</p>
@@ -28,8 +49,8 @@
                 <label for="hours">
                     <!-- input number for hours with step 0.25 -->
                     Enter hours here:
-                    <input type="number" step="0.25" id="hours" name="hours" />
                 </label>
+                <input type="number" step="0.25" id="hours" name="hours" />
                 <p>Reflection</p>
                 <label for="reflection">
                     <!-- textarea for reflection -->
@@ -44,12 +65,6 @@ What things can you do in the future?"
                     ></textarea> 
                     
                 </label>
-                <br />
-                <!-- button to save log -->
-                <button type="button" id="save-button">Save</button>
-                <br />
-                <!-- button for back button -->
-                <button type="button" id="back-button">Back to Calendar</button>
             </form>
         </main>
     </body>

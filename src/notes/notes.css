@@ -1,3 +1,9 @@
+:root {
+    --notes-display-left-margin: 20px;
+    --note-width: 250px;
+    --notes-per-row: 3;
+}
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -71,11 +77,22 @@ button:hover {
 }
 
 .notes-display {
+    width: 90%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(var(--notes-per-row), 1fr);
     gap: 20px;
 }
+.note-editor {
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #f5bbbb8e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .note {
+    width: var(--note-width);
     background-color: #e0f7fa;
     padding: 20px;
     border-radius: 10px;
@@ -98,36 +115,35 @@ button:hover {
     background-color: #e0f7fa;
 }
 
-/* Media Queries for Responsive Design */
+/* Vary sizes based on screen size */
+/* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {
-    .note {
-        width: 240px;
-    }
-    h1 {
-        color: blue;
+    :root {
+        --note-width: 275px;
+        --notes-per-row: 1;
     }
 }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    .note {
-        width: 300px;
-    }
-    h1 {
-        color: green;
+    :root {
+        --note-width: 150px;
+        --notes-per-row: 2;
     }
 }
+
+/* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    .note {
-        width: 400px;
-    }
-    h1 {
-        color: red;
+    :root {
+        --note-width: 225px;
+        --notes-per-row: 2;
     }
 }
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    .note {
-        width: 500px;
-    }
-    h1 {
-        color: purple;
+    :root {
+        --note-width: 250px;
+        --notes-per-row: 3;
     }
 }

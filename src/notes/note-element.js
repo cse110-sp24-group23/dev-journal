@@ -56,12 +56,12 @@ class Note extends HTMLElement {
     set content(value) {
         this._content = value;
         this.setAttribute("content", value);
-        const previewChars = 50;
+        const previewChars = 100;
         this._preview = this._content.slice(0, previewChars);
     }
 
     /*
-    Description: Change note attributes from oldValue to newValue
+    Change note attributes from oldValue to newValue
     Parameters: name, oldValue, newValue
         - name: attribute name
         - oldValue: old content of attribute
@@ -86,7 +86,20 @@ class Note extends HTMLElement {
         }
     }
     /*
-    Description: Initialize values when new note is added.
+    Given a date string like 2024-05-27T07:50:04.274Z, return a string in the form May 27, 2024
+    Parameters:
+        - dateString: String that represents a date
+    Return:
+        - String of the same date but in a readable form
+    */
+    _formatDate(dateString) {
+        const date = new Date(dateString);
+        const settings = { year: "numeric", month: "long", day: "numeric" };
+        return date.toLocaleDateString("en-US", settings);
+    }
+
+    /*
+    Initialize values when new note is added.
     Parameters: None
     Return: None
     */
@@ -95,11 +108,28 @@ class Note extends HTMLElement {
         this._title = this.getAttribute("title");
         this._date = this.getAttribute("date");
         this._content = this.getAttribute("content");
+        // if the content is longer than the preview, add an elipses to the preview
         this.shadow.innerHTML = `
-        <h3>${this._title}</h3>
-        <p>${this.preview}</p>
-        <p>Date: ${this._date}</p>
-        <button>Delete</button>
+        <p id="date">${this._formatDate(this._date)}</p>
+        <p>${this._title}</p>
+        <img src="../assets/icons/trash-icon.svg" alt="Delete" class="js-trash">
+        <style>
+            #date {
+                width: max-content;
+                margin-right: 0;
+                margin-left: auto;
+            }
+            #icons-container {
+                float: right;
+            }
+            img {
+                height: 2em;
+                margin-bottom: 0;
+                margin-top: auto;
+                display: inline-block;
+                float: right;
+            }
+        </style>
         `;
         this.classList.add("note");
     }

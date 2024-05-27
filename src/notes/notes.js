@@ -1,6 +1,7 @@
 import { Record } from "../backend-storage/record-class.js";
 import { LocalStorageRecordsApi as RecordsStorage } from "../backend-storage/records-api.js";
 
+// TODO: make it so newest added notes are on top - sort by most recently created
 function loadFromStorage() {
     const notesDisplay = document.querySelector(".notes-display");
     const notesList = RecordsStorage.getAllRecords("note");
@@ -8,29 +9,40 @@ function loadFromStorage() {
         let newNote = document.createElement("my-note");
         newNote.id = note.id;
         newNote.title = note.title;
-        newNote.date = note.date;
+        newNote.date = note.created;
         newNote.content = note.field1;
-        notesDisplay.appendChild(newNote);
+        notesDisplay.prepend(newNote);
+        _addDeleteButtonListener(newNote);
     }
-    _addDeleteButtonListeners();
 }
 
-function _addDeleteButtonListeners() {
+// load the newest note from local storage
+function _loadNewestNoteFromStorage() {
     const notesDisplay = document.querySelector(".notes-display");
-    const notes = notesDisplay.querySelectorAll("my-note");
-    notes.forEach((note) => {
-        const deleteButton = note.shadowRoot.querySelector("button");
-        deleteButton.addEventListener("click", () => {
-            const noteId = note.id;
-            deleteFromStorage(noteId);
-        });
+    const notesList = RecordsStorage.getAllRecords("note");
+    const note = notesList[notesList.length - 1];
+    let newNote = document.createElement("my-note");
+    newNote.id = note.id;
+    newNote.title = note.title;
+    newNote.date = note.created;
+    newNote.content = note.field1;
+    notesDisplay.prepend(newNote);
+    _addDeleteButtonListener(newNote);
+}
+
+// given a note, add a delete button listener to it that will delete it when clicked
+function _addDeleteButtonListener(note) {
+    const deleteButton = note.shadowRoot.querySelector(".js-trash");
+    deleteButton.addEventListener("click", () => {
+        const noteId = note.id;
+        deleteFromStorage(noteId);
     });
 }
 
 // submit to local storage
 function submitToStorage() {
     // the title of the note
-    const noteTitle = document.getElementById("note-title");
+    const noteTitle = document.getElementById("note-editor-title");
     // the textbox to enter notes in
     const noteTextContent = document.getElementById("note-content");
     const noteContent = noteTextContent.value;
@@ -51,25 +63,32 @@ function deleteFromStorage(noteId) {
 }
 
 function _addNoteTextbox() {
-    const notesDisplay = document.querySelector(".notes-display");
+    const notesContainer = document.querySelector(".js-notes-container");
     const note = document.createElement("div");
-    const noteTitle = document.createElement("h3");
+    const noteTitle = document.createElement("input");
     const noteContent = document.createElement("textarea");
     const noteSaveBtn = document.createElement("button");
-    note.className = "note";
-    noteTitle.id = "note-title";
-    // noteTextBox.type = "text";
+    note.className = "note-editor";
+    noteTitle.id = "note-editor-title";
+    noteTitle.type = "text";
+    noteTitle.style = "display:block;";
+    noteTitle.placeholder = "Title";
     noteSaveBtn.innerText = "Save";
     noteTitle.setAttribute("contenteditable", "true");
     noteContent.id = "note-content";
+    noteContent.placeholder = "Notes";
+    noteContent.style = "display:block;";
     note.appendChild(noteTitle);
     note.appendChild(noteContent);
     note.appendChild(noteSaveBtn);
-    notesDisplay.appendChild(note);
+    notesContainer.prepend(note);
     noteSaveBtn.addEventListener("click", (event) => {
+        // put note in storage
         submitToStorage();
+        // get rid of the note editor display
         note.style.display = "none";
-        loadFromStorage();
+        // show the newly created note
+        _loadNewestNoteFromStorage();
     });
     // notes.appendChild(noteTextBox).appendChild(noteHeading).appendChild(note);
     // document.getElementById('add-note-textbox').style.display = 'block';

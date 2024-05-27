@@ -2,7 +2,7 @@ import { Record } from "../backend-storage/record-class.js";
 import { LocalStorageRecordsApi as RecordsStorage } from "../backend-storage/records-api.js";
 
 function loadFromStorage() {
-    const addNotes = document.querySelector(".add-notes");
+    const notesDisplay = document.querySelector(".notes-display");
     const notesList = RecordsStorage.getAllRecords("note");
     for (const note of notesList) {
         let newNote = document.createElement("my-note");
@@ -10,7 +10,7 @@ function loadFromStorage() {
         // newNote.title = note.title;
         newNote.date = note.date;
         newNote.content = note.field1;
-        addNotes.appendChild(newNote);
+        notesDisplay.appendChild(newNote);
     }
 }
 
@@ -46,9 +46,10 @@ function _addNoteTextbox() {
     noteSaveBtn.innerText = "Save";
     noteTitle.setAttribute("contenteditable", "true");
     noteContent.id = "note-content";
-    notesDisplay.appendChild(noteTitle);
-    notesDisplay.appendChild(noteContent);
-    notesDisplay.appendChild(noteSaveBtn);
+    note.appendChild(noteTitle);
+    note.appendChild(noteContent);
+    note.appendChild(noteSaveBtn);
+    notesDisplay.appendChild(note);
     noteSaveBtn.addEventListener("click", (event) => {
         submitToStorage();
         note.style.display = "none";

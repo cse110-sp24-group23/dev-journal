@@ -8,7 +8,6 @@ class Note extends HTMLElement {
         // this.classList.add('note');
         this.shadow = this.attachShadow({ mode: "closed" });
         this.shadow.innerHTML = `
-        
         <h4>${this.date}</h4>
         <textarea disabled>${this.preview}</textarea>
         <button>Delete</button>
@@ -93,10 +92,16 @@ class Note extends HTMLElement {
     Return: None
     */
     connectedCallback() {
-        this.id = this.getAttribute("id");
+        this._id = this.getAttribute("id");
         // this.title = this.getAttribute('title');
-        this.date = this.getAttribute("date");
-        this.content = this.getAttribute("content");
+        this._date = this.getAttribute("date");
+        this._content = this.getAttribute("content");
+        this.shadow.innerHTML = `
+        <h4>${this._date}</h4>
+        <textarea disabled>${this.preview}</textarea>
+        <button>Delete</button>
+        `;
+        this.class = "note";
     }
 }
 customElements.define("my-note", Note);

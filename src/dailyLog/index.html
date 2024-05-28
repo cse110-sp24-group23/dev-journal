@@ -3,9 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-        <script src="simpleMDE.js"></script>
+
         <title>Daily Log</title>
 
         <!-- Stylesheet-->
@@ -14,9 +12,14 @@
             type="text/css"
             href="../dailyLog/dailyLog.css"
         />
-
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
+        />
         <!-- Script -->
         <script src="/src/navbar/navbar.js"></script>
+        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <script src="simpleMDE.js"></script>
     </head>
     <body>
         <div id="navbar"></div>
@@ -41,9 +44,8 @@
                     <textarea
                         name="done-today"
                         id="done-today"
-                        cols="30"
-                        rows="10"
-                        placeholder="Enter text here:"></textarea>
+                        placeholder="Enter text here:"
+                    ></textarea>
                 </label>
                 <br />
                 <label for="hours">
@@ -57,13 +59,10 @@
                     <textarea
                         name="reflection"
                         id="reflection"
-                        cols="30"
-                        rows="10"
                         placeholder="What did you learn?
 What challenges did you face?
 What things can you do in the future?"
-                    ></textarea> 
-                    
+                    ></textarea>
                 </label>
             </form>
         </main>

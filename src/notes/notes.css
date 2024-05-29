@@ -48,6 +48,10 @@ body {
     color: #7d5a5a;
 }
 
+.hidden {
+    display: none;
+}
+
 .content {
     flex-grow: 1;
     padding: 20px;
@@ -132,6 +136,12 @@ body {
     background-color: #e0f7fa;
 }
 
+#note-editor-content {
+    display: block;
+}
+#note-editor-title {
+    display: block;
+}
 /* Vary sizes based on screen size */
 /* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {

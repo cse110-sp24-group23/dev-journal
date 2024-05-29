@@ -28,6 +28,7 @@ function _loadNewestNoteFromStorage() {
     newNote.content = note.field1;
     notesDisplay.prepend(newNote);
     _addDeleteButtonListener(newNote);
+    console.log(note.id, "|", note.title, "|", note.field1);
 }
 
 // given a note, add a delete button listener to it that will delete it when clicked
@@ -68,19 +69,25 @@ function _addNoteTextbox() {
     const noteTitle = document.createElement("input");
     const noteContent = document.createElement("textarea");
     const noteSaveBtn = document.createElement("button");
+    // add ways to access elements
     note.className = "note-editor";
     noteTitle.id = "note-editor-title";
+    // add format/styles
+    // title
     noteTitle.type = "text";
     noteTitle.style = "display:block;";
     noteTitle.placeholder = "Title";
+    // save button
     noteSaveBtn.innerText = "Save";
-    noteTitle.setAttribute("contenteditable", "true");
+    // content
     noteContent.id = "note-content";
     noteContent.placeholder = "Notes";
     noteContent.style = "display:block;";
+    // create note editor
     note.appendChild(noteTitle);
     note.appendChild(noteContent);
     note.appendChild(noteSaveBtn);
+    // display note editor
     notesContainer.prepend(note);
     noteSaveBtn.addEventListener("click", (event) => {
         // put note in storage

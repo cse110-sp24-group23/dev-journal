@@ -27,8 +27,11 @@ function loadFromStorage() {
         newNote.content = note.field1;
         notesDisplay.prepend(newNote);
         _addDeleteButtonListener(newNote);
+        _addEditListener(newNote);
     }
 }
+
+
 
 // load the newest note from local storage
 function _loadNewestNoteFromStorage() {
@@ -81,7 +84,7 @@ function deleteFromStorage(noteId) {
     note.remove();
 }
 
-function _addNoteTextbox(update = false) {
+function _addNoteTextbox(prevNote = null) {
     const notesContainer = document.querySelector(".js-notes-container");
     const note = document.createElement("div");
     const noteTitle = document.createElement("input");
@@ -130,5 +133,5 @@ function _addNoteTextbox(update = false) {
 window.onload = function () {
     loadFromStorage();
     const addNoteBtn = document.getElementById("addNoteBtn");
-    addNoteBtn.addEventListener("click", _addNoteTextbox);
+    addNoteBtn.addEventListener("click", _addNoteTextbox());
 };

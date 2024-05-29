@@ -6,10 +6,14 @@
     --button-background: rgb(244, 249, 255);
     --add-button-background-hover: rgb(188, 208, 237);
     --delete-button-background-hover: rgb(228, 87, 87);
+    --table-border-color: black;
+
+    /* Table body variables */
+    --table-text-color: #004492;
 }
 
 h1 {
-    font-weight: normal;
+    font-weight: bold;
 }
 
 /* Setting the font for the whole body */
@@ -48,6 +52,11 @@ button{
 }
 .accomplishments-table th,
 .accomplishments-table td {
-    border: 2px solid;
+    border: 2px solid var(--table-border-color);
     padding: 10px;
+    font-size: 21px;
+}
+
+tbody {
+    color: var(--table-text-color);
 }

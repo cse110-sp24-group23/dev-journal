@@ -13,11 +13,7 @@ TODO:
         - when it is pressed change text on it to say something like stop deleting
         - icons go back to display:none;
         - Ravi
-    
-    
-    
-
-
+    - make poppup only appear once when you click add note or click on a note to edit it
 */
 
 // TODO: make it so newest added notes are on top - sort by most recently created
@@ -47,7 +43,6 @@ function _loadNewestNoteFromStorage() {
     newNote.content = note.field1;
     notesDisplay.prepend(newNote);
     _addDeleteButtonListener(newNote);
-    console.log(note.id, "|", note.title, "|", note.field1);
 }
 
 // given a note, add a delete button listener to it that will delete it when clicked
@@ -60,22 +55,19 @@ function _addDeleteButtonListener(note) {
 }
 
 // submit to local storage
-function submitToStorage(update = false) {
+function submitToStorage() {
     // the title of the note
-    const noteTitle = document.getElementById("note-editor-title");
+    const noteTitleElem = document.getElementById("note-editor-title");
+    const noteTitle = noteTitleElem.value;
     // the textbox to enter notes in
-    const noteTextContent = document.getElementById("note-content");
-    const noteContent = noteTextContent.value;
-    const noteTitleContent = noteTitle.innerText;
+    const noteContentElem = document.getElementById("note-editor-content");
+    const noteContent = noteContentElem.value;
+    // create a new record to store the note
     const noteRecord = new Record("note", {
         field1: noteContent,
-        title: noteTitleContent,
+        title: noteTitle,
     });
-    if (update) {
-        RecordsStorage.updateRecord(noteRecord);
-    } else {
-        RecordsStorage.createRecord(noteRecord);
-    }
+    RecordsStorage.createRecord(noteRecord);
 }
 
 function deleteFromStorage(noteId) {
@@ -98,12 +90,13 @@ function _addNoteTextbox() {
     // add format/styles
     // title
     noteTitle.type = "text";
+    noteTitle.maxLength = "50"; // define a max amount of characters users can input
     noteTitle.style = "display:block;";
     noteTitle.placeholder = "Title";
     // save button
     noteSaveBtn.innerText = "Save";
     // content
-    noteContent.id = "note-content";
+    noteContent.id = "note-editor-content";
     noteContent.placeholder = "Notes";
     noteContent.style = "display:block;";
     // create note editor

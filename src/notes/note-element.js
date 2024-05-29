@@ -1,21 +1,15 @@
 class Note extends HTMLElement {
     static get ObservedAttributes() {
-        return ["id", "date", "content", "preview"];
+        return ["id", "date", "title", "content"];
     }
 
     constructor() {
         super();
         this.shadow = this.attachShadow({ mode: "open" });
-        this.shadow.innerHTML = `
-        <h4>${this.date}</h4>
-        <textarea disabled>${this.preview}</textarea>
-        <button>Delete</button>
-        `;
-
         this._id = null;
         this._date = null;
+        this._title = null;
         this._content = null;
-        this._preview = null;
     }
     /*
     =======================
@@ -30,12 +24,12 @@ class Note extends HTMLElement {
         return this._date;
     }
 
-    get content() {
-        return this._content;
+    get title() {
+        return this._title;
     }
 
-    get preview() {
-        return this._preview;
+    get content() {
+        return this._content;
     }
 
     /*
@@ -48,6 +42,11 @@ class Note extends HTMLElement {
         this.setAttribute("id", value);
     }
 
+    set title(value) {
+        this._title = value;
+        this.setAttribute("title", value);
+    }
+
     set date(value) {
         this._date = value;
         this.setAttribute("date", value);
@@ -56,8 +55,6 @@ class Note extends HTMLElement {
     set content(value) {
         this._content = value;
         this.setAttribute("content", value);
-        const previewChars = 100;
-        this._preview = this._content.slice(0, previewChars);
     }
 
     /*
@@ -75,11 +72,11 @@ class Note extends HTMLElement {
         if (name === "id") {
             this.id = newValue;
         }
-        // if (name === 'title'){
-        //     this.title = newValue;
-        // };
         if (name === "date") {
             this.date = newValue;
+        }
+        if (name === "title") {
+            this.title = newValue;
         }
         if (name === "content") {
             this.content = newValue;
@@ -108,7 +105,6 @@ class Note extends HTMLElement {
         this._title = this.getAttribute("title");
         this._date = this.getAttribute("date");
         this._content = this.getAttribute("content");
-        // if the content is longer than the preview, add an elipses to the preview
         this.shadow.innerHTML = `
         <p id="date">${this._formatDate(this._date)}</p>
         <p>${this._title}</p>
@@ -129,9 +125,9 @@ class Note extends HTMLElement {
                 display: inline-block;
                 float: right;
             }
-            .js-trash {
-                display: none;
-            }
+            // .js-trash {
+            //     display: none;
+            // }
         </style>
         `;
         this.classList.add("note");

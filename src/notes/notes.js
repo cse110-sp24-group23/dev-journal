@@ -1,6 +1,25 @@
 import { Record } from "../backend-storage/record-class.js";
 import { LocalStorageRecordsApi as RecordsStorage } from "../backend-storage/records-api.js";
 
+/*
+TODO:
+    - edit notes brings up popup
+        - Daniel
+    - abilitiy to close/cancel popup (cancel or X button in top right?)
+        - Daniel
+    - debug untitled/not displayed notes
+        - Ravi
+    - hide trash icons until delete Note button is pressed
+        - when it is pressed change text on it to say something like stop deleting
+        - icons go back to display:none;
+        - Ravi
+    
+    
+    
+
+
+*/
+
 // TODO: make it so newest added notes are on top - sort by most recently created
 function loadFromStorage() {
     const notesDisplay = document.querySelector(".notes-display");
@@ -41,7 +60,7 @@ function _addDeleteButtonListener(note) {
 }
 
 // submit to local storage
-function submitToStorage() {
+function submitToStorage(update = false) {
     // the title of the note
     const noteTitle = document.getElementById("note-editor-title");
     // the textbox to enter notes in
@@ -52,7 +71,11 @@ function submitToStorage() {
         field1: noteContent,
         title: noteTitleContent,
     });
-    RecordsStorage.createRecord(noteRecord);
+    if (update) {
+        RecordsStorage.updateRecord(noteRecord);
+    } else {
+        RecordsStorage.createRecord(noteRecord);
+    }
 }
 
 function deleteFromStorage(noteId) {

@@ -129,6 +129,9 @@ class Note extends HTMLElement {
                 display: inline-block;
                 float: right;
             }
+            .js-trash {
+                display: none;
+            }
         </style>
         `;
         this.classList.add("note");

@@ -2,15 +2,26 @@
     --notes-display-left-margin: 20px;
     --note-width: 250px;
     --notes-per-row: 3;
+
+    /*Font*/
+    --font: "Lato", sans-serif;
+    --font-size-button: 18px;
+
+    /*Colors*/
+    --button-color: rgb(244, 249, 255);
+    --add-note-color-hover: rgb(188, 208, 237);
+    --delete-note-color-hover: rgb(228, 87, 87);
+
+    --notes-color: #f5bbbb8e;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font);
     display: flex;
-    background-color: #f0f4f8;
     margin: 0;
     padding: 0;
 }
+
 .sidebar {
     width: 200px;
     background-color: #7d5a5a;
@@ -36,6 +47,7 @@ body {
     background-color: #f0f4f8;
     color: #7d5a5a;
 }
+
 .content {
     flex-grow: 1;
     padding: 20px;
@@ -47,17 +59,22 @@ body {
 .buttons {
     margin-bottom: 20px;
 }
+
 .buttons button {
-    padding: 10px 20px;
-    margin-right: 10px;
-    cursor: pointer;
-    background-color: #ccc;
-    border: none;
-    border-radius: 5px;
-}
-button:hover {
-    background-color: #cccccc8e;
+    padding: 20px;
+    font-size: var(--font-size-button);
+    background-color: var(--button-color);
     border-width: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#addNoteBtn:hover {
+    background-color: var(--add-note-color-hover);
+}
+
+#deleteNoteBtn:hover {
+    background-color: var(--delete-note-color-hover);
 }
 
 .add-notes textarea {
@@ -85,10 +102,10 @@ button:hover {
 .note-editor {
     width: 100%;
     margin-bottom: 20px;
-    background-color: #f5bbbb8e;
+    background-color: var(--notes-color);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 5px 2px gray;
 }
 
 .note {

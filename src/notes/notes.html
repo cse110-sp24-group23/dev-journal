@@ -1,36 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Notes Page</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes Page</title>
 
-        <!-- Stylesheet-->
-        <link rel="stylesheet" href="notes.css" />
+    <!-- Stylesheet-->
+    <link rel="stylesheet" href="notes.css" />
 
-        <!-- Script -->
-        <script src="/src/navbar/navbar.js"></script>
-        <script src="notes.js" type="module"></script>
-        <script src="note-element.js"></script>
-    </head>
-    <body>
-        <div id="navbar"></div>
+    <!-- Script -->
+    <script src="/src/navbar/navbar.js"></script>
+    <script src="notes.js" type="module"></script>
+    <script src="note-element.js"></script>
+  </head>
+  <body>
+    <div id="navbar"></div>
 
-        <main>
-            <div class="content">
-                <h1>Notes</h1>
-                <div class="buttons">
-                    <button id="addNoteBtn">Add Note</button>
-                    <button id="deleteNoteBtn">Delete Note</button>
-                </div>
-                <div class="js-notes-container"></div>
-                <input
-                    id="add-note-textbox"
-                    type="text"
-                    style="display: none"
-                />
-                <div class="notes-display"></div>
-            </div>
-        </main>
-    </body>
+    <main>
+      <div class="content">
+        <h1>Notes</h1>
+        <div class="buttons">
+          <button id="addNoteBtn">Add Note</button>
+          <button id="deleteNoteBtn">Delete Note</button>
+        </div>
+        <div class="js-notes-container"></div>
+        <input id="add-note-textbox" type="text" style="display: none" />
+        <div class="notes-display"></div>
+      </div>
+    </main>
+  </body>
 </html>

@@ -1,0 +1,22 @@
+/* Variables */
+:root {
+    --font: "Lato", sans-serif;
+}
+/* Setting the font for the whole body */
+body {
+    font-family: var(--font);
+}
+h1 {
+    font-weight: normal;
+}
+/* Adjustable Calendar and border */
+.accomplishments-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.accomplishments-table th,
+.accomplishments-table td {
+    border: 2px solid;
+    padding: 10px;
+}

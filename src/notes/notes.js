@@ -6,14 +6,13 @@ TODO:
     - edit notes brings up popup
         - Daniel
     - abilitiy to close/cancel popup (cancel or X button in top right?)
-        - Daniel
+        - Daniel - done
     - debug untitled/not displayed notes
         - Ravi
     - hide trash icons until delete Note button is pressed
         - when it is pressed change text on it to say something like stop deleting
         - icons go back to display:none;
         - Ravi
-    - make poppup only appear once when you click add note or click on a note to edit it
 */
 
 // TODO: make it so newest added notes are on top - sort by most recently created
@@ -78,12 +77,13 @@ function deleteFromStorage(noteId) {
     note.remove();
 }
 
-function _addNoteTextbox() {
+function _addNoteTextbox(update = false) {
     const notesContainer = document.querySelector(".js-notes-container");
     const note = document.createElement("div");
     const noteTitle = document.createElement("input");
     const noteContent = document.createElement("textarea");
     const noteSaveBtn = document.createElement("button");
+    const noteCancelBtn = document.createElement("button");
     // add ways to access elements
     note.className = "note-editor";
     noteTitle.id = "note-editor-title";
@@ -95,6 +95,8 @@ function _addNoteTextbox() {
     noteTitle.placeholder = "Title";
     // save button
     noteSaveBtn.innerText = "Save";
+    // cancel button
+    noteCancelBtn.innerText = "Cancel";
     // content
     noteContent.id = "note-editor-content";
     noteContent.placeholder = "Notes";
@@ -103,6 +105,8 @@ function _addNoteTextbox() {
     note.appendChild(noteTitle);
     note.appendChild(noteContent);
     note.appendChild(noteSaveBtn);
+    note.appendChild(noteCancelBtn);
+
     // display note editor
     notesContainer.prepend(note);
     noteSaveBtn.addEventListener("click", (event) => {
@@ -112,6 +116,9 @@ function _addNoteTextbox() {
         note.style.display = "none";
         // show the newly created note
         _loadNewestNoteFromStorage();
+    });
+    noteCancelBtn.addEventListener("click", (event) => {
+        note.style.display = "none";
     });
     // notes.appendChild(noteTextBox).appendChild(noteHeading).appendChild(note);
     // document.getElementById('add-note-textbox').style.display = 'block';

@@ -1,6 +1,6 @@
 class Note extends HTMLElement {
     static get ObservedAttributes() {
-        return ["id", "date", "title", "content"];
+        return ["id", "date", "title", "content", "preview"];
     }
 
     constructor() {
@@ -10,6 +10,7 @@ class Note extends HTMLElement {
         this._date = null;
         this._title = null;
         this._content = null;
+        this._preview = null;
     }
     /*
     =======================
@@ -30,6 +31,10 @@ class Note extends HTMLElement {
 
     get content() {
         return this._content;
+    }
+
+    get preview() {
+        return this._preview;
     }
 
     /*
@@ -55,6 +60,8 @@ class Note extends HTMLElement {
     set content(value) {
         this._content = value;
         this.setAttribute("content", value);
+        const previewLength = 50;
+        this._preview = this._content.slice(0, previewLength);
     }
 
     /*
@@ -80,6 +87,9 @@ class Note extends HTMLElement {
         }
         if (name === "content") {
             this.content = newValue;
+        }
+        if (name === "preview") {
+            this.preview = newValue;
         }
     }
     /*
@@ -108,15 +118,11 @@ class Note extends HTMLElement {
         this.shadow.innerHTML = `
         <p id="date">${this._formatDate(this._date)}</p>
         <p>${this._title}</p>
+        <p class="preview">${this._preview}</p>
         <img src="../assets/icons/trash-icon.svg" alt="Delete" class="js-trash">
         <style>
-            #date {
-                width: max-content;
-                margin-right: 0;
-                margin-left: auto;
-            }
-            #icons-container {
-                float: right;
+            .preview {
+                color: gray;
             }
             img {
                 height: 2em;
@@ -128,6 +134,14 @@ class Note extends HTMLElement {
             // .js-trash {
             //     display: none;
             // }
+            #date {
+                width: max-content;
+                margin-right: 0;
+                margin-left: auto;
+            }
+            #icons-container {
+                float: right;
+            }
         </style>
         `;
         this.classList.add("note");

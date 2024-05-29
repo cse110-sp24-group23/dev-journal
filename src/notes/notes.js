@@ -7,15 +7,19 @@ TODO:
         - Daniel
     - abilitiy to close/cancel popup (cancel or X button in top right?)
         - Daniel - done
-    - debug untitled/not displayed notes
-        - Ravi
     - hide trash icons until delete Note button is pressed
         - when it is pressed change text on it to say something like stop deleting
         - icons go back to display:none;
         - Ravi
+
+    styling todos:
+        - alternating colors (like in figma)
+        - make the edit popup look like the figma ()
+        - hide trash icons and put them back
+        - separate styles into css file
+
 */
 
-// TODO: make it so newest added notes are on top - sort by most recently created
 function loadFromStorage() {
     const notesDisplay = document.querySelector(".notes-display");
     const notesList = RecordsStorage.getAllRecords("note");
@@ -26,8 +30,13 @@ function loadFromStorage() {
         newNote.date = note.created;
         newNote.content = note.field1;
         notesDisplay.prepend(newNote);
-        _addDeleteButtonListener(newNote);
+        _addListeners(newNote);
     }
+}
+
+function _addListeners(note) {
+    _addDeleteButtonListener(note);
+    note.addEventListener("click", _addNoteTextbox(note));
 }
 
 // load the newest note from local storage
@@ -41,7 +50,7 @@ function _loadNewestNoteFromStorage() {
     newNote.date = note.created;
     newNote.content = note.field1;
     notesDisplay.prepend(newNote);
-    _addDeleteButtonListener(newNote);
+    _addListeners(newNote);
 }
 
 // given a note, add a delete button listener to it that will delete it when clicked
@@ -77,7 +86,7 @@ function deleteFromStorage(noteId) {
     note.remove();
 }
 
-function _addNoteTextbox(update = false) {
+function _addNoteTextbox(noteElem = null) {
     const notesContainer = document.querySelector(".js-notes-container");
     const note = document.createElement("div");
     const noteTitle = document.createElement("input");
@@ -87,6 +96,7 @@ function _addNoteTextbox(update = false) {
     // add ways to access elements
     note.className = "note-editor";
     noteTitle.id = "note-editor-title";
+    noteContent.id = "note-editor-content";
     // add format/styles
     // title
     noteTitle.type = "text";
@@ -98,7 +108,6 @@ function _addNoteTextbox(update = false) {
     // cancel button
     noteCancelBtn.innerText = "Cancel";
     // content
-    noteContent.id = "note-editor-content";
     noteContent.placeholder = "Notes";
     noteContent.style = "display:block;";
     // create note editor

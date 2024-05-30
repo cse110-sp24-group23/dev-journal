@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <title>Daily Log</title>
 
         <!-- Stylesheet-->
@@ -11,9 +12,15 @@
             type="text/css"
             href="../dailyLog/dailyLog.css"
         />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
+        />
 
-        <!-- Script for nav bar-->
+        <!-- Scripts -->
         <script src="/src/navbar/navbar.js"></script>
+        <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+        <script src="simpleMDE.js"></script>
         <script type="module" src="./dailyLog.js"></script>
     </head>
     <body>
@@ -54,7 +61,7 @@
                     <textarea
                         name="reflection"
                         id="reflection"
-                        placeholder="What did you learn?       
+                        placeholder="What did you learn?
 What challenges did you face?
 What things can you do in the future?"
                     ></textarea>

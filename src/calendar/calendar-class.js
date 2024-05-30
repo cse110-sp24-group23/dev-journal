@@ -412,15 +412,16 @@ class Calendar {
             const cellDate = calendarDateList[i];
             calendarDayCell.innerText = cellDate;
             calendarDayCell.tabIndex = "0";
-            // highlight the cell if it matches the current date
-            this._highlightIfCurrDate(calendarDayCell, cellDate);
-            // if it isn't the current month, gray it out
+            // if date isn't in the current displayed month, gray it out
             if (i < currMonthStartIdx || i >= nextMonthStartIdx) {
                 // gray out rollover dates for prev and next month that are displayed
                 calendarDayCell.classList.add(rolloverDateClass);
             } else {
-                // otherwise, don't gray it. Note: removing a class that isn't there does nothing
+                // otherwise, date is in displayedMonth
+                // don't gray it. Note: removing a class that isn't there does nothing
                 calendarDayCell.classList.remove(rolloverDateClass);
+                // highlight the cell if it matches the present date
+                this._highlightIfCurrDate(calendarDayCell, cellDate);
             }
         }
     }

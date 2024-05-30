@@ -10,23 +10,25 @@ Returns:
 - navbar
 */
 function loadNavbar() {
-    fetch('/src/navbar/navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('navbar').innerHTML = data;
-            document.head.insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="/src/navbar/navbar.css">');
-            
+    fetch("/src/navbar/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+            document.getElementById("navbar").innerHTML = data;
+            document.head.insertAdjacentHTML(
+                "beforeend",
+                '<link rel="stylesheet" href="/src/navbar/navbar.css">'
+            );
+
             //Add class to determine active link
             const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                console.log(link)
-                if (link.getAttribute('href') === currentPath) {
-                    link.classList.add('active');
+            const navLinks = document.querySelectorAll(".nav-link");
+            navLinks.forEach((link) => {
+                if (link.getAttribute("href") === currentPath) {
+                    link.classList.add("active");
                 }
             });
         })
-        .catch(error => console.error('Error loading navbar', error));
+        .catch((error) => console.error("Error loading navbar", error));
 }
 
-document.addEventListener('DOMContentLoaded', loadNavbar);
+document.addEventListener("DOMContentLoaded", loadNavbar);

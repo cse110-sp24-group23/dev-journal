@@ -1,5 +1,5 @@
 import LocalStorageRecordsApi from "../backend-storage/records-api.js";
-
+import { Record } from "../backend-storage/record-class.js";
 function populateDefaultLog(record) {
     const updateH1 = document.querySelector("h1");
     updateH1.innerHTML = record.title;
@@ -17,11 +17,13 @@ function populateDefaultLog(record) {
     }
 }
 
-function notesFunctionality(record) {
-    populateDefaultLog(record);
+function logFunctionality(record) {
     const submitButton = document.querySelector("#save-button");
     const deleteButton = document.querySelector("#delete-button");
+    console.log(record);
     const date = new Date(record.date);
+    //alert(date);
+    populateDefaultLog(record);
     submitButton.addEventListener("click", () => {
         if (!LocalStorageRecordsApi.hasRecordByDate(date)) {
             LocalStorageRecordsApi.createRecord(record);
@@ -56,6 +58,18 @@ function notesFunctionality(record) {
 
 window.onload = function () {
     const recordString = sessionStorage.getItem("current record");
-    const record = JSON.parse(recordString);
-    notesFunctionality(record);
+    let record;
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
+    if (!recordString) {
+        if (!LocalStorageRecordsApi.hasRecordByDate(today)) {
+            record = new Record("log", { date: today });
+        } else {
+            record = LocalStorageRecordsApi.getRecordByDate(today);
+        }
+    } else {
+        record = JSON.parse(recordString);
+    }
+
+    logFunctionality(record);
 };

@@ -7,6 +7,7 @@ export class Record {
     created;
     updated;
     id;
+    date; //added adte for log because need to access localstorage
     constructor(
         type,
         options = {
@@ -44,6 +45,7 @@ export class Record {
             this.id = logDate.getTime();
             // set the title to the date regardless of what the user passes in
             this.title = logDate.toDateString();
+            this.date = logDate; //added date for log
         } else if (type === "note") {
             this.id = currentDate.getTime();
             // set the title based on what the passes in or "Untitled"

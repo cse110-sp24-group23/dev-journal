@@ -131,9 +131,9 @@ class Note extends HTMLElement {
                 display: inline-block;
                 float: right;
             }
-            // .js-trash {
-            //     display: none;
-            // }
+            .js-trash {
+                display: none;
+            }
             #date {
                 width: max-content;
                 margin-right: 0;

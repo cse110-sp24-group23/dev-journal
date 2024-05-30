@@ -7,9 +7,6 @@ TODO:
         - when it is pressed change text on it to say something like stop deleting
         - icons go back to display:none;
         - Ravi
-    - stop mutliple popups from appearing
-        - Ravi
-    - debug editing
 */
 let CURRENT_NOTE_ID = null;
 
@@ -186,9 +183,8 @@ function _addNoteEditorListeners() {
     });
     // when the cancel button is clicked, clear the form and hide it.
     cancelBtn.addEventListener("click", () => {
-        // clear form values
-        noteTitle.value = "";
-        noteContent.value = "";
+        // clear note editor form values
+        _initNoteEditorValues(null);
         noteEditor.classList.add("hidden");
     });
 }
@@ -223,11 +219,46 @@ function _updateNoteEditor(noteElem = null) {
     _initNoteEditorValues(noteElem);
 }
 
+/*
+Display trash can buttons when delete button is clicked, hide
+trash can buttons when done button is clicked.
+    Parameters: display = true by default
+    Returns: none
+*/
+function _displayTrashBtn(display = true) {
+    const trashBtn = document.querySelectorAll(".js-trash");
+    const delBtn = document.getElementById("delete-note-btn");
+    if (display) {
+        delBtn.style.display = "none";
+        const doneBtn = document.getElementById("done-deleting-note-btn");
+        doneBtn.style.display = "block";
+        trashBtn.forEach((btn) => {
+            btn.style.display = "block";
+        });
+    } else {
+        delBtn.style.display = "block";
+        const doneBtn = document.getElementById("done-deleting-note-btn");
+        doneBtn.style.display = "none";
+        trashBtn.forEach((btn) => {
+            btn.style.display = "none";
+        });
+    }
+}
+
 window.onload = function () {
     loadFromStorage();
     const addNoteBtn = document.getElementById("add-note-btn");
     addNoteBtn.addEventListener("click", () => {
         CURRENT_NOTE_ID = null;
         _displayNoteEditor();
+    });
+    const display = false;
+    const deleteNoteBtn = document.getElementById("delete-note-btn");
+    const doneDelNoteBtn = document.getElementById("done-deleting-note-btn");
+    deleteNoteBtn.addEventListener("click", () => {
+        _displayTrashBtn();
+    });
+    doneDelNoteBtn.addEventListener("click", () => {
+        _displayTrashBtn(display);
     });
 };

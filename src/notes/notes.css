@@ -82,6 +82,10 @@ body {
     background-color: var(--delete-note-color-hover);
 }
 
+#done-deleting-note-btn:hover {
+    background-color: var(--delete-note-color-hover);
+}
+
 .add-notes textarea {
     background-color: #e0f7fa;
     padding: 20px;

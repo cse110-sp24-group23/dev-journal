@@ -1,11 +1,16 @@
-document.getElementById('password-form').addEventListener('submit', async function(event){
+//Wait for input password to be submitted
+document.getElementById('input-password-form').addEventListener('submit', async function(event){
     event.preventDefault();
     const inputPassword = document.getElementById('password').value;
-    const storedHashedPassword = '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'
+    const storedHashedPassword = localStorage.getItem('storedHashedPassword')
     const hashedInputPassword = await hashPassword(inputPassword);
+    //check if input password is the same as the stored password
     if(hashedInputPassword === storedHashedPassword){
         window.location.href = '/src/calendar/calendar.html';
     }
+    //console log incorrect password if they do not match
+
+    //TODO: show incorrect password error on the page
     else{
         console.log("incorrect password")
     }

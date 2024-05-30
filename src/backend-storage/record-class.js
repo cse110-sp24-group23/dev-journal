@@ -1,4 +1,4 @@
- export class Record {
+export class Record {
     type;
     title;
     hours;
@@ -15,6 +15,7 @@
             hours: null,
             title: null,
             date: null,
+            id: null,
         }
     ) {
         const types = ["log", "note"];
@@ -26,6 +27,9 @@
         }
         if (type === "log" && !options.date) {
             throw Error("Logs must have date.");
+        }
+        if (type === "log" && options.id) {
+            throw Error("Can't specify ids to create Logs. Access Via dates");
         }
         this.type = type;
         this.hours = options.hours;
@@ -45,7 +49,11 @@
             // set the title to the date regardless of what the user passes in
             this.title = logDate.toDateString();
         } else if (type === "note") {
-            this.id = currentDate.getTime();
+            if (options.id != null) {
+                this.id = parseInt(options.id);
+            } else {
+                this.id = currentDate.getTime();
+            }
             // set the title based on what the passes in or "Untitled"
             if (!options.title) {
                 this.title = "Untitled";

@@ -48,22 +48,22 @@ class LocalStorageRecordsApi extends RecordsApi {
     Returns: 
     - Array of Records
     */
-    static getAllRecords(type=null) {
-        const types = ['log', 'note', null];
-        if(!types.includes(type)){
+    static getAllRecords(type = null) {
+        const types = ["log", "note", null];
+        if (!types.includes(type)) {
             throw Error('type must be "log", "note", or null.');
         }
         try {
             let filteredRecords = [];
             const Records = JSON.parse(localStorage.getItem("Records")) || [];
-            if(!type){
+            if (!type) {
                 return Records;
-            };
-            for(const record of Records){
-                if(record.type == type){
+            }
+            for (const record of Records) {
+                if (record.type == type) {
                     filteredRecords.push(record);
-                };
-            };
+                }
+            }
             return filteredRecords;
         } catch (error) {
             console.warn(error);
@@ -130,7 +130,8 @@ class LocalStorageRecordsApi extends RecordsApi {
 
     static getRecordById(id) {
         const Records = LocalStorageRecordsApi.getAllRecords();
-        const record = Records.find((record) => record.id === id);
+        // using == below makes it still work even if users pass in a string instead of an int
+        const record = Records.find((record) => record.id == id);
         if (!record) {
             throw new Error("Record not found", id);
         }

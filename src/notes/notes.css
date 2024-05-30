@@ -48,6 +48,7 @@ body {
     color: #7d5a5a;
 }
 
+/* meant to hide/show objects my adding/removing this class in js */
 .hidden {
     display: none;
 }
@@ -73,11 +74,11 @@ body {
     cursor: pointer;
 }
 
-#addNoteBtn:hover {
+#add-note-btn:hover {
     background-color: var(--add-note-color-hover);
 }
 
-#deleteNoteBtn:hover {
+#delete-note-btn:hover {
     background-color: var(--delete-note-color-hover);
 }
 
@@ -89,21 +90,13 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#submitNoteBtn {
-    position: absolute;
-    top: 40px;
-    right: 10px;
-    cursor: pointer;
-    display: none;
-}
-
 .notes-display {
     width: 90%;
     display: grid;
     grid-template-columns: repeat(var(--notes-per-row), 1fr);
     gap: 20px;
 }
-.note-editor {
+#note-editor {
     width: 100%;
     margin-bottom: 20px;
     background-color: var(--notes-color);

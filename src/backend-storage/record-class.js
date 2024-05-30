@@ -44,8 +44,14 @@ export class Record {
             );
             this.id = logDate.getTime();
             // set the title to the date regardless of what the user passes in
-            this.title = logDate.toDateString();
-            this.date = logDate; //added date for log
+            const dateOptions = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            };
+            this.title = logDate.toLocaleString("en-US", dateOptions);
+            // set date for log
+            this.date = logDate;
         } else if (type === "note") {
             this.id = currentDate.getTime();
             // set the title based on what the passes in or "Untitled"

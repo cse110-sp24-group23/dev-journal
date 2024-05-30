@@ -3,15 +3,15 @@ import { LocalStorageRecordsApi as RecordsStorage } from "../backend-storage/rec
 
 /*
 TODO:
-    - abilitiy to close/cancel popup (cancel or X button in top right?)
-        - Daniel - done
     - hide trash icons until delete Note button is pressed
         - when it is pressed change text on it to say something like stop deleting
         - icons go back to display:none;
         - Ravi
     - stop mutliple popups from appearing
         - Ravi
+    - debug editing
 */
+let CURRENT_NOTE_ID = null;
 
 function loadFromStorage() {
     const notesDisplay = document.querySelector(".notes-display");
@@ -28,33 +28,42 @@ function loadFromStorage() {
 }
 
 /*
-Given a note element the note editor and populate it with values of a note element if one is given
+Given a note element, display the note editor and populate it with values of a note element if one is given
 Parameters:
     - note (optional): custom note element - reference to the note that is being edited
 Returns: None
 */
 function _addListeners(noteElem) {
     _addDeleteButtonListener(noteElem);
-    noteElem.addEventListener("click", _displayNoteEditor(noteElem));
+    // when a note is clicked, open the editor for it
+    noteElem.addEventListener("click", () => {
+        CURRENT_NOTE_ID = noteElem.id;
+        _displayNoteEditor(noteElem);
+    });
 }
 
 // given the id of a note, load it from storage. If no id is given, it will load the most recently added note
 function _loadNotefromStorage(id = null) {
     const notesDisplay = document.querySelector(".notes-display");
-    let note;
-    if (id) {
-        note = RecordsStorage.getRecordById(id);
+    let noteRecord;
+    // get the note record from storage
+    if (id !== null) {
+        // if an id is passed in, get the note record by id
+        noteRecord = RecordsStorage.getRecordById(parseInt(id));
     } else {
+        // if id is null, get the most recently added note record
         const notesList = RecordsStorage.getAllRecords("note");
-        note = notesList[notesList.length - 1];
+        noteRecord = notesList[notesList.length - 1];
     }
-    let newNote = document.createElement("my-note");
-    newNote.id = note.id;
-    newNote.title = note.title;
-    newNote.date = note.created;
-    newNote.content = note.field1;
-    notesDisplay.prepend(newNote);
-    _addListeners(newNote);
+    // create a note element to display the noteRecord's info
+    let noteElem = document.createElement("my-note");
+    noteElem.id = noteRecord.id;
+    noteElem.title = noteRecord.title;
+    noteElem.date = noteRecord.created;
+    noteElem.content = noteRecord.field1;
+    // add note element to page
+    notesDisplay.prepend(noteElem);
+    _addListeners(noteElem);
 }
 
 // given a note, add a delete button listener to it that will delete it when clicked
@@ -69,17 +78,22 @@ function _addDeleteButtonListener(noteElem) {
 // submit to local storage
 function submitToStorage() {
     // the title of the note
-    const noteTitleElem = document.getElementById("note-editor-title");
-    const noteTitle = noteTitleElem.value;
+    const noteTitle = document.getElementById("note-editor-title");
+    const noteTitleVal = noteTitle.value;
     // the textbox to enter notes in
-    const noteContentElem = document.getElementById("note-editor-content");
-    const noteContent = noteContentElem.value;
+    const noteContent = document.getElementById("note-editor-content");
+    const noteContentVal = noteContent.value;
     // create a new record to store the note
     const noteRecord = new Record("note", {
-        field1: noteContent,
-        title: noteTitle,
+        field1: noteContentVal,
+        title: noteTitleVal,
+        id: CURRENT_NOTE_ID, // will be null if creating one, or a value if updating
     });
-    RecordsStorage.createRecord(noteRecord);
+    if (CURRENT_NOTE_ID) {
+        RecordsStorage.updateRecord(noteRecord);
+    } else {
+        RecordsStorage.createRecord(noteRecord);
+    }
 }
 
 function deleteFromStorage(noteId) {
@@ -97,38 +111,16 @@ Parameters:
 Returns: None
 */
 function _displayNoteEditor(noteElem = null) {
+    // set editorCreated as a boolean of if there is a noteEditor created yet
+    // if it exists, it won't be null
+    const editorCreated = document.getElementById("note-editor") != null;
     // if the note Editor has already been created, update it, otherwise, create it
     if (editorCreated) {
         _updateNoteEditor(noteElem);
-        noteEditor.removeClassList("hidden");
     } else {
         _createNoteEditor(noteElem);
+        _addNoteEditorListeners();
     }
-    // get buttons for the note editor
-    const noteSaveBtn = document.getElementById("save-btn");
-    const noteCancelBtn = document.getElementById("cancel-btn");
-    // when the save is clicked, save to storage, update display
-    noteSaveBtn.addEventListener("click", (event) => {
-        // put note in storage
-        submitToStorage();
-        // hide the note editor display
-        noteEditor.appendClassList("hidden");
-        // if we are editing a note
-        if (noteElem) {
-            // display the updated note
-            _loadNotefromStorage(noteElem.id);
-            // remove the old note from view
-            noteElem.remove();
-        }
-        // otherwise
-        else {
-            // show new note by loading in the most recently created note from storage
-            _loadNotefromStorage();
-        }
-    });
-    noteCancelBtn.addEventListener("click", (event) => {
-        noteEditor.appendClassList("hidden");
-    });
 }
 
 /*
@@ -138,19 +130,18 @@ Parameters:
 Returns: None
 */
 function _createNoteEditor(noteElem = null) {
-    const notesContainer = document.querySelector(".js-notes-container");
     // Elements for the note editor
-    const noteEditor = document.createElement("div");
+    const noteEditor = document.createElement("div"); //TODO: MAKE THIS A FORM
     const noteTitle = document.createElement("input");
     const noteContent = document.createElement("textarea");
     const saveBtn = document.createElement("button");
     const cancelBtn = document.createElement("button");
-    // add ways selectors to elements
+    // add selectors to elements
     noteEditor.id = "note-editor";
     noteTitle.id = "note-editor-title";
     noteContent.id = "note-editor-content";
-    saveBtn.id = "save-btn";
-    cancelBtn.id = "cancel-btn";
+    saveBtn.id = "editor-save-btn";
+    cancelBtn.id = "editor-cancel-btn";
     // add formats/attributes to elements
     noteTitle.type = "text";
     noteTitle.maxLength = "50"; // define a max amount of characters users can input
@@ -160,17 +151,61 @@ function _createNoteEditor(noteElem = null) {
     saveBtn.innerText = "Save";
     cancelBtn.innerText = "Cancel";
     // if there was a note passed in, populate values
-    if (noteElem) {
-        noteTitle.value = noteElem.title;
-        noteContent.value = noteElem.content;
-    }
+    _initNoteEditorValues(noteElem, noteTitle, noteContent);
     // Populate note editor
     noteEditor.appendChild(noteTitle);
     noteEditor.appendChild(noteContent);
     noteEditor.appendChild(saveBtn);
     noteEditor.appendChild(cancelBtn);
     // Put note editor in the main notes container to be displayed
+    const notesContainer = document.querySelector(".js-notes-container");
     notesContainer.prepend(noteEditor);
+}
+
+function _addNoteEditorListeners() {
+    const noteEditor = document.getElementById("note-editor");
+    const saveBtn = document.getElementById("editor-save-btn");
+    const cancelBtn = document.getElementById("editor-cancel-btn");
+    // when the save is clicked, save to storage, update display
+    saveBtn.addEventListener("click", () => {
+        // put note in storage and hide the form
+        submitToStorage();
+        noteEditor.classList.add("hidden");
+        // if we are editing a note
+        if (CURRENT_NOTE_ID != null) {
+            const noteElem = document.querySelector(
+                `my-note[id="${CURRENT_NOTE_ID}"]`
+            );
+            // display the updated note and remove the old note from view
+            _loadNotefromStorage(CURRENT_NOTE_ID);
+            noteElem.remove();
+        } else {
+            // otherwise, show new note by loading in the most recently created note from storage
+            _loadNotefromStorage();
+        }
+    });
+    // when the cancel button is clicked, clear the form and hide it.
+    cancelBtn.addEventListener("click", () => {
+        // clear form values
+        noteTitle.value = "";
+        noteContent.value = "";
+        noteEditor.classList.add("hidden");
+    });
+}
+
+function _initNoteEditorValues(noteElem, noteTitle = null, noteContent = null) {
+    // if note title or note content aren't given, define them
+    if (!noteTitle || !noteContent) {
+        noteTitle = document.getElementById("note-editor-title");
+        noteContent = document.getElementById("note-editor-content");
+    }
+    if (noteElem !== null) {
+        noteTitle.value = noteElem.title;
+        noteContent.value = noteElem.content;
+    } else {
+        noteTitle.value = "";
+        noteContent.value = "";
+    }
 }
 
 /*
@@ -180,20 +215,19 @@ Parameters:
 Returns: None
 */
 function _updateNoteEditor(noteElem = null) {
-    const noteTitle = document.getElementById("note-editor-title");
-    const noteContent = document.getElementById("note-editor-content");
+    // get note editor
+    const noteEditor = document.getElementById("note-editor");
+    // if it's hidden, show it
+    noteEditor.classList.remove("hidden");
     // if there was a note passed in, populate values
-    if (noteElem) {
-        noteTitle.value = noteElem.title;
-        noteContent.value = noteElem.content;
-    } else {
-        noteTitle.value = "";
-        noteContent.value = "";
-    }
+    _initNoteEditorValues(noteElem);
 }
 
 window.onload = function () {
     loadFromStorage();
-    const addNoteBtn = document.getElementById("addNoteBtn");
-    addNoteBtn.addEventListener("click", _displayNoteEditor);
+    const addNoteBtn = document.getElementById("add-note-btn");
+    addNoteBtn.addEventListener("click", () => {
+        CURRENT_NOTE_ID = null;
+        _displayNoteEditor();
+    });
 };

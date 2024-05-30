@@ -192,8 +192,41 @@ function _updateNoteEditor(noteElem = null) {
     }
 }
 
+/*
+Display trash can buttons when delete button is clicked, hide
+trash can buttons when done button is clicked.
+    Parameters: display = true by default
+    Returns: none
+*/
+function _displayTrashBtn(display = true){
+    const trashBtn = document.querySelectorAll(".js-trash");
+    const delBtn = document.getElementById("deleteNoteBtn");
+    if (display){
+        delBtn.style.display = "none";
+        const doneBtn = document.getElementById("doneDeletingNoteBtn");
+        doneBtn.style.display = "block";
+        trashBtn.forEach(btn => {
+            btn.style.display = "block";
+        });
+    }
+    else{
+        delBtn.style.display = "block";
+        const doneBtn = document.getElementById("doneDeletingNoteBtn");
+        doneBtn.style.display = "none";
+        trashBtn.forEach(btn => {
+            btn.style.display = "none";
+        });
+    } 
+}
+
+
 window.onload = function () {
     loadFromStorage();
+    const display = false;
     const addNoteBtn = document.getElementById("addNoteBtn");
+    const deleteNoteBtn = document.getElementById("deleteNoteBtn");
+    const doneDelNoteBtn = document.getElementById("doneDeletingNoteBtn");
     addNoteBtn.addEventListener("click", _displayNoteEditor);
+    deleteNoteBtn.addEventListener("click", _displayTrashBtn());
+    doneDelNoteBtn.addEventListener("click", _displayTrashBtn(display));
 };

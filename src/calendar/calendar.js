@@ -26,8 +26,9 @@ function calendarFunctionality(calendar) {
 }
 
 /*
-    addClickToDays(): Adds event listeners to each date. 
-    Parameters: None
+    Adds event listeners to each date and stores the record created in session stoarge. 
+    Redirects to the daily log page.
+    Parameters: calendar object initialized when the window is loaded
     Returns: None
 */
 function addClickToDays(calendar) {
@@ -36,20 +37,25 @@ function addClickToDays(calendar) {
         //day.innerHTML = "<a href= '../dailyLog/index.html'>helloo</a>";
         day.addEventListener("click", () => {
             let record;
+            // gets the date of the cell which was clicked
             const dateObject = calendar.getDateOfDayCell(day);
+            // if record object for the date already exists, get that, else make a new record object.
             if (LocalStorageRecordsApi.hasRecordByDate(dateObject)) {
                 record = LocalStorageRecordsApi.getRecordByDate(dateObject);
             } else {
                 record = new Record("log", { date: dateObject });
             }
-
+            // stores current record from the cell date into session storage
             sessionStorage.setItem("current record", JSON.stringify(record));
-
+            // redirects to daily log
             window.location.href = "../dailyLog/index.html";
         });
     }
 }
 
+/* 
+actions that are done when the window is loaded 
+*/
 window.onload = function () {
     // select relevant calendar elements
     const calendarHeading = document.querySelector("h1");

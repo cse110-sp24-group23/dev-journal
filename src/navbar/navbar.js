@@ -4,8 +4,8 @@ To use it add the following code to head:
 <script src="/src/navbar/navbar.js"></script>
 and following code to body:
 <div id="navbar"></div>
-Parameters:
-NONE
+Parameters: 
+- NONE
 Returns:
 - navbar
 */
@@ -18,22 +18,30 @@ function loadNavbar() {
                 "beforeend",
                 '<link rel="stylesheet" href="/src/navbar/navbar.css">'
             );
-
-            //Add class to determine active link
+            // clears session storage, when nav bar is clicked
+            clearSessionStorage();
+            // add class to determine active link
             const currentPath = window.location.pathname;
             const navLinks = document.querySelectorAll(".nav-link");
             navLinks.forEach((link) => {
                 console.log(link);
                 if (link.getAttribute("href") === currentPath) {
+                    // get the record from session storage
                     const recordString =
                         sessionStorage.getItem("current record");
+                    // parse the record from string to object using JSON
                     const record = JSON.parse(recordString);
+                    // if the record is null, add active to classname
+                    // else check if the record date is today, add active to classname, if not do add active to classname
                     if (!record) {
                         link.classList.add("active");
                     } else {
+                        //get date from record object
                         const date = new Date(record.date);
+                        // make new Date for today's date
                         const today = new Date();
                         today.setHours(0, 0, 0, 0);
+                        // if date of record is equal today's date, add active to addname
                         if (date.getTime() === today.getTime()) {
                             link.classList.add("active");
                         }
@@ -43,7 +51,13 @@ function loadNavbar() {
         })
         .catch((error) => console.error("Error loading navbar", error));
 }
-
+/*
+Clears the session storage when a tab on the nav bar is clicked.
+Parameters:
+    - NONE
+Returns:
+    - NONE
+*/
 function clearSessionStorage() {
     const links = document.getElementsByClassName("js-nav-link");
     for (const link of links) {
@@ -52,4 +66,5 @@ function clearSessionStorage() {
         });
     }
 }
+
 document.addEventListener("DOMContentLoaded", loadNavbar);

@@ -182,7 +182,7 @@ Returns: None
 */
 function _createNoteEditor(noteElem = null) {
     // Elements for the note editor
-    const noteEditor = document.createElement("div"); //TODO: MAKE THIS A FORM
+    const noteEditor = document.createElement("form");
     const noteTitle = document.createElement("input");
     const noteContent = document.createElement("textarea");
     const saveBtn = document.createElement("button");
@@ -208,6 +208,11 @@ function _createNoteEditor(noteElem = null) {
     noteEditor.appendChild(noteContent);
     noteEditor.appendChild(saveBtn);
     noteEditor.appendChild(cancelBtn);
+    // don't reload the page when the form is submitted - minimize unnecessary loads from storage
+    noteEditor.addEventListener("submit", (event) => {
+        // prevent form from refreshing page upon submit
+        event.preventDefault();
+    });
     // Put note editor in the main notes container to be displayed
     const notesContainer = document.querySelector(".js-notes-container");
     notesContainer.prepend(noteEditor);

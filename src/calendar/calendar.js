@@ -30,11 +30,18 @@ function calendarFunctionality() {
 /*
     TODO: change this to use localStorage once localStorage functionality is complete
         - This whole function will likely be rewritten.
-    dateLink(): Opens a new Daily Log page for the day that was clicked 
-    Parameters: None
+    dateLink(event): Opens a new Daily Log page for the day that was clicked 
+    Parameters: event - to be used with addEventListener
     Returns: None
 */
-async function dateLink() {
+async function dateLink(event) {
+    // Only add listeners if the event was a click or Enter. If it was a random keypress, return.
+    const listenerConditions =
+        event.type === "click" ||
+        (event.type === "keypress" && event.key === "Enter");
+    if (!listenerConditions) {
+        return;
+    }
     //Link to daily log page for the specific day that was clicked
     //First time clicking a date: creates a new Daily Log page for it
     try {
@@ -68,6 +75,7 @@ function addClickToDays() {
     const calendarDays = document.querySelectorAll(".js-calendar-day");
     for (let day of calendarDays) {
         day.addEventListener("click", dateLink);
+        day.addEventListener("keypress", dateLink);
     }
 }
 

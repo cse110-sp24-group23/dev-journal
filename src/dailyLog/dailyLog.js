@@ -1,5 +1,13 @@
 import LocalStorageRecordsApi from "../backend-storage/records-api.js";
 import { Record } from "../backend-storage/record-class.js";
+
+/*
+populates the daily log with the information from the record object
+Parameters:
+    - Record record containg the record either from the local storage or new record
+Returns:
+    - NONE
+*/
 function populateDefaultLog(record) {
     const updateH1 = document.querySelector("h1");
     updateH1.innerHTML = record.title;
@@ -17,44 +25,59 @@ function populateDefaultLog(record) {
     }
 }
 
+function submitButtonClick(record) {
+    const date = new Date(record.date);
+    if (!LocalStorageRecordsApi.hasRecordByDate(date)) {
+        LocalStorageRecordsApi.createRecord(record);
+    }
+    const updateField1 = document.querySelector("#done-today");
+    if (updateField1.value) {
+        record.field1 = updateField1.value;
+    }
+    const updateField2 = document.querySelector("#reflection");
+    if (updateField2.value) {
+        record.field2 = updateField2.value;
+    }
+    const updateHours = document.querySelector("#hours");
+    if (updateHours.value) {
+        record.hours = updateHours.value;
+    }
+    LocalStorageRecordsApi.updateRecord(record);
+    window.location.href = "../calendar/calendar.html";
+}
+
+function deleteButtonClick(record) {
+    const date = new Date(record.date);
+    if (LocalStorageRecordsApi.hasRecordByDate(date)) {
+        if (window.confirm("Are you sure you want to delete this record?")) {
+            LocalStorageRecordsApi.deleteRecord(record.id);
+            window.location.href = "../calendar/calendar.html";
+        }
+    }
+}
+
+/*
+populates the daily log with the information from the record object
+Parameters:
+    - Record record containg the record either from the local storage or new record
+Returns:
+    - NONE
+*/
 function logFunctionality(record) {
     const submitButton = document.querySelector("#save-button");
     const deleteButton = document.querySelector("#delete-button");
-    console.log(record);
-    const date = new Date(record.date);
-    //alert(date);
     populateDefaultLog(record);
     submitButton.addEventListener("click", () => {
-        if (!LocalStorageRecordsApi.hasRecordByDate(date)) {
-            LocalStorageRecordsApi.createRecord(record);
-        }
-        const updateField1 = document.querySelector("#done-today");
-        if (updateField1.value) {
-            record.field1 = updateField1.value;
-        }
-        const updateField2 = document.querySelector("#reflection");
-        if (updateField2.value) {
-            record.field2 = updateField2.value;
-        }
-        const updateHours = document.querySelector("#hours");
-        if (updateHours.value) {
-            record.hours = updateHours.value;
-        }
-        LocalStorageRecordsApi.updateRecord(record);
-        window.location.href = "../calendar/calendar.html";
+        submitButtonClick(record);
     });
-
     deleteButton.addEventListener("click", () => {
-        if (LocalStorageRecordsApi.hasRecordByDate(date)) {
-            if (
-                window.confirm("Are you sure you want to delete this record?")
-            ) {
-                LocalStorageRecordsApi.deleteRecord(record.id);
-                window.location.href = "../calendar/calendar.html";
-            }
-        }
+        deleteButtonClick(record);
     });
 }
+
+/* 
+This function is called when the window is loaded
+*/
 
 window.onload = function () {
     const recordString = sessionStorage.getItem("current record");

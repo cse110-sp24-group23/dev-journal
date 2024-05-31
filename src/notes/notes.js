@@ -29,6 +29,42 @@ function loadAllNotesFromStorage() {
     }
 }
 
+// submit to local storage
+function submitToStorage() {
+    // the title of the note
+    const noteTitle = document.getElementById("note-editor-title");
+    const noteTitleVal = noteTitle.value;
+    // the textbox to enter notes in
+    const noteContent = document.getElementById("note-editor-content");
+    const noteContentVal = noteContent.value;
+    // create a new record to store the note
+    const noteRecord = new Record("note", {
+        field1: noteContentVal,
+        title: noteTitleVal,
+        id: CURRENT_NOTE_ID, // will be null if creating one, or a value if updating
+    });
+    // in local storage, update note record if it exists, otherwise create a new one
+    if (CURRENT_NOTE_ID) {
+        RecordsStorage.updateRecord(noteRecord);
+    } else {
+        RecordsStorage.createRecord(noteRecord);
+    }
+}
+
+/*
+Given a note id, delete the note from local storage and remove it from the html page
+Parameters:
+    - noteId: string or int of a note's id
+Returns: None
+*/
+function deleteFromStorage(noteId) {
+    // Comes in as string, so we convert to a Number
+    RecordsStorage.deleteRecord(Number(noteId));
+    const notesDisplay = document.querySelector(".notes-display");
+    const noteElem = notesDisplay.querySelector(`note-element[id="${noteId}"]`);
+    noteElem.remove();
+}
+
 /*
 Given a note element, display the note editor and populate it with values of a note element if one is given
 Parameters:
@@ -117,42 +153,6 @@ function _loadNotefromStorage(id = null) {
     // add note element to page and add its event listeners
     notesDisplay.prepend(noteElem);
     _addListeners(noteElem);
-}
-
-// submit to local storage
-function submitToStorage() {
-    // the title of the note
-    const noteTitle = document.getElementById("note-editor-title");
-    const noteTitleVal = noteTitle.value;
-    // the textbox to enter notes in
-    const noteContent = document.getElementById("note-editor-content");
-    const noteContentVal = noteContent.value;
-    // create a new record to store the note
-    const noteRecord = new Record("note", {
-        field1: noteContentVal,
-        title: noteTitleVal,
-        id: CURRENT_NOTE_ID, // will be null if creating one, or a value if updating
-    });
-    // in local storage, update note record if it exists, otherwise create a new one
-    if (CURRENT_NOTE_ID) {
-        RecordsStorage.updateRecord(noteRecord);
-    } else {
-        RecordsStorage.createRecord(noteRecord);
-    }
-}
-
-/*
-Given a note id, delete the note from local storage and remove it from the html page
-Parameters:
-    - noteId: string or int of a note's id
-Returns: None
-*/
-function deleteFromStorage(noteId) {
-    // Comes in as string, so we convert to a Number
-    RecordsStorage.deleteRecord(Number(noteId));
-    const notesDisplay = document.querySelector(".notes-display");
-    const noteElem = notesDisplay.querySelector(`note-element[id="${noteId}"]`);
-    noteElem.remove();
 }
 
 /*

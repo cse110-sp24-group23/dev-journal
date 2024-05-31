@@ -40,12 +40,28 @@ function _addListeners(noteElem) {
     noteElem.addEventListener("click", () => {
         CURRENT_NOTE_ID = noteElem.id;
     });
+    // when note is selected with Enter, update global CURRENT_NOTE_ID variable to be note's id
+    noteElem.addEventListener("keypress", (event) => {
+        // only add listener if the enter key was pressed, not some random key
+        if (event.key != "Enter") {
+            return;
+        }
+        CURRENT_NOTE_ID = noteElem.id;
+    });
     // when a note is clicked, open the editor for it
     noteElem.addEventListener("click", _editCurrentNote);
+    noteElem.addEventListener("keypress", _editCurrentNote);
 }
 
 // delete the current note - to be used with add/remove event listeners
-function _deleteCurrentNote() {
+function _deleteCurrentNote(event) {
+    // Only add listeners if the event was a click or Enter. If it was a random keypress, return.
+    const listenerConditions =
+        event.type === "click" ||
+        (event.type === "keypress" && event.key === "Enter");
+    if (!listenerConditions) {
+        return;
+    }
     // HACK (ish) - seems to be the cleanest way to do this in vanilla JS
     // wait 0.01s for the CURRENT_NOTE_ID to be updated by the noteElem event listener that updates CURRENT_NOTE_ID
     // this allows us to have _deleteCurrentNote be a function that doesn't take in any parameters
@@ -56,7 +72,14 @@ function _deleteCurrentNote() {
 }
 
 // edit the current note (displays note editor popup) - to be used with add/remove event listeners
-function _editCurrentNote() {
+function _editCurrentNote(event) {
+    // Only add listeners if the event was a click or Enter. If it was a random keypress, return.
+    const listenerConditions =
+        event.type === "click" ||
+        (event.type === "keypress" && event.key === "Enter");
+    if (!listenerConditions) {
+        return;
+    }
     // HACK (ish) - seems to be the cleanest way to do this in vanilla JS
     // wait 0.01s for the CURRENT_NOTE_ID to be updated by the noteElem event listener that updates CURRENT_NOTE_ID
     // this allows us to have _editCurrentNote be a function that doesn't take in any parameters
@@ -282,8 +305,9 @@ window.onload = function () {
     const doneDelNoteBtn = document.getElementById("done-deleting-note-btn");
     // allow for deleting when delete button is clicked - display trash icons, edit event listeners
     deleteNoteBtn.addEventListener("click", () => {
-        // hide 'delete note' button and show 'done deleting' button
+        // hide 'delete note', 'add note' buttons and show 'done deleting' button
         deleteNoteBtn.classList.add("hidden");
+        addNoteBtn.classList.add("hidden");
         doneDelNoteBtn.classList.remove("hidden");
         // loop through note elements, adding trash listeners and removing note edit listeners
         const noteElems = document.getElementsByClassName("note");
@@ -293,15 +317,18 @@ window.onload = function () {
             // display trash button and add event listener that deletes its note when clicked
             trashBtn.classList.remove("hidden");
             trashBtn.addEventListener("click", _deleteCurrentNote);
+            trashBtn.addEventListener("keypress", _deleteCurrentNote);
             // remove edit popup listener while in delete mode
             // - makes sure edit popup doesn't display when trash icons are clicked
             noteElem.removeEventListener("click", _editCurrentNote);
+            noteElem.removeEventListener("keypress", _editCurrentNote);
         }
     });
     // block deleting when 'done deleting' button clicked - hide trash icons, edit event listeners
     doneDelNoteBtn.addEventListener("click", () => {
-        // hide 'done deleting' button, show 'delete notes' button
+        // hide 'done deleting' button, show 'delete notes' 'add note' buttons
         deleteNoteBtn.classList.remove("hidden");
+        addNoteBtn.classList.remove("hidden");
         doneDelNoteBtn.classList.add("hidden");
         // loop through note elements, removing trash listeners and adding note edit listeners
         const noteElems = document.getElementsByClassName("note");
@@ -311,8 +338,10 @@ window.onload = function () {
             // hide trash button and remove event listener that deletes its note when clicked
             trashBtn.classList.add("hidden");
             trashBtn.removeEventListener("click", _deleteCurrentNote);
+            trashBtn.removeEventListener("keypress", _deleteCurrentNote);
             // add edit popup listener back - assures editor popup can display when note is clicked
             noteElem.addEventListener("click", _editCurrentNote);
+            noteElem.addEventListener("keypress", _editCurrentNote);
         }
     });
 };

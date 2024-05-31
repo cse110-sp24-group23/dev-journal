@@ -26,6 +26,10 @@
         <input type="password" id="confirm-password" name="confirm-password" required>
         <button type="submit">Update</button>
     </form>
+    <div id = "error-message" class = "error">
+        <span id="error-text">Passwords do not match. Please try again.</span>
+        <button id="try-again-button">Try Again</button>
+    </div>
     <script src="settings.js"></script>
     <script>
         document.getElementById('toggle-password-form').addEventListener('change', function() {

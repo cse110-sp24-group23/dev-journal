@@ -12,8 +12,13 @@ document.getElementById('input-password-form').addEventListener('submit', async 
 
     //TODO: show incorrect password error on the page
     else{
-        console.log("incorrect password")
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.style.display = 'block';
     }
+})
+document.getElementById('try-again-button').addEventListener('click', function(){
+    const errorMessage = document.getElementById('error-message');
+    errorMessage.style.display='none';
 })
 
 /*

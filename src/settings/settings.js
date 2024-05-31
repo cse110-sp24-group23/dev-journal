@@ -13,10 +13,14 @@ document.getElementById('password-form').addEventListener('submit', async functi
      //console log incorrect password if the passwords do not match
      //TODO: show incorrect password error on the page
     else{
-        console.log("passwords do not match");
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.style.display = 'block';
     }
 })
-
+document.getElementById('try-again-button').addEventListener('click', function(){
+    const errorMessage = document.getElementById('error-message');
+    errorMessage.style.display='none';
+})
 /*
     Hashes the input password using SHA-256 algorithm
     Parameters:

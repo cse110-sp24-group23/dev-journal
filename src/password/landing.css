@@ -46,3 +46,31 @@ button[type="submit"]:hover {
     color: #21528B;
 }
 
+.error{
+    font-size: 21px;
+    font-weight: bold;
+    display: none; /* Hidden by default */
+    color: red;
+    background-color: #f8d7da;
+    border: 5px solid #f5c6cb;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.error button{
+    font-size: 21px;
+    font-weight: bold;
+    background-color: #21528B;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.error button:hover {
+    background-color: #E2EFFF;
+    color: #21528B;
+}

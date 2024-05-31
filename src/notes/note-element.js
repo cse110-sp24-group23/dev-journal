@@ -119,7 +119,7 @@ class Note extends HTMLElement {
         <p id="date">${this._formatDate(this._date)}</p>
         <p>${this._title}</p>
         <p class="preview">${this._preview}</p>
-        <img src="../assets/icons/trash-icon.svg" alt="Delete" class="js-trash">
+        <img src="../assets/icons/trash-icon.svg" alt="Delete" class="hidden js-trash" id="js-trash">
         <style>
             .preview {
                 color: gray;
@@ -128,12 +128,13 @@ class Note extends HTMLElement {
                 height: 2em;
                 margin-bottom: 0;
                 margin-top: auto;
-                display: inline-block;
+                
                 float: right;
             }
-            .js-trash {
+            .js-trash {}
+            .hidden{
                 display: none;
-            }
+            }            
             #date {
                 width: max-content;
                 margin-right: 0;

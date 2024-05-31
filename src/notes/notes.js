@@ -31,12 +31,20 @@ Parameters:
 Returns: None
 */
 function _addListeners(noteElem) {
-    _addDeleteButtonListener(noteElem);
     // when a note is clicked, open the editor for it
     noteElem.addEventListener("click", () => {
         CURRENT_NOTE_ID = noteElem.id;
         _displayNoteEditor(noteElem);
     });
+
+    noteElem.addEventListener("click", function (e) {
+        if (e.target.tagName === "IMG") {
+            // const noteId = noteElem.id;
+            deleteFromStorage(CURRENT_NOTE_ID);
+        }
+    });
+
+    // _addTrashButtonListener(noteElem);
 }
 
 // given the id of a note, load it from storage. If no id is given, it will load the most recently added note
@@ -64,12 +72,15 @@ function _loadNotefromStorage(id = null) {
 }
 
 // given a note, add a delete button listener to it that will delete it when clicked
-function _addDeleteButtonListener(noteElem) {
-    const deleteButton = noteElem.shadowRoot.querySelector(".js-trash");
-    deleteButton.addEventListener("click", () => {
+function _addTrashButtonListener(noteElem) {
+    if (noteElem.target.tagName == "IMG") {
         const noteId = noteElem.id;
         deleteFromStorage(noteId);
-    });
+    }
+    // deleteButton.addEventListener("click", () => {
+    //     const noteId = noteElem.id;
+    //     deleteFromStorage(noteId);
+    // });
 }
 
 // submit to local storage
@@ -227,21 +238,24 @@ Parameters:
 Returns: none
 */
 function _displayTrashBtn(display = true) {
-    const trashBtn = document.querySelectorAll(".js-trash");
+    // const trashBtn = noteElem.shadowRoot.querySelectorAll(".js-trash");
     const delBtn = document.getElementById("delete-note-btn");
     const doneBtn = document.getElementById("done-deleting-note-btn");
     if (display) {
-        delBtn.style.display = "none";
-        doneBtn.style.display = "block";
-        trashBtn.forEach((btn) => {
-            btn.style.display = "block";
-        });
+        const noteElems = document.getElementsByClassName(".note");
+        for (const noteElem of noteElems) {
+            const trashBtn = noteElem.shadowRoot.getElementById(".js-trash");
+            // trashBtn.classList.remove("hidden");
+            trashBtn.style.display = "block";
+            _addTrashButtonListener(noteElem);
+        }
     } else {
-        delBtn.style.display = "block";
-        doneBtn.style.display = "none";
-        trashBtn.forEach((btn) => {
-            btn.style.display = "none";
-        });
+        const noteElems = document.getElementsByClassName(".note");
+        for (const noteElem of noteElems) {
+            const trashBtn = noteElem.shadowRoot.getElementById(".js-trash");
+            trashBtn.style.display = "none";
+            // trashBtn.classList.add("hidden");
+        }
     }
 }
 
@@ -256,13 +270,24 @@ window.onload = function () {
         _displayNoteEditor();
     });
     // display trash icons when "Delete Notes" button clicked
-    const display = false;
     const deleteNoteBtn = document.getElementById("delete-note-btn");
     const doneDelNoteBtn = document.getElementById("done-deleting-note-btn");
     deleteNoteBtn.addEventListener("click", () => {
-        _displayTrashBtn();
+        doneDelNoteBtn.classList.remove("hidden");
+        const noteElems = document.getElementsByClassName("note");
+        for (const noteElem of noteElems) {
+            const trashBtn = noteElem.shadowRoot.getElementById("js-trash");
+            // trashBtn.classList.remove("hidden");
+            trashBtn.classList.remove("hidden");
+            // _addTrashButtonListener(noteElem);
+        }
     });
     doneDelNoteBtn.addEventListener("click", () => {
-        _displayTrashBtn(display);
+        doneDelNoteBtn.classList.add("hidden");
+        const noteElems = document.getElementsByClassName("note");
+        for (const noteElem of noteElems) {
+            const trashBtn = noteElem.shadowRoot.getElementById("js-trash");
+            trashBtn.classList.add("hidden");
+        }
     });
 };

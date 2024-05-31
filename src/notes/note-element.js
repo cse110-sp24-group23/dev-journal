@@ -58,10 +58,20 @@ class Note extends HTMLElement {
     }
 
     set content(value) {
+        // set content
         this._content = value;
         this.setAttribute("content", value);
-        const previewLength = 50;
-        this._preview = this._content.slice(0, previewLength);
+        // set preview
+        // define a max length for the preview
+        const maxPreviewLength = 50;
+        const previewBody = this._content.slice(0, maxPreviewLength);
+        // suffix for preview is default empty, but an elipses if it's truncated from content
+        let suffix = "";
+        if (previewBody != this._content) {
+            suffix = "...";
+        }
+        // define preview to be the main body with a potential elipses
+        this._preview = previewBody + suffix;
     }
 
     /*
@@ -104,7 +114,7 @@ class Note extends HTMLElement {
         const settings = { year: "numeric", month: "long", day: "numeric" };
         return date.toLocaleDateString("en-US", settings);
     }
-
+    // git commit -m "#18 added elipses back to custom note element previews"
     /*
     Initialize values when new note is added.
     Parameters: None
@@ -128,10 +138,8 @@ class Note extends HTMLElement {
                 height: 2em;
                 margin-bottom: 0;
                 margin-top: auto;
-                
                 float: right;
             }
-            .js-trash {}
             .hidden{
                 display: none;
             }            

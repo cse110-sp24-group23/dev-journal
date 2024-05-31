@@ -19,7 +19,7 @@ function loadFromStorage() {
     const notesDisplay = document.querySelector(".notes-display");
     const notesList = RecordsStorage.getAllRecords("note");
     for (const noteRecord of notesList) {
-        let noteElem = document.createElement("my-note");
+        let noteElem = document.createElement("note-element");
         noteElem.id = noteRecord.id;
         noteElem.title = noteRecord.title;
         noteElem.date = noteRecord.created;
@@ -65,7 +65,7 @@ function _editCurrentNote() {
         // get the note element that was clicked on
         const notesDisplay = document.querySelector(".notes-display");
         const noteElem = notesDisplay.querySelector(
-            `my-note[id="${CURRENT_NOTE_ID}"]`
+            `note-element[id="${CURRENT_NOTE_ID}"]`
         );
         _displayNoteEditor(noteElem);
     }, 10);
@@ -85,7 +85,7 @@ function _loadNotefromStorage(id = null) {
         noteRecord = notesList[notesList.length - 1];
     }
     // create a note element to display the noteRecord's info
-    let noteElem = document.createElement("my-note");
+    let noteElem = document.createElement("note-element");
     noteElem.id = noteRecord.id;
     noteElem.title = noteRecord.title;
     noteElem.date = noteRecord.created;
@@ -130,7 +130,7 @@ function deleteFromStorage(noteId) {
     // Comes in as string, so we convert to a Number
     RecordsStorage.deleteRecord(Number(noteId));
     const notesDisplay = document.querySelector(".notes-display");
-    const noteElem = notesDisplay.querySelector(`my-note[id="${noteId}"]`);
+    const noteElem = notesDisplay.querySelector(`note-element[id="${noteId}"]`);
     noteElem.remove();
 }
 
@@ -204,7 +204,7 @@ function _addNoteEditorListeners() {
         // if we are editing a note
         if (CURRENT_NOTE_ID != null) {
             const noteElem = document.querySelector(
-                `my-note[id="${CURRENT_NOTE_ID}"]`
+                `note-element[id="${CURRENT_NOTE_ID}"]`
             );
             // display the updated note and remove the old note from view
             _loadNotefromStorage(CURRENT_NOTE_ID);

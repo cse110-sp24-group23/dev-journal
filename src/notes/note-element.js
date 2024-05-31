@@ -1,10 +1,12 @@
 class Note extends HTMLElement {
+    // all attributes that can be gotten from a note element
     static get ObservedAttributes() {
         return ["id", "date", "title", "content", "preview"];
     }
-
+    // initialize everything to null when note is first created
     constructor() {
         super();
+        // keep shadow mode open for event Listeners to access trash icon
         this.shadow = this.attachShadow({ mode: "open" });
         this._id = null;
         this._date = null;
@@ -17,22 +19,23 @@ class Note extends HTMLElement {
         Get functions
     =======================
     */
+    // getter for id attribute - called by const value = noteElem.id
     get id() {
         return this._id;
     }
-
+    // getter for date attribute - called by const value = noteElem.date
     get date() {
         return this._date;
     }
-
+    // getter for title attribute - called by const value = noteElem.title
     get title() {
         return this._title;
     }
-
+    // getter for content attribute - called by const value = noteElem.content
     get content() {
         return this._content;
     }
-
+    // getter for preview attribute - called by const value = noteElem.preview
     get preview() {
         return this._preview;
     }
@@ -42,21 +45,23 @@ class Note extends HTMLElement {
         Set functions
     =======================
     */
+    // setter for id attribute - called by noteElem.id = "some-value"
     set id(value) {
         this._id = value;
         this.setAttribute("id", value);
     }
-
+    // setter for title attribute - called by noteElem.title = "some value"
     set title(value) {
         this._title = value;
         this.setAttribute("title", value);
     }
-
+    // setter for date attribute - called by noteElem.date = new Date(...);
     set date(value) {
         this._date = value;
         this.setAttribute("date", value);
     }
-
+    // setter for title attribute - called by noteElem.content = "some value"
+    // also sets preview member variable (as a possibly truncated version of content)
     set content(value) {
         // set content
         this._content = value;
@@ -116,15 +121,17 @@ class Note extends HTMLElement {
     }
     // git commit -m "#18 added elipses back to custom note element previews"
     /*
-    Initialize values when new note is added.
+    Initialize values when new note is added to DOM.
     Parameters: None
     Return: None
     */
     connectedCallback() {
+        // once a new note element is added to the DOM, initialize its values
         this._id = this.getAttribute("id");
         this._title = this.getAttribute("title");
         this._date = this.getAttribute("date");
         this._content = this.getAttribute("content");
+        // set the shadow DOM for the note element to contain its displayed member variables
         this.shadow.innerHTML = `
         <p id="date">${this._formatDate(this._date)}</p>
         <p>${this._title}</p>
@@ -156,4 +163,4 @@ class Note extends HTMLElement {
         this.classList.add("note");
     }
 }
-customElements.define("my-note", Note);
+customElements.define("note-element", Note);

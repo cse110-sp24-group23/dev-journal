@@ -51,6 +51,7 @@ function loadNavbar() {
         })
         .catch((error) => console.error("Error loading navbar", error));
 }
+
 /*
 Clears the session storage when a tab on the nav bar is clicked.
 Parameters:

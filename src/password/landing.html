@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="landing.css">
 </head>
 <body>
+    <div class = "form-container">
     <form id = "input-password-form" action="/submit-password" method="post">
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
@@ -15,6 +16,7 @@
     <div id = "error-message" class = "error">
         <span id="error-text">Incorrect password. Please try again.</span>
         <button id="try-again-button">Try Again</button>
+    </div>
     </div>
     <script src="landing.js"></script>
 </body>

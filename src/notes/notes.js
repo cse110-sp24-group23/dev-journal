@@ -1,5 +1,5 @@
 import { Record } from "../backend-storage/record-class.js";
-import { LocalStorageRecordsApi as RecordsStorage } from "../backend-storage/records-api.js";
+import RecordsStorage from "../backend-storage/records-api.js";
 
 /*
 TODO:
@@ -246,12 +246,16 @@ function _displayTrashBtn(display = true) {
 }
 
 window.onload = function () {
+    // make sure there aren't any error records in storage, then load records
+    RecordsStorage.cleanse_records();
     loadFromStorage();
+    // display note editor when "Add Note" button clicked
     const addNoteBtn = document.getElementById("add-note-btn");
     addNoteBtn.addEventListener("click", () => {
         CURRENT_NOTE_ID = null;
         _displayNoteEditor();
     });
+    // display trash icons when "Delete Notes" button clicked
     const display = false;
     const deleteNoteBtn = document.getElementById("delete-note-btn");
     const doneDelNoteBtn = document.getElementById("done-deleting-note-btn");

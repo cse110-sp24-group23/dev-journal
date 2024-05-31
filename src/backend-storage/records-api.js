@@ -41,7 +41,23 @@ export class RecordsApi {
     }
 }
 
-class LocalStorageRecordsApi extends RecordsApi {
+export default class LocalStorageRecordsApi extends RecordsApi {
+    /*
+    Clear any 'none' records in the localStorage if some error accidentally added one.
+    This stops any errors from compounding and breaking the functionality
+    Parameters: None
+    Returns: None
+    */
+    static cleanse_records() {
+        const Records = LocalStorageRecordsApi.getAllRecords();
+        const newRecords = Records.filter((record) => record != null);
+        // if there were no records to remove, don't do anything
+        if (newRecords.length === Records.length) {
+            return;
+        }
+        // if there were error records, update localStorage with only the filtered records
+        localStorage.setItem("Records", JSON.stringify(newRecords));
+    }
     /*
     getAllRecords(): Gets all Records from LocalStorage
     Parameters: None
@@ -184,4 +200,3 @@ class LocalStorageRecordsApi extends RecordsApi {
         localStorage.setItem("Records", JSON.stringify(newRecords));
     }
 }
-export { LocalStorageRecordsApi };

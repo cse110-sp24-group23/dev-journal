@@ -52,10 +52,9 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         try {
             const Records = JSON.parse(localStorage.getItem("Records")) || [];
             return Records;
-        }
-        catch (error) {
-            console.error(error);
-            console.error("Returning Empty List");
+        } catch (error) {
+            console.warn(error);
+            console.warn("Returning Empty List");
             return [];
         }
     }
@@ -78,13 +77,6 @@ export default class LocalStorageRecordsApi extends RecordsApi {
                 recordObject.id
             );
         }
-        const currentDate = new Date();
-        // Assign an id for a note, versus should be fed in one for a daily log
-        if (!recordObject.id) {
-            recordObject.id = currentDate.getTime();
-        }
-        recordObject.updated = currentDate.toISOString();
-        recordObject.created = currentDate.toISOString();
         Records.push(recordObject);
         localStorage.setItem("Records", JSON.stringify(Records));
     }
@@ -147,6 +139,21 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         }
         return record;
     }
+    /*
+    hasRecordByDate(): Checks if a record exists in LocalStorage by date
+    Parameters:
+    - date: date Object (new Date(Year, Month Day))
+    Returns:
+    - Boolean
+    */
+    static hasRecordByDate(date) {
+        const Records = LocalStorageRecordsApi.getAllRecords();
+        const record = Records.find((record) => record.id === date.getTime());
+        if (!record) {
+            return false;
+        }
+        return true;
+    }
 
     /*
     deleteRecord(): Deletes a record from LocalStorage
@@ -157,6 +164,9 @@ export default class LocalStorageRecordsApi extends RecordsApi {
     static deleteRecord(id) {
         const Records = LocalStorageRecordsApi.getAllRecords();
         const newRecords = Records.filter((record) => record.id !== id);
+        if (newRecords.length === Records.length) {
+            throw new Error("Could not delete record, record not found:", id);
+        }
         localStorage.setItem("Records", JSON.stringify(newRecords));
     }
 }

@@ -7,7 +7,7 @@ export class Record {
     created;
     updated;
     id;
-    date; //added adte for log because need to access localstorage
+    date;
     constructor(
         type,
         options = {

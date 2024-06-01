@@ -131,6 +131,7 @@ export default class LocalStorageRecordsApi extends RecordsApi {
     - Record object
     */
     // For use in Daily Log
+    //TODO: add optional type for log - parse date by year, month, day
     static getRecordByDate(date) {
         const Records = LocalStorageRecordsApi.getAllRecords();
         const record = Records.find((record) => record.id === date.getTime());
@@ -146,6 +147,7 @@ export default class LocalStorageRecordsApi extends RecordsApi {
     Returns:
     - Boolean
     */
+    //TODO: add optional type for log - parse date by year, month, day
     static hasRecordByDate(date) {
         const Records = LocalStorageRecordsApi.getAllRecords();
         const record = Records.find((record) => record.id === date.getTime());

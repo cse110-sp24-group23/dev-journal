@@ -53,8 +53,8 @@ export default class LocalStorageRecordsApi extends RecordsApi {
             const Records = JSON.parse(localStorage.getItem("Records")) || [];
             return Records;
         } catch (error) {
-            console.error(error);
-            console.error("Returning Empty List");
+            console.warn(error);
+            console.warn("Returning Empty List");
             return [];
         }
     }
@@ -77,7 +77,6 @@ export default class LocalStorageRecordsApi extends RecordsApi {
                 recordObject.id
             );
         }
-
         Records.push(recordObject);
         localStorage.setItem("Records", JSON.stringify(Records));
     }
@@ -124,7 +123,6 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         }
         return record;
     }
-
     /*
     getRecordByDate(): Gets a record from LocalStorage by date
     Parameters:
@@ -141,8 +139,14 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         }
         return record;
     }
-    //TODO: add comment and potentially change to include search by type
-    static hasRecord(date) {
+    /*
+    hasRecordByDate(): Checks if a record exists in LocalStorage by date
+    Parameters:
+    - date: date Object (new Date(Year, Month Day))
+    Returns:
+    - Boolean
+    */
+    static hasRecordByDate(date) {
         const Records = LocalStorageRecordsApi.getAllRecords();
         const record = Records.find((record) => record.id === date.getTime());
         if (!record) {
@@ -160,6 +164,9 @@ export default class LocalStorageRecordsApi extends RecordsApi {
     static deleteRecord(id) {
         const Records = LocalStorageRecordsApi.getAllRecords();
         const newRecords = Records.filter((record) => record.id !== id);
+        if (newRecords.length === Records.length) {
+            throw new Error("Could not delete record, record not found:", id);
+        }
         localStorage.setItem("Records", JSON.stringify(newRecords));
     }
 }

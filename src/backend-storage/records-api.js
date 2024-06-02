@@ -43,15 +43,46 @@ export class RecordsApi {
 
 export default class LocalStorageRecordsApi extends RecordsApi {
     /*
-    getAllRecords(): Gets all Records from LocalStorage
+    Clear any 'none' records in the localStorage if some error accidentally added one.
+    This stops any errors from compounding and breaking the functionality
     Parameters: None
+    Returns: None
+    */
+    static cleanse_records() {
+        const Records = LocalStorageRecordsApi.getAllRecords();
+        const filteredRecords = Records.filter((record) => record != null);
+        // if there were no records to remove, don't do anything
+        if (filteredRecords.length === Records.length) {
+            return;
+        }
+        // if there were error records, update localStorage with only the filtered records
+        localStorage.setItem("Records", JSON.stringify(filteredRecords));
+    }
+    /*
+    getAllRecords(): Gets all Records from LocalStorage
+    Parameters: 
+        - type: null, 'log', or 'note' - specifies which type of record to filter by.
+            - if type is null, it returns all records regardless of type
     Returns: 
     - Array of Records
     */
-    static getAllRecords() {
+    static getAllRecords(type = null) {
+        const types = ["log", "note", null];
+        if (!types.includes(type)) {
+            throw Error('type must be "log", "note", or null.');
+        }
         try {
+            // get all records from storage
             const Records = JSON.parse(localStorage.getItem("Records")) || [];
-            return Records;
+            // if no type passed in, don't filter the records
+            if (!type) {
+                return Records;
+            }
+            // otherwise, filter the records by type
+            const filteredRecords = Records.filter(
+                (record) => record.type == type
+            );
+            return filteredRecords;
         } catch (error) {
             console.warn(error);
             console.warn("Returning Empty List");
@@ -117,7 +148,8 @@ export default class LocalStorageRecordsApi extends RecordsApi {
 
     static getRecordById(id) {
         const Records = LocalStorageRecordsApi.getAllRecords();
-        const record = Records.find((record) => record.id === id);
+        // get the record after parsing user input to make sure it's a number
+        const record = Records.find((record) => record.id === parseInt(id));
         if (!record) {
             throw new Error("Record not found", id);
         }
@@ -151,6 +183,22 @@ export default class LocalStorageRecordsApi extends RecordsApi {
     static hasRecordByDate(date) {
         const Records = LocalStorageRecordsApi.getAllRecords();
         const record = Records.find((record) => record.id === date.getTime());
+        if (!record) {
+            return false;
+        }
+        return true;
+    }
+
+    /*
+    hasRecordById(): Checks if a record exists in LocalStorage by id
+    Parameters:
+    - id: Number (although does accept strings) - id of a record
+    Returns:
+    - Boolean
+    */
+    static hasRecordById(id) {
+        const Records = LocalStorageRecordsApi.getAllRecords();
+        const record = Records.find((record) => record.id === parseInt(id));
         if (!record) {
             return false;
         }

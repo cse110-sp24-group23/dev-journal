@@ -1,10 +1,39 @@
+:root {
+    --notes-display-left-margin: 20px;
+    --note-width: 250px;
+    --notes-per-row: 3;
+
+    /*Font*/
+    --font: "Lato", sans-serif;
+
+    /*Colors*/
+    --button-color: rgb(244, 249, 255);
+    --add-note-color-hover: rgb(188, 208, 237);
+    --delete-note-color-hover: rgb(228, 87, 87);
+    --button-save-color: #fbd1ff81;
+    --button-cancel-color: #fbd1ff81;
+    --button-save-hover-color: #f0def7;
+    --button-cancel-hover-color: #f0def7;
+
+    --shadow-color: rgba(128, 128, 128, 0.507);
+    --shadow-color-hover: rgb(128, 128, 128);
+
+    --notes-edit-color: #fadaf559;
+    --notes-edit-input-color: #fbd1ff81;
+    --notes-lavendar: #dcd5f859;
+    --notes-peach: #fde3ac44;
+    --notes-mint: #dbffd652;
+    --notes-salmon: #f88b7d28;
+    --notes-light-blue: #ace8ff3b;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font);
     display: flex;
-    background-color: #f0f4f8;
     margin: 0;
     padding: 0;
 }
+
 .sidebar {
     width: 200px;
     background-color: #7d5a5a;
@@ -25,10 +54,17 @@ body {
     padding: 10px;
     border-radius: 5px;
 }
-.sidebar ul li.active, .sidebar ul li:hover {
+.sidebar ul li.active,
+.sidebar ul li:hover {
     background-color: #f0f4f8;
     color: #7d5a5a;
 }
+
+/* meant to hide/show objects my adding/removing this class in js */
+.hidden {
+    display: none;
+}
+
 .content {
     flex-grow: 1;
     padding: 20px;
@@ -40,25 +76,75 @@ body {
 .buttons {
     margin-bottom: 20px;
 }
+
 .buttons button {
-    padding: 10px 20px;
-    margin-right: 10px;
+    padding: 20px;
+    font-size: var(--font-size-button);
+    background-color: var(--button-color);
+    border-width: 0;
+    border-radius: 10px;
     cursor: pointer;
-    background-color: #ccc;
-    border: none;
-    border-radius: 5px;
 }
-.notes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+
+#add-note-btn:hover {
+    background-color: var(--add-note-color-hover);
 }
-.note {
+
+#delete-note-btn:hover {
+    background-color: var(--delete-note-color-hover);
+}
+
+#done-deleting-note-btn:hover {
+    background-color: var(--delete-note-color-hover);
+}
+
+.add-notes textarea {
     background-color: #e0f7fa;
     padding: 20px;
-    border-radius: 10px;
+    width: 100%;
+    height: 120px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+.notes-display {
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(var(--notes-per-row), 1fr);
+    gap: 20px;
+}
+
+.note:nth-child(5n + 1) {
+    /*1,6,11*/
+    background-color: var(--notes-peach);
+}
+.note:nth-child(5n + 2) {
+    /*2,7,12*/
+    background-color: var(--notes-mint);
+}
+.note:nth-child(5n + 3) {
+    /*3,8,13*/
+    background-color: var(--notes-salmon);
+}
+.note:nth-child(5n + 4) {
+    /*4,9,14*/
+    background-color: var(--notes-lavendar);
+}
+.note:nth-child(5n + 5) {
+    /*4,9,14*/
+    background-color: var(--notes-light-blue);
+}
+
+.note {
+    width: var(--note-width);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 2px var(--shadow-color);
+}
+
+.note:hover {
+    box-shadow: 5px 5px 5px 2px var(--shadow-color-hover);
+}
+
 .note h3 {
     margin-top: 0;
 }
@@ -70,36 +156,123 @@ body {
     margin: 5px 0;
 }
 
-/* Media Queries for Responsive Design */
+#note-editor {
+    background-color: var(--notes-edit-color);
+    width: var(--note-editor-width);
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 2px var(--shadow-color);
+}
+
+#note-editor-title {
+    display: block;
+    background-color: var(--notes-edit-input-color);
+    font-size: var(--note-title-font-size);
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    padding-right: var(--note-title-right);
+}
+
+#note-editor-content {
+    display: block;
+    background-color: var(--notes-edit-input-color);
+    font-family: var(--font);
+    font-size: var(--note-title-font-size);
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    padding-right: var(--note-content-padding-right);
+    padding-bottom: var(--note-content-padding);
+    margin-bottom: 10px;
+}
+
+#editor-save-btn {
+    font-size: var(--font-size-button);
+    background-color: var(--button-save-color);
+    padding: var(--edit-btn-padding);
+    margin-right: 5px;
+    border-width: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#editor-save-btn:hover {
+    background-color: var(--button-save-hover-color);
+}
+
+#editor-cancel-btn {
+    font-size: var(--font-size-button);
+    background-color: var(--button-cancel-color);
+    padding: var(--edit-btn-padding);
+    border-width: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#editor-cancel-btn:hover {
+    background-color: var(--button-cancel-hover-color);
+}
+
+/* Vary sizes based on screen size */
+/* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {
-    .note {
-        width: 240px;
-    }
-    h1 {
-        color: blue;
+    :root {
+        --note-width: 275px;
+        --notes-per-row: 1;
+        --note-editor-width: 275px;
+        --note-title-font-size: 15px;
+        --note-content-padding: 100px;
+        --note-content-padding-right: 100px;
+        --note-title-right: 73px;
+        --font-size-button: 15px;
+        --edit-btn-padding: 15px;
     }
 }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    .note {
-        width: 300px;
-    }
-    h1 {
-        color: green;
+    :root {
+        --note-width: 150px;
+        --notes-per-row: 2;
+        --note-editor-width: 360px;
+        --note-title-font-size: 15px;
+        --note-content-padding: 100px;
+        --note-content-padding-right: 180px;
+        --note-title-right: 150px;
+        --font-size-button: 15px;
+        --edit-btn-padding: 15px;
     }
 }
+
+/* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    .note {
-        width: 400px;
-    }
-    h1 {
-        color: red;
+    :root {
+        --note-width: 225px;
+        --notes-per-row: 2;
+        --note-editor-width: 510px;
+        --note-title-font-size: 18px;
+        --note-content-padding: 100px;
+        --note-content-padding-right: 310px;
+        --note-title-right: 275px;
+        --font-size-button: 18px;
+        --edit-btn-padding: 15px;
     }
 }
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    .note {
-        width: 500px;
-    }
-    h1 {
-        color: purple;
+    :root {
+        --note-width: 250px;
+        --notes-per-row: 3;
+        --note-editor-width: 870px;
+        --note-title-font-size: 22px;
+        --note-content-padding: 200px;
+        --note-content-padding-right: 610px;
+        --note-title-right: 580px;
+        --font-size-button: 20px;
+        --edit-btn-padding: 20px;
     }
 }

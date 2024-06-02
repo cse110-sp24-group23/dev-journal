@@ -60,7 +60,9 @@ export default class LocalStorageRecordsApi extends RecordsApi {
     }
     /*
     getAllRecords(): Gets all Records from LocalStorage
-    Parameters: None
+    Parameters: 
+        - type: null, 'log', or 'note' - specifies which type of record to filter by.
+            - if type is null, it returns all records regardless of type
     Returns: 
     - Array of Records
     */

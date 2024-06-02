@@ -1,22 +1,62 @@
 /* Variables */
 :root {
     --font: "Lato", sans-serif;
+
+    /* Button variables */
+    --button-background: rgb(244, 249, 255);
+    --add-button-background-hover: rgb(188, 208, 237);
+    --delete-button-background-hover: rgb(228, 87, 87);
+    --table-border-color: black;
+
+    /* Table body variables */
+    --table-text-color: #004492;
 }
+
+h1 {
+    font-weight: bold;
+}
+
 /* Setting the font for the whole body */
 body {
     font-family: var(--font);
 }
-h1 {
-    font-weight: normal;
+
+/* Flexbox styling for header and buttons */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-/* Adjustable Calendar and border */
+
+/* Styling the buttons */
+button{
+    padding: 20px;
+    font-size: var(--font-size-text-input);
+    background-color: var(--button-background);
+    border-width: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 110px;
+}
+.add-button:hover {
+    background-color: var(--add-button-background-hover);
+}
+.delete-button:hover {
+    background-color: var(--delete-button-background-hover);
+}
+
+/* Table styling */
 .accomplishments-table {
     border-collapse: collapse;
     width: 100%;
 }
-
 .accomplishments-table th,
 .accomplishments-table td {
-    border: 2px solid;
+    border: 2px solid var(--table-border-color);
     padding: 10px;
+    font-size: 21px;
+}
+
+tbody {
+    color: var(--table-text-color);
 }

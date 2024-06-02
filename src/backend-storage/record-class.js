@@ -7,6 +7,7 @@ export class Record {
     created;
     updated;
     id;
+    date; //added adte for log because need to access localstorage
     constructor(
         type,
         options = {
@@ -47,7 +48,14 @@ export class Record {
             );
             this.id = logDate.getTime();
             // set the title to the date regardless of what the user passes in
-            this.title = logDate.toDateString();
+            const dateOptions = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            };
+            this.title = logDate.toLocaleString("en-US", dateOptions);
+            // set date for log
+            this.date = logDate;
         } else if (type === "note") {
             if (options.id != null) {
                 this.id = parseInt(options.id);

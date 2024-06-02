@@ -1,0 +1,48 @@
+/* Center the form in the middle of the page */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Styling for the form */
+form {
+    border: 2px solid #21528B;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Styling for the form label */
+label {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+/* Styling for the input field */
+input[type="password"] {
+    font-size: 21px;
+    border: 2px solid #21528B;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* Styling for the submit button */
+button[type="submit"] {
+    font-size: 21px;
+    font-weight: bold;
+    background-color: #21528B;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Styling for the submit button on hover */
+button[type="submit"]:hover {
+    background-color: #E2EFFF;
+    color: #21528B;
+}
+

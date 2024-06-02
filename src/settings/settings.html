@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Password Page Boilerplate</title>
+        <!-- Script -->
+        <link rel="stylesheet" href="settings.css">
+        <!-- Script -->
+        <script src="/src/navbar/navbar.js"></script>
+    </head>
+    <body>
+        <main>
+            <div id="navbar"></div>
+            <div class="header">
+                <h1>Settings</h1>
+            </div>
+            <div class="settings">
+                <input type="checkbox" id="toggle-password-form" name="toggle-password-form" checked>
+                <label for="toggle-password-form" class="settings-icon">Password Protection</label>
+            </div>
+            <form action="/submit-password" method="post" id="password-form">
+                <label for="new-password">New Password:</label>
+                <input type="password" id="new-password" name="new-password" required>
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+                <button type="submit">Update</button>
+            </form>
+            <script src="settings.js"></script>
+            <script>
+                document.getElementById('toggle-password-form').addEventListener('change', function() {
+                    const form = document.getElementById('password-form');
+                    if (this.checked) {
+                        form.classList.remove('hidden');
+                    } else {
+                        form.classList.add('hidden');
+                    }
+                });
+            </script>
+        </main>
+    </body>
+</html>
+

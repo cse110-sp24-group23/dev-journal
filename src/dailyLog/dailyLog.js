@@ -41,7 +41,22 @@ function populateDefaultLog(record) {
         );
         for (let item of accomplishmentObj.content) {
             const newItem = document.createElement("li");
-            newItem.textContent = item;
+            newItem.classList.add("accomplishment-text");
+            newItem.innerText = item;
+
+            const editButton = document.createElement("button");
+            editButton.textContent = "Edit";
+            editButton.addEventListener("click", () =>
+                editAccomplishment(newItem)
+            );
+            newItem.appendChild(editButton);
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.addEventListener("click", () =>
+                deleteAccomplishment(newItem)
+            );
+            newItem.appendChild(deleteButton);
             displayParagraph.append(newItem);
         }
     }
@@ -87,7 +102,7 @@ function submitButtonClick(record) {
         const content = [];
         const listItems = hasAccomplishments.querySelectorAll("li");
         for (let item of listItems) {
-            content.push(item.textContent.trim());
+            content.push(item.firstChild.textContent.trim());
         }
         let accomplishmentObj;
         if (LocalStorageAccomplishmentsApi.hasAccomplishmentsObjByDate(date)) {
@@ -112,7 +127,6 @@ function submitButtonClick(record) {
         }
     }
 
-    alert(record.hasAccomplishment);
     // update record in the local storage
     LocalStorageRecordsApi.updateRecord(record);
     // links to the calendar page
@@ -149,13 +163,64 @@ function newAccomplishment() {
     const inputValue = addNewInput.value.trim();
     if (inputValue) {
         const newItem = document.createElement("li");
-        newItem.textContent = inputValue;
+        newItem.classList.add("accomplishment-item");
+        newItem.innerText = inputValue;
+
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.addEventListener("click", () => editAccomplishment(newItem));
+        newItem.appendChild(editButton);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.addEventListener("click", () =>
+            deleteAccomplishment(newItem)
+        );
+        newItem.appendChild(deleteButton);
         displayParagraph.prepend(newItem);
         addNewInput.value = ""; // Clear the input field
     }
 }
 
-function trial() {}
+function editAccomplishment(item) {
+    // Create an input element that will replace the text for editing
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = item.firstChild.textContent.trim(); // Set input value to current text
+
+    // Replace the text node with this input element
+    item.firstChild.textContent = ""; // Clear the text node
+    item.insertBefore(input, item.childNodes[1]); // Insert input before the buttons
+
+    // Automatically focus on the new input and select its content
+    input.focus();
+    input.select();
+
+    // Handle when user exits the input (on blur event)
+    input.onblur = function () {
+        // If input is not empty, update the text
+        if (input.value.trim() !== "") {
+            item.firstChild.textContent = input.value.trim() + " ";
+        } else {
+            item.firstChild.textContent = "Unnamed Accomplishment ";
+        }
+        // Remove the input field
+        input.remove();
+    };
+
+    // Handle pressing Enter to finish editing
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            input.blur(); // Triggers the blur event
+        }
+    });
+}
+
+function deleteAccomplishment(item) {
+    if (confirm("Are you sure you want to delete this accomplishment?")) {
+        item.remove();
+    }
+}
 /*
  * Initializes log functionality by setting up the event listeners for the submit and delete buttons.
 Parameters:
@@ -180,11 +245,6 @@ function logFunctionality(record) {
         ".js-add-accomplishment"
     );
     addAccomplishmentBtn.addEventListener("click", newAccomplishment);
-
-    /*const deleteAccomplishmentBtn = document.querySelector(
-        ".js-delete-accomplishment"
-    );*/
-    //deleteAccomplishmentBtn.addEventListener("click", trial);
 }
 
 /* 

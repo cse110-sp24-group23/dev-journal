@@ -1,5 +1,7 @@
 import LocalStorageRecordsApi from "../backend-storage/records-api.js";
 import { Record } from "../backend-storage/record-class.js";
+import LocalStorageAccomplishmentsApi from "../backend-storage/accomplishments-api.js";
+import { AccomplishmentsObj } from "../backend-storage/accomplishments-class.js";
 
 /*
 populates the daily log with the information from the record object
@@ -27,6 +29,21 @@ function populateDefaultLog(record) {
     // check to see if hours is null
     if (record.hours) {
         updateHours.value = record.hours;
+    }
+
+    const date = new Date(record.date);
+
+    if (record.hasAccomplishment) {
+        const accomplishmentObj =
+            LocalStorageAccomplishmentsApi.getAccomplishmentsObjByDate(date);
+        const displayParagraph = document.querySelector(
+            ".js-accomplishment-list"
+        );
+        for (let item of accomplishmentObj.content) {
+            const newItem = document.createElement("li");
+            newItem.textContent = item;
+            displayParagraph.append(newItem);
+        }
     }
 }
 
@@ -60,7 +77,43 @@ function submitButtonClick(record) {
     if (updateHours.value) {
         record.hours = updateHours.value;
     }
-    // update record in the lcoal storage
+    const hasAccomplishments = document.querySelector(
+        ".js-accomplishment-list"
+    );
+    // check to see if field1 is null and update record if not
+
+    if (hasAccomplishments.textContent !== "") {
+        record.hasAccomplishment = true;
+        const content = [];
+        const listItems = hasAccomplishments.querySelectorAll("li");
+        for (let item of listItems) {
+            content.push(item.textContent.trim());
+        }
+        let accomplishmentObj;
+        if (LocalStorageAccomplishmentsApi.hasAccomplishmentsObjByDate(date)) {
+            accomplishmentObj =
+                LocalStorageAccomplishmentsApi.getAccomplishmentsObjByDate(
+                    date
+                );
+            accomplishmentObj.content = content;
+            LocalStorageAccomplishmentsApi.updateAccomplishmentsObj(
+                accomplishmentObj
+            );
+        } else {
+            accomplishmentObj = new AccomplishmentsObj(content, date);
+            LocalStorageAccomplishmentsApi.createAccomplishmentsObj(
+                accomplishmentObj
+            );
+        }
+    } else {
+        record.hasAccomplishment = false;
+        if (LocalStorageAccomplishmentsApi.hasAccomplishmentsObjByDate(date)) {
+            LocalStorageAccomplishmentsApi.deleteAccomplishmentsObj(date);
+        }
+    }
+
+    alert(record.hasAccomplishment);
+    // update record in the local storage
     LocalStorageRecordsApi.updateRecord(record);
     // links to the calendar page
     window.location.href = "../calendar/calendar.html";
@@ -90,16 +143,19 @@ function deleteButtonClick(record) {
 }
 
 function newAccomplishment() {
-    const addNewInput = document.createElement("input");
-    addNewInput.setAttribute("type", "text");
-    addNewInput.setAttribute("name", "accomplishments[]");
+    const addNewInput = document.querySelector(".js-accomplishment-input");
+    const displayParagraph = document.querySelector(".js-accomplishment-list");
 
-    // Get the container where the new inputs will be added
-    const container = document.querySelector(".js-accomplishment-list");
-
-    // Insert the new input into the container
-    container.appendChild(addNewInput);
+    const inputValue = addNewInput.value.trim();
+    if (inputValue) {
+        const newItem = document.createElement("li");
+        newItem.textContent = inputValue;
+        displayParagraph.prepend(newItem);
+        addNewInput.value = ""; // Clear the input field
+    }
 }
+
+function trial() {}
 /*
  * Initializes log functionality by setting up the event listeners for the submit and delete buttons.
 Parameters:
@@ -124,6 +180,11 @@ function logFunctionality(record) {
         ".js-add-accomplishment"
     );
     addAccomplishmentBtn.addEventListener("click", newAccomplishment);
+
+    /*const deleteAccomplishmentBtn = document.querySelector(
+        ".js-delete-accomplishment"
+    );*/
+    //deleteAccomplishmentBtn.addEventListener("click", trial);
 }
 
 /* 

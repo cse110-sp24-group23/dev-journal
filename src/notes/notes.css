@@ -5,7 +5,6 @@
 
     /*Font*/
     --font: "Lato", sans-serif;
-    --font-size-button: 18px;
 
     /*Colors*/
     --button-color: rgb(244, 249, 255);
@@ -200,7 +199,7 @@ body {
 #editor-save-btn {
     font-size: var(--font-size-button);
     background-color: var(--button-save-color);
-    padding: 20px;
+    padding: var(--edit-btn-padding);
     margin-right: 5px;
     border-width: 0;
     border-radius: 10px;
@@ -214,7 +213,7 @@ body {
 #editor-cancel-btn {
     font-size: var(--font-size-button);
     background-color: var(--button-cancel-color);
-    padding: 20px;
+    padding: var(--edit-btn-padding);
     border-width: 0;
     border-radius: 10px;
     cursor: pointer;
@@ -230,11 +229,13 @@ body {
     :root {
         --note-width: 275px;
         --notes-per-row: 1;
-        --note-editor-width: 870px;
-        --note-title-font-size: 22px;
-        --note-content-padding: 200px;
-        --note-content-padding-right: 610px;
-        --note-title-right: 580px;
+        --note-editor-width: 275px;
+        --note-title-font-size: 15px;
+        --note-content-padding: 100px;
+        --note-content-padding-right: 100px;
+        --note-title-right: 73px;
+        --font-size-button: 15px;
+        --edit-btn-padding: 15px;
     }
 }
 
@@ -243,6 +244,13 @@ body {
     :root {
         --note-width: 150px;
         --notes-per-row: 2;
+        --note-editor-width: 360px;
+        --note-title-font-size: 15px;
+        --note-content-padding: 100px;
+        --note-content-padding-right: 180px;
+        --note-title-right: 150px;
+        --font-size-button: 15px;
+        --edit-btn-padding: 15px;
     }
 }
 
@@ -251,6 +259,13 @@ body {
     :root {
         --note-width: 225px;
         --notes-per-row: 2;
+        --note-editor-width: 510px;
+        --note-title-font-size: 18px;
+        --note-content-padding: 100px;
+        --note-content-padding-right: 310px;
+        --note-title-right: 275px;
+        --font-size-button: 18px;
+        --edit-btn-padding: 15px;
     }
 }
 
@@ -259,5 +274,12 @@ body {
     :root {
         --note-width: 250px;
         --notes-per-row: 3;
+        --note-editor-width: 870px;
+        --note-title-font-size: 22px;
+        --note-content-padding: 200px;
+        --note-content-padding-right: 610px;
+        --note-title-right: 580px;
+        --font-size-button: 20px;
+        --edit-btn-padding: 20px;
     }
 }

@@ -50,13 +50,13 @@ export default class LocalStorageRecordsApi extends RecordsApi {
     */
     static cleanse_records() {
         const Records = LocalStorageRecordsApi.getAllRecords();
-        const newRecords = Records.filter((record) => record != null);
+        const filteredRecords = Records.filter((record) => record != null);
         // if there were no records to remove, don't do anything
-        if (newRecords.length === Records.length) {
+        if (filteredRecords.length === Records.length) {
             return;
         }
         // if there were error records, update localStorage with only the filtered records
-        localStorage.setItem("Records", JSON.stringify(newRecords));
+        localStorage.setItem("Records", JSON.stringify(filteredRecords));
     }
     /*
     getAllRecords(): Gets all Records from LocalStorage
@@ -70,16 +70,16 @@ export default class LocalStorageRecordsApi extends RecordsApi {
             throw Error('type must be "log", "note", or null.');
         }
         try {
-            let filteredRecords = [];
+            // get all records from storage
             const Records = JSON.parse(localStorage.getItem("Records")) || [];
+            // if no type passed in, don't filter the records
             if (!type) {
                 return Records;
             }
-            for (const record of Records) {
-                if (record.type == type) {
-                    filteredRecords.push(record);
-                }
-            }
+            // otherwise, filter the records by type
+            const filteredRecords = Records.filter(
+                (record) => record.type == type
+            );
             return filteredRecords;
         } catch (error) {
             console.warn(error);
@@ -146,8 +146,8 @@ export default class LocalStorageRecordsApi extends RecordsApi {
 
     static getRecordById(id) {
         const Records = LocalStorageRecordsApi.getAllRecords();
-        // using == below makes it still work even if users pass in a string instead of an int
-        const record = Records.find((record) => record.id == id);
+        // get the record after parsing user input to make sure it's a number
+        const record = Records.find((record) => record.id === parseInt(id));
         if (!record) {
             throw new Error("Record not found", id);
         }
@@ -179,6 +179,22 @@ export default class LocalStorageRecordsApi extends RecordsApi {
     static hasRecordByDate(date) {
         const Records = LocalStorageRecordsApi.getAllRecords();
         const record = Records.find((record) => record.id === date.getTime());
+        if (!record) {
+            return false;
+        }
+        return true;
+    }
+
+    /*
+    hasRecordById(): Checks if a record exists in LocalStorage by id
+    Parameters:
+    - id: Number (although does accept strings) - id of a record
+    Returns:
+    - Boolean
+    */
+    static hasRecordById(id) {
+        const Records = LocalStorageRecordsApi.getAllRecords();
+        const record = Records.find((record) => record.id === parseInt(id));
         if (!record) {
             return false;
         }

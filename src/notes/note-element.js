@@ -119,7 +119,6 @@ class Note extends HTMLElement {
         const settings = { year: "numeric", month: "long", day: "numeric" };
         return date.toLocaleDateString("en-US", settings);
     }
-    // git commit -m "#18 added elipses back to custom note element previews"
     /*
     Initialize values when new note is added to DOM.
     Parameters: None

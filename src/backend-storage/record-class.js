@@ -16,7 +16,6 @@ export class Record {
             hours: null,
             title: null,
             date: null,
-            id: null,
         }
     ) {
         const types = ["log", "note"];
@@ -26,11 +25,11 @@ export class Record {
         if (type === "note" && options.field2) {
             throw Error("Notes can only have one field.");
         }
+        if (type === "note" && options.hours) {
+            throw Error("Notes cannot have an hours member variable'.");
+        }
         if (type === "log" && !options.date) {
             throw Error("Logs must have date.");
-        }
-        if (type === "log" && options.id) {
-            throw Error("Can't specify ids to create Logs. Access Via dates");
         }
         this.type = type;
         this.hours = options.hours;
@@ -57,12 +56,8 @@ export class Record {
             // set date for log
             this.date = logDate;
         } else if (type === "note") {
-            if (options.id != null) {
-                this.id = parseInt(options.id);
-            } else {
-                this.id = currentDate.getTime();
-            }
-            // set the title based on what the passes in or "Untitled"
+            this.id = currentDate.getTime();
+            // set the title based on what is passed in or "Untitled"
             if (!options.title) {
                 this.title = "Untitled";
             } else {

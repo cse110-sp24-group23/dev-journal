@@ -3,6 +3,12 @@ import RecordsStorage from "../backend-storage/records-api.js";
 
 // id of the most recently accessed (clicked, edited, etc.) note element
 let CURRENT_NOTE_ID = null;
+// ids of JS created elements in the note editor form
+const EDITOR_FORM_ID = "note-editor";
+const EDITOR_TTILE_ID = "note-editor-title";
+const EDITOR_CONTENT_ID = "note-editor-content";
+const EDITOR_SAVE_ID = "editor-save-btn";
+const EDITOR_CANCEL_ID = "editor-cancel-btn";
 
 /*
 Loads note records from storage and creates note-elements to display them in notes.html
@@ -32,21 +38,30 @@ function loadAllNotesFromStorage() {
 // submit to local storage
 function submitToStorage() {
     // the title of the note
-    const noteTitle = document.getElementById("note-editor-title");
+    const noteTitle = document.getElementById(EDITOR_TTILE_ID);
     const noteTitleVal = noteTitle.value;
     // the textbox to enter notes in
-    const noteContent = document.getElementById("note-editor-content");
+    const noteContent = document.getElementById(EDITOR_CONTENT_ID);
     const noteContentVal = noteContent.value;
-    // create a new record to store the note
-    const noteRecord = new Record("note", {
-        field1: noteContentVal,
-        title: noteTitleVal,
-        id: CURRENT_NOTE_ID, // will be null if creating one, or a value if updating
-    });
     // in local storage, update note record if it exists, otherwise create a new one
-    if (CURRENT_NOTE_ID) {
+    let noteRecord;
+    if (
+        CURRENT_NOTE_ID != null &&
+        RecordsStorage.hasRecordById(CURRENT_NOTE_ID)
+    ) {
+        // retrieve the record from storage
+        noteRecord = RecordsStorage.getRecordById(CURRENT_NOTE_ID);
+        // update the record's information, then update it in storage.
+        noteRecord.field1 = noteContentVal;
+        noteRecord.title = noteTitleVal;
         RecordsStorage.updateRecord(noteRecord);
     } else {
+        // create a new record to store the note
+        noteRecord = new Record("note", {
+            field1: noteContentVal,
+            title: noteTitleVal,
+        });
+        // create the new record in storage
         RecordsStorage.createRecord(noteRecord);
     }
 }
@@ -59,7 +74,7 @@ Returns: None
 */
 function deleteFromStorage(noteId) {
     // Comes in as string, so we convert to a Number
-    RecordsStorage.deleteRecord(Number(noteId));
+    RecordsStorage.deleteRecord(parseInt(noteId));
     const notesDisplay = document.querySelector(".notes-display");
     const noteElem = notesDisplay.querySelector(`note-element[id="${noteId}"]`);
     noteElem.remove();
@@ -117,7 +132,7 @@ function _editCurrentNote(event) {
         return;
     }
     // HACK (ish) - seems to be the cleanest way to do this in vanilla JS
-    // wait 0.01s for the CURRENT_NOTE_ID to be updated by the noteElem event listener that updates CURRENT_NOTE_ID
+    // wait 0.1s for the CURRENT_NOTE_ID to be updated by the noteElem event listener that updates CURRENT_NOTE_ID
     // this allows us to have _editCurrentNote be a function that doesn't take in any parameters
     // so that we can use it with addEventListener and deleteEventListener to add/remove it.
     setTimeout(() => {
@@ -128,7 +143,7 @@ function _editCurrentNote(event) {
         );
         // display the note editor of the newly retrieved current note
         _displayNoteEditor(noteElem);
-    }, 10);
+    }, 100);
 }
 
 // given the id of a note, load it from storage. If no id is given, it will load the most recently added note
@@ -163,8 +178,8 @@ Returns: None
 */
 function _displayNoteEditor(noteElem = null) {
     // set editorCreated as a boolean of if there is a noteEditor created yet
-    // if it exists, it won't be null
-    const editorCreated = document.getElementById("note-editor") != null;
+    // if the note editor exists, it won't be null
+    const editorCreated = document.getElementById(EDITOR_FORM_ID) != null;
     // if the note Editor has already been created, update it, otherwise, create it
     if (editorCreated) {
         _updateNoteEditor(noteElem);
@@ -188,11 +203,11 @@ function _createNoteEditor(noteElem = null) {
     const saveBtn = document.createElement("button");
     const cancelBtn = document.createElement("button");
     // add selectors to elements
-    noteEditor.id = "note-editor";
-    noteTitle.id = "note-editor-title";
-    noteContent.id = "note-editor-content";
-    saveBtn.id = "editor-save-btn";
-    cancelBtn.id = "editor-cancel-btn";
+    noteEditor.id = EDITOR_FORM_ID;
+    noteTitle.id = EDITOR_TTILE_ID;
+    noteContent.id = EDITOR_CONTENT_ID;
+    saveBtn.id = EDITOR_SAVE_ID;
+    cancelBtn.id = EDITOR_CANCEL_ID;
     // add formats/attributes to elements
     noteTitle.type = "text";
     noteTitle.maxLength = "50"; // define a max amount of characters users can input
@@ -224,9 +239,9 @@ Parameters: None
 Returns: None
 */
 function _addNoteEditorListeners() {
-    const noteEditor = document.getElementById("note-editor");
-    const saveBtn = document.getElementById("editor-save-btn");
-    const cancelBtn = document.getElementById("editor-cancel-btn");
+    const noteEditor = document.getElementById(EDITOR_FORM_ID);
+    const saveBtn = document.getElementById(EDITOR_SAVE_ID);
+    const cancelBtn = document.getElementById(EDITOR_CANCEL_ID);
     // when the save is clicked, save to storage, update display
     saveBtn.addEventListener("click", () => {
         // put note in storage and hide the form
@@ -266,8 +281,8 @@ Returns: None
 function _initNoteEditorValues(noteElem, noteTitle = null, noteContent = null) {
     // if either of note title or note content aren't given, define them
     if (!noteTitle || !noteContent) {
-        noteTitle = document.getElementById("note-editor-title");
-        noteContent = document.getElementById("note-editor-content");
+        noteTitle = document.getElementById(EDITOR_TTILE_ID);
+        noteContent = document.getElementById(EDITOR_CONTENT_ID);
     }
     // if noteElem isn't null update the title and content of the note editor popup
     if (noteElem !== null) {
@@ -288,7 +303,7 @@ Returns: None
 */
 function _updateNoteEditor(noteElem = null) {
     // get note editor
-    const noteEditor = document.getElementById("note-editor");
+    const noteEditor = document.getElementById(EDITOR_FORM_ID);
     // if it's hidden, show it
     noteEditor.classList.remove("hidden");
     // if there was a note passed in, populate values

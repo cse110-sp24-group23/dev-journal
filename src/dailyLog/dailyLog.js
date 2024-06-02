@@ -127,80 +127,134 @@ Parameters:
     - record containing either from the record from local storage or new a record
 Returns:
     - NONE
-*/
-function deleteButtonClick(record) {
-    const date = new Date(record.date);
-    // If record does exists in local storage, delete it.
-    if (LocalStorageRecordsApi.hasRecordByDate(date)) {
-        // Confirm to see if user wants to delete
-        // if ok, call delete function from local storage
-        if (window.confirm("Are you sure you want to delete this record?")) {
-            LocalStorageRecordsApi.deleteRecord(record.id);
-            // links to the calendar page
-            window.location.href = "../calendar/calendar.html";
-        }
-    }
-}
-
-function newAccomplishment() {
+*/function newAccomplishment() {
     const addNewInput = document.querySelector(".js-accomplishment-input");
     const displayParagraph = document.querySelector(".js-accomplishment-list");
-
     const inputValue = addNewInput.value.trim();
+
     if (inputValue) {
         const newItem = document.createElement("li");
-        newItem.textContent = inputValue;
+        const textNode = document.createTextNode(inputValue + " ");
+        newItem.appendChild(textNode);
+
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.onclick = function() { editAccomplishment(newItem, textNode); };
+        
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.onclick = function() { deleteAccomplishment(newItem); };
+
+        newItem.appendChild(editButton);
+        newItem.appendChild(deleteButton);
+
         displayParagraph.prepend(newItem);
         addNewInput.value = ""; // Clear the input field
     }
 }
 
-function trial() {}
-/*
- * Initializes log functionality by setting up the event listeners for the submit and delete buttons.
-Parameters:
-    - record containing either from the record from local storage or new a record
-Returns:
-    - NONE
-*/
+// function editAccomplishment(item, textNode) {
+//     const newText = prompt("Edit the text:", textNode.data.trim());
+//     if (newText !== null) {
+//         textNode.data = newText + " ";
+//     }
+// }
+function editAccomplishment(item, textNode) {
+    // Create an input element that will replace the textNode for editing
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = textNode.data.trim(); // Set input value to current text
+    input.style.width = "70%"; // Optionally set the width of the input field
+
+    // Replace the text node with this input element
+    item.replaceChild(input, textNode);
+
+    // Automatically focus on the new input and select its content
+    input.focus();
+    input.select();
+
+    // Handle when user exits the input (on blur event)
+    input.onblur = function() {
+        // If input is not empty, update the textNode data
+        if (input.value.trim() !== '') {
+            textNode.data = input.value + ' ';
+        } else {
+            textNode.data = 'Unnamed Accomplishment '; // Provide a default if empty
+        }
+        // Replace input back with the updated textNode
+        item.replaceChild(textNode, input);
+    };
+
+    // Handle pressing Enter to finish editing
+    input.onkeypress = function(e) {
+        if (e.key === 'Enter') {
+            input.blur(); // Triggers the blur event
+        }
+    };
+}
+
+
+function deleteAccomplishment(item) {
+    // Optionally, you might want to include some form of undo functionality
+    item.remove(); // Directly removes the list item
+
+    // If using an undo mechanism, show an undo option briefly
+    const undoNotification = document.createElement("div");
+    undoNotification.textContent = "Accomplishment deleted. Undo?";
+    document.body.appendChild(undoNotification);
+
+    // Style the notification for visibility
+    undoNotification.style.position = "fixed";
+    undoNotification.style.bottom = "20px";
+    undoNotification.style.right = "20px";
+    undoNotification.style.backgroundColor = "lightcoral";
+    undoNotification.style.color = "white";
+    undoNotification.style.padding = "10px";
+    undoNotification.style.borderRadius = "5px";
+    undoNotification.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
+
+    // Add an undo button
+    const undoButton = document.createElement("button");
+    undoButton.textContent = "Undo";
+    undoButton.onclick = function() {
+        document.querySelector('.js-accomplishment-list').appendChild(item);
+        document.body.removeChild(undoNotification);
+    };
+
+    undoNotification.appendChild(undoButton);
+
+    // Automatically remove the notification after a short period
+    setTimeout(() => {
+        if (document.body.contains(undoNotification)) {
+            document.body.removeChild(undoNotification);
+        }
+    }, 5000); // Notification disappears after 5 seconds
+}
+
 function logFunctionality(record) {
     const submitButton = document.querySelector("#save-button");
     const deleteButton = document.querySelector("#delete-button");
     populateDefaultLog(record);
-    // Event listner for submit button
+    
     submitButton.addEventListener("click", () => {
         submitButtonClick(record);
     });
-    // Event listner for delete button
+
     deleteButton.addEventListener("click", () => {
         deleteButtonClick(record);
     });
 
-    const addAccomplishmentBtn = document.querySelector(
-        ".js-add-accomplishment"
-    );
+    const addAccomplishmentBtn = document.querySelector(".js-add-accomplishment");
     addAccomplishmentBtn.addEventListener("click", newAccomplishment);
-
-    /*const deleteAccomplishmentBtn = document.querySelector(
-        ".js-delete-accomplishment"
-    );*/
-    //deleteAccomplishmentBtn.addEventListener("click", trial);
 }
 
-/* 
-This function is called when the window is loaded
-*/
 window.onload = function () {
     const recordString = sessionStorage.getItem("current record");
     let record;
     let today = new Date();
     today.setHours(0, 0, 0, 0);
     if (!recordString) {
-        if (!LocalStorageRecordsApi.hasRecordByDate(today)) {
-            record = new Record("log", { date: today });
-        } else {
-            record = LocalStorageRecordsApi.getRecordByDate(today);
-        }
+        record = !LocalStorageRecordsApi.hasRecordByDate(today) ? new Record("log", { date: today }) : LocalStorageRecordsApi.getRecordByDate(today);
     } else {
         record = JSON.parse(recordString);
     }

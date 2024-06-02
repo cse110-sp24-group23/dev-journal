@@ -107,3 +107,7 @@ button:hover {
 #delete-button:hover {
     background-color: var(--delete-button-background-hover);
 }
+
+#add-accomplishment-button {
+    margin: var(--margin-heading);
+}

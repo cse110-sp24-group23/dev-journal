@@ -26,12 +26,12 @@ export default class LocalStorageAccomplishmentsApi {
     static createAccomplishmentsObj(accomplishmentsObj) {
         const Accomplishments = this.getAllAccomplishmentsObj();
         const existingAccomplishmentsObj = Accomplishments.find(
-            (object) => object.date === accomplishmentsObj.date
+            (object) => object.id === accomplishmentsObj.id
         );
         if (existingAccomplishmentsObj) {
             throw new Error(
                 "Could not create accomplishments object, object with date already exists:",
-                object.date
+                accomplishmentsObj.id
             );
         }
         Accomplishments.push(accomplishmentsObj);
@@ -50,12 +50,12 @@ export default class LocalStorageAccomplishmentsApi {
     static updateAccomplishmentsObj(accomplishmentsObj) {
         const Accomplishments = this.getAllAccomplishmentsObj();
         const existingAccomplishmentsObj = Accomplishments.find(
-            (object) => object.date === accomplishmentsObj.date
+            (object) => object.id === accomplishmentsObj.id
         );
         if (!existingAccomplishmentsObj) {
             throw new Error(
                 "Could not update accomplishments object, object for date not found:",
-                accomplishmentsObj.date
+                accomplishmentsObj.id
             );
         }
         existingAccomplishmentsObj.content = accomplishmentsObj.content;
@@ -76,12 +76,15 @@ export default class LocalStorageAccomplishmentsApi {
     static getAccomplishmentsObjByDate(date) {
         date = this._handleDateInput(date);
         const Accomplishments = this.getAllAccomplishmentsObj();
-        const accomplishmentsObj = Accomplishments.find((object) => {
-            object.date.getTime() === date.getTime();
-        });
+        const accomplishmentsObj = Accomplishments.find(
+            (object) => object.id === date.getTime()
+        );
         // make sure accomplishments object exists
         if (!accomplishmentsObj) {
-            throw new Error("Accomplishments object not found for date", date);
+            throw new Error(
+                "Accomplishments object not found for date",
+                date.toLocaleDateString("en-US")
+            );
         }
         return accomplishmentsObj;
     }
@@ -95,9 +98,9 @@ export default class LocalStorageAccomplishmentsApi {
     static hasAccomplishmentsObjByDate(date) {
         date = this._handleDateInput(date);
         const Accomplishments = this.getAllAccomplishmentsObj();
-        const accomplishmentsObj = Accomplishments.find((object) => {
-            object.date.getTime() === date.getTime();
-        });
+        const accomplishmentsObj = Accomplishments.find(
+            (object) => object.id === date.getTime()
+        );
         // make sure accomplishments object exists
         if (!accomplishmentsObj) {
             return false;
@@ -113,16 +116,16 @@ export default class LocalStorageAccomplishmentsApi {
     */
     static deleteAccomplishmentsObj(date) {
         date = this._handleDateInput(date);
-        if (!this.hasAccomplishmentsObjByDate(date)) {
+        const Accomplishments = this.getAllAccomplishmentsObj();
+        const notDeletedAccomplishments = Accomplishments.filter(
+            (object) => object.id !== date.getTime()
+        );
+        if (notDeletedAccomplishments.length === Accomplishments.length) {
             throw new Error(
                 "Could not delete accomplishments object, object not found for date:",
                 date.toLocaleDateString("en-US")
             );
         }
-        const Accomplishments = this.getAllAccomplishmentsObj();
-        const notDeletedAccomplishments = Accomplishments.filter((object) => {
-            object.date.getTime() !== date.getTime();
-        });
         localStorage.setItem(
             "Accomplishments",
             JSON.stringify(notDeletedAccomplishments)

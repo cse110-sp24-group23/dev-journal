@@ -8,6 +8,7 @@ export class Record {
     updated;
     id;
     date;
+    hasAccomplishment;
     constructor(
         type,
         options = {
@@ -35,6 +36,7 @@ export class Record {
         const currentDate = new Date();
         this.created = currentDate.toISOString();
         this.updated = currentDate.toISOString();
+        this.hasAccomplishment = false;
         if (type === "log") {
             // logDate should only contain year, month and date (hours, seconds, milliseconds = 0)
             const logDate = new Date(

@@ -1,5 +1,5 @@
-import { LocalStorageRecordsApi as RecordsStorage } from "../backend-storage/records-api.js";
-import Accomplishment from "../backend-storage/accomplishments-api.js";
+import RecordsStorage from "../backend-storage/records-api.js";
+import AccomplishmentsStorage from "../backend-storage/accomplishments-api.js";
 /*
 TODO: 
     - add dateLink function from calendar.js as a public method
@@ -400,6 +400,9 @@ class Calendar {
         - None, but does modify the calendar table HTML
      */
     _populateCalendarMonth(calendarDateList) {
+        // const myDate = new Date("2024-06-02T07:00:00.000Z");
+        const myDate = new Date(2024, 5, 2);
+        console.log(RecordsStorage.hasRecordByDate(myDate));
         // class that grays out the text of a date
         const rolloverDateClass = "rollover-date";
         // There are exactly 2 `1`s in calendarDateList: start of curr month & start of next month
@@ -413,11 +416,13 @@ class Calendar {
             // get the date (e.g. 14) and put it into the cell
             const cellDate = calendarDateList[i];
             calendarDayCell.innerText = cellDate;
+            // make sure cell is accessible via keyboard
             calendarDayCell.tabIndex = "0";
+            // cell month will either be the displayed month or +/- 1 from that for rollover dates
             let cellMonth;
-            let cellYear;
-            // if it isn't the current month, gray it out
-            // prev month's rollover
+            // by default cellYear is the currently displayed year. Gets edited if it isn't correct
+            let cellYear = this._displayedYear;
+            // date is in prev month's rollover
             if (i < currMonthStartIdx) {
                 // gray out rollover dates for prev and next month that are displayed
                 calendarDayCell.classList.add(rolloverDateClass);
@@ -427,9 +432,9 @@ class Calendar {
                 if (cellMonth == 11) {
                     cellYear = this._displayedYear - 1;
                 }
+                console.log("previous", cellMonth);
             }
-            // if it isn't the current month, gray it out
-            // next month's rollover
+            // date is in next month's rollover
             else if (i >= nextMonthStartIdx) {
                 // gray out rollover dates for prev and next month that are displayed
                 calendarDayCell.classList.add(rolloverDateClass);
@@ -439,16 +444,21 @@ class Calendar {
                 if (cellMonth == 0) {
                     cellYear = this._displayedYear + 1;
                 }
-            } else {
-                // current month
+                console.log("next", cellMonth);
+            }
+            // date is in current month
+            else {
                 // highlight the cell if it matches the current date
                 this._highlightIfCurrDate(calendarDayCell, cellDate);
                 // don't gray date - not rollover. Note: removing a nonexistent class does nothing
                 calendarDayCell.classList.remove(rolloverDateClass);
                 cellMonth = this._displayedMonth;
+                console.log("current", cellMonth);
             }
             // create a Date object for the cell
             const cellDateObj = new Date(cellYear, cellMonth, cellDate);
+            // console.log(cellDateObj);
+            // console.log(cellDateObj.getTime() - myDate.getTime() == 0);
             this._markAccomplishmentIfExists(calendarDayCell, cellDateObj);
             this._markLogCompleteIfExists(calendarDayCell, cellDateObj);
         }
@@ -493,11 +503,18 @@ class Calendar {
     _markAccomplishmentIfExists(calendarDayCell, cellDateObj) {
         const accomplishmentClass = "has-accomplishment";
         // if there are accomplishment(s) for the given date, update the calendarDayCell
-        if (Accomplishments.hasAccomplishment(cellDateObj)) {
-            // TODO: update cell with icon, text, and class
+        if (AccomplishmentsStorage.hasAccomplishmentsObjByDate(cellDateObj)) {
+            // create elements and update attributes
+            const accomplishmentText = document.createElement("span");
+            accomplishmentText.innerText = "Accomplishment";
+            const accomplishmentIcon = document.createElement("img");
+            accomplishmentIcon.src = "../assets/icons/accomplishments-icon.svg";
+            // add elements to page
+            calendarDayCell.appendChild(accomplishmentIcon);
+            calendarDayCell.appendChild(accomplishmentText);
+            // add class
             calendarDayCell.classList.add(accomplishmentClass);
         } else {
-            // TODO: remove the class, and make sure there isn't accomplishments text or icon
             calendarDayCell.classList.remove(accomplishmentClass);
         }
     }
@@ -515,7 +532,7 @@ class Calendar {
     _markLogCompleteIfExists(calendarDayCell, cellDateObj) {
         const checkmarkClass = "has-log";
         // if there is a log for the given date, update the calendarDayCell
-        if (RecordsStorage.hasRecord(cellDateObj)) {
+        if (RecordsStorage.hasRecordByDate(cellDateObj)) {
             calendarDayCell.classList.add(checkmarkClass);
         } else {
             // remove the class, and make sure there isn't any checkmark icon

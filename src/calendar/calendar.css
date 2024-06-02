@@ -1,9 +1,9 @@
 /* Variables */
 :root {
-    --table-head-text-color: #1D1C1D;
-    --current-date-color: rgba(226,227,255,255);
-    --calendar-background-color: rgba(244,249,255,255);
-    --calendar-grid-color: rgba(86,124,168,255);
+    --table-head-text-color: #1d1c1d;
+    --current-date-color: rgba(226, 227, 255, 255);
+    --calendar-background-color: rgba(244, 249, 255, 255);
+    --calendar-grid-color: rgba(86, 124, 168, 255);
     --font: "Lato", sans-serif;
     --table-head-background-color: rgb(185, 209, 238);
     --today-background-color: rgb(226, 227, 254);
@@ -104,12 +104,12 @@ body {
 
 /* Month and Year Header */
 h1 {
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
 }
 
 /* Body */
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
 }
 
 /* Days of the Week */
@@ -148,4 +148,9 @@ th {
 /* Changing the color of the rolover dates */
 .rollover-date {
     color: var(--rollover-date-color);
+}
+
+.has-accomplishment,
+.has-log {
+    color: lightgreen;
 }

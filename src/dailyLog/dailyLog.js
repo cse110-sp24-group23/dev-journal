@@ -161,6 +161,7 @@ function newAccomplishment() {
     const displayParagraph = document.querySelector(".js-accomplishment-list");
 
     const inputValue = addNewInput.value.trim();
+
     if (inputValue) {
         const newItem = document.createElement("li");
         newItem.classList.add("accomplishment-item");
@@ -216,10 +217,47 @@ function editAccomplishment(item) {
     });
 }
 
-function deleteAccomplishment(item) {
+/*function deleteAccomplishment(item) {
     if (confirm("Are you sure you want to delete this accomplishment?")) {
         item.remove();
     }
+}*/
+
+function deleteAccomplishment(item) {
+    // Optionally, you might want to include some form of undo functionality
+    item.remove(); // Directly removes the list item
+
+    // If using an undo mechanism, show an undo option briefly
+    const undoNotification = document.createElement("div");
+    undoNotification.textContent = "Accomplishment deleted. Undo?";
+    document.body.appendChild(undoNotification);
+
+    // Style the notification for visibility
+    undoNotification.style.position = "fixed";
+    undoNotification.style.bottom = "20px";
+    undoNotification.style.right = "20px";
+    undoNotification.style.backgroundColor = "lightcoral";
+    undoNotification.style.color = "white";
+    undoNotification.style.padding = "10px";
+    undoNotification.style.borderRadius = "5px";
+    undoNotification.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
+
+    // Add an undo button
+    const undoButton = document.createElement("button");
+    undoButton.textContent = "Undo";
+    undoButton.onclick = function () {
+        document.querySelector(".js-accomplishment-list").appendChild(item);
+        document.body.removeChild(undoNotification);
+    };
+
+    undoNotification.appendChild(undoButton);
+
+    // Automatically remove the notification after a short period
+    setTimeout(() => {
+        if (document.body.contains(undoNotification)) {
+            document.body.removeChild(undoNotification);
+        }
+    }, 5000); // Notification disappears after 5 seconds
 }
 /*
  * Initializes log functionality by setting up the event listeners for the submit and delete buttons.

@@ -43,20 +43,34 @@ function populateDefaultLog(record) {
             const newItem = document.createElement("li");
             newItem.classList.add("accomplishment-text");
             newItem.innerText = item;
-
+            const accomplishmentButtons = document.createElement("div");
+            accomplishmentButtons.classList.add("accomlishment-buttons");
             const editButton = document.createElement("button");
             editButton.textContent = "Edit";
-            editButton.addEventListener("click", () =>
-                editAccomplishment(newItem)
-            );
-            newItem.appendChild(editButton);
+            const doneButton = document.createElement("button");
+            editButton.setAttribute("id", "edit");
+            doneButton.setAttribute("id", "done");
+            doneButton.textContent = "Done";
+            doneButton.classList.add("hidden");
+
+            editButton.addEventListener("click", () => {
+                editButton.classList.add("hidden");
+                doneButton.classList.remove("hidden");
+                editAccomplishment(newItem);
+            });
 
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Delete";
+            deleteButton.setAttribute("id", "delete");
             deleteButton.addEventListener("click", () =>
                 deleteAccomplishment(newItem)
             );
-            newItem.appendChild(deleteButton);
+
+            accomplishmentButtons.appendChild(editButton);
+            accomplishmentButtons.appendChild(doneButton);
+            accomplishmentButtons.appendChild(deleteButton);
+
+            newItem.appendChild(accomplishmentButtons);
             displayParagraph.append(newItem);
         }
     }
@@ -150,6 +164,11 @@ function deleteButtonClick(record) {
         // if ok, call delete function from local storage
         if (window.confirm("Are you sure you want to delete this record?")) {
             LocalStorageRecordsApi.deleteRecord(record.id);
+            if (
+                LocalStorageAccomplishmentsApi.hasAccomplishmentsObjByDate(date)
+            ) {
+                LocalStorageAccomplishmentsApi.deleteAccomplishmentsObj(date);
+            }
             // links to the calendar page
             window.location.href = "../calendar/calendar.html";
         }
@@ -166,18 +185,34 @@ function newAccomplishment() {
         const newItem = document.createElement("li");
         newItem.classList.add("accomplishment-item");
         newItem.innerText = inputValue;
-
+        const accomplishmentButtons = document.createElement("span");
+        accomplishmentButtons.classList.add("accomlishment-buttons");
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
-        editButton.addEventListener("click", () => editAccomplishment(newItem));
-        newItem.appendChild(editButton);
+        const doneButton = document.createElement("button");
+        doneButton.textContent = "Done";
+        editButton.setAttribute("id", "edit");
+        doneButton.setAttribute("id", "done");
+        doneButton.classList.add("hidden");
+
+        editButton.addEventListener("click", () => {
+            editButton.classList.add("hidden");
+            doneButton.classList.remove("hidden");
+            editAccomplishment(newItem);
+        });
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
+        deleteButton.setAttribute("id", "delete");
         deleteButton.addEventListener("click", () =>
             deleteAccomplishment(newItem)
         );
-        newItem.appendChild(deleteButton);
+
+        accomplishmentButtons.appendChild(editButton);
+        accomplishmentButtons.appendChild(doneButton);
+        accomplishmentButtons.appendChild(deleteButton);
+
+        newItem.appendChild(accomplishmentButtons);
         displayParagraph.prepend(newItem);
         addNewInput.value = ""; // Clear the input field
     }
@@ -193,72 +228,41 @@ function editAccomplishment(item) {
     item.firstChild.textContent = ""; // Clear the text node
     item.insertBefore(input, item.childNodes[1]); // Insert input before the buttons
 
-    // Automatically focus on the new input and select its content
-    input.focus();
     input.select();
+    // Handle pressing Enter to finish editing
+    input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            if (input.value.trim() !== "") {
+                item.firstChild.textContent = input.value.trim() + " ";
+            } else {
+                item.remove();
+            }
+            // Remove the input field
+            input.remove();
+        }
+    });
 
-    // Handle when user exits the input (on blur event)
-    input.onblur = function () {
-        // If input is not empty, update the text
+    const editButton = item.querySelector("#edit");
+    const doneButton = item.querySelector("#done");
+    doneButton.addEventListener("click", () => {
+        editButton.classList.remove("hidden");
+        doneButton.classList.add("hidden");
         if (input.value.trim() !== "") {
             item.firstChild.textContent = input.value.trim() + " ";
         } else {
-            item.firstChild.textContent = "Unnamed Accomplishment ";
+            item.remove();
         }
         // Remove the input field
         input.remove();
-    };
-
-    // Handle pressing Enter to finish editing
-    input.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-            input.blur(); // Triggers the blur event
-        }
     });
 }
 
-/*function deleteAccomplishment(item) {
+function deleteAccomplishment(item) {
     if (confirm("Are you sure you want to delete this accomplishment?")) {
         item.remove();
     }
-}*/
-
-function deleteAccomplishment(item) {
-    // Optionally, you might want to include some form of undo functionality
-    item.remove(); // Directly removes the list item
-
-    // If using an undo mechanism, show an undo option briefly
-    const undoNotification = document.createElement("div");
-    undoNotification.textContent = "Accomplishment deleted. Undo?";
-    document.body.appendChild(undoNotification);
-
-    // Style the notification for visibility
-    undoNotification.style.position = "fixed";
-    undoNotification.style.bottom = "20px";
-    undoNotification.style.right = "20px";
-    undoNotification.style.backgroundColor = "lightcoral";
-    undoNotification.style.color = "white";
-    undoNotification.style.padding = "10px";
-    undoNotification.style.borderRadius = "5px";
-    undoNotification.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
-
-    // Add an undo button
-    const undoButton = document.createElement("button");
-    undoButton.textContent = "Undo";
-    undoButton.onclick = function () {
-        document.querySelector(".js-accomplishment-list").appendChild(item);
-        document.body.removeChild(undoNotification);
-    };
-
-    undoNotification.appendChild(undoButton);
-
-    // Automatically remove the notification after a short period
-    setTimeout(() => {
-        if (document.body.contains(undoNotification)) {
-            document.body.removeChild(undoNotification);
-        }
-    }, 5000); // Notification disappears after 5 seconds
 }
+
 /*
  * Initializes log functionality by setting up the event listeners for the submit and delete buttons.
 Parameters:

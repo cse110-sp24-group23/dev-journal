@@ -400,8 +400,6 @@ class Calendar {
         - None, but does modify the calendar table HTML
      */
     _populateCalendarMonth(calendarDateList) {
-        // const myDate = new Date("2024-06-02T07:00:00.000Z");
-        const myDate = new Date(2024, 5, 2);
         // class that grays out the text of a date
         const rolloverDateClass = "rollover-date";
         // There are exactly 2 `1`s in calendarDateList: start of curr month & start of next month

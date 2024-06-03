@@ -1,52 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Accomplishments</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accomplishments</title>
 
-        <!-- Stylesheet-->
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="../accomplishments/accomplishments.css"
-        />
+    <!-- Stylesheet-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../accomplishments/accomplishments.css"
+    />
 
-        <!-- Script -->
-        <script src="/src/navbar/navbar.js"></script>
-    </head>
-    <body>
-        <div id="navbar"></div>
+    <!-- Script -->
+    <script src="/src/navbar/navbar.js"></script>
+    <script
+      src="/src/accomplishments/accomplishments.js"
+      type="module"
+    ></script>
+  </head>
+  <body>
+    <div id="navbar"></div>
 
-        <main>
-            <div class="header-container">
-                <h1>Accomplishments</h1>
-                <div class="button-container">
-                    <button class="add-button js-add-button">Add</button>
-                    <button class="delete-button js-delete-button">
-                        Delete
-                    </button>
-                </div>
-            </div>
-            <br />
-            <!-- Table: Accomplishments with Date -->
-            <table class="accomplishments-table js-accomplishments-table">
-                <!-- Column Labels: Date and Accomplishments  -->
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Accomplishment</th>
-                    </tr>
-                </thead>
+    <main>
+      <div class="header-container">
+        <h1>Accomplishments</h1>
+      </div>
+      <br />
+      <!-- Table: Accomplishments with Date -->
+      <table class="accomplishments-table js-accomplishments-table">
+        <!-- Column Labels: Date and Accomplishments  -->
+        <thead>
+          <tr id="tableHead">
+            <th id="date">Date</th>
+            <th id="accomplishment">Accomplishment</th>
+          </tr>
+        </thead>
 
-                <!-- Table Body: all accomplishments with the date attached to them -->
-                <tbody>
-                    <tr class="add-accomplishment js-add-accomplishment">
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-        </main>
-    </body>
+        <!-- Table Body: all accomplishments with the date attached to them -->
+        <tbody id="tableBody"></tbody>
+      </table>
+    </main>
+  </body>
 </html>

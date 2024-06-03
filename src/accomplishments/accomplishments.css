@@ -9,7 +9,7 @@
     --table-border-color: black;
 
     /* Table body variables */
-    --table-text-color: #004492;
+    --table-text-color: #black;
 }
 
 h1 {
@@ -29,7 +29,7 @@ body {
 }
 
 /* Styling the buttons */
-button{
+button {
     padding: 20px;
     font-size: var(--font-size-text-input);
     background-color: var(--button-background);
@@ -59,4 +59,7 @@ button{
 
 tbody {
     color: var(--table-text-color);
+}
+.content-cell {
+    word-break: break-word;
 }

@@ -24,7 +24,6 @@ function loadNavbar() {
             const currentPath = window.location.pathname;
             const navLinks = document.querySelectorAll(".nav-link");
             navLinks.forEach((link) => {
-                console.log(link);
                 if (link.getAttribute("href") === currentPath) {
                     // get the record from session storage
                     const recordString =

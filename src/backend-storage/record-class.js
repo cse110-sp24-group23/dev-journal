@@ -26,6 +26,9 @@ export class Record {
         if (type === "note" && options.field2) {
             throw Error("Notes can only have one field.");
         }
+        if (type === "note" && options.hours) {
+            throw Error("Notes cannot have an hours member variable'.");
+        }
         if (type === "log" && !options.date) {
             throw Error("Logs must have date.");
         }
@@ -56,7 +59,7 @@ export class Record {
             this.date = logDate;
         } else if (type === "note") {
             this.id = currentDate.getTime();
-            // set the title based on what the passes in or "Untitled"
+            // set the title based on what is passed in or "Untitled"
             if (!options.title) {
                 this.title = "Untitled";
             } else {

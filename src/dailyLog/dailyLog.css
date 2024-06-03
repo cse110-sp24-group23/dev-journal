@@ -104,10 +104,44 @@ button:hover {
     border-width: 0;
 }
 
-#delete-button:hover {
+#delete-button:hover,
+#delete:hover {
     background-color: var(--delete-button-background-hover);
 }
 
-#add-accomplishment-button {
+.accomplishment-input {
     margin: var(--margin-heading);
+    font-size: 20px;
+}
+
+#add-accomplishment-button {
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#edit,
+#done,
+#delete {
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
+.accomplishment--list li {
+    display: flex;
+    font-size: var(--font-size-form);
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+li input[type="text"] {
+    width: 100%;
+    font-size: var(--font-size-form);
+    display: list-item;
+}
+
+.hidden {
+    display: none;
 }

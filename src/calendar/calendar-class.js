@@ -402,7 +402,6 @@ class Calendar {
     _populateCalendarMonth(calendarDateList) {
         // const myDate = new Date("2024-06-02T07:00:00.000Z");
         const myDate = new Date(2024, 5, 2);
-        console.log(RecordsStorage.hasRecordByDate(myDate));
         // class that grays out the text of a date
         const rolloverDateClass = "rollover-date";
         // There are exactly 2 `1`s in calendarDateList: start of curr month & start of next month
@@ -432,7 +431,6 @@ class Calendar {
                 if (cellMonth == 11) {
                     cellYear = this._displayedYear - 1;
                 }
-                console.log("previous", cellMonth);
             }
             // date is in next month's rollover
             else if (i >= nextMonthStartIdx) {
@@ -444,7 +442,6 @@ class Calendar {
                 if (cellMonth == 0) {
                     cellYear = this._displayedYear + 1;
                 }
-                console.log("next", cellMonth);
             }
             // date is in current month
             else {
@@ -453,14 +450,11 @@ class Calendar {
                 // don't gray date - not rollover. Note: removing a nonexistent class does nothing
                 calendarDayCell.classList.remove(rolloverDateClass);
                 cellMonth = this._displayedMonth;
-                console.log("current", cellMonth);
             }
             // create a Date object for the cell
             const cellDateObj = new Date(cellYear, cellMonth, cellDate);
-            // console.log(cellDateObj);
-            // console.log(cellDateObj.getTime() - myDate.getTime() == 0);
-            this._markAccomplishmentIfExists(calendarDayCell, cellDateObj);
             this._markLogCompleteIfExists(calendarDayCell, cellDateObj);
+            this._markAccomplishmentIfExists(calendarDayCell, cellDateObj);
         }
     }
 
@@ -505,14 +499,22 @@ class Calendar {
         // if there are accomplishment(s) for the given date, update the calendarDayCell
         if (AccomplishmentsStorage.hasAccomplishmentsObjByDate(cellDateObj)) {
             // create elements and update attributes
+            // container to hold icon and text
+            const accomplishmentsMarker = document.createElement("div");
+            // text to show it's an accomplishment
             const accomplishmentText = document.createElement("span");
-            accomplishmentText.innerText = "Accomplishment";
+            // accomplishmentText.innerHTML = "Accomplishment";
+            accomplishmentText.style.fontSize = "17px";
+            // icon for the accomplishment
             const accomplishmentIcon = document.createElement("img");
+            accomplishmentIcon.style.width = "17px";
+            accomplishmentIcon.style.display = "inline-block";
             accomplishmentIcon.src = "../assets/icons/accomplishments-icon.svg";
-            // add elements to page
-            calendarDayCell.appendChild(accomplishmentIcon);
-            calendarDayCell.appendChild(accomplishmentText);
-            // add class
+            // add elements to container and add container to page
+            accomplishmentsMarker.appendChild(accomplishmentIcon);
+            accomplishmentsMarker.appendChild(accomplishmentText);
+            calendarDayCell.appendChild(accomplishmentsMarker);
+            // add class to style the accomplishments
             calendarDayCell.classList.add(accomplishmentClass);
         } else {
             calendarDayCell.classList.remove(accomplishmentClass);
@@ -530,10 +532,15 @@ class Calendar {
         - None, but does potentially edit the innerhtml and class of the cell
     */
     _markLogCompleteIfExists(calendarDayCell, cellDateObj) {
+        const loggedIcon = document.createElement("img");
+        loggedIcon.src = "../assets/icons/check-icon.svg";
+        loggedIcon.style.display = "block";
+        loggedIcon.style.margin = "0 auto";
         const checkmarkClass = "has-log";
         // if there is a log for the given date, update the calendarDayCell
         if (RecordsStorage.hasRecordByDate(cellDateObj)) {
             calendarDayCell.classList.add(checkmarkClass);
+            calendarDayCell.appendChild(loggedIcon);
         } else {
             // remove the class, and make sure there isn't any checkmark icon
             calendarDayCell.classList.remove(checkmarkClass);

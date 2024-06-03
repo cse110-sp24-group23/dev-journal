@@ -141,16 +141,11 @@ th {
 }
 
 /* Current Date */
-.current-date {
+td.current-date {
     background-color: var(--today-background-color);
     font-weight: bold;
 }
 /* Changing the color of the rolover dates */
 .rollover-date {
     color: var(--rollover-date-color);
-}
-
-.has-accomplishment,
-.has-log {
-    color: lightgreen;
 }

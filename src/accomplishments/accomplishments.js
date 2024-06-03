@@ -3,15 +3,10 @@ import { AccomplishmentsObj } from "../backend-storage/accomplishments-class.js"
 
 function loadAccomplishmentFromStorage(){
     const allAccomplishmentsObj = LocalStorageAccomplishmentsApi.getAllAccomplishmentsObj();
-    const dateCol = document.getElementById('date');
-    const accomplishmentCol = document.getElementById('accomplishment');
     const tableBody = document.getElementById('tableBody');
     for(const accomplishment of allAccomplishmentsObj){
         // get the date from accomplishment obj
         let dateOfAccomplishment = accomplishment.date;
-        let month ;
-        let day ;
-        let year ;  
         let fullDate = dateOfAccomplishment.substring(0, 10);
         // get the content from accomplishment obj
         let contentOfAccomplishment = accomplishment.content;

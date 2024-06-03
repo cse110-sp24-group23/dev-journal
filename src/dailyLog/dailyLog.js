@@ -89,6 +89,17 @@ function deleteButtonClick(record) {
     }
 }
 
+function newAccomplishment() {
+    const addNewInput = document.createElement("input");
+    addNewInput.setAttribute("type", "text");
+    addNewInput.setAttribute("name", "accomplishments[]");
+
+    // Get the container where the new inputs will be added
+    const container = document.querySelector(".js-accomplishment-list");
+
+    // Insert the new input into the container
+    container.appendChild(addNewInput);
+}
 /*
  * Initializes log functionality by setting up the event listeners for the submit and delete buttons.
 Parameters:
@@ -108,6 +119,11 @@ function logFunctionality(record) {
     deleteButton.addEventListener("click", () => {
         deleteButtonClick(record);
     });
+
+    const addAccomplishmentBtn = document.querySelector(
+        ".js-add-accomplishment"
+    );
+    addAccomplishmentBtn.addEventListener("click", newAccomplishment);
 }
 
 /* 

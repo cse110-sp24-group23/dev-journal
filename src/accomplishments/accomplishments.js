@@ -1,5 +1,8 @@
 import LocalStorageAccomplishmentsApi from "../backend-storage/accomplishments-api.js";
 
+/**
+ * Loads accomplishments from local storage and populates table with the retrieved data
+ */
 function loadAccomplishmentFromStorage() {
     const allAccomplishmentsObj =
         LocalStorageAccomplishmentsApi.getAllAccomplishmentsObj();
@@ -17,6 +20,7 @@ function loadAccomplishmentFromStorage() {
             const dateElement = document.createElement("td");
             // content of the accomplishment
             const accomplishmentElement = document.createElement("td");
+            accomplishmentElement.classList.add("content-cell");
             // add the text
             dateElement.innerHTML = fullDate;
             accomplishmentElement.innerHTML = contentOfAccomplishment[i];
@@ -28,6 +32,11 @@ function loadAccomplishmentFromStorage() {
     }
 }
 
+/**
+ * This function is called when the window is loaded.
+ * @function
+ * @name window.onload
+ */
 window.onload = function () {
     loadAccomplishmentFromStorage();
 };

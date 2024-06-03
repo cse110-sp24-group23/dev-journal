@@ -1,6 +1,8 @@
 import { Calendar } from "./calendar-class.js";
-import LocalStorageRecordsApi from "../backend-storage/records-api.js";
+import RecordsStorage from "../backend-storage/records-api.js";
 import { Record } from "../backend-storage/record-class.js";
+import { AccomplishmentsObj } from "../backend-storage/accomplishments-class.js";
+import AccomplishmentsStorage from "../backend-storage/accomplishments-api.js";
 
 /*
     Uses Calendar class from ./calendar-class.js to populate the month view and show the next
@@ -40,8 +42,8 @@ function addClickToDays(calendar) {
             // gets the date of the cell which was clicked
             const dateObject = calendar.getDateOfDayCell(day);
             // if record object for the date already exists, get that, else make a new record object.
-            if (LocalStorageRecordsApi.hasRecordByDate(dateObject)) {
-                record = LocalStorageRecordsApi.getRecordByDate(dateObject);
+            if (RecordsStorage.hasRecordByDate(dateObject)) {
+                record = RecordsStorage.getRecordByDate(dateObject);
             } else {
                 record = new Record("log", { date: dateObject });
             }

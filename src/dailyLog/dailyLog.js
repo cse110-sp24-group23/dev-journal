@@ -1,7 +1,6 @@
 import LocalStorageRecordsApi from "../backend-storage/records-api.js";
 import { Record } from "../backend-storage/record-class.js";
 import LocalStorageAccomplishmentsApi from "../backend-storage/accomplishments-api.js";
-import { AccomplishmentsObj } from "../backend-storage/accomplishments-class.js";
 
 /*
 populates the daily log with the information from the record object

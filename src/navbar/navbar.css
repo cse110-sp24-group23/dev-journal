@@ -8,7 +8,6 @@
     --hover-color: rgba(226, 227, 254, 0.6);
 }
 
-
 /* Noted title */
 .app-title {
     color: var(--font-color);
@@ -66,12 +65,12 @@
 }
 
 /* Navigation icons */
-.nav-icon{
+.nav-icon {
     width: 16px;
     height: 16px;
 }
 
-/*hover and focus states*/
+/* Hover and focus states */
 .nav-link:hover {
     background-color: var(--hover-color);
 }

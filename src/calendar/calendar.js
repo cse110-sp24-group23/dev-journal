@@ -1,4 +1,8 @@
 import { Calendar } from "./calendar-class.js";
+import RecordsStorage from "../backend-storage/records-api.js";
+import { Record } from "../backend-storage/record-class.js";
+import { AccomplishmentsObj } from "../backend-storage/accomplishments-class.js";
+import AccomplishmentsStorage from "../backend-storage/accomplishments-api.js";
 
 /*
     Uses Calendar class from ./calendar-class.js to populate the month view and show the next
@@ -7,14 +11,10 @@ import { Calendar } from "./calendar-class.js";
     Parameters: None
     Returns: None
 */
-function calendarFunctionality() {
-    // select relevant calendar elements
-    const calendarHeading = document.querySelector("h1");
-    const calendarDayCells = document.getElementsByClassName("js-calendar-day");
+function calendarFunctionality(calendar) {
     const prevMonthButton = document.getElementsByClassName("js-prev-month")[0];
     const nextMonthButton = document.getElementsByClassName("js-next-month")[0];
-    // instantiate Calendar class, passing in Heading and day cells since they will be edited
-    const calendar = new Calendar(calendarHeading, calendarDayCells);
+
     // populate table upon page load with defaults (current month and year)
     calendar.populateMonthView();
     // go to prev month when prev button is clicked
@@ -28,51 +28,42 @@ function calendarFunctionality() {
 }
 
 /*
-    TODO: change this to use localStorage once localStorage functionality is complete
-        - This whole function will likely be rewritten.
-    dateLink(): Opens a new Daily Log page for the day that was clicked 
-    Parameters: None
+    Adds event listeners to each date and stores the record created in session stoarge. 
+    Redirects to the daily log page.
+    Parameters: calendar object initialized when the window is loaded
     Returns: None
 */
-async function dateLink() {
-    //Link to daily log page for the specific day that was clicked
-    //First time clicking a date: creates a new Daily Log page for it
-    try {
-        //path to the html boiler plate, please update if changed
-        const dailyLogPath = "../dailyLog/index.html";
-        // hello
-        const response = await fetch(dailyLogPath);
-        const htmlDailyLog = await response.text(); //get the html out of the response, if successful
-        const newDailyLog = document.createElement("link-for-date"); //creating a new element for daily log,
-        //later when the storage is up, we have to go through all of them and maybe match id or date?
-
-        // !! add classname when months are done to assist saving.
-        newDailyLog.innerHTML = htmlDailyLog;
-        const main = document.querySelector("main"); //reference to main element
-        main.append(newDailyLog); //add daily log to main
-        for (let i = 0; i < main.children.length - 1; i++) {
-            main.children[i].style.display = "none"; //hide other elements, only works when the current addedlog is the last one
-            //would not work for saved dates
-        }
-    } catch (error) {
-        console.error("Error fetching daily log:", error);
-    }
-}
-
-/*
-    addClickToDays(): Adds event listeners to each date. 
-    Parameters: None
-    Returns: None
-*/
-function addClickToDays() {
+function addClickToDays(calendar) {
     const calendarDays = document.querySelectorAll(".js-calendar-day");
     for (let day of calendarDays) {
-        day.addEventListener("click", dateLink);
+        //day.innerHTML = "<a href= '../dailyLog/index.html'>helloo</a>";
+        day.addEventListener("click", () => {
+            let record;
+            // gets the date of the cell which was clicked
+            const dateObject = calendar.getDateOfDayCell(day);
+            // if record object for the date already exists, get that, else make a new record object.
+            if (RecordsStorage.hasRecordByDate(dateObject)) {
+                record = RecordsStorage.getRecordByDate(dateObject);
+            } else {
+                record = new Record("log", { date: dateObject });
+            }
+            // stores current record from the cell date into session storage
+            sessionStorage.setItem("current record", JSON.stringify(record));
+            // redirects to daily log
+            window.location.href = "../dailyLog/index.html";
+        });
     }
 }
 
+/* 
+actions that are done when the window is loaded 
+*/
 window.onload = function () {
-    // todaysDate();
-    addClickToDays();
-    calendarFunctionality();
+    // select relevant calendar elements
+    const calendarHeading = document.querySelector("h1");
+    const calendarDayCells = document.getElementsByClassName("js-calendar-day");
+    // instantiate Calendar class, passing in Heading and day cells since they will be edited
+    const calendar = new Calendar(calendarHeading, calendarDayCells);
+    calendarFunctionality(calendar);
+    addClickToDays(calendar);
 };

@@ -16,10 +16,12 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
         />
-        <!-- Script -->
+
+        <!-- Scripts -->
         <script src="/src/navbar/navbar.js"></script>
         <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-        <script src="simpleMDE.js"></script>
+        <script type="module" src="simpleMDE.js"></script>
+        <script type="module" src="./dailyLog.js"></script>
     </head>
     <body>
         <div id="navbar"></div>
@@ -65,6 +67,19 @@ What things can you do in the future?"
                     ></textarea>
                 </label>
             </form>
+            <input
+                type="text"
+                class="accomplishment-input js-accomplishment-input"
+            />
+            <button
+                type="button"
+                id="add-accomplishment-button"
+                class="js-add-accomplishment"
+                title="add accomplishmentt"
+            >
+                Add Accomplishment
+            </button>
+            <p class="accomplishment--list js-accomplishment-list"></p>
         </main>
     </body>
 </html>

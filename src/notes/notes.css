@@ -1,9 +1,48 @@
 :root {
+    --body-margin: 0;
+    --body-padding: 0;
+
+    --content-padding: 20px;
+    --content-h2-font-size: 24px;
+    --content-h2-margin-bottom: 20px;
+
+    --button-margin-bottom: 20px;
+    --button-padding: 20px;
+    --button-border-width: 0;
+    --button-border-radius: 10px;
+
     --notes-display-left-margin: 20px;
     --note-width: 250px;
     --notes-per-row: 3;
+    --notes-padding: 20px;
+    --notes-border-radius: 10px;
+    --notes-box-shadow-top-left-right: 5px;
+    --notes-box-shadow-bottom: 2px;
+    --notes-display-width: 90%;
+    --notes-display-grid-sizing: 1fr;
+    --notes-display-gap: 20px;
+    --note-h3-margin-top: 0;
 
-    /*Font*/
+    --addnote-textarea-color: #e0f7fa;
+    --addnote-padding: 20px;
+    --addnote-width: 100%;
+    --addnote-height: 120px;
+    --addnote-box-shadow-top: 0;
+    --addnote-box-shadow-left: 2px;
+    --addnote-box-shadow-right: 5px;
+
+    --note-editor-margin-bottom: 20px;
+    --note-editor-padding: 20px;
+    --note-editor-border-radius: 10px;
+
+    --note-editor-title-content-margin-bottom: 15px;
+    --note-editor-title-content-padding: 10px;
+    --note-editor-content-margin-bottom: 10px;
+
+    --editor-save-btn--margin-right: 5px;
+    --editor-btn-border-width: 0;
+    --editor-btn-border-radius: 10px;
+
     --font: "Lato", sans-serif;
 
     /*Colors*/
@@ -25,195 +64,6 @@
     --notes-mint: #dbffd652;
     --notes-salmon: #f88b7d28;
     --notes-light-blue: #ace8ff3b;
-}
-
-body {
-    font-family: var(--font);
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-.sidebar {
-    width: 200px;
-    background-color: #7d5a5a;
-    color: white;
-    padding: 20px;
-}
-.sidebar h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-.sidebar ul li {
-    margin: 10px 0;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-}
-.sidebar ul li.active,
-.sidebar ul li:hover {
-    background-color: #f0f4f8;
-    color: #7d5a5a;
-}
-
-/* meant to hide/show objects my adding/removing this class in js */
-.hidden {
-    display: none;
-}
-
-.content {
-    flex-grow: 1;
-    padding: 20px;
-}
-.content h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-.buttons {
-    margin-bottom: 20px;
-}
-
-.buttons button {
-    padding: 20px;
-    font-size: var(--font-size-button);
-    background-color: var(--button-color);
-    border-width: 0;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-#add-note-btn:hover {
-    background-color: var(--add-note-color-hover);
-}
-
-#delete-note-btn:hover {
-    background-color: var(--delete-note-color-hover);
-}
-
-#done-deleting-note-btn:hover {
-    background-color: var(--delete-note-color-hover);
-}
-
-.add-notes textarea {
-    background-color: #e0f7fa;
-    padding: 20px;
-    width: 100%;
-    height: 120px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.notes-display {
-    width: 90%;
-    display: grid;
-    grid-template-columns: repeat(var(--notes-per-row), 1fr);
-    gap: 20px;
-}
-
-.note:nth-child(5n + 1) {
-    /*1,6,11*/
-    background-color: var(--notes-peach);
-}
-.note:nth-child(5n + 2) {
-    /*2,7,12*/
-    background-color: var(--notes-mint);
-}
-.note:nth-child(5n + 3) {
-    /*3,8,13*/
-    background-color: var(--notes-salmon);
-}
-.note:nth-child(5n + 4) {
-    /*4,9,14*/
-    background-color: var(--notes-lavendar);
-}
-.note:nth-child(5n + 5) {
-    /*4,9,14*/
-    background-color: var(--notes-light-blue);
-}
-
-.note {
-    width: var(--note-width);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px 2px var(--shadow-color);
-}
-
-.note:hover {
-    box-shadow: 5px 5px 5px 2px var(--shadow-color-hover);
-}
-
-.note h3 {
-    margin-top: 0;
-}
-.note ul {
-    list-style: none;
-    padding: 0;
-}
-.note ul li {
-    margin: 5px 0;
-}
-
-#note-editor {
-    background-color: var(--notes-edit-color);
-    width: var(--note-editor-width);
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px 2px var(--shadow-color);
-}
-
-#note-editor-title {
-    display: block;
-    background-color: var(--notes-edit-input-color);
-    font-size: var(--note-title-font-size);
-    border: none;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    padding: 10px;
-    padding-right: var(--note-title-right);
-}
-
-#note-editor-content {
-    display: block;
-    background-color: var(--notes-edit-input-color);
-    font-family: var(--font);
-    font-size: var(--note-title-font-size);
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    padding-right: var(--note-content-padding-right);
-    padding-bottom: var(--note-content-padding);
-    margin-bottom: 10px;
-}
-
-#editor-save-btn {
-    font-size: var(--font-size-button);
-    background-color: var(--button-save-color);
-    padding: var(--edit-btn-padding);
-    margin-right: 5px;
-    border-width: 0;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-#editor-save-btn:hover {
-    background-color: var(--button-save-hover-color);
-}
-
-#editor-cancel-btn {
-    font-size: var(--font-size-button);
-    background-color: var(--button-cancel-color);
-    padding: var(--edit-btn-padding);
-    border-width: 0;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-#editor-cancel-btn:hover {
-    background-color: var(--button-cancel-hover-color);
 }
 
 /* Vary sizes based on screen size */
@@ -275,4 +125,181 @@ body {
         --font-size-button: 20px;
         --edit-btn-padding: 20px;
     }
+}
+
+body {
+    font-family: var(--font);
+    display: flex;
+    margin: var(--body-margin);
+    padding: var(--body-padding);
+}
+
+h1 {
+    font-family: var(--font);
+    font-weight: normal; 
+}
+
+/* meant to hide/show objects my adding/removing this class in js */
+.hidden {
+    display: none;
+}
+
+.content {
+    flex-grow: 1;
+    padding: var(--content-padding);
+}
+
+.content h2 {
+    font-size: var(--content-h2-font-size);
+    margin-bottom: var(--content-h2-margin-bottom);
+}
+
+.buttons {
+    margin-bottom: var(--button-margin-bottom);
+}
+
+.buttons button {
+    padding: var(--button-padding);
+    font-size: var(--font-size-button);
+    background-color: var(--button-color);
+    border-width: var(--button-border-width);
+    border-radius: var(--button-border-radius);
+    cursor: pointer;
+}
+
+.note {
+    width: var(--note-width);
+    padding: var(--notes-padding);
+    border-radius: var(--notes-border-radius);
+    box-shadow: var(--notes-box-shadow-top-left-right) 
+                var(--notes-box-shadow-top-left-right) 
+                var(--notes-box-shadow-top-left-right) 
+                var(--notes-box-shadow-bottom) 
+                var(--shadow-color);
+}
+
+.notes-display {
+    width: var(--notes-display-width);
+    display: grid;
+    grid-template-columns: repeat(var(--notes-per-row), var(--notes-display-grid-sizing));
+    gap: var(--notes-display-gap);
+}
+
+.note h3 {
+    margin-top: var(--note-h3-margin-top);
+}
+
+.add-notes textarea {
+    background-color: var(--note-textarea-color);
+    padding: var(--addnote-padding);
+    width: var(--addnote-width);
+    height: var(--addnote-height);
+    box-shadow: var(--addnote-box-shadow-top) var(--addnote-box-shadow-left) var(--addnote-box-shadow-right) rgba(0, 0, 0, 0.1);
+}
+
+#add-note-btn:hover {
+    background-color: var(--add-note-color-hover);
+}
+
+#delete-note-btn:hover {
+    background-color: var(--delete-note-color-hover);
+}
+
+#done-deleting-note-btn:hover {
+    background-color: var(--delete-note-color-hover);
+}
+
+/* Parameter: 5n is the frequency, in other words
+    "This color appears every 5 notes."*/
+.note:nth-child(5n + 1) {
+    /*Notes: 1, 6, 11, etc.*/
+    background-color: var(--notes-peach);
+}
+.note:nth-child(5n + 2) {
+    /*Notes: 2, 7, 12, etc.*/
+    background-color: var(--notes-mint);
+}
+.note:nth-child(5n + 3) {
+    /*Notes: 3, 8, 13, etc.*/
+    background-color: var(--notes-salmon);
+}
+.note:nth-child(5n + 4) {
+    /*Notes: 4, 9, 14, etc.*/
+    background-color: var(--notes-lavendar);
+}
+.note:nth-child(5n + 5) {
+    /*Notes: 4, 9, 14, etc.*/
+    background-color: var(--notes-light-blue);
+}
+
+.note:hover {
+    box-shadow: var(--notes-box-shadow-top-left-right) 
+                var(--notes-box-shadow-top-left-right) 
+                var(--notes-box-shadow-top-left-right) 
+                var(--notes-box-shadow-bottom) 
+                var(--shadow-color-hover);
+}
+
+#note-editor {
+    background-color: var(--notes-edit-color);
+    width: var(--note-editor-width);
+    margin-bottom: var(--note-editor-margin-bottom);
+    padding: var(--note-editor-padding);
+    border-radius: var(--note-editor-border-radius);
+    box-shadow: var(--notes-box-shadow-top-left-right) 
+                var(--notes-box-shadow-top-left-right) 
+                var(--notes-box-shadow-top-left-right) 
+                var(--notes-box-shadow-bottom) 
+                var(--shadow-color);
+}
+
+#note-editor-title {
+    display: block;
+    background-color: var(--notes-edit-input-color);
+    font-size: var(--note-title-font-size);
+    border: none;
+    border-radius: var(--note-editor-border-radius);
+    margin-bottom: var(--note-editor-title-content-margin-bottom);
+    padding: var(--note-editor-title-content-padding);
+    padding-right: var(--note-title-right);
+}
+
+#note-editor-content {
+    display: block;
+    background-color: var(--notes-edit-input-color);
+    font-family: var(--font);
+    font-size: var(--note-title-font-size);
+    border: none;
+    border-radius: var(--note-editor-border-radius);
+    padding: var(--note-editor-title-content-padding);
+    padding-right: var(--note-content-padding-right);
+    padding-bottom: var(--note-content-padding);
+    margin-bottom: var(--note-editor-content-margin-bottom);
+}
+
+#editor-save-btn {
+    font-size: var(--font-size-button);
+    background-color: var(--button-save-color);
+    padding: var(--edit-btn-padding);
+    margin-right: var(--editor-save-btn--margin-right);
+    border-width: var(--editor-btn-border-width);
+    border-radius: var(--editor-btn-border-radius);
+    cursor: pointer;
+}
+
+#editor-cancel-btn {
+    font-size: var(--font-size-button);
+    background-color: var(--button-cancel-color);
+    padding: var(--edit-btn-padding);
+    border-width: var(--editor-btn-border-width);
+    border-radius: var(--editor-btn-border-radius);
+    cursor: pointer;
+}
+
+#editor-save-btn:hover {
+    background-color: var(--button-save-hover-color);
+}
+
+#editor-cancel-btn:hover {
+    background-color: var(--button-cancel-hover-color);
 }

@@ -4,14 +4,15 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Password Page Boilerplate</title>
-        <!-- Script -->
-        <link rel="stylesheet" href="settings.css" />
+        <!-- Stylesheet-->
+        <link rel="stylesheet" href="settings.css">
         <!-- Script -->
         <script src="../navbar/navbar.js"></script>
     </head>
+
     <body>
+        <div id="navbar"></div>
         <main>
-            <div id="navbar"></div>
             <div class="header">
                 <h1>Settings</h1>
             </div>
@@ -43,6 +44,10 @@
                 />
                 <button type="submit">Update</button>
             </form>
+            <div id="error-message" class="error">
+                <span id="error-text">Passwords do not match. Please try again.</span>
+                <button id="try-again-button">Try Again</button>
+            </div>
             <script src="settings.js"></script>
             <script>
                 document
@@ -55,6 +60,10 @@
                             form.classList.add("hidden");
                         }
                     });
+                document.getElementById('try-again-button').addEventListener('click', function() {
+                    document.getElementById('error-message').classList.add('hidden');
+                });
+
             </script>
         </main>
     </body>

@@ -1,3 +1,14 @@
+:root {
+    --primary-font-size: 16px;
+    --error-color: red;
+    --error-background-color: #f8d7da;
+    --error-border-color: #f5c6cb;
+    --form-border-color: #21528B;
+    --button-font-size: 21px;
+    --button-bg-color: #21528B;
+    --button-hover-bg-color: #E2EFFF;
+    --button-hover-color: #21528B;
+}
 /* Center the form in the middle of the page */
 body {
     display: flex;
@@ -9,30 +20,30 @@ body {
 
 /* Styling for the form */
 form {
-    border: 2px solid #21528B;
+    border: 2px solid var(--form-border-color);
     padding: 20px;
     border-radius: 10px;
 }
 
 /* Styling for the form label */
 label {
-    font-size: 21px;
+    font-size: var(--button-font-size);
     font-weight: bold;
 }
 
 /* Styling for the input field */
 input[type="password"] {
-    font-size: 21px;
-    border: 2px solid #21528B;
+    font-size: var(--button-font-size);
+    border: 2px solid var(--form-border-color);
     border-radius: 5px;
     padding: 5px;
 }
 
 /* Styling for the submit button */
 button[type="submit"] {
-    font-size: 21px;
+    font-size: var(--button-font-size);
     font-weight: bold;
-    background-color: #21528B;
+    background-color: var(--button-bg-color);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -42,35 +53,34 @@ button[type="submit"] {
 
 /* Styling for the submit button on hover */
 button[type="submit"]:hover {
-    background-color: #E2EFFF;
-    color: #21528B;
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-hover-color);
 }
 
-.error{
-    font-size: 16px; /* Smaller font size */
+.error {
+    font-size: var(--primary-font-size);
     display: none; /* Hidden by default */
-    color: red;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
+    color: var(--error-color);
+    background-color: var(--error-background-color);
+    border: 1px solid var(--error-border-color);
     padding: 10px;
     margin-top: 10px;
     border-radius: 5px;
     text-align: center;
-
 }
 
-.error button{
-    font-size: 16px;
+.error button {
+    font-size: var(--button-font-size);
     font-weight: bold;
-    background-color: #21528B;
+    background-color: var(--button-bg-color);
     color: white;
     border: none;
-    padding: 10px 10px;
+    padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
 }
 
 .error button:hover {
-    background-color: #E2EFFF;
-    color: #21528B;
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-hover-color);
 }

@@ -18,6 +18,6 @@ jobs:
             - name: print deployment-url
               env:
                   DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
-                  DEPLOYMENT_ID: ${{ steps.deploy.outputs.deployment-id}}
+                  COMMAND-OUTPUT: ${{ steps.deploy.outputs.command-output}}
               run: echo $DEPLOYMENT_URL
-                  echo $DEPLOYMENT_ID
+                  echo $COMMAND-OUTPUT

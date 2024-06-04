@@ -3,13 +3,10 @@ import { Record } from "../backend-storage/record-class.js";
 import LocalStorageAccomplishmentsApi from "../backend-storage/accomplishments-api.js";
 import { AccomplishmentsObj } from "../backend-storage/accomplishments-class.js";
 
-/*
-populates the daily log with the information from the record object
-Parameters:
-    - record containing either from the record from local storage or new a record
-Returns:
-    - NONE
-*/
+/**
+ * Populates the daily log with the information from the record object
+ * @param {Record} record - The record containing either from the record from local storage or new a record
+ */
 function populateDefaultLog(record) {
     const updateH1 = document.querySelector("h1");
     // no check because title should be there
@@ -42,7 +39,7 @@ function populateDefaultLog(record) {
             ".js-accomplishment-list"
         );
         // loop over all content in the accomplishment object, and make each accomplishment list element with buttons
-        for (let item of accomplishmentObj.content) {
+        for (const item of accomplishmentObj.content) {
             let newItem = document.createElement("li");
             //adds the content and buttons to the list element
             newItem = updateContentButtons(newItem, item);
@@ -52,14 +49,11 @@ function populateDefaultLog(record) {
     }
 }
 
-/*
-Updates the imformation of the record saved in the local storage when the submit button is clicked.
-Brings to the calendar page.
-Parameters:
-    - record containing either from the record from local storage or new a record
-Returns:
-    - NONE
-*/
+/**
+ * Updates the imformation of the record saved in the local storage when the submit button is clicked
+ * Jumps to the calendar page
+ * @param {Record} record - The record containing either from the record from local storage or new a record
+ */
 function submitButtonClick(record) {
     // date from record object
     const date = new Date(record.date);
@@ -95,8 +89,8 @@ function submitButtonClick(record) {
         const content = [];
         // gets all the list items from the accomplishment paragraph
         const listItems = hasAccomplishments.querySelectorAll("li");
-        // loop over the list items and append the textconetnt of the firstChild into the content array
-        for (let item of listItems) {
+        // loop over the list items and append the text content of the firstChild into the content array
+        for (const item of listItems) {
             content.push(item.firstChild.textContent.trim());
         }
         let accomplishmentObj;
@@ -123,7 +117,7 @@ function submitButtonClick(record) {
         }
     } else {
         record.hasAccomplishment = false;
-        // delete the accomplishment object from loacl storage
+        // delete the accomplishment object from local storage
         // as all accomplishment very deleted or none were added
         if (LocalStorageAccomplishmentsApi.hasAccomplishmentsObjByDate(date)) {
             LocalStorageAccomplishmentsApi.deleteAccomplishmentsObj(date);
@@ -135,15 +129,12 @@ function submitButtonClick(record) {
     window.location.href = "../calendar/calendar.html";
 }
 
-/*
-Delets record from local storage when the delete button is clicked.
-Has a confirm message, to ask for confirmation.
-Brings to the calendar page.
-Parameters:
-    - record containing either from the record from local storage or new a record
-Returns:
-    - NONE
-*/
+/**
+ * Delets record from local storage when the delete button is clicked
+ * Has a confirm message, to ask for confirmation
+ * Brings to the calendar page
+ * @param {Record} record - The record containing either from the record from local storage or new a record
+ */
 function deleteButtonClick(record) {
     const date = new Date(record.date);
     // if record does exists in local storage, delete it.
@@ -164,14 +155,10 @@ function deleteButtonClick(record) {
     }
 }
 
-/*
-Adds a new list item into the accomplishment paragraph
-Clears the input value for accomplishment input, so that new input can be taken in
-Parameters:
-    - NONE
-Returns:
-    - NONE
-*/
+/**
+ * Adds a new list item into the accomplishment paragraph
+ * Clears the input value for accomplishment input, so that new input can be taken in
+ */
 function addAccomplishment() {
     // get the input element with new accomplishemnt text
     const newInput = document.querySelector(".js-accomplishment-input");
@@ -179,7 +166,6 @@ function addAccomplishment() {
     const displayParagraph = document.querySelector(".js-accomplishment-list");
     // get the text from the input
     const inputValue = newInput.value.trim();
-
     // if input value not empty, create list element to store new accomplishment
     if (inputValue) {
         let newItem = document.createElement("li");
@@ -191,14 +177,11 @@ function addAccomplishment() {
     }
 }
 
-/*
-Updates the content of a specific accomplishment by
-including a input box to edit
-Parameters:
-    - list item with the content and buttons in it
-Returns:
-    - NONE
-*/
+/**
+ * Updates the content of a specific accomplishment by
+ * Creates an input box to get updated accomplishment
+ * @param {HTMLLIElement} item - The list element with the content and buttons in it
+ */
 function editAccomplishment(item) {
     // create an input element that will replace the text for editing
     const input = document.createElement("input");
@@ -232,16 +215,11 @@ function editAccomplishment(item) {
     });
 }
 
-/*
-Updates an accomplishment list element by adding text 
-and buttons for edit, done, and delete actions
-Parameters:
-    - newItem:list item element
-    - text: text content to be added to the list item
-
-Returns:
-    - updated list item with added content and buttons
-*/
+/**
+ * Delete the list element
+ * Confirms if the element is to be deleted
+ * @param {HTMLLIElement} newItem - The list element with the updated content and buttons
+ */
 function deleteAccomplishment(item) {
     if (
         confirm(
@@ -252,6 +230,13 @@ function deleteAccomplishment(item) {
     }
 }
 
+/**
+ * Updates an accomplishment list element by adding text
+ * and buttons for edit, done, and delete actions
+ * @param {HTMLLIElement} newItem - The list element
+ * @param {string} text - The content to be added to the list item
+ * @returns {HTMLLIElement} The list element with the updated content and buttons
+ */
 function updateContentButtons(newItem, text) {
     // add a class to style the new accomplishment item
     newItem.classList.add("accomplishment-text");
@@ -292,13 +277,10 @@ function updateContentButtons(newItem, text) {
     return newItem;
 }
 
-/*
- * Initializes log functionality by setting up the event listeners for the submit and delete buttons.
-Parameters:
-    - record containing either from the record from local storage or new a record
-Returns:
-    - NONE
-*/
+/**
+ * Initializes log functionality by setting up the event listeners for the submit and delete buttons
+ * @param {string} text - The content to be added to the list item
+ */
 function logFunctionality(record) {
     //update content of the page
     populateDefaultLog(record);
@@ -321,15 +303,32 @@ function logFunctionality(record) {
     addAccomplishmentBtn.addEventListener("click", addAccomplishment);
 }
 
-/* 
-This function is called when the window is loaded
-*/
+/**
+ * This function is called when the window is loaded.
+ * Calls the logFunctionality function with the retrieved or created record.
+ * @function
+ * @name window.onload
+ */
 window.onload = function () {
+    /**
+     * The stringified record retrieved from sessionStorage.
+     * @type {string|null}
+     */
     const recordString = sessionStorage.getItem("current record");
+    /**
+     * The record object to be used.
+     * @type {Record}
+     */
     let record;
+    /**
+     * A new date object
+     * @type {Date}
+     */
     let today = new Date();
     today.setHours(0, 0, 0, 0);
     if (!recordString) {
+        // if no record is found in sessionStorage, it checks local storage for a record by today's date.
+        // if no record is found in local storage, it creates a new Record object.
         if (!LocalStorageRecordsApi.hasRecordByDate(today)) {
             record = new Record("log", { date: today });
         } else {
@@ -338,6 +337,5 @@ window.onload = function () {
     } else {
         record = JSON.parse(recordString);
     }
-
     logFunctionality(record);
 };

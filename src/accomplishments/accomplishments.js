@@ -119,6 +119,7 @@ function populateTable(accomplishmentsObjArr) {
             const dateElement = document.createElement("td");
             // content of the accomplishment
             const accomplishmentElement = document.createElement("td");
+            accomplishmentElement.classList.add("content-cell");
             // add the text
             dateElement.innerHTML = fullDate;
             accomplishmentElement.innerHTML = contentOfAccomplishment[i];
@@ -206,6 +207,11 @@ function _getAccomplishmentsToDisplay(
     return accomplishmentsToDisplay;
 }
 
+/**
+ * This function is called when the window is loaded.
+ * @function
+ * @name window.onload
+ */
 window.onload = function () {
     // load in accomplishments and display a message if there are none
     const allAccomplishments = loadAccomplishmentFromStorage();

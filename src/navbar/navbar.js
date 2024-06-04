@@ -10,7 +10,7 @@ Returns:
 - navbar
 */
 function loadNavbar() {
-    fetch("/src/navbar/navbar.html")
+    fetch("../navbar/navbar.html")
         .then((response) => response.text())
         .then((data) => {
             document.getElementById("navbar").innerHTML = data;

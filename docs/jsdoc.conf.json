@@ -1,0 +1,12 @@
+{
+    "source": {
+      "include": ["../src/accomplishments/accomplishments.js" , "../src/dailyLog/dailyLog.js", "../src/backend-storage/record-class.js", 
+    "../src/calendar/calendar-class.js", "../src/calendar/calendar.js", "../src/navbar/navbar.js", "../src/notes/note-element.js", 
+    "../src/notes/notes.js", "../src/password/landing.js", "../src/settings/settings.js"],
+      "exclude": ["node_modules"]
+    },
+    "opts": {
+      "destination": "./docs"
+    }
+  }
+  

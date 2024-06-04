@@ -9,6 +9,10 @@
         <link rel="stylesheet" type="text/css" href="./accomplishments.css" />
 
         <!-- Script -->
+        <script
+            src="/src/accomplishments/accomplishments.js"
+            type="module"
+        ></script>
         <script src="../navbar/navbar.js"></script>
     </head>
     <body>
@@ -17,31 +21,41 @@
         <main>
             <div class="header-container">
                 <h1>Accomplishments</h1>
-                <div class="button-container">
-                    <button class="add-button js-add-button">Add</button>
-                    <button class="delete-button js-delete-button">
-                        Delete
-                    </button>
-                </div>
             </div>
             <br />
+            <!-- select for filtering -->
+            <label for="filter-options">Filter by:</label>
+            <select
+                name="filter-options"
+                id="filter-options"
+                class="js-filter-options"
+            >
+                <option value="none" selected="selected">None</option>
+                <option value="month">Current Month</option>
+                <option value="year">Current Year</option>
+            </select>
+            <!-- select for sorting -->
+            <label for="sort-options">Sort by:</label>
+            <select
+                name="sort-options"
+                id="sort-options"
+                class="js-sort-options"
+            >
+                <option value="oldest" selected="selected">Oldest</option>
+                <option value="newest">Newest</option>
+            </select>
             <!-- Table: Accomplishments with Date -->
             <table class="accomplishments-table js-accomplishments-table">
                 <!-- Column Labels: Date and Accomplishments  -->
                 <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Accomplishment</th>
+                    <tr id="tableHead">
+                        <th id="date">Date</th>
+                        <th id="accomplishment">Accomplishment</th>
                     </tr>
                 </thead>
 
                 <!-- Table Body: all accomplishments with the date attached to them -->
-                <tbody>
-                    <tr class="add-accomplishment js-add-accomplishment">
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
+                <tbody id="tableBody"></tbody>
             </table>
         </main>
     </body>

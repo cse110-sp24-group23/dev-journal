@@ -134,6 +134,7 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         existingRecord.hours = recordObject.hours;
         existingRecord.field1 = recordObject.field1;
         existingRecord.field2 = recordObject.field2;
+        existingRecord.hasAccomplishment = recordObject.hasAccomplishment;
         existingRecord.updated = new Date().toISOString();
         localStorage.setItem("Records", JSON.stringify(Records));
     }

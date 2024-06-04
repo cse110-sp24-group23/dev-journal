@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
 if(localStorage.getItem('storedHashedPassword')){
 //Wait for input password to be submitted
 document.getElementById('input-password-form').addEventListener('submit', async function(event){

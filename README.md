@@ -1,5 +1,5 @@
 # dev-journal
-
+[Go to app](./src/calendar/calendar.html) (if on github pages site)
 
 [GitHub Pages](https://cse110-sp24-group23.github.io/dev-journal/)
 

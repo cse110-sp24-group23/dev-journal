@@ -10,16 +10,16 @@
     --button-color: rgb(244, 249, 255);
     --add-note-color-hover: rgb(188, 208, 237);
     --delete-note-color-hover: rgb(228, 87, 87);
-    --button-save-color: #fbd1ff81;
-    --button-cancel-color: #fbd1ff81;
-    --button-save-hover-color: #f0def7;
-    --button-cancel-hover-color: #f0def7;
+    --button-save-color: #ffffff;
+    --button-cancel-color: #ffffff;
+    --button-save-hover-color: #DDCC77;
+    --button-cancel-hover-color: #DDCC77;
 
     --shadow-color: rgba(128, 128, 128, 0.507);
     --shadow-color-hover: rgb(128, 128, 128);
 
-    --notes-edit-color: #fadaf559;
-    --notes-edit-input-color: #fbd1ff81;
+    --notes-edit-color: #CC6677;
+    --notes-edit-input-color: #ffffff;
     --notes-lavendar: #dcd5f859;
     --notes-peach: #fde3ac44;
     --notes-mint: #dbffd652;

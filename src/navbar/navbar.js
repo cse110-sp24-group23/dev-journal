@@ -1,7 +1,7 @@
 /*
 This function loads the navbar component so it can be easily reused on multiple pages
-To use it add the following code to head:
-<script src="/src/navbar/navbar.js"></script>
+To use it add the following code to head (assuming the html file is in a child folder of source):
+<script src="../navbar/navbar.js"></script>
 and following code to body:
 <div id="navbar"></div>
 Parameters: 
@@ -10,13 +10,13 @@ Returns:
 - navbar
 */
 function loadNavbar() {
-    fetch("/src/navbar/navbar.html")
+    fetch("../navbar/navbar.html")
         .then((response) => response.text())
         .then((data) => {
             document.getElementById("navbar").innerHTML = data;
             document.head.insertAdjacentHTML(
                 "beforeend",
-                '<link rel="stylesheet" href="/src/navbar/navbar.css">'
+                '<link rel="stylesheet" href="../navbar/navbar.css">'
             );
             // clears session storage, when nav bar is clicked
             clearSessionStorage();

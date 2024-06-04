@@ -11,6 +11,21 @@ function loadAccomplishmentFromStorage() {
 }
 
 /**
+ * Display a message on the page if there are no accomplishments
+ * @param {Object[]} allAccomplishmentsObj array of all accomplishments objects from storage
+ */
+function displayMsgIfEmpty(allAccomplishmentsObj) {
+    // display message if allAccomplishments is empty
+    if (allAccomplishmentsObj.length === 0) {
+        const main = document.querySelector("main");
+        const noContentMsg = document.createElement("h2");
+        noContentMsg.innerText =
+            "There are no accomplishments. Add them in daily Logs.";
+        main.appendChild(noContentMsg);
+    }
+}
+
+/**
  * Sort an array of accomplishments objects by oldest or newest given an unsorted or sorted array
  * This allows for quick reversing betweeen newest and oldest rather than fully resorting each time
  * @param {Object[]} accomplishmentsObjArr array of accomplishments objects
@@ -85,8 +100,9 @@ function filterAccomplishments(
  */
 function populateTable(accomplishmentsObjArr) {
     _clearTable();
-    // get accomplishments object list as an editable list
+    // create shallow copy of accomplishments to not edit the parameter that was passed in
     let allAccomplishments = _copyAccomplishments(accomplishmentsObjArr);
+    // get table, add a row to table for each accomplishment in each accomplishments object
     const tableBody = document.getElementById("tableBody");
     for (const accomplishment of allAccomplishments) {
         // get the date from accomplishment obj
@@ -190,15 +206,18 @@ function _getAccomplishmentsToDisplay(
 }
 
 window.onload = function () {
-    // load in accomplishments, and sort them by oldest accomplishments first
+    // load in accomplishments and display a message if there are none
     const allAccomplishments = loadAccomplishmentFromStorage();
+    displayMsgIfEmpty(allAccomplishments);
+    // Sort accomplishments by oldest first
     const allAccomplishmentsByOldest = sortAccomplishments(allAccomplishments, {
         byOldest: true,
         alreadySortedByOldest: false,
     });
     // populate table with the sorted accomplishments
     populateTable(allAccomplishmentsByOldest);
-    // statuses to determine how to filter and sort accomplishments when user selects options    let shouldSortByOldest = true;
+    // statuses to determine how to filter and sort accomplishments when user selects options
+    let shouldSortByOldest = true;
     let filterStatus = "none";
 
     // Get select for filtering

@@ -1,45 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Accomplishments</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Accomplishments</title>
 
-    <!-- Stylesheet-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../accomplishments/accomplishments.css"
-    />
+        <!-- Stylesheet-->
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../accomplishments/accomplishments.css"
+        />
 
-    <!-- Script -->
-    <script src="/src/navbar/navbar.js"></script>
-    <script
-      src="/src/accomplishments/accomplishments.js"
-      type="module"
-    ></script>
-  </head>
-  <body>
-    <div id="navbar"></div>
+        <!-- Script -->
+        <script src="/src/navbar/navbar.js"></script>
+        <script
+            src="/src/accomplishments/accomplishments.js"
+            type="module"
+        ></script>
+    </head>
+    <body>
+        <div id="navbar"></div>
 
-    <main>
-      <div class="header-container">
-        <h1>Accomplishments</h1>
-      </div>
-      <br />
-      <!-- Table: Accomplishments with Date -->
-      <table class="accomplishments-table js-accomplishments-table">
-        <!-- Column Labels: Date and Accomplishments  -->
-        <thead>
-          <tr id="tableHead">
-            <th id="date">Date</th>
-            <th id="accomplishment">Accomplishment</th>
-          </tr>
-        </thead>
+        <main>
+            <div class="header-container">
+                <h1>Accomplishments</h1>
+            </div>
+            <br />
+            <!-- select for filtering -->
+            <label for="filter-options">Filter by:</label>
+            <select
+                name="filter-options"
+                id="filter-options"
+                class="js-filter-options"
+            >
+                <option value="none" selected="selected">None</option>
+                <option value="month">Current Month</option>
+                <option value="year">Current Year</option>
+            </select>
+            <!-- select for sorting -->
+            <label for="sort-options">Sort by:</label>
+            <select
+                name="sort-options"
+                id="sort-options"
+                class="js-sort-options"
+            >
+                <option value="oldest" selected="selected">Oldest</option>
+                <option value="newest">Newest</option>
+            </select>
+            <!-- Table: Accomplishments with Date -->
+            <table class="accomplishments-table js-accomplishments-table">
+                <!-- Column Labels: Date and Accomplishments  -->
+                <thead>
+                    <tr id="tableHead">
+                        <th id="date">Date</th>
+                        <th id="accomplishment">Accomplishment</th>
+                    </tr>
+                </thead>
 
-        <!-- Table Body: all accomplishments with the date attached to them -->
-        <tbody id="tableBody"></tbody>
-      </table>
-    </main>
-  </body>
+                <!-- Table Body: all accomplishments with the date attached to them -->
+                <tbody id="tableBody"></tbody>
+            </table>
+        </main>
+    </body>
 </html>

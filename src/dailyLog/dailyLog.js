@@ -39,7 +39,7 @@ function populateDefaultLog(record) {
             ".js-accomplishment-list"
         );
         // loop over all content in the accomplishment object, and make each accomplishment list element with buttons
-        for (let item of accomplishmentObj.content) {
+        for (const item of accomplishmentObj.content) {
             let newItem = document.createElement("li");
             //adds the content and buttons to the list element
             newItem = updateContentButtons(newItem, item);
@@ -89,8 +89,8 @@ function submitButtonClick(record) {
         const content = [];
         // gets all the list items from the accomplishment paragraph
         const listItems = hasAccomplishments.querySelectorAll("li");
-        // loop over the list items and append the textconetnt of the firstChild into the content array
-        for (let item of listItems) {
+        // loop over the list items and append the text content of the firstChild into the content array
+        for (const item of listItems) {
             content.push(item.firstChild.textContent.trim());
         }
         let accomplishmentObj;
@@ -117,7 +117,7 @@ function submitButtonClick(record) {
         }
     } else {
         record.hasAccomplishment = false;
-        // delete the accomplishment object from loacl storage
+        // delete the accomplishment object from local storage
         // as all accomplishment very deleted or none were added
         if (LocalStorageAccomplishmentsApi.hasAccomplishmentsObjByDate(date)) {
             LocalStorageAccomplishmentsApi.deleteAccomplishmentsObj(date);

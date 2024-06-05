@@ -18,7 +18,8 @@ jobs:
             - name: print deployment-url
               env:
                   DEPLOYMENT_URL: ${{ steps.deploy.outputs.deployment-url }}
-              run: echo DEPLOYMENT_URL=${DEPLOYMENT_URL} >> .env
+              run: printf '%s\n' 
+                echo DEPLOYMENT_URL=${DEPLOYMENT_URL} >> .env
             - name: Run Tests
               uses: actions/setup-node@v4
               with:

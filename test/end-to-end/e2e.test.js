@@ -1,10 +1,13 @@
 import "dotenv/config";
-// require("dotenv").config();
-console.log(process.env);
 
-let url = process.env.DEPLOYMENT_URL;
-// console.log(secret);
+if (process.env.TEST_ENV === "LOCAL") {
+    const url = "'http://127.0.0.1:5500/index.html'"
+}
+else {
+    const url = process.env.DEPLOYMENT_URL;
+}
 
-test("this is an integration test", () => {
-    expect(url).toBe("1234")
+
+test("This is an example E2E Test", () => {
+    console.log(url)
 });

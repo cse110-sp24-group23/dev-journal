@@ -12,7 +12,6 @@
 
     <body>
         <div id="navbar"></div>
-        <main>
             <div class="header">
                 <h1>Settings</h1>
             </div>
@@ -49,22 +48,5 @@
                 <button id="try-again-button">Try Again</button>
             </div>
             <script src="settings.js"></script>
-            <script>
-                document
-                    .getElementById("toggle-password-form")
-                    .addEventListener("change", function () {
-                        const form = document.getElementById("password-form");
-                        if (this.checked) {
-                            form.classList.remove("hidden");
-                        } else {
-                            form.classList.add("hidden");
-                        }
-                    });
-                document.getElementById('try-again-button').addEventListener('click', function() {
-                    document.getElementById('error-message').classList.add('hidden');
-                });
-
-            </script>
-        </main>
     </body>
 </html>

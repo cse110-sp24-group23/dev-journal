@@ -20,7 +20,7 @@ document.getElementById('password-form').addEventListener('submit', async functi
 //Toggles visibility of the try again button when an error message is shown.
 const tryAgainBtn = document.getElementById('try-again-button')
 tryAgainBtn.addEventListener('click', function(){
-    const errorMessage = document.getElementById('error-message');
+    const errorMessage = document.querySelector('.error');
     errorMessage.style.display='none';
 })
 //Changes the visibility of the password settings form. If the password protection option is checked, then the form is visible.

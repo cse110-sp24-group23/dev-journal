@@ -2,64 +2,80 @@
 :root {
     --font: "Lato", sans-serif;
 
-    /* Button variables */
-    --button-background: rgb(244, 249, 255);
-    --add-button-background-hover: rgb(188, 208, 237);
-    --delete-button-background-hover: rgb(228, 87, 87);
-    --table-border-color: black;
+    --filter-font-size: 21px;
+    --filter-options-font-size: 17px;
+    --filter-options-width: 150px;
+    --filter-options-border-radius: 10px;
+    --filter-options-margin-right: 10px;
+    --filter-options-padding: 5px;
 
     /* Table body variables */
+    --table-header-background-color: rgb(185, 209, 238);
+    --table-margin-top: 10px;
+    --table-border-size: 1.5px;
+    --table-border-color: rgb(33, 83, 138);
+    --table-padding: 10px;
     --table-text-color: black;
 }
 
-h1 {
-    font-weight: bold;
-}
-
-/* Setting the font for the whole body */
 body {
     font-family: var(--font);
 }
 
-/* Flexbox styling for header and buttons */
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+label[for=filter-options] {
+    font-size: var(--filter-font-size);
+    margin: var(--filter-margin);
 }
 
-/* Styling the buttons */
-button {
-    padding: 20px;
-    font-size: var(--font-size-text-input);
-    background-color: var(--button-background);
-    border-width: 0;
-    border-radius: 10px;
+label[for=sort-options] {
+    font-size: var(--filter-font-size);
+}
+
+select#filter-options {
+    padding: var(--filter-options-padding);
+    border-radius: var(--filter-options-border-radius);
+    font-size: var(--filter-options-font-size);
+    text-align: center;
+    width: var(--filter-options-width);
     cursor: pointer;
-    width: 110px;
+
+    margin-right: var(--filter-options-margin-right);
 }
-.add-button:hover {
-    background-color: var(--add-button-background-hover);
-}
-.delete-button:hover {
-    background-color: var(--delete-button-background-hover);
+
+select#sort-options {
+    padding: var(--filter-options-padding);
+    border-radius: var(--filter-options-border-radius);
+    font-size: var(--filter-options-font-size);
+    text-align: center;
+    width: var(--filter-options-width);
+    cursor: pointer;
 }
 
 /* Table styling */
-.accomplishments-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-.accomplishments-table th,
-.accomplishments-table td {
-    border: 2px solid var(--table-border-color);
-    padding: 10px;
-    font-size: 21px;
-}
-
 tbody {
     color: var(--table-text-color);
 }
+
+.accomplishments-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: var(--table-margin-top);
+}
+
 .content-cell {
     word-break: break-word;
 }
+
+
+.accomplishments-table th {
+    background-color: var(--table-header-background-color);
+}
+
+.accomplishments-table th,
+.accomplishments-table td {
+    border: var(--table-border-size) solid var(--table-border-color);
+    padding: var(--table-padding);
+    font-size: var(--filter-font-size);
+    text-align: center;
+}
+

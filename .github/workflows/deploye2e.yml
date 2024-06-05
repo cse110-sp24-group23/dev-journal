@@ -3,7 +3,7 @@ name: E2E Testing
 on: push
 
 jobs:
-    deploy:
+    deployAndTest:
         runs-on: ubuntu-latest
         name: Deploy
         steps:

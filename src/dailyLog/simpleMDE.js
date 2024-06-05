@@ -1,3 +1,5 @@
+/*global SimpleMDE*/
+// ^^ show SimpleMDE is a global function to not aggravate linter
 import LocalStorageRecordsApi from "../backend-storage/records-api.js";
 import { Record } from "../backend-storage/record-class.js";
 // Wait until page loads

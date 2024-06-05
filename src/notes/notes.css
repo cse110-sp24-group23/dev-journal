@@ -75,8 +75,8 @@
         --note-editor-width: 275px;
         --note-title-font-size: 15px;
         --note-content-padding: 100px;
-        --note-content-padding-right: 100px;
-        --note-title-right: 73px;
+        --note-content-width: 255px;
+        --note-title-width: 255px;
         --font-size-button: 15px;
         --edit-btn-padding: 15px;
     }
@@ -90,8 +90,8 @@
         --note-editor-width: 360px;
         --note-title-font-size: 15px;
         --note-content-padding: 100px;
-        --note-content-padding-right: 180px;
-        --note-title-right: 150px;
+        --note-content-width: 340px;
+        --note-title-width: 340px;
         --font-size-button: 15px;
         --edit-btn-padding: 15px;
     }
@@ -105,8 +105,8 @@
         --note-editor-width: 510px;
         --note-title-font-size: 18px;
         --note-content-padding: 100px;
-        --note-content-padding-right: 310px;
-        --note-title-right: 275px;
+        --note-content-width: 490px;
+        --note-title-width: 490px;
         --font-size-button: 18px;
         --edit-btn-padding: 15px;
     }
@@ -120,8 +120,8 @@
         --note-editor-width: 870px;
         --note-title-font-size: 22px;
         --note-content-padding: 200px;
-        --note-content-padding-right: 610px;
-        --note-title-right: 580px;
+        --note-content-width: 850px;
+        --note-title-width: 850px;
         --font-size-button: 20px;
         --edit-btn-padding: 20px;
     }
@@ -261,7 +261,7 @@ h1 {
     border-radius: var(--note-editor-border-radius);
     margin-bottom: var(--note-editor-title-content-margin-bottom);
     padding: var(--note-editor-title-content-padding);
-    padding-right: var(--note-title-right);
+    width: var(--note-title-width);
 }
 
 #note-editor-content {
@@ -272,7 +272,7 @@ h1 {
     border: none;
     border-radius: var(--note-editor-border-radius);
     padding: var(--note-editor-title-content-padding);
-    padding-right: var(--note-content-padding-right);
+    width: var(--note-content-width);
     padding-bottom: var(--note-content-padding);
     margin-bottom: var(--note-editor-content-margin-bottom);
 }

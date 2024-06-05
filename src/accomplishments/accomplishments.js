@@ -2,7 +2,7 @@ import AccomplishmentsStorage from "../backend-storage/accomplishments-api.js";
 
 /**
  * Get all accomplishment Objects from storage
- * @returns {Object[]} array of accomplishments objects retrieved from storage
+ * @returns {accomplishemntsObj[]} array of accomplishments objects retrieved from storage
  */
 function loadAccomplishmentFromStorage() {
     let allAccomplishmentsObj =
@@ -12,7 +12,7 @@ function loadAccomplishmentFromStorage() {
 
 /**
  * Display a message on the page if there are no accomplishments
- * @param {Object[]} allAccomplishmentsObj array of all accomplishments objects from storage
+ * @param {accomplishemntsObj[]} allAccomplishmentsObj array of all accomplishments objects from storage
  */
 function displayMsgIfEmpty(allAccomplishmentsObj) {
     // display message if allAccomplishments is empty
@@ -28,9 +28,9 @@ function displayMsgIfEmpty(allAccomplishmentsObj) {
 /**
  * Sort an array of accomplishments objects by oldest or newest given an unsorted or sorted array
  * This allows for quick reversing betweeen newest and oldest rather than fully resorting each time
- * @param {Object[]} accomplishmentsObjArr array of accomplishments objects
+ * @param {accomplishemntsObj[]} accomplishmentsObjArr array of accomplishments objects
  * @param {Object} options contains byOldest (boolean) and alreadySortedByOldest(boolean)
- * @returns {Object[]}
+ * @returns {accomplishemntsObj[]}
  */
 function sortAccomplishments(
     accomplishmentsObjArr,
@@ -61,9 +61,10 @@ function sortAccomplishments(
 
 /**
  * Filters an array of accomplishments objects by current year, current month, or no filtering
- * @param {Object[]} accomplishmentsObjArr array of accomplishments objects
+ * @param {accomplishemntsObj[]} accomplishmentsObjArr array of accomplishments objects
  * @param {Object} options contains byCurrentMonth (Boolean) and byCurrentYear (Boolean)
- * @returns {Object[]}
+ * @throws {Error} if options has incorrect parameter settings
+ * @returns {accomplishemntsObj[]}
  */
 function filterAccomplishments(
     accomplishmentsObjArr,
@@ -96,7 +97,7 @@ function filterAccomplishments(
 /**
  * Populate the accomplishments table given an arry of accomplishments objects.
  * Puts every accomplishment on a new row.
- * @param {Object[]} accomplishmentsObjArr array of accomplishments objects
+ * @param {accomplishemntsObj[]} accomplishmentsObjArr array of accomplishments objects
  */
 function populateTable(accomplishmentsObjArr) {
     _clearTable();
@@ -118,6 +119,7 @@ function populateTable(accomplishmentsObjArr) {
             const dateElement = document.createElement("td");
             // content of the accomplishment
             const accomplishmentElement = document.createElement("td");
+            accomplishmentElement.classList.add("content-cell");
             // add the text
             dateElement.innerHTML = fullDate;
             accomplishmentElement.innerHTML = contentOfAccomplishment[i];
@@ -131,7 +133,7 @@ function populateTable(accomplishmentsObjArr) {
 
 /**
  * Get the date of an accomplishments object as a Date object
- * @param {Object} accomplishmentsObj an accomplishments object - has date and content fields
+ * @param {accomplishemntsObj} accomplishmentsObj an accomplishments object - has date and content fields
  * @returns {Date} Date object corresponding to the accomplishments object's date
  */
 function _getDate(accomplishmentsObj) {
@@ -148,8 +150,8 @@ function _clearTable() {
 
 /**
  * return a shallow copy of an array that still points to the accomplishments objects
- * @param {Object[]} AccomplishmentsObjArr array of accomplishments objects
- * @returns {Object[]} shallow copy of parameter
+ * @param {accomplishemntsObj[]} AccomplishmentsObjArr array of accomplishments objects
+ * @returns {accomplishemntsObj[]} shallow copy of parameter
  */
 function _copyAccomplishments(AccomplishmentsObjArr) {
     let copiedAccomplishmentsObj = [];
@@ -160,11 +162,11 @@ function _copyAccomplishments(AccomplishmentsObjArr) {
 }
 
 /**
- * Filter and sort (reverse or not) an array of all accomplishments objects already sorted by oldest
- * @param {Object[]} allAccomplishmentsByOldest accomplishment objects sorted by oldest 1st
- * @param {Object} options contains sortByOldest (boolean) and filterBy (String: "none", "month", or "year")
+ * Filter and sort (reverse or not) array of all accomplishments objects already sorted by oldest
+ * @param {accomplishemntsObj[]} allAccomplishmentsByOldest accomplishment objects sorted by oldest
+ * @param {Object} options has sortByOldest (boolean) & filterBy (String: "none", "month", "year")
  * @throws {Error} if options has incorrect parameter settings
- * @returns {Object[]} filtered and sorted list of accomplishment objects
+ * @returns {accomplishemntsObj[]} filtered and sorted list of accomplishment objects
  */
 function _getAccomplishmentsToDisplay(
     allAccomplishmentsByOldest,
@@ -205,6 +207,11 @@ function _getAccomplishmentsToDisplay(
     return accomplishmentsToDisplay;
 }
 
+/**
+ * This function is called when the window is loaded.
+ * @function
+ * @name window.onload
+ */
 window.onload = function () {
     // load in accomplishments and display a message if there are none
     const allAccomplishments = loadAccomplishmentFromStorage();

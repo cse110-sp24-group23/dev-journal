@@ -13,9 +13,25 @@ document.getElementById('password-form').addEventListener('submit', async functi
      //console log incorrect password if the passwords do not match
      //TODO: show incorrect password error on the page
     else{
-        console.log("passwords do not match");
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.style.display = 'block';
     }
 })
+//Toggles visibility of the try again button when an error message is shown.
+const tryAgainBtn = document.getElementById('try-again-button')
+tryAgainBtn.addEventListener('click', function(){
+    const errorMessage = document.querySelector('.error');
+    errorMessage.style.display='none';
+})
+//Changes the visibility of the password settings form. If the password protection option is checked, then the form is visible.
+document.getElementById('toggle-password-form').addEventListener('change', function() {
+    const form = document.getElementById('password-form');
+    if (this.checked) {
+        form.classList.remove('hidden');
+    } else {
+        form.classList.add('hidden');
+    }
+});
 
 /*
     Hashes the input password using SHA-256 algorithm
@@ -26,8 +42,10 @@ document.getElementById('password-form').addEventListener('submit', async functi
     */
 async function hashPassword(password) {
     const msgUint8 = new TextEncoder().encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    const hashHex = hashArray
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
     return hashHex;
 }

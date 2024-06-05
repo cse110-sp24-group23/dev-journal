@@ -1,3 +1,5 @@
+/*global SimpleMDE*/
+// ^^ show SimpleMDE is a global function to not aggravate linter
 import LocalStorageRecordsApi from "../backend-storage/records-api.js";
 import { Record } from "../backend-storage/record-class.js";
 // Wait until page loads
@@ -43,22 +45,4 @@ function init() {
         tabSize: 4,
     });
     simplemde_reflection.value(record.field2);
-    /*
-    Saves text from the markdown editors into localStorage
-    Parameters:
-    Returns:
-    */
-    function saveTextInStorage() {
-        // TODO
-        // get text from editor with simplemde.value();
-    }
-
-    /*
-    Gets text from the localStorage and populates it in the markdown editors
-    Parameters:
-    Returns:
-    */
-    function getTextFromStorage() {
-        // TODO
-    }
 }

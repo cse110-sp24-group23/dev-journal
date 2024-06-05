@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notes Page</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Notes Page</title>
 
-    <!-- Stylesheet-->
-    <link rel="stylesheet" href="notes.css" />
+        <!-- Stylesheet-->
+        <link rel="stylesheet" href="notes.css" />
 
-    <!-- Script -->
-    <script src="/src/navbar/navbar.js"></script>
-    <script src="notes.js" type="module"></script>
-    <script src="note-element.js"></script>
-  </head>
-  <body>
-    <div id="navbar"></div>
-    <main>
-      <div class="content">
-        <h1>Notes</h1>
-        <div class="buttons">
-          <button id="add-note-btn">Add Note</button>
-          <button id="delete-note-btn" display="block">Delete Note</button>
-          <button id="done-deleting-note-btn" class="hidden">
-            Done Deleting
-          </button>
-        </div>
-        <div class="js-notes-container"></div>
-        <div class="notes-display"></div>
-      </div>
-    </main>
-  </body>
+        <!-- Script -->
+        <script src="../navbar/navbar.js"></script>
+        <script src="notes.js" type="module"></script>
+        <script src="note-element.js"></script>
+    </head>
+    <body>
+        <div id="navbar"></div>
+        <main>
+            <div class="content">
+                <h1>Notes</h1>
+                <div class="buttons">
+                    <button id="add-note-btn">Add Note</button>
+                    <button id="delete-note-btn" display="block">
+                        Delete Note
+                    </button>
+                    <button id="done-deleting-note-btn" class="hidden">
+                        Done Deleting
+                    </button>
+                </div>
+                <div class="js-notes-container"></div>
+                <div class="notes-display"></div>
+            </div>
+        </main>
+    </body>
 </html>

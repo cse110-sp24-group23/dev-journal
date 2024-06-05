@@ -18,12 +18,11 @@ document.getElementById('input-password-form').addEventListener('submit', async 
     }
 })
 }
+//go directly to the calendar page if there is no password set
 else{
-    //go directly to the calendar page if there is no password set
     window.location.href = '/src/calendar/calendar.html';
 }
 });
-
 
 //Toggles visibility of the try again button when an error message is shown.
 const tryAgainBtn = document.getElementById('try-again-button')

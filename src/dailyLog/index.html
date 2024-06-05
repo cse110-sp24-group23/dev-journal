@@ -18,9 +18,9 @@
         />
 
         <!-- Scripts -->
-        <script src="/src/navbar/navbar.js"></script>
+        <script src="../navbar/navbar.js"></script>
         <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-        <script type="module" src="simpleMDE.js"></script>
+        <script type="module" src="./simpleMDE.js"></script>
         <script type="module" src="./dailyLog.js"></script>
     </head>
     <body>
@@ -67,6 +67,22 @@ What things can you do in the future?"
                     ></textarea>
                 </label>
             </form>
+            <!-- input field for entering a new accomplishment -->
+            <input
+                type="text"
+                class="accomplishment-input js-accomplishment-input"
+            />
+            <!-- button to add the new accomplishment as list element -->
+            <button
+                type="button"
+                id="add-accomplishment-button"
+                class="js-add-accomplishment"
+                title="add accomplishmentt"
+            >
+                Add Accomplishment
+            </button>
+            <!-- paragraph element to display the list of accomplishments -->
+            <p class="accomplishment--list js-accomplishment-list"></p>
         </main>
     </body>
 </html>

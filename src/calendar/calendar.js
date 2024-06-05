@@ -1,5 +1,5 @@
 import { Calendar } from "./calendar-class.js";
-import LocalStorageRecordsApi from "../backend-storage/records-api.js";
+import RecordsStorage from "../backend-storage/records-api.js";
 import { Record } from "../backend-storage/record-class.js";
 
 /*
@@ -16,11 +16,11 @@ function calendarFunctionality(calendar) {
     // populate table upon page load with defaults (current month and year)
     calendar.populateMonthView();
     // go to prev month when prev button is clicked
-    prevMonthButton.addEventListener("click", (event) => {
+    prevMonthButton.addEventListener("click", () => {
         calendar.prevMonthView();
     });
     // go to next month when next button is clicked
-    nextMonthButton.addEventListener("click", (event) => {
+    nextMonthButton.addEventListener("click", () => {
         calendar.nextMonthView();
     });
 }
@@ -40,8 +40,8 @@ function addClickToDays(calendar) {
             // gets the date of the cell which was clicked
             const dateObject = calendar.getDateOfDayCell(day);
             // if record object for the date already exists, get that, else make a new record object.
-            if (LocalStorageRecordsApi.hasRecordByDate(dateObject)) {
-                record = LocalStorageRecordsApi.getRecordByDate(dateObject);
+            if (RecordsStorage.hasRecordByDate(dateObject)) {
+                record = RecordsStorage.getRecordByDate(dateObject);
             } else {
                 record = new Record("log", { date: dateObject });
             }

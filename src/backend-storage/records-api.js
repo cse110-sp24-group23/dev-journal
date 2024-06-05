@@ -21,22 +21,37 @@ export class RecordsApi {
         throw new Error("getAllRecords not implemented");
     }
     static createRecord(recordToCreate) {
+        if (!recordToCreate) {
+            throw new Error("recordToCreate must be defined");
+        }
         throw new Error("createRecord not implemented");
     }
 
     static updateRecord(recordToUpdate) {
+        if (!recordToUpdate) {
+            throw new Error("recordToUpdate must be defined");
+        }
         throw new Error("updateRecord not implemented");
     }
 
     static getRecordById(id) {
+        if (!id) {
+            throw new Error("id must be defined");
+        }
         throw new Error("getRecordById not implemented");
     }
 
     static getRecordByDate(date) {
+        if (!date) {
+            throw new Error("date must be defined");
+        }
         throw new Error("getRecordByDate not implemented");
     }
 
     static deleteRecord(id) {
+        if (!id) {
+            throw new Error("id must be defined");
+        }
         throw new Error("deleteRecord not implemented");
     }
 }
@@ -134,6 +149,7 @@ export default class LocalStorageRecordsApi extends RecordsApi {
         existingRecord.hours = recordObject.hours;
         existingRecord.field1 = recordObject.field1;
         existingRecord.field2 = recordObject.field2;
+        existingRecord.hasAccomplishment = recordObject.hasAccomplishment;
         existingRecord.updated = new Date().toISOString();
         localStorage.setItem("Records", JSON.stringify(Records));
     }

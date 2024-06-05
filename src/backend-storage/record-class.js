@@ -7,7 +7,8 @@ export class Record {
     created;
     updated;
     id;
-    date; //added adte for log because need to access localstorage
+    date;
+    hasAccomplishment;
     constructor(
         type,
         options = {
@@ -38,6 +39,7 @@ export class Record {
         const currentDate = new Date();
         this.created = currentDate.toISOString();
         this.updated = currentDate.toISOString();
+        this.hasAccomplishment = false;
         if (type === "log") {
             // logDate should only contain year, month and date (hours, seconds, milliseconds = 0)
             const logDate = new Date(

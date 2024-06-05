@@ -133,12 +133,16 @@ class Note extends HTMLElement {
         // set the shadow DOM for the note element to contain its displayed member variables
         this.shadow.innerHTML = `
         <p id="date">${this._formatDate(this._date)}</p>
-        <p>${this._title}</p>
-        <p class="preview">${this._preview}</p>
+        <p id="title">${this._title}</p>
+        <p id="preview">${this._preview}</p>
         <img tabindex=0 src="../assets/icons/trash-icon.svg" alt="Delete" class="hidden js-trash" id="js-trash">
         <style>
-            .preview {
+            #preview {
                 color: gray;
+                overflow-wrap: break-word;
+            }
+            #title {
+                overflow-wrap: break-word;
             }
             img {
                 height: 2em;

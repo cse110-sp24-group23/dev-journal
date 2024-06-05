@@ -7,7 +7,8 @@
     --active-color: rgb(226, 227, 254);
     --hover-color: rgba(226, 227, 254, 0.6);
 
-    --size-of-navBar: 9vh;
+    --width-navBar: 65px;
+    --height-navBar: 100%;
     --main-margin: 60px;
 
     /* Variables for the app icon and name*/
@@ -32,7 +33,7 @@
 /* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {
     :root {
-        --size-of-navBar: 70px;
+        --width-navBar: 70px;
         --title-size: 20px;
         --main-margin: 80px;
         --app-icon-size: 40px;
@@ -47,7 +48,7 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     :root {
-        --size-of-navBar: 70px;
+        --width-navBar: 70px;
         --title-size: 22px;
         --main-margin: 80px;
         --app-icon-size: 40px;
@@ -62,14 +63,14 @@
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     :root {
-        --size-of-navBar: 175px;
+        --width-navBar: 175px;
         --title-size: 22px;
         --main-margin: 180px;
         --app-icon-size: 48px;
         --nav-link-font-size: 17px;
         --nav-icon-size: 26px;
     }
-    /* Display the Name of the app */
+    /* Display application title text */
     .app-text {
         display: block;
     }
@@ -84,13 +85,13 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     :root {
-        --size-of-navBar: 215px;
+        --width-navBar: 215px;
         --main-margin: 220px;
         --app-icon-size: 64px;
         --nav-link-font-size: 20px;
         --nav-icon-size: 32px;
     }
-    /* Display the Name of the app */
+    /* Display application title text */
     .app-text {
         display: block;
     }
@@ -109,8 +110,8 @@ main {
 
 /* Navbar */
 .navbar {
-    width: var(--size-of-navBar);
-    height: 100%;
+    width: var(--width-navBar);
+    height: var(--height-navBar);
     background-color: var(--navbar-color);
     font-family: var(--font);
     position: fixed;
@@ -127,7 +128,6 @@ main {
     gap: var(--app-title-gap);
 }
 
-/* Noted title txt attributes */
 .app-text {
     font-size: var(--app-title-size);
     font-weight: var(--title-font-weight);
@@ -168,13 +168,13 @@ main {
     height: var(--nav-icon-size);
 }
 
-/* Hover states */
-.nav-link:hover {
-    background-color: var(--hover-color);
-}
-
 /* Active states */
 .nav-link.active {
     background-color: var(--active-color);
     font-weight: bold;
+}
+
+/* Hover states */
+.nav-link:hover {
+    background-color: var(--hover-color);
 }

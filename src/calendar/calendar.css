@@ -1,9 +1,9 @@
 /* Variables */
 :root {
-    --table-head-text-color: #1D1C1D;
-    --current-date-color: rgba(226,227,255,255);
-    --calendar-background-color: rgba(244,249,255,255);
-    --calendar-grid-color: rgba(86,124,168,255);
+    --table-head-text-color: #1d1c1d;
+    --current-date-color: rgba(226, 227, 255, 255);
+    --calendar-background-color: rgba(244, 249, 255, 255);
+    --calendar-grid-color: rgba(86, 124, 168, 255);
     --font: "Lato", sans-serif;
     --table-head-background-color: rgb(185, 209, 238);
     --today-background-color: rgb(226, 227, 254);
@@ -13,6 +13,9 @@
     --calendar-background: rgb(244, 249, 255);
     --calendar-heading: rgb(185, 209, 238);
     --calendar-border: rgb(33, 83, 138);
+    --calendar-table-width: 100%;
+    --calendar-table-td-height: 8vh;
+    --calendar-table-td-width: 5vh;
     --cell-padding: 12px;
     --gap-buttons: 15px;
     --prev-next-buttons: 30px;
@@ -58,17 +61,24 @@
     }
 }
 
+/* Setting the font for the whole body */
+body {
+    font-family: var(--font);
+}
+
 /* Flexbox container for header */
 .header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 /* Main heading */
 h1 {
     font-weight: normal;
     font-size: var(--font-size-heading);
 }
+
 /* Button container */
 .button-container {
     display: flex; /* using flex box to place the buttons */
@@ -90,26 +100,16 @@ h1 {
     color: var(--month-button-hover-color);
 }
 
-/* Setting the font for the whole body */
-body {
-    font-family: var(--font);
-}
-
 /* Adjustable Calendar and border */
 .calendar-table {
     border-collapse: collapse;
-    width: 100%;
+    width: var(--calendar-table-width);
     background-color: var(--calendar-background);
 }
 
 /* Month and Year Header */
 h1 {
-    font-family: 'Lato', sans-serif;
-}
-
-/* Body */
-body {
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
 }
 
 /* Days of the Week */
@@ -117,19 +117,12 @@ thead {
     color: var(--table-head-text-color);
     background-color: var(--table-head-background-color);
 }
+
+
 /* Making font lighter for heading */
 th {
     font-size: var(--font-size-calendar-heading);
     font-weight: var(--font-weight-table);
-}
-
-/* Day of the Month  */
-.calendar-table td {
-    text-align: center;
-    height: 8vh;
-    width: 5vh;
-    vertical-align: top;
-    font-size: var(--font-size-calendar-text);
 }
 
 /* Calendar border */
@@ -140,12 +133,28 @@ th {
     padding: var(--cell-padding);
 }
 
-/* Current Date */
-.current-date {
-    background-color: var(--today-background-color);
-    font-weight: bold;
+/* Body */
+body {
+    font-family: "Lato", sans-serif;
 }
+
+/* Day of the Month  */
+.calendar-table td {
+    text-align: center;
+    height: var(--calendar-table-td-height);
+    width: var(--calendar-table-td-width);
+    vertical-align: top;
+    font-size: var(--font-size-calendar-text);
+}
+
 /* Changing the color of the rolover dates */
 .rollover-date {
     color: var(--rollover-date-color);
 }
+
+/* Current Date */
+td.current-date {
+    background-color: var(--today-background-color);
+    font-weight: bold;
+}
+

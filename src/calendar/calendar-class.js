@@ -1,3 +1,5 @@
+import RecordsStorage from "../backend-storage/records-api.js";
+import AccomplishmentsStorage from "../backend-storage/accomplishments-api.js";
 /*
 TODO: 
     - add dateLink function from calendar.js as a public method
@@ -411,18 +413,46 @@ class Calendar {
             // get the date (e.g. 14) and put it into the cell
             const cellDate = calendarDateList[i];
             calendarDayCell.innerText = cellDate;
+            // make sure cell is accessible via keyboard
             calendarDayCell.tabIndex = "0";
-            // if date isn't in the current displayed month, gray it out
-            if (i < currMonthStartIdx || i >= nextMonthStartIdx) {
+            // cell month will either be the displayed month or +/- 1 from that for rollover dates
+            let cellMonth;
+            // by default cellYear is the currently displayed year. Gets edited if it isn't correct
+            let cellYear = this._displayedYear;
+            // date is in prev month's rollover
+            if (i < currMonthStartIdx) {
                 // gray out rollover dates for prev and next month that are displayed
                 calendarDayCell.classList.add(rolloverDateClass);
-            } else {
-                // otherwise, date is in displayedMonth
-                // don't gray it. Note: removing a class that isn't there does nothing
-                calendarDayCell.classList.remove(rolloverDateClass);
-                // highlight the cell if it matches the present date
-                this._highlightIfCurrDate(calendarDayCell, cellDate);
+                // get cellMonth and cellYear
+                cellMonth = this._handleMonthInput(this._displayedMonth - 1);
+                // if after going back a month, we're in december, we went back a year too
+                if (cellMonth == 11) {
+                    cellYear = this._displayedYear - 1;
+                }
             }
+            // date is in next month's rollover
+            else if (i >= nextMonthStartIdx) {
+                // gray out rollover dates for prev and next month that are displayed
+                calendarDayCell.classList.add(rolloverDateClass);
+                // get cellMonth and cellYear
+                cellMonth = this._handleMonthInput(this._displayedMonth + 1);
+                // if after going forward a month, we're in january, we went forward a year too
+                if (cellMonth == 0) {
+                    cellYear = this._displayedYear + 1;
+                }
+            }
+            // date is in current month
+            else {
+                // highlight the cell if it matches the current date
+                this._highlightIfCurrDate(calendarDayCell, cellDate);
+                // don't gray date - not rollover. Note: removing a nonexistent class does nothing
+                calendarDayCell.classList.remove(rolloverDateClass);
+                cellMonth = this._displayedMonth;
+            }
+            // create a Date object for the cell
+            const cellDateObj = new Date(cellYear, cellMonth, cellDate);
+            this._markLogCompleteIfExists(calendarDayCell, cellDateObj);
+            this._markAccomplishmentIfExists(calendarDayCell, cellDateObj);
         }
     }
 
@@ -430,7 +460,7 @@ class Calendar {
     Given a calendar day cell and its cell date (e.g. 16) to be displayed in the calendar table,
     if it matches the current date, add "current-date" class to it to highlight it in css
     Parameters:
-        - calendarDayCell: html td element of current date
+        - calendarDayCell: html td element of a date
         - cellDate: the date of the calendar day cell (it's innerText)
     Returns:
         - None, but does potentially add a class to highlight the cell in css
@@ -446,8 +476,72 @@ class Calendar {
         ) {
             // note: classlist isn't supported on Internet Explorer 9 or lower */
             calendarDayCell.classList.add(todayClass);
-        } else if (calendarDayCell.classList.contains(todayClass)) {
+        } else {
+            // if class not in classlist, remove does nothing
             calendarDayCell.classList.remove(todayClass);
+        }
+    }
+
+    /*
+    Given a calendarDayCell and a date object, if there is an accomplishment for that date, 
+    add an icon and text in the cell in the month view to show there is an accomplishment
+    Parameters:
+        - calendarDayCell: html td element of a date
+        - cellDateObj: A date object for the calendarDayCell 
+            - should only be based of year, month, date - not hours, seconds, or ms
+    Returns:
+        - None, but does potentially edit the innerhtml and class of the cell
+    */
+    _markAccomplishmentIfExists(calendarDayCell, cellDateObj) {
+        const accomplishmentClass = "has-accomplishment";
+        // if there are accomplishment(s) for the given date, update the calendarDayCell
+        if (AccomplishmentsStorage.hasAccomplishmentsObjByDate(cellDateObj)) {
+            // create elements and update attributes
+            // container to hold icon and text
+            const accomplishmentsMarker = document.createElement("div");
+            // text to show it's an accomplishment
+            const accomplishmentText = document.createElement("span");
+            // accomplishmentText.innerHTML = "Accomplishment";
+            accomplishmentText.style.fontSize = "17px";
+            // icon for the accomplishment
+            const accomplishmentIcon = document.createElement("img");
+            accomplishmentIcon.style.width = "17px";
+            accomplishmentIcon.style.display = "inline-block";
+            accomplishmentIcon.src = "../assets/icons/accomplishments-icon.svg";
+            // add elements to container and add container to page
+            accomplishmentsMarker.appendChild(accomplishmentIcon);
+            accomplishmentsMarker.appendChild(accomplishmentText);
+            calendarDayCell.appendChild(accomplishmentsMarker);
+            // add class to style the accomplishments
+            calendarDayCell.classList.add(accomplishmentClass);
+        } else {
+            calendarDayCell.classList.remove(accomplishmentClass);
+        }
+    }
+
+    /*
+    Given a calendarDayCell and a date object, if there is a log for that date, 
+    add a green checkmark icon to show there is a log for that date
+    Parameters:
+        - calendarDayCell: html td element of a date
+        - cellDateObj: A date object for the calendarDayCell 
+            - should only be based of year, month, date - not hours, seconds, or ms
+    Returns:
+        - None, but does potentially edit the innerhtml and class of the cell
+    */
+    _markLogCompleteIfExists(calendarDayCell, cellDateObj) {
+        const loggedIcon = document.createElement("img");
+        loggedIcon.src = "../assets/icons/check-icon.svg";
+        loggedIcon.style.display = "block";
+        loggedIcon.style.margin = "0 auto";
+        const checkmarkClass = "has-log";
+        // if there is a log for the given date, update the calendarDayCell
+        if (RecordsStorage.hasRecordByDate(cellDateObj)) {
+            calendarDayCell.classList.add(checkmarkClass);
+            calendarDayCell.appendChild(loggedIcon);
+        } else {
+            // remove the class, and make sure there isn't any checkmark icon
+            calendarDayCell.classList.remove(checkmarkClass);
         }
     }
 }

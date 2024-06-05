@@ -93,3 +93,31 @@ button:hover {
     vertical-align: middle;
 }
 
+.error{
+    font-size: 15px;
+    font-weight: bold;
+    display: none; /* Hidden by default */
+    color: red;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 5px;
+    margin-top: 1px;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.error button{
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #21528B;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.error button:hover {
+    background-color: #E2EFFF;
+    color: #21528B;
+}

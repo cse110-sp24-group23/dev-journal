@@ -8,7 +8,7 @@ document.getElementById('password-form').addEventListener('submit', async functi
     if (newPassword === confirmPassword){
         const hashedPassword = await hashPassword(confirmPassword);
         localStorage.setItem('storedHashedPassword', hashedPassword);
-        window.location.href = '/src/calendar/calendar.html';
+        window.location.href = '../calendar/calendar.html';
     }
      //console log incorrect password if the passwords do not match
      //TODO: show incorrect password error on the page

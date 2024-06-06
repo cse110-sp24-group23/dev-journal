@@ -22,6 +22,10 @@ body {
     font-family: var(--font);
 }
 
+h1 {
+    font-weight: bold;
+}
+
 label[for=filter-options] {
     font-size: var(--filter-font-size);
     margin: var(--filter-margin);

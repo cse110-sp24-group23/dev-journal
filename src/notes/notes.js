@@ -29,7 +29,8 @@ function loadAllNotesFromStorage() {
         noteElem.date = noteRecord.created;
         noteElem.content = noteRecord.field1;
         // add note element to html page
-        notesDisplay.prepend(noteElem);
+        //notesDisplay.prepend(noteElem);
+        _addFadeIn(noteElem, notesDisplay);
         // add listeners to note element that check if it is clicked to update it
         _addListeners(noteElem);
     }
@@ -77,7 +78,44 @@ function deleteFromStorage(noteId) {
     RecordsStorage.deleteRecord(parseInt(noteId));
     const notesDisplay = document.querySelector(".notes-display");
     const noteElem = notesDisplay.querySelector(`note-element[id="${noteId}"]`);
-    noteElem.remove();
+    _removeFadeOut(noteElem);
+}
+
+/*
+Given a note element, remove it from the page while fading it out
+Parameters:
+    - noteElem: custom note element - reference to the note that is being deleted
+Returns: None
+*/
+function _removeFadeOut(noteElem) {
+    //Fade out for 300 ms
+    const milliseconds = 300;
+    noteElem.style.transition = "opacity " + milliseconds + "ms ease";
+    //After the note had faded out, remove it from the page
+    noteElem.style.opacity = 0;
+    setTimeout(function () {
+        noteElem.remove();
+    }, milliseconds);
+}
+
+/*
+Given a note element, add it to the page while fading it in
+Parameters:
+    - noteElem: custom note element - reference to the note that is being added
+    - parent: container that the note will be added to
+Returns: None
+*/
+function _addFadeIn(noteElem, parent) {
+    //Add the note onto the page at opacity 0
+    parent.prepend(noteElem);
+    noteElem.style.opacity = 0;
+    //Fade in the note over 300 ms
+    const milliseconds = 300;
+    noteElem.style.transition = "opacity " + milliseconds + "ms ease-in";
+    //Display the note at full opacity after 300 ms
+    setTimeout(function () {
+        noteElem.style.opacity = 1;
+    }, milliseconds);
 }
 
 /*
@@ -166,7 +204,8 @@ function _loadNotefromStorage(id = null) {
     noteElem.date = noteRecord.created;
     noteElem.content = noteRecord.field1;
     // add note element to page and add its event listeners
-    notesDisplay.prepend(noteElem);
+    //notesDisplay.prepend(noteElem);
+    _addFadeIn(noteElem, notesDisplay);
     _addListeners(noteElem);
 }
 

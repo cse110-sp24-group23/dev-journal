@@ -1,3 +1,4 @@
+/* variables */
 :root {
     --primary-font-size: 16px;
     --error-color: red;
@@ -9,6 +10,8 @@
     --button-hover-bg-color: #E2EFFF;
     --button-hover-color: #21528B;
 }
+
+/* tags */
 /* Center the form in the middle of the page */
 body {
     display: flex;
@@ -18,20 +21,17 @@ body {
     margin: 0;
 }
 
-/* Styling for the form */
 form {
     border: 2px solid var(--form-border-color);
     padding: 20px;
     border-radius: 10px;
 }
 
-/* Styling for the form label */
 label {
     font-size: var(--button-font-size);
     font-weight: bold;
 }
 
-/* Styling for the input field */
 input[type="password"] {
     font-size: var(--button-font-size);
     border: 2px solid var(--form-border-color);
@@ -39,7 +39,6 @@ input[type="password"] {
     padding: 5px;
 }
 
-/* Styling for the submit button */
 button[type="submit"] {
     font-size: var(--button-font-size);
     font-weight: bold;
@@ -51,15 +50,16 @@ button[type="submit"] {
     border-radius: 5px;
 }
 
-/* Styling for the submit button on hover */
 button[type="submit"]:hover {
     background-color: var(--button-hover-bg-color);
     color: var(--button-hover-color);
 }
 
+/* classes */
+/* Styling for error message & try again button when passwords don't match */
 .error {
     font-size: var(--primary-font-size);
-    display: none; /* Hidden by default */
+    display: none; 
     color: var(--error-color);
     background-color: var(--error-background-color);
     border: 1px solid var(--error-border-color);

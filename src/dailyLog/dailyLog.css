@@ -1,23 +1,18 @@
 /* Variables */
 :root {
     --font: "Lato", sans-serif;
-    --margin-heading: 15px;
-    --margin-form: 30px;
     --height-textarea: 30vh;
     --button-background-hover: rgb(188, 208, 237);
     --delete-button-background-hover: rgb(228, 87, 87);
     --button-background: rgb(244, 249, 255);
-    --font-size-heading: 30px;
     --font-size-form: 22px;
     --font-size-text-input: 18px;
-    --margin-save-button-top: 15px;
     --textarea-padding: 20px;
 }
 /* Vary size of text based on screen size */
 /* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {
     :root {
-        --font-size-heading: 32px;
         --font-size-form: 22px;
         --font-size-text-input: 18px;
     }
@@ -25,7 +20,6 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     :root {
-        --font-size-heading: 35px;
         --font-size-form: 23px;
         --font-size-text-input: 19px;
     }
@@ -33,7 +27,6 @@
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     :root {
-        --font-size-heading: 35px;
         --font-size-form: 23px;
         --font-size-text-input: 20px;
     }
@@ -41,7 +34,6 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     :root {
-        --font-size-heading: 40px;
         --font-size-form: 25px;
         --font-size-text-input: 22px;
     }
@@ -58,15 +50,10 @@ body {
 }
 
 h1 {
-    font-size: var(--font-size-heading);
     font-weight: normal;
-    margin-left: var(--margin-heading);
-    margin-right: var(--margin-heading);
 }
 
 form {
-    margin-left: var(--margin-form);
-    margin-right: var(--margin-form);
     font-size: var(--font-size-form);
 }
 
@@ -110,7 +97,6 @@ button:hover {
 }
 
 .accomplishment-input {
-    margin: var(--margin-heading);
     font-size: 20px;
 }
 
@@ -129,6 +115,7 @@ button:hover {
     cursor: pointer;
     font-size: 15px;
 }
+
 .accomplishment--list li {
     display: flex;
     font-size: var(--font-size-form);

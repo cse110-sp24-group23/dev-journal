@@ -21,6 +21,7 @@ function init() {
     let record;
     let today = new Date();
     today.setHours(0, 0, 0, 0);
+    // If the day's record does not exist, create a new Record
     if (!recordString) {
         if (!LocalStorageRecordsApi.hasRecordByDate(today)) {
             record = new Record("log", { date: today });
@@ -30,6 +31,7 @@ function init() {
     } else {
         record = JSON.parse(recordString);
     }
+    // Record field1
     simplemde_done_today.value(record.field1);
 
     const simplemde_reflection = new SimpleMDE({
@@ -41,5 +43,6 @@ function init() {
         promptURLs: true,
         tabSize: 4,
     });
+    // Record field2
     simplemde_reflection.value(record.field2);
 }

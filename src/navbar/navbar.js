@@ -31,13 +31,10 @@ function loadNavbar() {
                     // parse the record from string to object using JSON
                     const record = JSON.parse(recordString);
                     // if the record is null, add active to classname
-                    // else check if the record date is today, add active to classname, if not do add active to classname
                     if (!record) {
                         link.classList.add("active");
                     } else {
-                        //get date from record object
                         const date = new Date(record.date);
-                        // make new Date for today's date
                         const today = new Date();
                         today.setHours(0, 0, 0, 0);
                         // if date of record is equal today's date, add active to addname

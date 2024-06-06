@@ -245,7 +245,7 @@ function updateContentButtons(newItem, text) {
 
     // create a container for the accomplishment buttons
     const accomplishmentButtons = document.createElement("div");
-    accomplishmentButtons.classList.add("accomlishment-buttons");
+    accomplishmentButtons.classList.add("accomplishment-buttons");
     // create the Edit button
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";

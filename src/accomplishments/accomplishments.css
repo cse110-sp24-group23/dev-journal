@@ -23,7 +23,7 @@ body {
 }
 
 h1 {
-    font-weight: bold;
+    font-weight: normal;
 }
 
 label[for=filter-options] {

@@ -24,7 +24,7 @@ jobs:
                   source_dir: ./src
                   output_dir: ./out
                   recurse: true
-                  #   template: better-docs
+                  template: tidy-jsdoc
             - name: Upload to Cloudflare
               uses: cloudflare/wrangler-action@v3
               with:

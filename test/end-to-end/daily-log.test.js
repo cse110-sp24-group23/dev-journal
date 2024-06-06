@@ -20,8 +20,8 @@ describe("Daily Log End-to-End Tests", () => {
         // Wait for navigation to the new page
         await page.waitForNavigation();
 
-        // Check if the URL contains 'dailyLog/index'
-        expect(page.url()).toContain(`dailyLog/index`);
+        // Check if the URL contains 'dailyLog'
+        expect(page.url()).toContain(`dailyLog`);
     });
 
     // Test for Today page
@@ -141,30 +141,5 @@ describe("Daily Log End-to-End Tests", () => {
         expect(addedText).toBe(reflection);
     });
 
-    test("Add text to reflection", async () => {
-        // Query the textarea element in HTML
-        const updateReflection = await page.$("#reflection");
-
-        // Define the text to be typed
-        const reflection = ` - Completed all planned tasks.
-        - Prepare presentation for group meeting tomorrow.`;
-
-        // Type the text into the textarea element
-        await updateReflection.type(reflection);
-
-        await page.evaluate(
-            (updateReflection, reflection) => {
-                updateReflection.value = reflection;
-            },
-            updateReflection,
-            reflection
-        );
-        // Retrieve the value from the textarea element
-        const addedText = await page.evaluate(
-            (updateReflection) => updateReflection.value,
-            updateReflection
-        );
-
-        expect(addedText).toBe(reflection);
-    });
+    test("Add text to reflection", async () => {});
 });

@@ -24,6 +24,8 @@ function loadNavbar() {
             const currentPath = window.location.pathname;
             const navLinks = document.querySelectorAll(".nav-link");
             navLinks.forEach((link) => {
+                // Split the href of the link and the current path by "/"
+                // and compare the last segments of both match
                 if (
                     link.getAttribute("href").split("/").pop() ===
                     currentPath.split("/").pop()

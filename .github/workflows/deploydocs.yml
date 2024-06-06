@@ -5,6 +5,7 @@ on:
         branches:
             - main
             - Add-JSDocs-Building
+    workflow_dispatch:
 
 jobs:
     buildAndDeploy:
@@ -30,4 +31,4 @@ jobs:
               with:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-                  command: pages deploy ./out --project-name=docs-dev-journal --commit-dirty=true --branch=production
+                  command: pages deploy ./out --project-name=docs-dev-journal --commit-dirty=true --branch=main

@@ -6,15 +6,17 @@ document.getElementById('input-password-form').addEventListener('submit', async 
     console.log("here")
     event.preventDefault();
     const inputPassword = document.getElementById('password').value;
+    //hashed version of the input
     const hashedInputPassword = await hashPassword(inputPassword);
+    //retrive the stored hashed password
     const storedHashedPassword = localStorage.getItem('storedHashedPassword');
-    localStorage.setItem('authenticateKey', hashedInputPassword)
-    //check if input password is the same as the stored password
+    //set the authentication key to the hashed input password. this will be hashed again to verify the user has logged in
+    sessionStorage.setItem('authenticateKey', hashedInputPassword)
+    //check if input password is the same as the stored password, and redirect to the calendar if they are
     if(hashedInputPassword === storedHashedPassword){
         window.location.href = '/src/calendar/calendar.html';
     }
-    //console log incorrect password if they do not match
-
+    //display incorrect password error if they do not match
     else{
         const errorMessage = document.getElementById('error-message');
         errorMessage.style.display = 'block';

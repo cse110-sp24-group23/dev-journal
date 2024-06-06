@@ -1,11 +1,20 @@
+//check to see if a password exists. if it does, then make sure the user stays on the password page until they log in.
 if(localStorage.getItem('storedHashedPassword')){
 document.addEventListener('DOMContentLoaded', async function (event){
-    const authenticateValue = await hashPassword(localStorage.getItem('authenticateKey'))
+    //hash the input again and see if it matches with the double hashed password
+    const authenticateValue = await hashPassword(sessionStorage.getItem('authenticateKey'))
     if (localStorage.getItem('authenticateValue') !== authenticateValue) {
         window.location.href = '/src/password/landing.html'; // Redirect to password page
     }
 })
 }
+/*
+Hashes the input password using SHA-256 algorithm
+Parameters:
+    input password from user
+Returns:
+    hashed input password
+*/
 async function hashPassword(password) {
     const msgUint8 = new TextEncoder().encode(password);
     const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8);

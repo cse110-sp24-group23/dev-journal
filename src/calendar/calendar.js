@@ -1,8 +1,6 @@
 import { Calendar } from "./calendar-class.js";
 import RecordsStorage from "../backend-storage/records-api.js";
 import { Record } from "../backend-storage/record-class.js";
-import { AccomplishmentsObj } from "../backend-storage/accomplishments-class.js";
-import AccomplishmentsStorage from "../backend-storage/accomplishments-api.js";
 
 /*
     Uses Calendar class from ./calendar-class.js to populate the month view and show the next
@@ -18,11 +16,11 @@ function calendarFunctionality(calendar) {
     // populate table upon page load with defaults (current month and year)
     calendar.populateMonthView();
     // go to prev month when prev button is clicked
-    prevMonthButton.addEventListener("click", (event) => {
+    prevMonthButton.addEventListener("click", () => {
         calendar.prevMonthView();
     });
     // go to next month when next button is clicked
-    nextMonthButton.addEventListener("click", (event) => {
+    nextMonthButton.addEventListener("click", () => {
         calendar.nextMonthView();
     });
 }

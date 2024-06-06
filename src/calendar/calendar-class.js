@@ -507,6 +507,7 @@ class Calendar {
             const accomplishmentIcon = document.createElement("img");
             accomplishmentIcon.style.width = "17px";
             accomplishmentIcon.style.display = "inline-block";
+            accomplishmentIcon.style.padding = "5px 5px 5px 5px";
             accomplishmentIcon.src = "../assets/icons/accomplishments-icon.svg";
             // add elements to container and add container to page
             accomplishmentsMarker.appendChild(accomplishmentIcon);
@@ -534,6 +535,7 @@ class Calendar {
         loggedIcon.src = "../assets/icons/check-icon.svg";
         loggedIcon.style.display = "block";
         loggedIcon.style.margin = "0 auto";
+        loggedIcon.style.padding = "5px 5px 5px 5px";
         const checkmarkClass = "has-log";
         // if there is a log for the given date, update the calendarDayCell
         if (RecordsStorage.hasRecordByDate(cellDateObj)) {

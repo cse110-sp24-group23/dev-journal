@@ -4,9 +4,8 @@ on:
     push:
         branches:
             - main
+            - dev
             - Add-JSDocs-Building
-    workflow_dispatch:
-
 jobs:
     buildAndDeploy:
         runs-on: ubuntu-latest
@@ -31,4 +30,4 @@ jobs:
               with:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
                   accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-                  command: pages deploy ./out --project-name=docs-dev-journal --commit-dirty=true --branch=main
+                  command: pages deploy ./out --project-name=docs-dev-journal --commit-dirty=true --branch=${{ github.ref_name }}

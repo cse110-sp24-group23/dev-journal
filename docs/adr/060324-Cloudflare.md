@@ -16,6 +16,6 @@ We also want to host documentation, but again run into the same issue with GitHu
 Option: Use Cloudflare
 
 It's fairly obvious - Cloudflare lets us have an absurd number of "preview" pages, thus we can have one for each branch (or even push).
-This let's us to end to end testing fairly effectively, while also not making a heinous github action that copies things all over the place.
+This let's us do end to end testing fairly effectively, while also not making a heinous github action that copies things all over the place.
 Cloudflare has the wrangler github action which makes deployment simple, and we can use secrets to deploy, meaning no hard coding.
 Lastly, with the "infrastructure" in place, we can also host our documentation site with relative ease.

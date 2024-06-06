@@ -1,27 +1,42 @@
 /* Variables */
 :root {
     --font: "Lato", sans-serif;
-    --height-textarea: 30vh;
     --button-background-hover: rgb(188, 208, 237);
     --delete-button-background-hover: rgb(228, 87, 87);
     --button-background: rgb(244, 249, 255);
-    --font-size-form: 22px;
-    --font-size-text-input: 18px;
+    --font-size-form: 16px;
+    --font-size-text-input: 15px;
     --textarea-padding: 20px;
+    --margin-right: 15px;
+    --input-button-radius: 10px;
+    --button-padding: 10px;
+    --accomplishment-list-padding: 5px;
+    --accomplishment-border-color: rgb(188, 208, 237);
+    --accomplishment-border-width: 1px;
+    --remove-bottom-border: 1px;
+    --margin-accomplishments: 20px;
+    --gap-between-buttons: 2px;
+    --accomplishment-buttons-size: 10px;
 }
 /* Vary size of text based on screen size */
 /* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {
     :root {
-        --font-size-form: 22px;
-        --font-size-text-input: 18px;
+        --font-size-form: 17px;
+        --font-size-text-input: 16px;
+        --margin-right: 18px;
+        --button-padding: 11px;
+        --accomplishment-buttons-size: 10px;
     }
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     :root {
-        --font-size-form: 23px;
+        --font-size-form: 22px;
         --font-size-text-input: 19px;
+        --margin-right: 20px;
+        --button-padding: 12px;
+        --accomplishment-buttons-size: 12px;
     }
 }
 /* Medium devices (landscape tablets, 768px and up) */
@@ -29,106 +44,119 @@
     :root {
         --font-size-form: 23px;
         --font-size-text-input: 20px;
+        --margin-right: 22px;
+        --button-padding: 14px;
+        --accomplishment-buttons-size: 13px;
     }
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     :root {
-        --font-size-form: 25px;
+        --font-size-form: 24px;
         --font-size-text-input: 22px;
+        --margin-right: 24px;
+        --button-padding: 15px;
+        --accomplishment-buttons-size: 15px;
     }
 }
 
+/* Setting the font and margin for the whole body */
 body {
     font-family: var(--font);
+    margin-right: var(--margin-right);
 }
 
+/* Main heading */
+h1 {
+    font-weight: normal;
+}
+
+/* Form font styling */
+form {
+    font-size: var(--font-size-form);
+}
+
+/* Basic button styling */
+button {
+    padding: var(--button-padding);
+    font-size: var(--font-size-text-input);
+    background-color: var(--button-background);
+    border-width: 0;
+    border-radius: var(--input-button-radius);
+    cursor: pointer;
+}
+
+/* Flex box with the heading and delete button */
 .header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-h1 {
-    font-weight: normal;
+/* Hide elements with classname hidden */
+.hidden {
+    display: none;
 }
 
-form {
-    font-size: var(--font-size-form);
+/* Accomplishments list */
+.accomplishment--list {
+    margin-top: var(--margin-accomplishments);
+    margin-bottom: var(--margin-accomplishments);
 }
 
-/* Main form elements */
-form textarea {
-    border: none;
-    background: var(--textarea-background);
-    width: 100%;
-    box-sizing: border-box; /* Ensures padding does not affect width */
-    height: 24vh;
+/* Accomplishments Content within list element */
+.accomplishment-text {
+    padding: var(--accomplishment-list-padding);
+    /* Flex box to put bittons on the right side of the page */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-style: solid;
+    border-width: var(--accomplishment-border-width);
+    border-color: var(--accomplishment-border-color);
+    border-radius: var(--input-button-radius);
+    /* Overlapping borders */
+    margin-bottom: var(--remove-bottom-border);
+}
+/* Accomplishments buttons styling */
+.accomplishment-buttons {
+    display: flex;
+}
+
+/* Font styling for all the input and textareas*/
+form textarea,
+input[type="number"],
+.accomplishment-input,
+.accomplishment-text {
     font-size: var(--font-size-text-input);
-    resize: vertical;
 }
 
-form input[type="number"] {
-    border-radius: 5px;
-}
-
-#hours {
-    margin-top: 20px;
-    font-size: var(--font-size-text-input);
-}
-
-button {
-    padding: 20px;
-    font-size: var(--font-size-text-input);
-    background-color: var(--button-background);
-    border-width: 0;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
+/* Change color of button on hover */
 button:hover {
     background-color: var(--button-background-hover);
-    border-width: 0;
 }
 
+/* Input box radius styling */
+form input[type="number"],
+.accomplishment-input {
+    border-radius: var(--input-button-radius);
+}
+
+/* Change color of delete buttons to red on hover */
 #delete-button:hover,
 #delete:hover {
     background-color: var(--delete-button-background-hover);
 }
 
-.accomplishment-input {
-    font-size: 20px;
-}
-
-#add-accomplishment-button {
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
+/* Font for buttons inside accomplishments */
 #edit,
 #done,
 #delete {
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
+    font-size: var(--accomplishment-buttons-size);
 }
 
-.accomplishment--list li {
-    display: flex;
-    font-size: var(--font-size-form);
-    align-items: flex-end;
-    justify-content: space-between;
-}
-
-li input[type="text"] {
-    width: 100%;
-    font-size: var(--font-size-form);
-    display: list-item;
-}
-
-.hidden {
-    display: none;
+/* Add margin between the delete and other buttons */
+#delete {
+    margin-left: var(--gap-between-buttons);
 }

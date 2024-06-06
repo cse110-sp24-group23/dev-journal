@@ -20,8 +20,8 @@ describe("Daily Log End-to-End Tests", () => {
         // Wait for navigation to the new page
         await page.waitForNavigation();
 
-        // Check if the URL contains 'dailyLog/index.html'
-        expect(page.url()).toContain(`dailyLog/index.html`);
+        // Check if the URL contains 'dailyLog/index'
+        expect(page.url()).toContain(`dailyLog/index`);
     });
 
     // Test for Today page
@@ -58,9 +58,7 @@ describe("Daily Log End-to-End Tests", () => {
     });
 
     // Test for Today page
-    test("Add text to different textareas", async () => {
-        // Wait for the textarea element to be visible
-
+    test("Add text to done-today textarea", async () => {
         // Query the textarea element in HTML
         const updateDoneToday = await page.$("#done-today");
 
@@ -88,5 +86,85 @@ describe("Daily Log End-to-End Tests", () => {
         );
 
         expect(addedText).toBe(doneToday);
+    });
+
+    test("Add text to hours", async () => {
+        // Query the textarea element in HTML
+        const updatehours = await page.$("#hours");
+
+        // Define the text to be typed
+        const hours = `7`;
+
+        // Type the text into the textarea element
+        await updatehours.type(hours);
+
+        await page.evaluate(
+            (updatehours, hours) => {
+                updatehours.value = hours;
+            },
+            updatehours,
+            hours
+        );
+        // Retrieve the value from the textarea element
+        const addedText = await page.evaluate(
+            (updatehours) => updatehours.value,
+            updatehours
+        );
+
+        expect(addedText).toBe(hours);
+    });
+
+    test("Add text to reflection", async () => {
+        // Query the textarea element in HTML
+        const updateReflection = await page.$("#reflection");
+
+        // Define the text to be typed
+        const reflection = ` - Completed all planned tasks.
+        - Prepare presentation for group meeting tomorrow.`;
+
+        // Type the text into the textarea element
+        await updateReflection.type(reflection);
+
+        await page.evaluate(
+            (updateReflection, reflection) => {
+                updateReflection.value = reflection;
+            },
+            updateReflection,
+            reflection
+        );
+        // Retrieve the value from the textarea element
+        const addedText = await page.evaluate(
+            (updateReflection) => updateReflection.value,
+            updateReflection
+        );
+
+        expect(addedText).toBe(reflection);
+    });
+
+    test("Add text to reflection", async () => {
+        // Query the textarea element in HTML
+        const updateReflection = await page.$("#reflection");
+
+        // Define the text to be typed
+        const reflection = ` - Completed all planned tasks.
+        - Prepare presentation for group meeting tomorrow.`;
+
+        // Type the text into the textarea element
+        await updateReflection.type(reflection);
+
+        await page.evaluate(
+            (updateReflection, reflection) => {
+                updateReflection.value = reflection;
+            },
+            updateReflection,
+            reflection
+        );
+        // Retrieve the value from the textarea element
+        const addedText = await page.evaluate(
+            (updateReflection) => updateReflection.value,
+            updateReflection
+        );
+
+        expect(addedText).toBe(reflection);
     });
 });

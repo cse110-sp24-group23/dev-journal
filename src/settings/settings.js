@@ -8,7 +8,9 @@ document.getElementById('password-form').addEventListener('submit', async functi
     if (newPassword === confirmPassword){
         const hashedPassword = await hashPassword(confirmPassword);
         localStorage.setItem('storedHashedPassword', hashedPassword);
-        window.location.href = '/src/calendar/calendar.html';
+        authenticateValue = await hashPassword(hashedPassword);
+        localStorage.setItem('authenticateValue', authenticateValue);
+        window.location.href = '/src/password/landing.html';
     }
      //console log incorrect password if the passwords do not match
      //TODO: show incorrect password error on the page
@@ -22,6 +24,9 @@ const tryAgainBtn = document.getElementById('try-again-button')
 tryAgainBtn.addEventListener('click', function(){
     const errorMessage = document.querySelector('.error');
     errorMessage.style.display='none';
+    document.getElementById('new-password').value = '';
+    document.getElementById('confirm-password').value = '';
+
 })
 //Changes the visibility of the password settings form. If the password protection option is checked, then the form is visible.
 document.getElementById('toggle-password-form').addEventListener('change', function() {
@@ -30,6 +35,9 @@ document.getElementById('toggle-password-form').addEventListener('change', funct
         form.classList.remove('hidden');
     } else {
         form.classList.add('hidden');
+        localStorage.removeItem('storedHashedPassword')
+        localStorage.removeItem('authenticateValue')
+        localStorage.removeItem('authenticateKey')
     }
 });
 

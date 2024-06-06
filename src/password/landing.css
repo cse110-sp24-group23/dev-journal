@@ -84,3 +84,19 @@ button[type="submit"]:hover {
     background-color: var(--button-hover-bg-color);
     color: var(--button-hover-color);
 }
+
+.welcome button{
+    font-size: var(--button-font-size);
+    font-weight: bold;
+    background-color: var(--button-bg-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.welcome button:hover {
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-hover-color);
+}

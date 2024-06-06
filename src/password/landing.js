@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
 if(localStorage.getItem('storedHashedPassword')){
+    document.getElementById('welcome-button').style.display = 'none'
 //Wait for input password to be submitted
 document.getElementById('input-password-form').addEventListener('submit', async function(event){
+    console.log("here")
     event.preventDefault();
     const inputPassword = document.getElementById('password').value;
     const hashedInputPassword = await hashPassword(inputPassword);
     const storedHashedPassword = localStorage.getItem('storedHashedPassword');
+    localStorage.setItem('authenticateKey', hashedInputPassword)
     //check if input password is the same as the stored password
     if(hashedInputPassword === storedHashedPassword){
         window.location.href = '/src/calendar/calendar.html';
@@ -20,7 +23,13 @@ document.getElementById('input-password-form').addEventListener('submit', async 
 }
 //go directly to the calendar page if there is no password set
 else{
-    window.location.href = '/src/calendar/calendar.html';
+    const formContainer = document.querySelector('.form-container');
+    formContainer.style.display='none';
+    const welcomeButton = document.getElementById('welcome-button');
+    welcomeButton.addEventListener('click',function(){
+        window.location.href = "/src/calendar/calendar.html"
+    })
+
 }
 });
 
@@ -29,6 +38,7 @@ const tryAgainBtn = document.getElementById('try-again-button')
 tryAgainBtn.addEventListener('click', function(){
     const errorMessage = document.querySelector('.error');
     errorMessage.style.display='none';
+    document.getElementById('password').value = '';
 })
 
 /*

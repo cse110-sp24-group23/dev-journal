@@ -5,10 +5,7 @@ import { Record } from "../backend-storage/record-class.js";
 // Wait until page loads
 window.addEventListener("DOMContentLoaded", init);
 
-/* 
-Create two SimpleMDE objects to apply to text areas
-Parameters: N/A
-Returns: N/A
+/**Create two SimpleMDE objects to apply to textareas
  */
 function init() {
     const simplemde_done_today = new SimpleMDE({

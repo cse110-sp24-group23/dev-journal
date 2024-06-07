@@ -14,5 +14,10 @@ export function setStatusMDE(statusMDE) {
  * @returns {Boolean} Whether or not markdown editing is enabled
  */
 export function getStatusMDE() {
-    return localStorage.getItem("StatusMDE");
+    // get the status from local storage - stored as a string
+    const statusMDEString = localStorage.getItem("StatusMDE");
+    // get the actual status as a bool by comparing the string to "true"
+    const statusMDE = statusMDEString === "true";
+    // return a boolean of the status of markdown editing
+    return statusMDE;
 }

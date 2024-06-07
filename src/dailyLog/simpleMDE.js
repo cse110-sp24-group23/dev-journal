@@ -12,8 +12,8 @@ Parameters: N/A
 Returns: N/A
  */
 function init() {
-    // get the status of markdown editing as a boolean by comparing it to the string "true"
-    const statusMDE = getStatusMDE() === "true";
+    // get the status of markdown editing as a boolean
+    const statusMDE = getStatusMDE();
     if (statusMDE) {
         const simplemde_done_today = new SimpleMDE({
             element: document.getElementById("done-today"),

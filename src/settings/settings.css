@@ -234,11 +234,21 @@ button:hover {
         --button-font-size: 0.5em;
         --form-padding: 0.75em;
         --input-padding: 0.3em;
+
+        /* Changing error message sizing */
+        --error-font-size: 7px;
+        --error-button-font-size: 7px;
+    }
+
+    /* Place try-again button below text and center */
+    #try-again-button {
+        display: block;
     }
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     :root {
+        /* Changing form sizing */
         --form-width: 300px;
         --header-font-size: 1.8em;
         --settings-font-size: 1em;
@@ -246,11 +256,19 @@ button:hover {
         --label-font-size: 1.2em;
         --button-font-size: 1em;
         --form-padding: 1.3em;
+
+        /* Changing error message sizing */
+        --error-font-size: 10px;
+        --error-button-font-size: 10px;
+    }
+    #try-again-button {
+        display: inline-block;
     }
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     :root {
+        /* Changing form sizing */
         --form-width: 400px;
         --header-font-size: 1.8em;
         --settings-font-size: 1em;
@@ -258,11 +276,21 @@ button:hover {
         --label-font-size: 1.2em;
         --button-font-size: 1em;
         --form-padding: 1.3em;
+
+        /* Changing error message sizing */
+        --error-font-size: 13px;
+        --error-button-font-size: 13px;
+    }
+
+    /* Try-again button on same line as error message */
+    #try-again-button {
+        display: inline-block;
     }
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     :root {
+        /* Changing form sizing */
         --form-width: 600px;
         --header-font-size: 2em;
         --settings-font-size: 1em;
@@ -270,5 +298,13 @@ button:hover {
         --label-font-size: 1.2em;
         --button-font-size: 1em;
         --input-padding: 1em;
+
+        /* Changing error message sizing */
+        --error-font-size: 15px;
+        --error-button-font-size: 15px;
+    }
+    /* Try-again button on same line as error message */
+    #try-again-button {
+        display: inline-block;
     }
 }

@@ -5,48 +5,51 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Password Page Boilerplate</title>
         <!-- Stylesheet-->
-        <link rel="stylesheet" href="settings.css">
+        <link rel="stylesheet" href="settings.css" />
         <!-- Script -->
         <script src="../navbar/navbar.js"></script>
     </head>
 
     <body>
         <div id="navbar"></div>
-            <div class="header">
-                <h1>Settings</h1>
-            </div>
-            <div class="settings">
-                <input
-                    type="checkbox"
-                    id="toggle-password-form"
-                    name="toggle-password-form"
-                    checked
-                />
-                <label for="toggle-password-form" class="settings-icon"
-                    >Password Protection</label
-                >
-            </div>
-            <form action="/submit-password" method="post" id="password-form">
-                <label for="new-password">New Password:</label>
-                <input
-                    type="password"
-                    id="new-password"
-                    name="new-password"
-                    required
-                />
-                <label for="confirm-password">Confirm Password:</label>
-                <input
-                    type="password"
-                    id="confirm-password"
-                    name="confirm-password"
-                    required
-                />
-                <button type="submit">Update</button>
-            </form>
-            <div id="error-message" class="error">
-                <span id="error-text">Passwords do not match. Please try again.</span>
-                <button id="try-again-button">Try Again</button>
-            </div>
-            <script src="settings.js"></script>
+        <div class="header">
+            <h1>Settings</h1>
+        </div>
+        <div class="settings">
+            <input
+                type="checkbox"
+                id="toggle-password-form"
+                name="toggle-password-form"
+                checked
+            />
+            <label for="toggle-password-form" class="settings-icon"
+                >Password Protection</label
+            >
+        </div>
+        <form action="/submit-password" method="post" id="password-form">
+            <label for="new-password">New Password:</label>
+            <input
+                type="password"
+                id="new-password"
+                name="new-password"
+                required
+            />
+            <label for="confirm-password">Confirm Password:</label>
+            <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                required
+            />
+            <button type="submit">Update</button>
+        </form>
+        <div id="error-message" class="error">
+            <span id="error-text"
+                >Passwords do not match. Please try again.</span
+            >
+            <button id="try-again-button">Try Again</button>
+        </div>
+        <button src="../password/landing.html">Logout</button>
+        <script src="settings.js"></script>
     </body>
 </html>

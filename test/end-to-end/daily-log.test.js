@@ -129,7 +129,7 @@ describe("Daily Log End-to-End Tests", () => {
 
         // Define the text to be typed
         const addedText = await page.evaluate(
-            (updateDoneToday) => updateDoneToday.value,
+            (el) => el.value,
             updateDoneToday
         );
 
@@ -139,10 +139,7 @@ describe("Daily Log End-to-End Tests", () => {
         const updatehours = await page.$("#hours");
 
         // Retrieve the value from the textarea element
-        const addedHours = await page.evaluate(
-            (updatehours) => updatehours.value,
-            updatehours
-        );
+        const addedHours = await page.evaluate((el) => el.value, updatehours);
 
         expect(addedHours).toBe(hours);
 
@@ -151,7 +148,7 @@ describe("Daily Log End-to-End Tests", () => {
 
         // Retrieve the value from the textarea element
         const addedReflection = await page.evaluate(
-            (updateReflection) => updateReflection.value,
+            (el) => el.value,
             updateReflection
         );
 

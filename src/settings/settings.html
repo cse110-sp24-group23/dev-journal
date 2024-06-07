@@ -14,7 +14,7 @@
             type="image/png"
             sizes="32x32"
             href="../assets/icons/brand-logo.svg"
-        >
+        />
     </head>
 
     <body>
@@ -48,7 +48,7 @@
                 name="confirm-password"
                 required
             />
-            <button type="submit">Update</button>
+            <button id="settings-update-button" type="submit">Update</button>
         </form>
         <div id="error-message" class="error">
             <span id="error-text"
@@ -56,7 +56,9 @@
             >
             <button id="try-again-button">Try Again</button>
         </div>
-        <a href="../password/landing.html"><button>Logout</button></a>
+        <a id="settings-logout-button" href="../password/landing.html"
+            ><button>Logout</button></a
+        >
         <script src="settings.js"></script>
     </body>
 </html>

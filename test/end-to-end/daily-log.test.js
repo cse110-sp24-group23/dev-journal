@@ -223,6 +223,28 @@ describe("Daily Log End-to-End Tests", () => {
         expect(accomplishmentText.trim()).toBe(
             "Finished making user stories and issues!"
         );
+
+        const updateReflection = await page.$("#reflection");
+
+        // Define the text to be typed
+        reflection = ` - Completed all planned tasks.
+    - Prepare presentation for group meeting tomorrow.
+    - Work on fixing bug.`;
+
+        await page.evaluate(
+            (updateReflection, reflection) => {
+                updateReflection.value = reflection;
+            },
+            updateReflection,
+            reflection
+        );
+        // Retrieve the value from the textarea element
+        const addedText = await page.evaluate(
+            (updateReflection) => updateReflection.value,
+            updateReflection
+        );
+
+        expect(addedText).toBe(reflection);
     }, 40000);
 
     test("Save Log button", async () => {
@@ -261,6 +283,28 @@ describe("Daily Log End-to-End Tests", () => {
         expect(accomplishmentText.trim()).toBe(
             "Finished making user stories and issues!"
         );
+
+        const updateDoneToday = await page.$("#done-today");
+        // Define the text to be typed
+        const addedText = await page.evaluate(
+            (el) => el.value,
+            updateDoneToday
+        );
+        // Query the textarea element in HTML
+        const updatehours = await page.$("#hours");
+        // Retrieve the value from the textarea element
+        const addedHours = await page.evaluate((el) => el.value, updatehours);
+        // Query the textarea element in HTML
+        const updateReflection = await page.$("#reflection");
+        // Retrieve the value from the textarea element
+        const addedReflection = await page.evaluate(
+            (el) => el.value,
+            updateReflection
+        );
+
+        expect(addedText).toBe(doneToday);
+        expect(addedHours).toBe(hours);
+        expect(addedReflection).toBe(reflection);
     }, 40000);
 
     test("test3", async () => {

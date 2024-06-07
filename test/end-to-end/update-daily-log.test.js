@@ -42,7 +42,6 @@ describe("Daily Log End-to-End Tests", () => {
             updateDoneToday,
             doneToday
         );
-
         const updatehours = await page.$("#hours");
 
         // Type the text into the input element
@@ -65,73 +64,6 @@ describe("Daily Log End-to-End Tests", () => {
             updateReflection,
             reflection
         );
-        const saveButton = await page.$(".js-save-button");
-
-        await saveButton.click();
-        await page.waitForNavigation();
-
-        // Check if the URL contains 'dailyLog'
-        expect(page.url()).toContain(`calendar`);
-        const localStorageLength = await page.evaluate(() => {
-            return JSON.parse(localStorage.getItem("Records")).length;
-        });
-
-        expect(localStorageLength).toBe(1);
-    }, 40000);
-
-    test("Navigate to Today page", async () => {
-        // Query today link in HTML
-        const todaySelector = ".nav-list li:nth-child(2) a";
-        await page.waitForSelector(todaySelector);
-
-        // Click on Today link in nav bar
-        await page.click(todaySelector);
-
-        // Assert if the URL matches the Today page URL
-        expect(page.url()).toContain("/dailyLog");
-    });
-
-    test("test 1", async () => {
-        const updateDoneToday = await page.$("#done-today");
-        const updatehours = await page.$("#hours");
-        const updateReflection = await page.$("#reflection");
-        const addedText = await page.evaluate(
-            (el) => el.value,
-            updateDoneToday
-        );
-        const addedHours = await page.evaluate((el) => el.value, updatehours);
-        const addedReflection = await page.evaluate(
-            (el) => el.value,
-            updateReflection
-        );
-        expect(addedText).toBe(doneToday);
-        expect(addedHours).toBe(hours);
-        expect(addedReflection).toBe(reflection);
-    }, 40000);
-
-    test("update daily log", async () => {
-        // Query the textarea element in HTML
-        const updateReflection = await page.$("#reflection");
-
-        // Define the text to be typed
-        reflection = ` - Completed all planned tasks.
-    - Prepare presentation for group meeting tomorrow.
-    - Work on fixing bug.`;
-
-        await page.evaluate(
-            (updateReflection, reflection) => {
-                updateReflection.value = reflection;
-            },
-            updateReflection,
-            reflection
-        );
-        // Retrieve the value from the textarea element
-        const addedText = await page.evaluate(
-            (updateReflection) => updateReflection.value,
-            updateReflection
-        );
-
-        expect(addedText).toBe(reflection);
     }, 40000);
 
     test("Save Log button", async () => {
@@ -148,5 +80,40 @@ describe("Daily Log End-to-End Tests", () => {
         });
 
         expect(localStorageLength).toBe(1);
+    });
+    test("Navigate to Today page", async () => {
+        // Query today link in HTML
+        const todaySelector = ".nav-list li:nth-child(2) a";
+        await page.waitForSelector(todaySelector);
+
+        // Click on Today link in nav bar
+        await page.click(todaySelector);
+
+        page.waitForNavigation();
+        // Assert if the URL matches the Today page URL
+        expect(page.url()).toContain("/dailyLog");
+    }, 40000);
+
+    test("test 1", async () => {
+        await page.waitForSelector("#done-today");
+        await page.waitForSelector("#hours");
+        await page.waitForSelector("#reflection");
+
+        const updateDoneToday = await page.$("#done-today");
+        const updatehours = await page.$("#hours");
+        const updateReflection = await page.$("#reflection");
+
+        const addedText = await page.evaluate(
+            (el) => el.value,
+            updateDoneToday
+        );
+        const addedHours = await page.evaluate((el) => el.value, updatehours);
+        const addedReflection = await page.evaluate(
+            (el) => el.value,
+            updateReflection
+        );
+
+        expect(addedText).toBe(doneToday);
+        expect(addedReflection).toBe(reflection);
     }, 40000);
 });

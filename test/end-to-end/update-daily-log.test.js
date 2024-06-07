@@ -79,13 +79,17 @@ describe("Daily Log End-to-End Tests", () => {
         expect(localStorageLength).toBe(1);
     }, 40000);
 
-    test("test 1", async () => {
+    test("Navigate to Today page", async () => {
+        // Query today link in HTML
         const todaySelector = ".nav-list li:nth-child(2) a";
         await page.waitForSelector(todaySelector);
+
         // Click on Today link in nav bar
         await page.click(todaySelector);
+
+        // Assert if the URL matches the Today page URL
         expect(page.url()).toContain("/dailyLog");
-    }, 40000);
+    });
 
     test("test 1", async () => {
         const updateDoneToday = await page.$("#done-today");

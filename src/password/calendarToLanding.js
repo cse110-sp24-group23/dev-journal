@@ -1,6 +1,6 @@
 //check to see if a password exists. if it does, then make sure the user stays on the password page until they log in.
 if(localStorage.getItem('storedHashedPassword')){
-document.addEventListener('DOMContentLoaded', async function (event){
+document.addEventListener('DOMContentLoaded', async function (){
     //hash the input again and see if it matches with the double hashed password
     const authenticateValue = await hashPassword(sessionStorage.getItem('authenticateKey'))
     if (localStorage.getItem('authenticateValue') !== authenticateValue) {

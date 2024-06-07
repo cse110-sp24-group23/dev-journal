@@ -8,8 +8,7 @@ document.getElementById('password-form').addEventListener('submit', async functi
     if (newPassword === confirmPassword){
         const hashedPassword = await hashPassword(confirmPassword);
         localStorage.setItem('storedHashedPassword', hashedPassword);
-        authenticateValue = await hashPassword(hashedPassword);
-        localStorage.setItem('authenticateValue', authenticateValue);
+        localStorage.setItem('authenticateValue', await hashPassword(hashedPassword));
         window.location.href = '/src/password/landing.html';
     }
      //console log incorrect password if the passwords do not match

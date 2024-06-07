@@ -64,9 +64,13 @@ async function _hashPassword(password) {
         .join("");
     return hashHex;
 }
-
+/**
+ * This function checks whether the user wants MD editing enabled or not
+ * @function
+ * @name updateStatusMDE
+ */
 function updateStatusMDE() {
-    //select the input from the HTML
+    //select the checkbox input from the HTML
     const mdeCheckbox = document.querySelector(".js-mde-checkbox");
     mdeCheckbox.addEventListener("click", () => {
         let statusMDE;
@@ -80,8 +84,16 @@ function updateStatusMDE() {
         setStatusMDE(statusMDE);
     });
 }
-
+/**
+ * This function is called when the window is loaded.
+ * @function
+ * @name window.onload
+ */
 window.onload = function () {
+    const mdeCheckbox = document.querySelector(".js-mde-checkbox");
+    if (!getStatusMDE()){
+        mdeCheckbox.checked = false;
+    }
     setPassword();
     toggleErrorDisplay();
     displayPasswordForm();

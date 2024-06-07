@@ -23,7 +23,7 @@ describe("Basic user flow for Navbar", () => {
         await page.click(calendarSelector);
 
         // Assert if the URL matches the Calendar page URL
-        expect(page.url()).toContain(`calendar/calendar.html`);
+        expect(page.url()).toContain(`/calendar/calendar`);
     });
 
     // Test for Today page
@@ -36,7 +36,7 @@ describe("Basic user flow for Navbar", () => {
         await page.click(todaySelector);
 
         // Assert if the URL matches the Today page URL
-        expect(page.url()).toContain("dailyLog/index.html");
+        expect(page.url()).toContain("/dailyLog");
     });
 
     // Test for Notes page
@@ -49,7 +49,7 @@ describe("Basic user flow for Navbar", () => {
         await page.click(notesSelector);
 
         // Assert if the URL matches the Notes page URL
-        expect(page.url()).toContain("notes/notes.html");
+        expect(page.url()).toContain("/notes/notes");
     });
 
     // Test for Accomplishments page
@@ -62,7 +62,7 @@ describe("Basic user flow for Navbar", () => {
         await page.click(accomplishmentsSelector);
 
         // Assert if the URL matches the Accomplishments page URL
-        expect(page.url()).toContain("accomplishments/accomplishments.html");
+        expect(page.url()).toContain("/accomplishments/accomplishments");
     });
 
     // Test for Settings page
@@ -75,6 +75,6 @@ describe("Basic user flow for Navbar", () => {
         await page.click(settingsSelector);
 
         // Assert if the URL matches the Settings page URL
-        expect(page.url()).toContain("settings/settings.html");
+        expect(page.url()).toContain("/settings/settings");
     });
 });

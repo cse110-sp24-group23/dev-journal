@@ -15,7 +15,7 @@ function loadAccomplishmentFromStorage() {
  * @param {accomplishemntsObj[]} allAccomplishmentsObj array of all accomplishments objects from storage
  */
 function displayMsgIfEmpty(allAccomplishmentsObj) {
-    // display message if allAccomplishments is empty
+    // Display message if allAccomplishments is empty
     if (allAccomplishmentsObj.length === 0) {
         const main = document.querySelector("main");
         const noContentMsg = document.createElement("h2");
@@ -36,13 +36,13 @@ function sortAccomplishments(
     accomplishmentsObjArr,
     options = { byOldest: true, alreadySortedByOldest: true }
 ) {
-    // create shallow copy of accomplishments to not edit the parameter that was passed in
+    // Create shallow copy of accomplishments to not edit the parameter that was passed in
     let allAccomplishments = _copyAccomplishments(accomplishmentsObjArr);
-    // if it's already sorted how it's requested, return the shallow copy
+    // If it's already sorted how it's requested, return the shallow copy
     if (options.byOldest && options.alreadySortedByOldest) {
         return allAccomplishments;
     }
-    // sort by oldest by default
+    // Sort by oldest by default
     if (!options.alreadySortedByOldest) {
         allAccomplishments.sort(
             (accomplishmentsObjOne, accomplishmentsObjTwo) => {
@@ -52,7 +52,7 @@ function sortAccomplishments(
             }
         );
     }
-    // sort by newest if requested
+    // Sort by newest if requested
     if (!options.byOldest) {
         allAccomplishments = allAccomplishments.reverse();
     }
@@ -73,9 +73,9 @@ function filterAccomplishments(
     if (options.byCurrentMonth && options.byCurrentYear) {
         throw Error("Cannot filter by year and month at the same time.");
     }
-    // create shallow copy of accomplishments to not edit the parameter that was passed in
+    // Create shallow copy of accomplishments to not edit the parameter that was passed in
     let filteredAccomplishments = _copyAccomplishments(accomplishmentsObjArr);
-    // filter by current month if requested
+    // Filter by current month if requested
     if (options.byCurrentMonth) {
         const currentMonth = new Date().getMonth();
         filteredAccomplishments = filteredAccomplishments.filter(
@@ -83,7 +83,7 @@ function filterAccomplishments(
                 _getDate(accomplishmentsObj).getMonth() === currentMonth
         );
     }
-    // filter by current year if requested
+    // Filter by current year if requested
     if (options.byCurrentYear) {
         const currentYear = new Date().getFullYear();
         filteredAccomplishments = filteredAccomplishments.filter(
@@ -101,29 +101,29 @@ function filterAccomplishments(
  */
 function populateTable(accomplishmentsObjArr) {
     _clearTable();
-    // create shallow copy of accomplishments to not edit the parameter that was passed in
+    // Create shallow copy of accomplishments to not edit the parameter that was passed in
     let allAccomplishments = _copyAccomplishments(accomplishmentsObjArr);
-    // get table, add a row to table for each accomplishment in each accomplishments object
+    // Get table, add a row to table for each accomplishment in each accomplishments object
     const tableBody = document.getElementById("tableBody");
     for (const accomplishment of allAccomplishments) {
-        // get the date from accomplishment obj
+        // Get the date from accomplishment obj
         let dateObj = new Date(accomplishment.date);
         const settings = { year: "numeric", month: "numeric", day: "numeric" };
         let fullDate = dateObj.toLocaleString("en-US", settings);
-        // get the content from accomplishment obj
+        // Get the content from accomplishment obj
         let contentOfAccomplishment = accomplishment.content;
         for (let i = 0; i < contentOfAccomplishment.length; i++) {
-            // create row of table
+            // Create row of table
             const row = document.createElement("tr");
-            // date of the accomplishemnt
+            // Date of the accomplishemnt
             const dateElement = document.createElement("td");
-            // content of the accomplishment
+            // Content of the accomplishment
             const accomplishmentElement = document.createElement("td");
             accomplishmentElement.classList.add("content-cell");
-            // add the text
+            // Add the text
             dateElement.innerHTML = fullDate;
             accomplishmentElement.innerHTML = contentOfAccomplishment[i];
-            // add them to the table
+            // Add them to the table
             tableBody.append(row);
             row.append(dateElement);
             row.append(accomplishmentElement);
@@ -149,7 +149,7 @@ function _clearTable() {
 }
 
 /**
- * return a shallow copy of an array that still points to the accomplishments objects
+ * Return a shallow copy of an array that still points to the accomplishments objects
  * @param {accomplishemntsObj[]} AccomplishmentsObjArr array of accomplishments objects
  * @returns {accomplishemntsObj[]} shallow copy of parameter
  */
@@ -172,31 +172,31 @@ function _getAccomplishmentsToDisplay(
     allAccomplishmentsByOldest,
     options = { sortByOldest: true, filterBy: "none" }
 ) {
-    // handle incorrect parameters input
+    // Handle incorrect parameters input
     if (options.sortByOldest !== true && options.sortByOldest !== false) {
         throw Error("options.sortByOldest must be true or false");
     }
     if (!["none", "month", "year"].includes(options.filterBy)) {
         throw Error("options.filterByy must be 'none' or 'month' or 'year'");
     }
-    // assign filter settings
-    // by default, no filtering
+    // Assign filter settings
+    // By default, no filtering
     let byCurrentMonth = false;
     let byCurrentYear = false;
-    // filter by current month
+    // Filter by current month
     if (options.filterBy == "month") {
         byCurrentMonth = true;
     }
-    // filter by current year
+    // Filter by current year
     else if (options.filterBy == "year") {
         byCurrentYear = true;
     }
-    // to get accomplishments to display, first filter original list, then sort it
+    // To get accomplishments to display, first filter original list, then sort it
     const filteredAccomplishments = filterAccomplishments(
         allAccomplishmentsByOldest,
         { byCurrentMonth: byCurrentMonth, byCurrentYear: byCurrentYear }
     );
-    // call sort
+    // Call sort
     const accomplishmentsToDisplay = sortAccomplishments(
         filteredAccomplishments,
         {
@@ -213,7 +213,7 @@ function _getAccomplishmentsToDisplay(
  * @name window.onload
  */
 window.onload = function () {
-    // load in accomplishments and display a message if there are none
+    // Load in accomplishments and display a message if there are none
     const allAccomplishments = loadAccomplishmentFromStorage();
     displayMsgIfEmpty(allAccomplishments);
     // Sort accomplishments by oldest first
@@ -221,9 +221,9 @@ window.onload = function () {
         byOldest: true,
         alreadySortedByOldest: false,
     });
-    // populate table with the sorted accomplishments
+    // Populate table with the sorted accomplishments
     populateTable(allAccomplishmentsByOldest);
-    // statuses to determine how to filter and sort accomplishments when user selects options
+    // Statuses to determine how to filter and sort accomplishments when user selects options
     let shouldSortByOldest = true;
     let filterStatus = "none";
 

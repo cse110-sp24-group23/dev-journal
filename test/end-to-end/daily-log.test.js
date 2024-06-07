@@ -190,11 +190,8 @@ describe("Daily Log End-to-End Tests", () => {
     });
 
     test("test 1", async () => {
-        // Type the text into the textarea element
-        const todaySelector = ".nav-list li:nth-child(2) a";
-        await page.waitForSelector(todaySelector);
+        const todayLink = await page.$(".nav-list li:nth-child(2)");
 
-        const todayLink = await page.$(todaySelector); // Select the element
         await todayLink.click();
         await page.waitForNavigation();
         // Check if the URL contains 'dailyLog'

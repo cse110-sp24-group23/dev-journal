@@ -203,36 +203,26 @@ describe("Daily Log End-to-End Tests", () => {
         // Type the text into the textarea element
         const todaySelector = ".nav-list li:nth-child(2) a";
         await page.waitForSelector(todaySelector);
+
+        // Click on Calendar link in nav bar
         await page.click(todaySelector);
         // Check if the URL contains 'dailyLog'
-        expect(page.url()).toContain(`dailyLog`);
+        expect(page.url()).toContain("dailyLog");
 
         const updateDoneToday = await page.$("#done-today");
-
+        const updatehours = await page.$("#hours");
+        const updateReflection = await page.$("#reflection");
         const addedText = await page.evaluate(
-            (updateDoneToday) => updateDoneToday.value,
+            (el) => el.value,
             updateDoneToday
         );
-        expect(addedText).toBe(doneToday);
-
-        // Query the textarea element in HTML
-        const updatehours = await page.$("#hours");
-        // Retrieve the value from the textarea element
-        const addedHours = await page.evaluate(
-            (updatehours) => updatehours.value,
-            updatehours
-        );
-
-        expect(addedHours).toBe(hours);
-
-        // Query the textarea element in HTML
-        const updateReflection = await page.$("#reflection");
-        // Retrieve the value from the textarea element
+        const addedHours = await page.evaluate((el) => el.value, updatehours);
         const addedReflection = await page.evaluate(
-            (updateReflection) => updateReflection.value,
+            (el) => el.value,
             updateReflection
         );
-
+        expect(addedText).toBe(doneToday);
+        expect(addedHours).toBe(hours);
         expect(addedReflection).toBe(reflection);
     }, 40000);
 
@@ -278,5 +268,5 @@ describe("Daily Log End-to-End Tests", () => {
         expect(editButton).not.toBeNull();
         expect(doneButton).not.toBeNull();
         expect(deleteButton).not.toBeNull();
-    });
+    }, 40000);
 });

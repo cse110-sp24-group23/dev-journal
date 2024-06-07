@@ -201,8 +201,9 @@ describe("Daily Log End-to-End Tests", () => {
         const todaySelector = ".nav-list li:nth-child(2) a";
         await page.waitForSelector(todaySelector);
 
-        // Click on Calendar link in nav bar
-        await page.click(todaySelector);
+        const todayLink = await page.$(todaySelector); // Select the element
+        await todayLink.click();
+        await page.waitForNavigation();
         // Check if the URL contains 'dailyLog'
         expect(page.url()).toContain("dailyLog");
 
@@ -213,7 +214,6 @@ describe("Daily Log End-to-End Tests", () => {
             (el) => el.value,
             updateDoneToday
         );
-        console.log("done");
         const addedHours = await page.evaluate((el) => el.value, updatehours);
         const addedReflection = await page.evaluate(
             (el) => el.value,

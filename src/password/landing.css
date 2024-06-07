@@ -3,11 +3,14 @@
     --error-color: red;
     --error-background-color: #f8d7da;
     --error-border-color: #f5c6cb;
-    --form-border-color: #21528B;
+    --form-border-color: #21528b;
     --button-font-size: 21px;
-    --button-bg-color: #21528B;
-    --button-hover-bg-color: #E2EFFF;
-    --button-hover-color: #21528B;
+    --button-bg-color: #21528b;
+    --button-hover-bg-color: #e2efff;
+    --button-hover-color: #21528b;
+    --padding-5: 5px;
+    --padding-10: 10px;
+    --padding-20: 20px;
 }
 /* Center the form in the middle of the page */
 body {
@@ -21,8 +24,8 @@ body {
 /* Styling for the form */
 form {
     border: 2px solid var(--form-border-color);
-    padding: 20px;
-    border-radius: 10px;
+    padding: var(--padding-20);
+    border-radius: var(--padding-10);
 }
 
 /* Styling for the form label */
@@ -35,7 +38,7 @@ label {
 input[type="password"] {
     font-size: var(--button-font-size);
     border: 2px solid var(--form-border-color);
-    border-radius: 5px;
+    border-radius: var(--padding-5);
     padding: 5px;
 }
 
@@ -46,7 +49,7 @@ button[type="submit"] {
     background-color: var(--button-bg-color);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: var(--padding-10) var(--padding-20);
     cursor: pointer;
     border-radius: 5px;
 }
@@ -63,8 +66,8 @@ button[type="submit"]:hover {
     color: var(--error-color);
     background-color: var(--error-background-color);
     border: 1px solid var(--error-border-color);
-    padding: 10px;
-    margin-top: 10px;
+    padding: var(--padding-10);
+    margin-top: var(--padding-10);
     border-radius: 5px;
     text-align: center;
 }
@@ -75,28 +78,12 @@ button[type="submit"]:hover {
     background-color: var(--button-bg-color);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: var(--padding-10) var(--padding-20);
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: var(--padding-5);
 }
 
 .error button:hover {
-    background-color: var(--button-hover-bg-color);
-    color: var(--button-hover-color);
-}
-
-.welcome button{
-    font-size: var(--button-font-size);
-    font-weight: bold;
-    background-color: var(--button-bg-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.welcome button:hover {
     background-color: var(--button-hover-bg-color);
     color: var(--button-hover-color);
 }

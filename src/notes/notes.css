@@ -1,25 +1,64 @@
 :root {
+    --body-margin: 0;
+    --body-padding: 0;
+
+    --content-padding: 20px;
+    --content-h2-font-size: 24px;
+    --content-h2-margin-bottom: 20px;
+
+    --button-margin-bottom: 20px;
+    --button-padding: 20px;
+    --button-border-width: 0;
+    --button-border-radius: 10px;
+
     --notes-display-left-margin: 20px;
     --note-width: 250px;
     --notes-per-row: 3;
+    --notes-padding: 20px;
+    --notes-border-radius: 10px;
+    --notes-box-shadow-top-left-right: 5px;
+    --notes-box-shadow-bottom: 2px;
+    --notes-display-width: 90%;
+    --notes-display-grid-sizing: 1fr;
+    --notes-display-gap: 20px;
+    --note-h3-margin-top: 0;
 
-    /*Font*/
+    --addnote-textarea-color: #e0f7fa;
+    --addnote-padding: 20px;
+    --addnote-width: 100%;
+    --addnote-height: 120px;
+    --addnote-box-shadow-top: 0;
+    --addnote-box-shadow-left: 2px;
+    --addnote-box-shadow-right: 5px;
+
+    --note-editor-margin-bottom: 20px;
+    --note-editor-padding: 20px;
+    --note-editor-border-radius: 10px;
+
+    --note-editor-title-content-margin-bottom: 15px;
+    --note-editor-title-content-padding: 10px;
+    --note-editor-content-margin-bottom: 10px;
+
+    --editor-save-btn--margin-right: 5px;
+    --editor-btn-border-width: 0;
+    --editor-btn-border-radius: 10px;
+
     --font: "Lato", sans-serif;
 
     /*Colors*/
     --button-color: rgb(244, 249, 255);
     --add-note-color-hover: rgb(188, 208, 237);
     --delete-note-color-hover: rgb(228, 87, 87);
-    --button-save-color: #fbd1ff81;
-    --button-cancel-color: #fbd1ff81;
-    --button-save-hover-color: #f0def7;
-    --button-cancel-hover-color: #f0def7;
+    --button-save-color: #ffffff;
+    --button-cancel-color: #ffffff;
+    --button-save-hover-color: #ddcc77;
+    --button-cancel-hover-color: #ddcc77;
 
     --shadow-color: rgba(128, 128, 128, 0.507);
     --shadow-color-hover: rgb(128, 128, 128);
 
-    --notes-edit-color: #fadaf559;
-    --notes-edit-input-color: #fbd1ff81;
+    --notes-edit-color: #cc6677;
+    --notes-edit-input-color: #ffffff;
     --notes-lavendar: #dcd5f859;
     --notes-peach: #fde3ac44;
     --notes-mint: #dbffd652;
@@ -27,37 +66,77 @@
     --notes-light-blue: #ace8ff3b;
 }
 
+/* Vary sizes based on screen size */
+/* Narrow devices (phones, 320px and up) */
+@media only screen and (min-width: 320px) {
+    :root {
+        --note-width: 275px;
+        --notes-per-row: 1;
+        --note-editor-width: 275px;
+        --note-title-font-size: 15px;
+        --note-content-padding: 100px;
+        --note-content-width: 255px;
+        --note-title-width: 255px;
+        --font-size-button: 15px;
+        --edit-btn-padding: 15px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    :root {
+        --note-width: 150px;
+        --notes-per-row: 2;
+        --note-editor-width: 360px;
+        --note-title-font-size: 15px;
+        --note-content-padding: 100px;
+        --note-content-width: 340px;
+        --note-title-width: 340px;
+        --font-size-button: 15px;
+        --edit-btn-padding: 15px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    :root {
+        --note-width: 225px;
+        --notes-per-row: 2;
+        --note-editor-width: 510px;
+        --note-title-font-size: 18px;
+        --note-content-padding: 100px;
+        --note-content-width: 490px;
+        --note-title-width: 490px;
+        --font-size-button: 18px;
+        --edit-btn-padding: 15px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    :root {
+        --note-width: 250px;
+        --notes-per-row: 3;
+        --note-editor-width: 870px;
+        --note-title-font-size: 22px;
+        --note-content-padding: 200px;
+        --note-content-width: 850px;
+        --note-title-width: 850px;
+        --font-size-button: 20px;
+        --edit-btn-padding: 20px;
+    }
+}
+
 body {
     font-family: var(--font);
     display: flex;
-    margin: 0;
-    padding: 0;
+    margin: var(--body-margin);
+    padding: var(--body-padding);
 }
 
-.sidebar {
-    width: 200px;
-    background-color: #7d5a5a;
-    color: white;
-    padding: 20px;
-}
-.sidebar h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-.sidebar ul li {
-    margin: 10px 0;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-}
-.sidebar ul li.active,
-.sidebar ul li:hover {
-    background-color: #f0f4f8;
-    color: #7d5a5a;
+h1 {
+    font-family: var(--font);
+    font-weight: normal;
 }
 
 /* meant to hide/show objects my adding/removing this class in js */
@@ -67,23 +146,58 @@ body {
 
 .content {
     flex-grow: 1;
-    padding: 20px;
+    padding: var(--content-padding);
 }
+
 .content h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: var(--content-h2-font-size);
+    margin-bottom: var(--content-h2-margin-bottom);
 }
+
 .buttons {
-    margin-bottom: 20px;
+    margin-bottom: var(--button-margin-bottom);
 }
 
 .buttons button {
-    padding: 20px;
+    padding: var(--button-padding);
     font-size: var(--font-size-button);
     background-color: var(--button-color);
-    border-width: 0;
-    border-radius: 10px;
+    border-width: var(--button-border-width);
+    border-radius: var(--button-border-radius);
     cursor: pointer;
+}
+
+.note {
+    width: var(--note-width);
+    padding: var(--notes-padding);
+    border-radius: var(--notes-border-radius);
+    box-shadow: var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right) var(--notes-box-shadow-bottom)
+        var(--shadow-color);
+}
+
+.notes-display {
+    width: var(--notes-display-width);
+    display: grid;
+    grid-template-columns: repeat(
+        var(--notes-per-row),
+        var(--notes-display-grid-sizing)
+    );
+    gap: var(--notes-display-gap);
+}
+
+.note h3 {
+    margin-top: var(--note-h3-margin-top);
+}
+
+.add-notes textarea {
+    background-color: var(--note-textarea-color);
+    padding: var(--addnote-padding);
+    width: var(--addnote-width);
+    height: var(--addnote-height);
+    box-shadow: var(--addnote-box-shadow-top) var(--addnote-box-shadow-left)
+        var(--addnote-box-shadow-right) rgba(0, 0, 0, 0.1);
 }
 
 #add-note-btn:hover {
@@ -98,71 +212,46 @@ body {
     background-color: var(--delete-note-color-hover);
 }
 
-.add-notes textarea {
-    background-color: #e0f7fa;
-    padding: 20px;
-    width: 100%;
-    height: 120px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.notes-display {
-    width: 90%;
-    display: grid;
-    grid-template-columns: repeat(var(--notes-per-row), 1fr);
-    gap: 20px;
-}
-
+/* Parameter: 5n is the frequency, in other words
+    "This color appears every 5 notes."*/
 .note:nth-child(5n + 1) {
-    /*1,6,11*/
+    /*Notes: 1, 6, 11, etc.*/
     background-color: var(--notes-peach);
 }
 .note:nth-child(5n + 2) {
-    /*2,7,12*/
+    /*Notes: 2, 7, 12, etc.*/
     background-color: var(--notes-mint);
 }
 .note:nth-child(5n + 3) {
-    /*3,8,13*/
+    /*Notes: 3, 8, 13, etc.*/
     background-color: var(--notes-salmon);
 }
 .note:nth-child(5n + 4) {
-    /*4,9,14*/
+    /*Notes: 4, 9, 14, etc.*/
     background-color: var(--notes-lavendar);
 }
 .note:nth-child(5n + 5) {
-    /*4,9,14*/
+    /*Notes: 4, 9, 14, etc.*/
     background-color: var(--notes-light-blue);
 }
 
-.note {
-    width: var(--note-width);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px 2px var(--shadow-color);
-}
-
 .note:hover {
-    box-shadow: 5px 5px 5px 2px var(--shadow-color-hover);
-}
-
-.note h3 {
-    margin-top: 0;
-}
-.note ul {
-    list-style: none;
-    padding: 0;
-}
-.note ul li {
-    margin: 5px 0;
+    box-shadow: var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right) var(--notes-box-shadow-bottom)
+        var(--shadow-color-hover);
 }
 
 #note-editor {
     background-color: var(--notes-edit-color);
     width: var(--note-editor-width);
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px 2px var(--shadow-color);
+    margin-bottom: var(--note-editor-margin-bottom);
+    padding: var(--note-editor-padding);
+    border-radius: var(--note-editor-border-radius);
+    box-shadow: var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right) var(--notes-box-shadow-bottom)
+        var(--shadow-color);
 }
 
 #note-editor-title {
@@ -170,10 +259,10 @@ body {
     background-color: var(--notes-edit-input-color);
     font-size: var(--note-title-font-size);
     border: none;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    padding: 10px;
-    padding-right: var(--note-title-right);
+    border-radius: var(--note-editor-border-radius);
+    margin-bottom: var(--note-editor-title-content-margin-bottom);
+    padding: var(--note-editor-title-content-padding);
+    width: var(--note-title-width);
 }
 
 #note-editor-content {
@@ -182,20 +271,29 @@ body {
     font-family: var(--font);
     font-size: var(--note-title-font-size);
     border: none;
-    border-radius: 10px;
-    padding: 10px;
-    padding-right: var(--note-content-padding-right);
+    border-radius: var(--note-editor-border-radius);
+    padding: var(--note-editor-title-content-padding);
+    width: var(--note-content-width);
     padding-bottom: var(--note-content-padding);
-    margin-bottom: 10px;
+    margin-bottom: var(--note-editor-content-margin-bottom);
 }
 
 #editor-save-btn {
     font-size: var(--font-size-button);
     background-color: var(--button-save-color);
     padding: var(--edit-btn-padding);
-    margin-right: 5px;
-    border-width: 0;
-    border-radius: 10px;
+    margin-right: var(--editor-save-btn--margin-right);
+    border-width: var(--editor-btn-border-width);
+    border-radius: var(--editor-btn-border-radius);
+    cursor: pointer;
+}
+
+#editor-cancel-btn {
+    font-size: var(--font-size-button);
+    background-color: var(--button-cancel-color);
+    padding: var(--edit-btn-padding);
+    border-width: var(--editor-btn-border-width);
+    border-radius: var(--editor-btn-border-radius);
     cursor: pointer;
 }
 
@@ -203,76 +301,6 @@ body {
     background-color: var(--button-save-hover-color);
 }
 
-#editor-cancel-btn {
-    font-size: var(--font-size-button);
-    background-color: var(--button-cancel-color);
-    padding: var(--edit-btn-padding);
-    border-width: 0;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
 #editor-cancel-btn:hover {
     background-color: var(--button-cancel-hover-color);
-}
-
-/* Vary sizes based on screen size */
-/* Narrow devices (phones, 320px and up) */
-@media only screen and (min-width: 320px) {
-    :root {
-        --note-width: 275px;
-        --notes-per-row: 1;
-        --note-editor-width: 275px;
-        --note-title-font-size: 15px;
-        --note-content-padding: 100px;
-        --note-content-padding-right: 100px;
-        --note-title-right: 73px;
-        --font-size-button: 15px;
-        --edit-btn-padding: 15px;
-    }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    :root {
-        --note-width: 150px;
-        --notes-per-row: 2;
-        --note-editor-width: 360px;
-        --note-title-font-size: 15px;
-        --note-content-padding: 100px;
-        --note-content-padding-right: 180px;
-        --note-title-right: 150px;
-        --font-size-button: 15px;
-        --edit-btn-padding: 15px;
-    }
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    :root {
-        --note-width: 225px;
-        --notes-per-row: 2;
-        --note-editor-width: 510px;
-        --note-title-font-size: 18px;
-        --note-content-padding: 100px;
-        --note-content-padding-right: 310px;
-        --note-title-right: 275px;
-        --font-size-button: 18px;
-        --edit-btn-padding: 15px;
-    }
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-    :root {
-        --note-width: 250px;
-        --notes-per-row: 3;
-        --note-editor-width: 870px;
-        --note-title-font-size: 22px;
-        --note-content-padding: 200px;
-        --note-content-padding-right: 610px;
-        --note-title-right: 580px;
-        --font-size-button: 20px;
-        --edit-btn-padding: 20px;
-    }
 }

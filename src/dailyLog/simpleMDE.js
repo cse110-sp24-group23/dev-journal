@@ -1,12 +1,11 @@
+/*global SimpleMDE*/
+// ^^ show SimpleMDE is a global function to not aggravate linter
 import LocalStorageRecordsApi from "../backend-storage/records-api.js";
 import { Record } from "../backend-storage/record-class.js";
 // Wait until page loads
 window.addEventListener("DOMContentLoaded", init);
 
-/* 
-Create two SimpleMDE objects to apply to text areas
-Parameters: N/A
-Returns: N/A
+/**Create two SimpleMDE objects to apply to textareas
  */
 function init() {
     const simplemde_done_today = new SimpleMDE({
@@ -22,6 +21,7 @@ function init() {
     let record;
     let today = new Date();
     today.setHours(0, 0, 0, 0);
+    // If the day's record does not exist, create a new Record
     if (!recordString) {
         if (!LocalStorageRecordsApi.hasRecordByDate(today)) {
             record = new Record("log", { date: today });
@@ -31,6 +31,7 @@ function init() {
     } else {
         record = JSON.parse(recordString);
     }
+    // Record field1
     simplemde_done_today.value(record.field1);
 
     const simplemde_reflection = new SimpleMDE({
@@ -42,23 +43,6 @@ function init() {
         promptURLs: true,
         tabSize: 4,
     });
+    // Record field2
     simplemde_reflection.value(record.field2);
-    /*
-    Saves text from the markdown editors into localStorage
-    Parameters:
-    Returns:
-    */
-    function saveTextInStorage() {
-        // TODO
-        // get text from editor with simplemde.value();
-    }
-
-    /*
-    Gets text from the localStorage and populates it in the markdown editors
-    Parameters:
-    Returns:
-    */
-    function getTextFromStorage() {
-        // TODO
-    }
 }

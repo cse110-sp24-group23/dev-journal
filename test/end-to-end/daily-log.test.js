@@ -158,7 +158,7 @@ describe("Daily Log End-to-End Tests", () => {
         expect(addedReflection).toBe(reflection);
     });
 
-    test("Navigate to the page and populate record", async () => {
+    test("update daily log", async () => {
         // Query the textarea element in HTML
         const updateReflection = await page.$("#reflection");
 
@@ -199,7 +199,7 @@ describe("Daily Log End-to-End Tests", () => {
         expect(localStorageLength).toBe(1);
     });
 
-    test("Navigate to the page and populate record", async () => {
+    test("test 1", async () => {
         // Type the text into the textarea element
         const todaySelector = ".nav-list li:nth-child(2) a";
         await page.waitForSelector(todaySelector);
@@ -236,7 +236,7 @@ describe("Daily Log End-to-End Tests", () => {
         expect(addedReflection).toBe(reflection);
     }, 40000);
 
-    test("Navigate to the page and populate record", async () => {
+    test("test 2", async () => {
         const accomplishmentInput = await page.$(".js-accomplishment-input");
         const accomplishment = `Finished making user stories!`;
         await page.evaluate(
@@ -279,6 +279,4 @@ describe("Daily Log End-to-End Tests", () => {
         expect(doneButton).not.toBeNull();
         expect(deleteButton).not.toBeNull();
     });
-
-    test("Navigate to the page and populate record", async () => {});
 });

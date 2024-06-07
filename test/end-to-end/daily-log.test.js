@@ -1,4 +1,5 @@
 import "dotenv/config";
+import puppeteer from "puppeteer";
 
 //This should point to your local liveserver
 //Note that liveserver will be running at the root level, so requires /src/, while the hosted will be at the src/ level already.
@@ -108,7 +109,7 @@ describe("Daily Log End-to-End Tests", () => {
         // Check if the URL contains 'dailyLog'
         expect(page.url()).toContain(`calendar`);
         const localStorageLength = await page.evaluate(() => {
-            return localStorage.length;
+            return JSON.parse(localStorage.getItem("Records")).length;
         });
 
         expect(localStorageLength).toBe(1);
@@ -190,7 +191,7 @@ describe("Daily Log End-to-End Tests", () => {
         // Check if the URL contains 'dailyLog'
         expect(page.url()).toContain(`calendar`);
         const localStorageLength = await page.evaluate(() => {
-            return localStorage.length;
+            return JSON.parse(localStorage.getItem("Records")).length;
         });
 
         expect(localStorageLength).toBe(1);
@@ -266,5 +267,88 @@ describe("Daily Log End-to-End Tests", () => {
         expect(editButton).not.toBeNull();
         expect(doneButton).not.toBeNull();
         expect(deleteButton).not.toBeNull();
+    }, 40000);
+
+    test("test 3", async () => {
+        const editButton = await page.$("#edit");
+        const doneButton = await page.$("#done");
+
+        await editButton.click();
+
+        // Wait for the input field to appear
+        const updateAccomplishment = await page.waitForSelector(
+            ".accomplishment-text input[type='text']"
+        );
+
+        await page.evaluate((updateAccomplishment) => {
+            updateAccomplishment.value =
+                "Finished making user stories and issues!";
+        }, updateAccomplishment);
+        await doneButton.click();
+        const accomplishmentItem = await page.waitForSelector(
+            ".accomplishment-text"
+        );
+
+        const accomplishmentText = await page.evaluate((accomplishmentItem) => {
+            // Get only the text content of the accomplishment, ignoring the button texts
+            return accomplishmentItem.childNodes[0].textContent;
+        }, accomplishmentItem);
+
+        expect(accomplishmentText.trim()).toBe(
+            "Finished making user stories and issues!"
+        );
+    }, 40000);
+
+    test("Save Log button", async () => {
+        // Type the text into the textarea element
+        const saveButton = await page.$(".js-save-button");
+
+        await saveButton.click();
+        await page.waitForNavigation();
+
+        // Check if the URL contains 'dailyLog'
+        expect(page.url()).toContain(`calendar`);
+        const localStorageLength = await page.evaluate(() => {
+            return JSON.parse(localStorage.getItem("Records")).length;
+        });
+
+        expect(localStorageLength).toBe(1);
+        // Type the text into the textarea element
+        // Type the text into the textarea element
+        const dateSelector = await page.$(".current-date");
+        await dateSelector.click();
+
+        // Wait for navigation to the new page
+        await page.waitForNavigation();
+
+        // Check if the URL contains 'dailyLog'
+        expect(page.url()).toContain(`dailyLog`);
+        const accomplishmentItem = await page.waitForSelector(
+            ".accomplishment-text"
+        );
+
+        const accomplishmentText = await page.evaluate((accomplishmentItem) => {
+            // Get only the text content of the accomplishment, ignoring the button texts
+            return accomplishmentItem.childNodes[0].textContent;
+        }, accomplishmentItem);
+
+        expect(accomplishmentText.trim()).toBe(
+            "Finished making user stories and issues!"
+        );
+    }, 40000);
+
+    test("test3", async () => {
+        // Check if the URL contains 'dailyLog'
+        page.on("dialog", async (dialog) => {
+            await dialog.accept();
+        });
+
+        // Click on the delete button using its ID
+        const deleteButton = await page.$("#delete");
+        await deleteButton.click();
+
+        // Ensure that the list item has been removed from the DOM
+        const listItemAfterDeletion = await page.$(".accomplishment-text");
+        expect(listItemAfterDeletion).toBeNull();
     }, 40000);
 });

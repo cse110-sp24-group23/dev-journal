@@ -6,19 +6,21 @@
         <title>Password Page Boilerplate</title>
         <!-- Stylesheet-->
         <link rel="stylesheet" href="settings.css" />
-        <!-- Script -->
-        <script src="../navbar/navbar.js"></script>
         <!-- Favicon link-->
         <link
             rel="icon"
             type="image/png"
             sizes="32x32"
             href="../assets/icons/brand-logo.svg"
-        >
+        />
+        <!-- Scripts -->
+        <script src="../navbar/navbar.js"></script>
+        <script type="module" src="settings.js"></script>
     </head>
 
     <body>
         <div id="navbar"></div>
+        <<<<<<< HEAD
         <div class="header">
             <h1>Settings</h1>
         </div>
@@ -58,5 +60,53 @@
         </div>
         <a href="../password/landing.html"><button>Logout</button></a>
         <script src="settings.js"></script>
+        =======
+        <div class="header">
+            <h1>Settings</h1>
+        </div>
+        <div class="settings">
+            <input
+                type="checkbox"
+                id="mde-checkbox"
+                class="mdeCheckbox js-mde-checkbox"
+                checked
+            />
+            <label for="mde-checkbox"
+                >Enable markdown editting for the Daily Logs</label
+            >
+            <input
+                type="checkbox"
+                id="toggle-password-form"
+                name="toggle-password-form"
+                checked
+            />
+            <label for="toggle-password-form" class="settings-icon"
+                >Password Protection</label
+            >
+        </div>
+        <form action="/submit-password" method="post" id="password-form">
+            <label for="new-password">New Password:</label>
+            <input
+                type="password"
+                id="new-password"
+                name="new-password"
+                required
+            />
+            <label for="confirm-password">Confirm Password:</label>
+            <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                required
+            />
+            <button type="submit">Update</button>
+        </form>
+        <div id="error-message" class="error">
+            <span id="error-text"
+                >Passwords do not match. Please try again.</span
+            >
+            <button id="try-again-button">Try Again</button>
+        </div>
+        >>>>>>> 9079f80b727d7ae029865195c3b4106e05dd073e
     </body>
 </html>

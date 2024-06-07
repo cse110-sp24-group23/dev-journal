@@ -1,10 +1,11 @@
+/**Class LocalStorageAccomplishmentsApi for creating, reading, updating and deleting accomplishments
+ * @class 
+ */
 export default class LocalStorageAccomplishmentsApi {
-    /*
-    Gets all accomplishments from LocalStorage
-    Parameters: None
-    Returns: 
-    - Array of accomplishment objects
-    */
+    
+    /**Gets all accomplishments from LocalStorage
+     * @returns {Array} array of accoplishment objects
+     */
     static getAllAccomplishmentsObj() {
         try {
             const Accomplishments =
@@ -17,12 +18,10 @@ export default class LocalStorageAccomplishmentsApi {
         }
     }
 
-    /*
-    Creates a new accomplishments object in LocalStorage
-    Parameters: 
-    - accomplishmentsObj: Acoomplishments object
-    Returns: None
-    */
+    /**Creates a new accomplishments object in LocalStorage
+     * @param {accomplishmentsObj} accomplishmentsObj accomplishments object
+     * @throws {Error} could not create accomplishments object due to date already existing
+     */
     static createAccomplishmentsObj(accomplishmentsObj) {
         const Accomplishments = this.getAllAccomplishmentsObj();
         const existingAccomplishmentsObj = Accomplishments.find(
@@ -41,11 +40,9 @@ export default class LocalStorageAccomplishmentsApi {
         );
     }
 
-    /*
-    Updates an accomplishmentsObj in LocalStorage
-    Parameters:
-    - accomplishmentsObj: accomplishments object
-    Returns: None
+    /**Updates an accomplishmentsObj in LocalStorage 
+     * @param {accomplishmentsObj} accomplishmentsObj accomplishments object
+     * @throws {Error} could not update accomplishments object due to object date not found
     */
     static updateAccomplishmentsObj(accomplishmentsObj) {
         const Accomplishments = this.getAllAccomplishmentsObj();
@@ -65,21 +62,18 @@ export default class LocalStorageAccomplishmentsApi {
         );
     }
 
-    /*
-    Gets an accomplishmentsObj from LocalStorage by date
-    Parameters:
-    - date: date Object (new Date(Year, Month, Day))
-    Returns:
-    - accomplishmentsObject
+    /**Gets an accomplishmentsObj from LocalStorage by date 
+     * @param {date} date date ojbect (new Date(Year, Month, Day))
+     * @throws {Error} accomplishments object not found for date if it doesn't exist
+     * @returns {accomplishmentsObj} accomplishments object
     */
-    // For use in Daily Log
     static getAccomplishmentsObjByDate(date) {
         date = this._handleDateInput(date);
         const Accomplishments = this.getAllAccomplishmentsObj();
         const accomplishmentsObj = Accomplishments.find(
             (object) => object.id === date.getTime()
         );
-        // make sure accomplishments object exists
+        
         if (!accomplishmentsObj) {
             throw new Error(
                 "Accomplishments object not found for date",
@@ -88,32 +82,27 @@ export default class LocalStorageAccomplishmentsApi {
         }
         return accomplishmentsObj;
     }
-    /*
-    Checks if an accomplishments object exists in LocalStorage by date
-    Parameters:
-    - date: date Object (new Date(Year, Month Day))
-    Returns:
-    - Boolean
-    */
+
+    /**Checks if an accomplishments object exists in localStorage by date
+     * @param {date} date date object (new Date(Year, Month, Day))
+     * @returns {Boolean} true if accomplishments object exists, false if it doesn't exist
+     */
     static hasAccomplishmentsObjByDate(date) {
         date = this._handleDateInput(date);
         const Accomplishments = this.getAllAccomplishmentsObj();
         const accomplishmentsObj = Accomplishments.find(
             (object) => object.id === date.getTime()
         );
-        // make sure accomplishments object exists
         if (!accomplishmentsObj) {
             return false;
         }
         return true;
     }
 
-    /*
-    Deletes an accomplishments object from LocalStorage
-    Parameters: 
-    - date: Date object
-    Returns: None
-    */
+    /**Deletes an accomplishments object from localStorage
+     * @param {date} date date object (new Date(Year, Month, Day))
+     * @throws {Error} could not delete accomplishments object due to date not found
+     */
     static deleteAccomplishmentsObj(date) {
         date = this._handleDateInput(date);
         const Accomplishments = this.getAllAccomplishmentsObj();
@@ -132,7 +121,10 @@ export default class LocalStorageAccomplishmentsApi {
         );
     }
 
-    // given a date object, return a new date object that only has year, month, date
+    /**Turn a date object into a new date object that only contains year, month, date
+     * @param {date} date date object (new Date(Year, Month, Day))
+     * @returns {date} returns a new date object with same Year, Month, Date
+     */
     static _handleDateInput(date) {
         // make sure hours, minutes, seconds, miliseconds aren't taken into account
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());

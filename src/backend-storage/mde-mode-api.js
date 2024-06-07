@@ -2,11 +2,12 @@
  * Sets the status of whether to enable markdown editing
  * @param {Boolean} statusMDE
  */
-export function setStatusMDE(statusMDE) {
+export default function setStatusMDE(statusMDE) {
     if (statusMDE !== true && statusMDE !== false) {
         throw Error("statusMDE must be a boolean value - true or false");
     }
     localStorage.setItem("StatusMDE", statusMDE);
+    console.log('statusMDE')
 }
 
 /**

@@ -38,18 +38,19 @@ function addClickToDays(calendar) {
     for (let day of calendarDays) {
         day.addEventListener("click", () => {
             let record;
-            // gets date of clicked cell
+            // Date of the Clicked Cell
             const dateObject = calendar.getDateOfDayCell(day);
 
-            // if record object for the date already exists, get that, else make a new record object.
+            // Get Record Object corresponding to date (if it exists),
+            // Else make a new record object.
             if (RecordsStorage.hasRecordByDate(dateObject)) {
                 record = RecordsStorage.getRecordByDate(dateObject);
             } else {
                 record = new Record("log", { date: dateObject });
             }
-            // stores current record from the cell date into session storage
+            // Stores current record from the cell date into session storage
             sessionStorage.setItem("current record", JSON.stringify(record));
-            // redirects to daily log page for clicked date
+            // Redirects to daily log page for clicked date
             window.location.href = "../dailyLog/index.html";
         });
     }
@@ -59,10 +60,10 @@ function addClickToDays(calendar) {
 actions that are done when the window is loaded 
 */
 window.onload = function () {
-    // select relevant calendar elements
+    // Select relevant calendar elements
     const calendarHeading = document.querySelector("h1");
     const calendarDayCells = document.getElementsByClassName("js-calendar-day");
-    // instantiate Calendar class, passing in Heading and day cells since they will be edited
+    // Instantiate Calendar class, passing in Heading and day cells since they will be edited
     const calendar = new Calendar(calendarHeading, calendarDayCells);
     calendarFunctionality(calendar);
     addClickToDays(calendar);

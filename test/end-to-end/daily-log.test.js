@@ -126,33 +126,27 @@ describe("Daily Log End-to-End Tests", () => {
         // Check if the URL contains 'dailyLog'
         expect(page.url()).toContain(`dailyLog`);
 
+        await page.waitFor(1000);
         const updateDoneToday = await page.$("#done-today");
-
         // Define the text to be typed
         const addedText = await page.evaluate(
             (el) => el.value,
             updateDoneToday
         );
-
-        expect(addedText).toBe(doneToday);
-
         // Query the textarea element in HTML
         const updatehours = await page.$("#hours");
-
         // Retrieve the value from the textarea element
         const addedHours = await page.evaluate((el) => el.value, updatehours);
-
-        expect(addedHours).toBe(hours);
-
         // Query the textarea element in HTML
         const updateReflection = await page.$("#reflection");
-
         // Retrieve the value from the textarea element
         const addedReflection = await page.evaluate(
             (el) => el.value,
             updateReflection
         );
 
+        expect(addedText).toBe(doneToday);
+        expect(addedHours).toBe(hours);
         expect(addedReflection).toBe(reflection);
     });
 

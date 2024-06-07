@@ -4,11 +4,11 @@
     --error-color: red;
     --error-background-color: #f8d7da;
     --error-border-color: #f5c6cb;
-    --form-border-color: #21528B;
+    --form-border-color: #21528b;
     --button-font-size: 21px;
-    --button-bg-color: #21528B;
-    --button-hover-bg-color: #E2EFFF;
-    --button-hover-color: #21528B;
+    --button-bg-color: #21528b;
+    --button-hover-bg-color: #e2efff;
+    --button-hover-color: #21528b;
     --body-height: 100vh;
     --form-padding: 20px;
     --form-border-radius: 10px;
@@ -26,8 +26,8 @@
 /* Center the form in the middle of the page, prompts user to enter password with a submit button */
 body {
     display: flex; /* Flexbox is used to center the form both horizontally and vertically */
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     height: var(--body-height);
     margin: var(--no-margin); /* Remove default margin */
 }
@@ -35,71 +35,81 @@ body {
 /* Styling for the form element, this adheres to the color set in our style guide  */
 form {
     border: var(--border-width) solid var(--form-border-color); /* Border color for the form */
-    padding: var(--form-padding); 
+    padding: var(--form-padding);
     border-radius: var(--form-border-radius); /* Rounded corners for the form */
 }
 
 /* Styling for the label element this adheres to the font size set in our style guide*/
 label {
-    font-size: var(--button-font-size); 
-    font-weight: bold; 
+    font-size: var(--button-font-size);
+    font-weight: bold;
 }
 
 /* Styling for password input fields */
 input[type="password"] {
-    font-size: var(--button-font-size); 
-    border: var(--border-width) solid var(--form-border-color); 
-    border-radius: var(--input-border-radius); /* Rounded corners for the input */
-    padding: var(--input-padding); 
+    font-size: var(--button-font-size);
+    border: var(--border-width) solid var(--form-border-color);
+    border-radius: var(
+        --input-border-radius
+    ); /* Rounded corners for the input */
+    padding: var(--input-padding);
 }
 
 /* Styling for the submit button, background color and font size adheres to style guide */
 button[type="submit"] {
-    font-size: var(--button-font-size); 
-    font-weight: bold; 
-    background-color: var(--button-bg-color); 
-    color: white; 
-    border: none; 
-    padding: var(--button-padding); 
+    font-size: var(--button-font-size);
+    font-weight: bold;
+    background-color: var(--button-bg-color);
+    color: white;
+    border: none;
+    padding: var(--button-padding);
     cursor: pointer; /* Pointer cursor on hover */
-    border-radius: var(--input-border-radius); /* Rounded corners for the button */
+    border-radius: var(
+        --input-border-radius
+    ); /* Rounded corners for the button */
 }
 
 /* Styling for the submit button on hover, when hovering vackground color changes to lighter blue and font color is dark blue*/
 button[type="submit"]:hover {
-    background-color: var(--button-hover-bg-color); 
-    color: var(--button-hover-color); 
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-hover-color);
 }
 
 /* classes */
+/* Added/removed in JS to hide/show messages and elements */
+.hidden {
+    display: none;
+}
+
 /* Styling for error message when password is incorrect, when user hits submit a red box will pop up under the input form
 that has red text saying "Incorrect password. Please try again." With a Try Again button*/
 .error {
-    font-size: var(--primary-font-size); 
-    display: none; /* Hidden by default */
-    color: var(--error-color); 
-    background-color: var(--error-background-color); 
-    border: 1px solid var(--error-border-color); 
-    padding: var(--error-padding); 
-    margin-top: var(--error-margin-top); 
-    border-radius: var(--error-border-radius); /* Rounded corners for the error message */
-    text-align: center; 
+    font-size: var(--primary-font-size);
+    color: var(--error-color);
+    background-color: var(--error-background-color);
+    border: 1px solid var(--error-border-color);
+    padding: var(--error-padding);
+    margin-top: var(--error-margin-top);
+    border-radius: var(
+        --error-border-radius
+    ); /* Rounded corners for the error message */
+    text-align: center;
 }
 
 /* Styling for the 'Try Again' button inside the error message has the same styling as the submit button*/
 .error button {
-    font-size: var(--button-font-size); 
-    font-weight: bold; 
-    background-color: var(--button-bg-color); 
-    color: white; 
-    border: none; 
-    padding: var(--button-padding); 
-    cursor: pointer; 
-    border-radius: var(--input-border-radius); 
+    font-size: var(--button-font-size);
+    font-weight: bold;
+    background-color: var(--button-bg-color);
+    color: white;
+    border: none;
+    padding: var(--button-padding);
+    cursor: pointer;
+    border-radius: var(--input-border-radius);
 }
 
 /* Styling for the 'Try Again' button inside the error message on hover, same as 'Submit' button */
 .error button:hover {
-    background-color: var(--button-hover-bg-color); 
-    color: var(--button-hover-color); 
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-hover-color);
 }

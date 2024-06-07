@@ -245,7 +245,7 @@ function updateContentButtons(newItem, text) {
 
     // create a container for the accomplishment buttons
     const accomplishmentButtons = document.createElement("div");
-    accomplishmentButtons.classList.add("accomlishment-buttons");
+    accomplishmentButtons.classList.add("accomplishment-buttons");
     // create the Edit button
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
@@ -284,8 +284,8 @@ function updateContentButtons(newItem, text) {
 function logFunctionality(record) {
     //update content of the page
     populateDefaultLog(record);
-    const submitButton = document.querySelector("#save-button");
-    const deleteButton = document.querySelector("#delete-button");
+    const submitButton = document.querySelector(".js-save-button");
+    const deleteButton = document.querySelector(".js-delete-button");
 
     // Event listner for submit button
     submitButton.addEventListener("click", () => {

@@ -51,13 +51,13 @@
     --delete-note-color-hover: rgb(228, 87, 87);
     --button-save-color: #ffffff;
     --button-cancel-color: #ffffff;
-    --button-save-hover-color: #DDCC77;
-    --button-cancel-hover-color: #DDCC77;
+    --button-save-hover-color: #ddcc77;
+    --button-cancel-hover-color: #ddcc77;
 
     --shadow-color: rgba(128, 128, 128, 0.507);
     --shadow-color-hover: rgb(128, 128, 128);
 
-    --notes-edit-color: #CC6677;
+    --notes-edit-color: #cc6677;
     --notes-edit-input-color: #ffffff;
     --notes-lavendar: #dcd5f859;
     --notes-peach: #fde3ac44;
@@ -136,7 +136,7 @@ body {
 
 h1 {
     font-family: var(--font);
-    font-weight: normal; 
+    font-weight: normal;
 }
 
 /* meant to hide/show objects my adding/removing this class in js */
@@ -171,17 +171,19 @@ h1 {
     width: var(--note-width);
     padding: var(--notes-padding);
     border-radius: var(--notes-border-radius);
-    box-shadow: var(--notes-box-shadow-top-left-right) 
-                var(--notes-box-shadow-top-left-right) 
-                var(--notes-box-shadow-top-left-right) 
-                var(--notes-box-shadow-bottom) 
-                var(--shadow-color);
+    box-shadow: var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right) var(--notes-box-shadow-bottom)
+        var(--shadow-color);
 }
 
 .notes-display {
     width: var(--notes-display-width);
     display: grid;
-    grid-template-columns: repeat(var(--notes-per-row), var(--notes-display-grid-sizing));
+    grid-template-columns: repeat(
+        var(--notes-per-row),
+        var(--notes-display-grid-sizing)
+    );
     gap: var(--notes-display-gap);
 }
 
@@ -194,7 +196,8 @@ h1 {
     padding: var(--addnote-padding);
     width: var(--addnote-width);
     height: var(--addnote-height);
-    box-shadow: var(--addnote-box-shadow-top) var(--addnote-box-shadow-left) var(--addnote-box-shadow-right) rgba(0, 0, 0, 0.1);
+    box-shadow: var(--addnote-box-shadow-top) var(--addnote-box-shadow-left)
+        var(--addnote-box-shadow-right) rgba(0, 0, 0, 0.1);
 }
 
 #add-note-btn:hover {
@@ -233,11 +236,10 @@ h1 {
 }
 
 .note:hover {
-    box-shadow: var(--notes-box-shadow-top-left-right) 
-                var(--notes-box-shadow-top-left-right) 
-                var(--notes-box-shadow-top-left-right) 
-                var(--notes-box-shadow-bottom) 
-                var(--shadow-color-hover);
+    box-shadow: var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right) var(--notes-box-shadow-bottom)
+        var(--shadow-color-hover);
 }
 
 #note-editor {
@@ -246,11 +248,10 @@ h1 {
     margin-bottom: var(--note-editor-margin-bottom);
     padding: var(--note-editor-padding);
     border-radius: var(--note-editor-border-radius);
-    box-shadow: var(--notes-box-shadow-top-left-right) 
-                var(--notes-box-shadow-top-left-right) 
-                var(--notes-box-shadow-top-left-right) 
-                var(--notes-box-shadow-bottom) 
-                var(--shadow-color);
+    box-shadow: var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right)
+        var(--notes-box-shadow-top-left-right) var(--notes-box-shadow-bottom)
+        var(--shadow-color);
 }
 
 #note-editor-title {

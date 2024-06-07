@@ -30,12 +30,14 @@
             <!-- Heading: Date -->
             <div class="header-container">
                 <h1>Date:</h1>
-                <div class="button-container">
-                    <!-- button to save log -->
-                    <button type="button" id="save-button">Submit</button>
-                    <!-- button for deleting log -->
-                    <button type="button" id="delete-button">Delete Log</button>
-                </div>
+                <!-- button for deleting log -->
+                <button
+                    type="button"
+                    id="delete-button"
+                    class="js-delete-button"
+                >
+                    Delete Log
+                </button>
             </div>
 
             <form>
@@ -83,6 +85,10 @@ What things can you do in the future?"
             </button>
             <!-- paragraph element to display the list of accomplishments -->
             <p class="accomplishment--list js-accomplishment-list"></p>
+            <!-- button to save log -->
+            <button type="button" id="save-button" class="js-save-button">
+                Save Log
+            </button>
         </main>
     </body>
 </html>

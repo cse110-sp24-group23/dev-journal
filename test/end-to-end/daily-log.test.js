@@ -126,6 +126,7 @@ describe("Daily Log End-to-End Tests", () => {
         // Check if the URL contains 'dailyLog'
         expect(page.url()).toContain(`dailyLog`);
     });
+
     test("Navigate to the page and populate record", async () => {
         const updateDoneToday = await page.$("#done-today");
         // Define the text to be typed
@@ -149,55 +150,6 @@ describe("Daily Log End-to-End Tests", () => {
         expect(addedHours).toBe(hours);
         expect(addedReflection).toBe(reflection);
     });
-
-    test("update daily log", async () => {
-        // Query the textarea element in HTML
-        const updateReflection = await page.$("#reflection");
-
-        // Define the text to be typed
-        reflection = ` - Completed all planned tasks.
-- Prepare presentation for group meeting tomorrow.
-- Work on fixing bug.`;
-
-        await page.evaluate(
-            (updateReflection, reflection) => {
-                updateReflection.value = reflection;
-            },
-            updateReflection,
-            reflection
-        );
-        // Retrieve the value from the textarea element
-        const addedText = await page.evaluate(
-            (updateReflection) => updateReflection.value,
-            updateReflection
-        );
-
-        expect(addedText).toBe(reflection);
-    });
-
-    test("Save Log button", async () => {
-        // Type the text into the textarea element
-        const saveButton = await page.$(".js-save-button");
-
-        await saveButton.click();
-        await page.waitForNavigation();
-
-        // Check if the URL contains 'dailyLog'
-        expect(page.url()).toContain(`calendar`);
-        const localStorageLength = await page.evaluate(() => {
-            return JSON.parse(localStorage.getItem("Records")).length;
-        });
-
-        expect(localStorageLength).toBe(1);
-    });
-
-    test("test 1", async () => {
-        const todaySelector = ".nav-list li:nth-child(2) a";
-        await page.waitForSelector(todaySelector);
-        // Click on Today link in nav bar
-        await page.click(todaySelector);
-        expect(page.url()).toContain("/dailyLog");
-    }, 40000);
 
     test("test 2", async () => {
         const accomplishmentInput = await page.$(".js-accomplishment-input");

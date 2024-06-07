@@ -216,6 +216,7 @@ describe("Daily Log End-to-End Tests", () => {
             (el) => el.value,
             updateDoneToday
         );
+        console.log("done");
         const addedHours = await page.evaluate((el) => el.value, updatehours);
         const addedReflection = await page.evaluate(
             (el) => el.value,

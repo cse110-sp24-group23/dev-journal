@@ -96,6 +96,37 @@
     --font-size-heading-large: 40px;
 }
 
+/* Styling error button */
+.error button:hover {
+    background-color: var(--error-button-background-color);
+    color: var(--error-button-hover-color);
+}
+
+.error button {
+    font-size: var(--error-button-font-size);
+    font-weight: var(--error-button-font-weight);
+    background-color: var(--error-button-background-color);
+    color: var(--error-button-color);
+    border: var(--error-button-border);
+    padding: var(--error-button-padding);
+    cursor: var(--error-button-cursor);
+    border-radius: var(--error-button-border-radius);
+}
+
+/* Error message styling */
+.error {
+    font-size: var(--error-font-size);
+    font-weight: var(--error-font-weight);
+    display: none; /* Hidden by default */
+    color: var(--error-color);
+    background-color: var(--error-background-color);
+    border: var(--error-border);
+    padding: var(--error-padding);
+    margin-top: var(--error-margin-top);
+    border-radius: var(--error-border-radius);
+    text-align: var(--error-text-align);
+}
+
 /* Styling elements of the body, such as the form, title, checkbox */
 body {
     font-family: var(--font);
@@ -121,6 +152,11 @@ body {
     color: var(--label-color);
 }
 
+/* Hidden class */
+.hidden {
+    display: none;
+}
+
 /* Styling password form */
 form {
     background: var(--form-background-color);
@@ -130,21 +166,6 @@ form {
     width: var(--form-width);
     text-align: center;
     margin-top: var(--form-margin-top);
-}
-
-/* Hidden class */
-.hidden {
-    display: none;
-}
-
-/* Label styling */
-label {
-    display: var(--label-display);
-    margin-top: var(--label-margin-top);
-    font-weight: var(--label-font-weight);
-    text-align: var(--label-text-align);
-    color: var(--label-color);
-    font-size: var(--label-font-size);
 }
 
 /* Input styling */
@@ -158,20 +179,14 @@ input[type="password"] {
     box-sizing: var(--input-box-sizing);
 }
 
-/* Button styling */
-button {
-    padding: var(--button-padding);
-    background-color: var(--button-background-color);
-    color: var(--button-color);
-    border: var(--button-border);
-    border-radius: var(--button-border-radius);
-    cursor: var(--button-cursor);
-    margin-top: var(--button-margin-top);
-    font-size: var(--button-font-size);
-}
-
-button:hover {
-    background-color: var(--button-hover-background-color);
+/* Label styling */
+label {
+    display: var(--label-display);
+    margin-top: var(--label-margin-top);
+    font-weight: var(--label-font-weight);
+    text-align: var(--label-text-align);
+    color: var(--label-color);
+    font-size: var(--label-font-size);
 }
 
 /* Settings section */
@@ -192,34 +207,20 @@ button:hover {
     vertical-align: middle;
 }
 
-/* Error message styling */
-.error {
-    font-size: var(--error-font-size);
-    font-weight: var(--error-font-weight);
-    display: none; /* Hidden by default */
-    color: var(--error-color);
-    background-color: var(--error-background-color);
-    border: var(--error-border);
-    padding: var(--error-padding);
-    margin-top: var(--error-margin-top);
-    border-radius: var(--error-border-radius);
-    text-align: var(--error-text-align);
+button:hover {
+    background-color: var(--button-hover-background-color);
 }
 
-.error button {
-    font-size: var(--error-button-font-size);
-    font-weight: var(--error-button-font-weight);
-    background-color: var(--error-button-background-color);
-    color: var(--error-button-color);
-    border: var(--error-button-border);
-    padding: var(--error-button-padding);
-    cursor: var(--error-button-cursor);
-    border-radius: var(--error-button-border-radius);
-}
-
-.error button:hover {
-    background-color: var(--error-button-background-color);
-    color: var(--error-button-hover-color);
+/* Button styling */
+button {
+    padding: var(--button-padding);
+    background-color: var(--button-background-color);
+    color: var(--button-color);
+    border: var(--button-border);
+    border-radius: var(--button-border-radius);
+    cursor: var(--button-cursor);
+    margin-top: var(--button-margin-top);
+    font-size: var(--button-font-size);
 }
 
 /* Responsive settings */

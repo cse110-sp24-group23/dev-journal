@@ -195,6 +195,8 @@ describe("Daily Log End-to-End Tests", () => {
         // Click on Today link in nav bar
         await page.click(todaySelector);
         expect(page.url()).toContain("/dailyLog");
+    });
+    test("test 1", async () => {
         const updateDoneToday = await page.$("#done-today");
         const updatehours = await page.$("#hours");
         const updateReflection = await page.$("#reflection");

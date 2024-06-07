@@ -16,6 +16,9 @@ As a team of software developers, our goal was to create a streamlined journal f
 For more a detailed description of our motivations and design process, please check our [wiki](https://github.com/cse110-sp24-group23/dev-journal/wiki/Process).
 
 #### CSE 110 Spring 2024 Team 23 [Main Team Repo](https://github.com/cse110-sp24-group23/cse110-sp24-group23) 
-Meeting notes: admin/meetings
-Branding: admin/branding
-Code style: admin/code-style.md
+
+The following are found in our main repo:
+
+* Meeting notes: admin/meetings
+* Branding: admin/branding
+* Code style: admin/code-style.md

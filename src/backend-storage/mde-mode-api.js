@@ -7,7 +7,6 @@ export default function setStatusMDE(statusMDE) {
         throw Error("statusMDE must be a boolean value - true or false");
     }
     localStorage.setItem("StatusMDE", statusMDE);
-    console.log('statusMDE')
 }
 
 /**

@@ -9,7 +9,7 @@ function setPassword () {
         //Check if new password and confirmed password are the same. If they are, hash the password and store it in
         //local storage.
         if (newPassword === confirmPassword){
-            const hashedPassword = await hashPassword(confirmPassword);
+            const hashedPassword = await _hashPassword(confirmPassword);
             localStorage.setItem('storedHashedPassword', hashedPassword);
             window.location.href = '/src/calendar/calendar.html';
         }
@@ -50,7 +50,7 @@ function displayPasswordForm () {
     Returns:
         hashed input password
     */
-async function hashPassword(password) {
+async function _hashPassword(password) {
     const msgUint8 = new TextEncoder().encode(password);
     const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -63,22 +63,23 @@ async function hashPassword(password) {
 function updateStatusMDE() {
     //select the input from the HTML 
     const mdeCheckbox = document.querySelector(".js-mde-checkbox");
-    let statusMDE;
-    //check its status
-    if (mdeCheckbox.checked == "true") {
-        statusMDE = true;
-    }
-    else {
-        statusMDE = false;
-    }
-    //update the status
-    setStatusMDE(statusMDE);
+    mdeCheckbox.addEventListener("click", () => {
+        let statusMDE;
+        //check its status
+        if (mdeCheckbox.checked == true) {
+            statusMDE = true;
+        }
+        else {
+            statusMDE = false;
+        }
+        //update the status
+        setStatusMDE(statusMDE);
+    });
 }
 
 window.onload = function () {
     setPassword();
     toggleErrorDisplay();
     displayPasswordForm();
-    hashPassword();
     updateStatusMDE();
 }

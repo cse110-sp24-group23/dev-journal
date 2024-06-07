@@ -21,7 +21,7 @@
     --label-color: #003366;
     --label-display: block;
     --label-margin-top: 1em;
-    --label-font-weight: bold;
+    --label-font-weight: normal;
     --label-text-align: left;
     --label-font-size: 1em;
 
@@ -46,11 +46,11 @@
     /* Header vars */
     --header-margin-bottom: 1em;
     --header-font-size: 2em;
-    --header-font-weight: bold;
+    --header-font-weight: normal;
 
     /* Settings vars */
     --settings-font-size: 1.5em;
-    --settings-font-weight: bold;
+    --settings-font-weight: normal;
     --settings-margin-top: 1em;
     --settings-text-align: center;
     --settings-display: flex;

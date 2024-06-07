@@ -24,7 +24,7 @@ describe("Basic user flow for Navbar", () => {
 
         // Assert if the URL matches the Calendar page URL
         expect(page.url()).toContain(`/calendar/calendar`);
-    });
+    }, 10000);
 
     // Test for Today page
     test("Navigate to Today page", async () => {

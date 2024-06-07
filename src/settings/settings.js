@@ -15,7 +15,7 @@ document
         if (newPassword === confirmPassword) {
             const hashedPassword = await hashPassword(confirmPassword);
             localStorage.setItem("storedHashedPassword", hashedPassword);
-            window.location.href = "/src/calendar/calendar.html";
+            window.location.href = "../calendar/calendar.html";
         } else {
             const errorMessage = document.getElementById("error-message");
             errorMessage.style.display = "block";
@@ -44,6 +44,15 @@ document
         } else {
             form.classList.add("hidden");
         }
+    });
+
+/**
+ * Redirects to landing page after clicking logout
+ */
+document
+    .getElementById('logout-button')
+    .addEventListener('click', function() {
+        window.location.href = '../password/landing.html';
     });
 
 /**

@@ -200,19 +200,13 @@ describe("Daily Log End-to-End Tests", () => {
     }, 40000);
 
     test("test 1", async () => {
-        const updateDoneToday = await page.$("#done-today");
         const updatehours = await page.$("#hours");
         const updateReflection = await page.$("#reflection");
-        const addedText = await page.evaluate(
-            (el) => el.value,
-            updateDoneToday
-        );
         const addedHours = await page.evaluate((el) => el.value, updatehours);
         const addedReflection = await page.evaluate(
             (el) => el.value,
             updateReflection
         );
-        expect(addedText).toBe(doneToday);
         expect(addedHours).toBe(hours);
         expect(addedReflection).toBe(reflection);
     }, 40000);

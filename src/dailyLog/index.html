@@ -22,8 +22,26 @@
         <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
         <script type="module" src="./simpleMDE.js"></script>
         <script type="module" src="./dailyLog.js"></script>
+
+        <style>
+            .noscript-warning {
+                background-color: #ffdddd; /* light red */
+                color: black;
+                text-align: center;
+                padding: 20px;
+                font-size: 24px;
+                border: 1px solid red;
+            }
+        </style>
     </head>
     <body>
+        <noscript>
+            <div class="noscript-warning">
+                This application requires JavaScript to run. 
+                Please enable JavaScript in your browser settings.
+            </div>
+        </noscript>
+
         <div id="navbar"></div>
 
         <main>

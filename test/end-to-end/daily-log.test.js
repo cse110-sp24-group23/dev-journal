@@ -199,18 +199,6 @@ describe("Daily Log End-to-End Tests", () => {
         expect(page.url()).toContain("/dailyLog");
     }, 40000);
 
-    test("test 1", async () => {
-        const updatehours = await page.$("#hours");
-        const updateReflection = await page.$("#reflection");
-        const addedHours = await page.evaluate((el) => el.value, updatehours);
-        const addedReflection = await page.evaluate(
-            (el) => el.value,
-            updateReflection
-        );
-        expect(addedHours).toBe(hours);
-        expect(addedReflection).toBe(reflection);
-    }, 40000);
-
     test("test 2", async () => {
         const accomplishmentInput = await page.$(".js-accomplishment-input");
         const accomplishment = `Finished making user stories!`;

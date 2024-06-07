@@ -321,4 +321,19 @@ describe("Daily Log End-to-End Tests", () => {
         const listItemAfterDeletion = await page.$(".accomplishment-text");
         expect(listItemAfterDeletion).toBeNull();
     }, 40000);
+
+    test("test3", async () => {
+        // Click on the delete button using its ID
+        const deleteButton = await page.$(".js-delete-button");
+        await deleteButton.click();
+
+        await page.waitForNavigation();
+        // Check if the URL contains 'dailyLog'
+        expect(page.url()).toContain(`calendar`);
+        const localStorageLength = await page.evaluate(() => {
+            return JSON.parse(localStorage.getItem("Records")).length;
+        });
+
+        expect(localStorageLength).toBe(0);
+    }, 40000);
 });

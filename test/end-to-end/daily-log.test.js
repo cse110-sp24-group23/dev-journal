@@ -125,6 +125,8 @@ describe("Daily Log End-to-End Tests", () => {
 
         // Check if the URL contains 'dailyLog'
         expect(page.url()).toContain(`dailyLog`);
+    });
+    test("Navigate to the page and populate record", async () => {
         const updateDoneToday = await page.$("#done-today");
         // Define the text to be typed
         const addedText = await page.evaluate(

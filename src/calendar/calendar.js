@@ -2,43 +2,45 @@ import { Calendar } from "./calendar-class.js";
 import RecordsStorage from "../backend-storage/records-api.js";
 import { Record } from "../backend-storage/record-class.js";
 
-/*
-    Uses Calendar class from ./calendar-class.js to populate the month view and show the next
-    or previous month when you click the `<` or `>` buttons on the calendar page.
-    Also highlights the current day and grays out the rollover dates from the prev/next month.
-    Parameters: None
-    Returns: None
-*/
+/**
+ * Uses Calendar class from ./calendar-class.js to populate the month view and show the next
+ * or previous month when you click the `<` or `>` buttons on the calendar page.
+ * Also highlights the current day and grays out the rollover dates from the prev/next month.
+ *
+ * @param {Calendar} calendar - The calendar object to be used for functionality.
+ * @returns {void}
+ */
 function calendarFunctionality(calendar) {
     const prevMonthButton = document.getElementsByClassName("js-prev-month")[0];
     const nextMonthButton = document.getElementsByClassName("js-next-month")[0];
 
-    // populate table upon page load with defaults (current month and year)
+    // Default Populate with current month
     calendar.populateMonthView();
-    // go to prev month when prev button is clicked
+
     prevMonthButton.addEventListener("click", () => {
         calendar.prevMonthView();
     });
-    // go to next month when next button is clicked
+
     nextMonthButton.addEventListener("click", () => {
         calendar.nextMonthView();
     });
 }
 
-/*
-    Adds event listeners to each date and stores the record created in session stoarge. 
-    Redirects to the daily log page.
-    Parameters: calendar object initialized when the window is loaded
-    Returns: None
-*/
+/**
+ * Adds event listeners to each date and stores the record created in session storage.
+ * Redirects to the "daily log" page for the date clicked.
+ *
+ * @param {Calendar} calendar - The calendar object initialized when the window is loaded.
+ * @returns {void}
+ */
 function addClickToDays(calendar) {
     const calendarDays = document.querySelectorAll(".js-calendar-day");
     for (let day of calendarDays) {
-        //day.innerHTML = "<a href= '../dailyLog/index.html'>helloo</a>";
         day.addEventListener("click", () => {
             let record;
-            // gets the date of the cell which was clicked
+            // gets date of clicked cell
             const dateObject = calendar.getDateOfDayCell(day);
+
             // if record object for the date already exists, get that, else make a new record object.
             if (RecordsStorage.hasRecordByDate(dateObject)) {
                 record = RecordsStorage.getRecordByDate(dateObject);
@@ -47,7 +49,7 @@ function addClickToDays(calendar) {
             }
             // stores current record from the cell date into session storage
             sessionStorage.setItem("current record", JSON.stringify(record));
-            // redirects to daily log
+            // redirects to daily log page for clicked date
             window.location.href = "../dailyLog/index.html";
         });
     }

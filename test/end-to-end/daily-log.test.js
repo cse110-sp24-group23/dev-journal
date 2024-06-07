@@ -190,13 +190,11 @@ describe("Daily Log End-to-End Tests", () => {
     });
 
     test("test 1", async () => {
-        const todayLink = await page.$(".nav-list li:nth-child(2)");
-
-        await todayLink.click();
-        await page.waitForNavigation();
-        // Check if the URL contains 'dailyLog'
-        expect(page.url()).toContain("dailyLog");
-
+        const todaySelector = ".nav-list li:nth-child(2) a";
+        await page.waitForSelector(todaySelector);
+        // Click on Today link in nav bar
+        await page.click(todaySelector);
+        expect(page.url()).toContain("/dailyLog");
         const updateDoneToday = await page.$("#done-today");
         const updatehours = await page.$("#hours");
         const updateReflection = await page.$("#reflection");

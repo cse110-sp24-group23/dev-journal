@@ -3,6 +3,9 @@
  * @param {Boolean} statusMDE
  */
 function setStatusMDE(statusMDE) {
+    if (statusMDE !== true && statusMDE !== false) {
+        throw Error("statusMDE must be a boolean value - true or false");
+    }
     localStorage.setItem("StatusMDE", statusMDE);
 }
 

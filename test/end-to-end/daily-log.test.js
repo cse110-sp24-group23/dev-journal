@@ -7,6 +7,16 @@ if (process.env.DEPLOYMENT_URL) {
     url = process.env.DEPLOYMENT_URL;
 }
 
+let doneToday = ` - Checked emails and replied to urgent messages.
+- Worked on the presentation for the client meeting.
+- Worked on the user stories for a new feature.
+- Reviewed code submissions from team members.`;
+
+let hours = `7`;
+
+let reflection = ` - Completed all planned tasks.
+- Prepare presentation for group meeting tomorrow.`;
+
 describe("Daily Log End-to-End Tests", () => {
     beforeAll(async () => {
         await page.goto(url); // Add page link
@@ -25,49 +35,10 @@ describe("Daily Log End-to-End Tests", () => {
     });
 
     // Test for Today page
-    test("Add text to different textareas", async () => {
-        // Wait for the textarea element to be visible
-
-        // Query the textarea element in HTML
-        const updateDoneToday = await page.$("#done-today");
-
-        // Define the text to be typed
-        const doneToday = ` - Checked emails and replied to urgent messages.
-        - Worked on the presentation for the client meeting.
-        - Worked on the user stories for a new feature.
-        - Reviewed code submissions from team members.`;
-
-        // Type the text into the textarea element
-        await updateDoneToday.type(doneToday);
-
-        await page.evaluate(
-            (updateDoneToday, doneToday) => {
-                updateDoneToday.value = doneToday;
-            },
-            updateDoneToday,
-            doneToday
-        );
-
-        // Retrieve the value from the textarea element
-        const addedText = await page.evaluate(
-            (updateDoneToday) => updateDoneToday.value,
-            updateDoneToday
-        );
-
-        expect(addedText).toBe(doneToday);
-    });
-
-    // Test for Today page
     test("Add text to done-today textarea", async () => {
         // Query the textarea element in HTML
         const updateDoneToday = await page.$("#done-today");
-
         // Define the text to be typed
-        const doneToday = ` - Checked emails and replied to urgent messages.
-        - Worked on the presentation for the client meeting.
-        - Worked on the user stories for a new feature.
-        - Reviewed code submissions from team members.`;
-
         await page.evaluate(
             (updateDoneToday, doneToday) => {
                 updateDoneToday.value = doneToday;
@@ -75,7 +46,6 @@ describe("Daily Log End-to-End Tests", () => {
             updateDoneToday,
             doneToday
         );
-
         // Retrieve the value from the textarea element
         const addedText = await page.evaluate(
             (updateDoneToday) => updateDoneToday.value,
@@ -86,14 +56,10 @@ describe("Daily Log End-to-End Tests", () => {
     });
 
     test("Add text to hours", async () => {
-        // Query the textarea element in HTML
+        // Query the input element in HTML
         const updatehours = await page.$("#hours");
 
-        // Define the text to be typed
-        const hours = `7`;
-
-        // Type the text into the textarea element
-
+        // Type the text into the input element
         await page.evaluate(
             (updatehours, hours) => {
                 updatehours.value = hours;
@@ -115,8 +81,6 @@ describe("Daily Log End-to-End Tests", () => {
         const updateReflection = await page.$("#reflection");
 
         // Define the text to be typed
-        const reflection = ` - Completed all planned tasks.
-        - Prepare presentation for group meeting tomorrow.`;
 
         await page.evaluate(
             (updateReflection, reflection) => {
@@ -164,10 +128,6 @@ describe("Daily Log End-to-End Tests", () => {
         const updateDoneToday = await page.$("#done-today");
 
         // Define the text to be typed
-        const doneToday = ` - Checked emails and replied to urgent messages.
-        - Worked on the presentation for the client meeting.
-        - Worked on the user stories for a new feature.
-        - Reviewed code submissions from team members.`;
         const addedText = await page.evaluate(
             (updateDoneToday) => updateDoneToday.value,
             updateDoneToday
@@ -177,9 +137,6 @@ describe("Daily Log End-to-End Tests", () => {
 
         // Query the textarea element in HTML
         const updatehours = await page.$("#hours");
-
-        // Define the text to be typed
-        const hours = `7`;
 
         // Retrieve the value from the textarea element
         const addedHours = await page.evaluate(
@@ -192,9 +149,6 @@ describe("Daily Log End-to-End Tests", () => {
         // Query the textarea element in HTML
         const updateReflection = await page.$("#reflection");
 
-        // Define the text to be typed
-        const reflection = ` - Completed all planned tasks.
-        - Prepare presentation for group meeting tomorrow.`;
         // Retrieve the value from the textarea element
         const addedReflection = await page.evaluate(
             (updateReflection) => updateReflection.value,
@@ -209,9 +163,9 @@ describe("Daily Log End-to-End Tests", () => {
         const updateReflection = await page.$("#reflection");
 
         // Define the text to be typed
-        const reflection = ` - Completed all planned tasks.
-        - Prepare presentation for group meeting tomorrow.
-        - Work on fixing bug.`;
+        reflection = ` - Completed all planned tasks.
+- Prepare presentation for group meeting tomorrow.
+- Work on fixing bug.`;
 
         await page.evaluate(
             (updateReflection, reflection) => {
@@ -249,34 +203,20 @@ describe("Daily Log End-to-End Tests", () => {
         // Type the text into the textarea element
         const todaySelector = ".nav-list li:nth-child(2) a";
         await page.waitForSelector(todaySelector);
-
-        // Click on Today link in nav bar
         await page.click(todaySelector);
-        await page.waitForNavigation();
-
         // Check if the URL contains 'dailyLog'
         expect(page.url()).toContain(`dailyLog`);
 
         const updateDoneToday = await page.$("#done-today");
 
-        // Define the text to be typed
-        const doneToday = ` - Checked emails and replied to urgent messages.
-        - Worked on the presentation for the client meeting.
-        - Worked on the user stories for a new feature.
-        - Reviewed code submissions from team members.`;
         const addedText = await page.evaluate(
             (updateDoneToday) => updateDoneToday.value,
             updateDoneToday
         );
-
         expect(addedText).toBe(doneToday);
 
         // Query the textarea element in HTML
         const updatehours = await page.$("#hours");
-
-        // Define the text to be typed
-        const hours = `7`;
-
         // Retrieve the value from the textarea element
         const addedHours = await page.evaluate(
             (updatehours) => updatehours.value,
@@ -287,11 +227,6 @@ describe("Daily Log End-to-End Tests", () => {
 
         // Query the textarea element in HTML
         const updateReflection = await page.$("#reflection");
-
-        // Define the text to be typed
-        const reflection = ` - Completed all planned tasks.
-        - Prepare presentation for group meeting tomorrow.
-        - Work on fixing bug.`;
         // Retrieve the value from the textarea element
         const addedReflection = await page.evaluate(
             (updateReflection) => updateReflection.value,
@@ -299,5 +234,51 @@ describe("Daily Log End-to-End Tests", () => {
         );
 
         expect(addedReflection).toBe(reflection);
+    }, 40000);
+
+    test("Navigate to the page and populate record", async () => {
+        const accomplishmentInput = await page.$(".js-accomplishment-input");
+        const accomplishment = `Finished making user stories!`;
+        await page.evaluate(
+            (accomplishmentInput, accomplishment) => {
+                accomplishmentInput.value = accomplishment;
+            },
+            accomplishmentInput,
+            accomplishment
+        );
+
+        const addAccomplishment = await page.$(".js-add-accomplishment");
+
+        await addAccomplishment.click();
+        const emptyInput = await page.evaluate(
+            (accomplishmentInput) => accomplishmentInput.value,
+            accomplishmentInput
+        );
+
+        expect(emptyInput).toBe("");
+
+        // Ensure the accomplishment item is correctly added
+        const accomplishmentItem = await page.waitForSelector(
+            ".accomplishment-text"
+        );
+
+        // Ensure the accomplishment item is correctly added
+        const accomplishmentText = await page.evaluate((accomplishmentItem) => {
+            // Get only the text content of the accomplishment, ignoring the button texts
+            return accomplishmentItem.childNodes[0].textContent;
+        }, accomplishmentItem);
+
+        expect(accomplishmentText).toBe(accomplishment);
+
+        const editButton = await page.$("#edit");
+        const doneButton = await page.$("#done");
+        const deleteButton = await page.$("#delete");
+
+        // Check that the buttons exist
+        expect(editButton).not.toBeNull();
+        expect(doneButton).not.toBeNull();
+        expect(deleteButton).not.toBeNull();
     });
+
+    test("Navigate to the page and populate record", async () => {});
 });

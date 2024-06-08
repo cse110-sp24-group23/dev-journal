@@ -1,5 +1,3 @@
-import { AccomplishmentsObj } from "./accomplishments-class";
-
 /**
  * Class LocalStorageAccomplishmentsApi for creating, reading, updating and deleting accomplishments
  * @class

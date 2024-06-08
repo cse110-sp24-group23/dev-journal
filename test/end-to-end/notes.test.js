@@ -51,7 +51,7 @@ describe("Testing Notes Page functionality", () => {
         await page.type("#note-editor-content", "");
 
         // Click the "Save" button
-        await page.click("#editor-save-btn");
+        await page.click("editor-save-btn");
 
         await page.waitForSelector("#note-element");
         console.log("found note-element");

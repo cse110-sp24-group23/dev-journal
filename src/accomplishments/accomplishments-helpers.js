@@ -1,3 +1,6 @@
+// By moving these helper functions into another file, it declutters the accomplishments.js file
+// and allows for unit testing of the exported functions without problems from window.onload
+
 /**
  * Sort an array of accomplishments objects by oldest or newest given an unsorted or sorted array
  * This allows for quick reversing betweeen newest and oldest rather than fully resorting each time

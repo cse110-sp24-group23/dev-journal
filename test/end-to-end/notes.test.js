@@ -2,7 +2,7 @@ import "dotenv/config";
 
 //This should point to your local liveserver
 //Note that liveserver will be running at the root level, so requires /src/, while the hosted will be at the src/ level already.
-let url = "http://127.0.0.1:5501/src/index.html";
+let url = "http://127.0.0.1:5501/src/notes/notes.html";
 if (process.env.DEPLOYMENT_URL) {
     url = process.env.DEPLOYMENT_URL;
 }
@@ -10,13 +10,6 @@ if (process.env.DEPLOYMENT_URL) {
 describe("Testing Notes Page functionality", () => {
     beforeAll(async () => {
         await page.goto(url);
-
-        // Query notes link in HTML
-        const notesSelector = ".nav-list li:nth-child(3) a";
-        await page.waitForSelector(notesSelector);
-
-        // Click on Notes link in nav bar
-        await page.click(notesSelector);
     });
 
     test("Add a new note", async () => {

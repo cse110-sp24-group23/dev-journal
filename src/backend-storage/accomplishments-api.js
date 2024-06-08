@@ -18,7 +18,7 @@ export default class LocalStorageAccomplishmentsApi {
     }
 
     /**Creates a new accomplishments object in LocalStorage
-     * @param {accomplishmentsObj} accomplishmentsObj accomplishments object
+     * @param {AccomplishmentsObj} accomplishmentsObj accomplishments object
      * @throws {Error} could not create accomplishments object due to date already existing
      */
     static createAccomplishmentsObj(accomplishmentsObj) {
@@ -40,7 +40,7 @@ export default class LocalStorageAccomplishmentsApi {
     }
 
     /**Updates an accomplishmentsObj in LocalStorage
-     * @param {accomplishmentsObj} accomplishmentsObj accomplishments object
+     * @param {AccomplishmentsObj} accomplishmentsObj accomplishments object
      * @throws {Error} could not update accomplishments object due to object date not found
      */
     static updateAccomplishmentsObj(accomplishmentsObj) {
@@ -64,7 +64,7 @@ export default class LocalStorageAccomplishmentsApi {
     /**Gets an accomplishmentsObj from LocalStorage by date
      * @param {Date} date date ojbect (new Date(Year, Month, Day))
      * @throws {Error} accomplishments object not found for date if it doesn't exist
-     * @returns {accomplishmentsObj} accomplishments object
+     * @returns {AccomplishmentsObj} accomplishments object
      */
     static getAccomplishmentsObjByDate(date) {
         date = this._handleDateInput(date);

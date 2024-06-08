@@ -24,13 +24,7 @@ document.getElementById('input-password-form').addEventListener('submit', async 
 }
 //go directly to the calendar page if there is no password set
 else{
-    const formContainer = document.querySelector('.form-container');
-    formContainer.style.display='none';
-    const welcomeButton = document.getElementById('welcome-button');
-    welcomeButton.addEventListener('click',function(){
-        window.location.href = "../calendar/calendar.html"
-    })
-
+    window.location.href = '../calendar/calendar.html';
 }
 });
 

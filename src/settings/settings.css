@@ -1,123 +1,311 @@
+/* Root Variables */
 :root {
-    --background-color: #F0F0F0;
+    /* General vars */
+    --background-color: #f0f0f0;
     --form-background-color: white;
     --box-shadow-color: rgba(0, 0, 0, 0.1);
     --border-color: #ccc;
     --button-background-color: #003366;
-    --button-hover-background-color: #0056B3;
+    --button-hover-background-color: #0056b3;
+    --font: "Lato", sans-serif;
+    --height: 100vh;
+
+    /* Form vars */
+    --form-padding: 1.5em;
+    --form-border-radius: 5px;
+    --form-width: 400px;
+    --form-margin-top: 1em;
+    --form-box-shadow: 0 0 10px var(--box-shadow-color);
+
+    /* Label vars */
     --label-color: #003366;
+    --label-display: block;
+    --label-margin-top: 1em;
+    --label-font-weight: normal;
+    --label-text-align: left;
+    --label-font-size: 1em;
+
+    /* Input vars */
+    --input-padding: 0.5em;
+    --input-margin-top: 0.5em;
+    --input-margin-bottom: 1em;
+    --input-border-radius: 3px;
+    --input-border-width: 1px;
+    --input-box-sizing: border-box;
+    --input-width-calc: calc(100% - 10px);
+
+    /* Button vars */
+    --button-padding: 0.5em 1em;
+    --button-color: white;
+    --button-border: none;
+    --button-border-radius: 3px;
+    --button-margin-top: 1em;
+    --button-cursor: pointer;
+    --button-font-size: 1em;
+
+    /* Header vars */
+    --header-margin-bottom: 1em;
+    --header-font-size: 2em;
+    --header-font-weight: normal;
+
+    /* Settings vars */
+    --settings-font-size: 1.5em;
+    --settings-font-weight: normal;
+    --settings-margin-top: 1em;
+    --settings-text-align: center;
+    --settings-display: flex;
+    --settings-align-items: center;
+    --settings-justify-content: center;
+
+    /* Settings icon vars*/
+    --settings-icon-font-size: 1em;
+    --settings-margin-left: 0.5em;
+
+    /* Error message vars */
+    --error-font-size: 15px;
+    --error-font-weight: bold;
+    --error-color: red;
+    --error-background-color: #f8d7da;
+    --error-border: 1px solid #f5c6cb;
+    --error-padding: 5px;
+    --error-margin-top: 1px;
+    --error-border-radius: 2px;
+    --error-text-align: center;
+
+    /* Error button vars */
+    --error-button-font-size: 15px;
+    --error-button-font-weight: bold;
+    --error-button-background-color: #21528b;
+    --error-button-color: white;
+    --error-button-border: none;
+    --error-button-padding: 5px 10px;
+    --error-button-cursor: pointer;
+    --error-button-border-radius: 5px;
+    --error-button-hover-background-color: #e2efff;
+    --error-button-hover-color: #21528b;
+
+    /* Responsive vars */
+    --cell-padding-small: 15px;
+    --prev-next-buttons-small: 32px;
+    --font-size-heading-small: 32px;
+    --cell-padding-medium: 18px;
+    --prev-next-buttons-medium: 35px;
+    --font-size-heading-medium: 38px;
+    --cell-padding-large: 20px;
+    --prev-next-buttons-large: 40px;
+    --font-size-heading-large: 40px;
 }
 
+/* Styling error button */
+.error button:hover {
+    background-color: var(--error-button-background-color);
+    color: var(--error-button-hover-color);
+}
+
+.error button {
+    font-size: var(--error-button-font-size);
+    font-weight: var(--error-button-font-weight);
+    background-color: var(--error-button-background-color);
+    color: var(--error-button-color);
+    border: var(--error-button-border);
+    padding: var(--error-button-padding);
+    cursor: var(--error-button-cursor);
+    border-radius: var(--error-button-border-radius);
+}
+
+/* Error message styling */
+.error {
+    font-size: var(--error-font-size);
+    font-weight: var(--error-font-weight);
+    display: none; /* Hidden by default */
+    color: var(--error-color);
+    background-color: var(--error-background-color);
+    border: var(--error-border);
+    padding: var(--error-padding);
+    margin-top: var(--error-margin-top);
+    border-radius: var(--error-border-radius);
+    text-align: var(--error-text-align);
+}
+
+/* Styling elements of the body, such as the form, title, checkbox */
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: var(--height);
     background-color: var(--background-color);
     margin: 0;
 }
 
+/* Header styling */
 .header {
     text-align: center;
-    margin-bottom: 1em;
+    margin-bottom: var(--header-margin-bottom);
 }
 
+/* Header font styling */
 .header h1 {
-    font-size: 2em;
-    font-weight: bold;
+    font-size: var(--header-font-size);
+    font-weight: var(--header-font-weight);
     color: var(--label-color);
 }
 
-form {
-    background: var(--form-background-color);
-    padding: 2em;
-    border-radius: 5px;
-    box-shadow: 0 0 10px var(--box-shadow-color);
-    width: 300px;
-    text-align: center;
-    margin-top: 1em;
-}
-
+/* Hidden class */
 .hidden {
     display: none;
 }
 
-label {
-    display: block;
-    margin-top: 1em;
-    font-weight: bold;
-    text-align: left;
-    color: var(--label-color);
+/* Styling password form */
+form {
+    background: var(--form-background-color);
+    padding: var(--form-padding);
+    border-radius: var(--form-border-radius);
+    box-shadow: var(--form-box-shadow);
+    width: var(--form-width);
+    text-align: center;
+    margin-top: var(--form-margin-top);
 }
 
+/* Input styling */
 input[type="password"] {
-    width: calc(100% - 10px);
-    padding: 0.5em;
-    margin-top: 0.5em;
-    margin-bottom: 1em;
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-    box-sizing: border-box;
+    width: var(--input-width-calc);
+    padding: var(--input-padding);
+    margin-top: var(--input-margin-top);
+    margin-bottom: var(--input-margin-bottom);
+    border: var(--input-border-width) solid var(--border-color);
+    border-radius: var(--input-border-radius);
+    box-sizing: var(--input-box-sizing);
 }
 
-button {
-    padding: 0.5em 1em;
-    background-color: var(--button-background-color);
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-top: 1em;
+/* Label styling */
+label {
+    display: var(--label-display);
+    margin-top: var(--label-margin-top);
+    font-weight: var(--label-font-weight);
+    text-align: var(--label-text-align);
+    color: var(--label-color);
+    font-size: var(--label-font-size);
+}
+
+/* Settings section */
+.settings {
+    font-size: var(--settings-font-size);
+    font-weight: var(--settings-font-weight);
+    margin-top: var(--settings-margin-top);
+    text-align: var(--settings-text-align);
+    display: var(--settings-display);
+    align-items: var(--settings-align-items);
+    justify-content: var(--settings-justify-content);
+}
+
+.settings-icon {
+    font-size: var(--settings-icon-font-size);
+    color: var(--label-color);
+    margin-left: var(--settings-margin-left);
+    vertical-align: middle;
 }
 
 button:hover {
     background-color: var(--button-hover-background-color);
 }
 
-.settings {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-top: 1em;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Button styling */
+button {
+    padding: var(--button-padding);
+    background-color: var(--button-background-color);
+    color: var(--button-color);
+    border: var(--button-border);
+    border-radius: var(--button-border-radius);
+    cursor: var(--button-cursor);
+    margin-top: var(--button-margin-top);
+    font-size: var(--button-font-size);
 }
 
-.settings-icon {
-    font-size: 1em;
-    color: var(--label-color);
-    margin-left: 0.5em;
-    vertical-align: middle;
-}
+/* Responsive settings */
+/* Narrow devices (phones, 320px and up) */
+@media only screen and (min-width: 320px) {
+    :root {
+        --form-width: 130px;
+        --header-font-size: 1em;
+        --settings-font-size: 0.6em;
+        --settings-icon-font-size: 1em;
+        --label-font-size: 0.7em;
+        --button-font-size: 0.5em;
+        --form-padding: 0.75em;
+        --input-padding: 0.3em;
 
-.error{
-    font-size: 15px;
-    font-weight: bold;
-    display: none; /* Hidden by default */
-    color: red;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 5px;
-    margin-top: 1px;
-    border-radius: 2px;
-    text-align: center;
-}
+        /* Changing error message sizing */
+        --error-font-size: 7px;
+        --error-button-font-size: 7px;
+    }
 
-.error button{
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #21528B;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
+    /* Place try-again button below text and center */
+    #try-again-button {
+        display: block;
+    }
 }
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    :root {
+        /* Changing form sizing */
+        --form-width: 300px;
+        --header-font-size: 1.8em;
+        --settings-font-size: 1em;
+        --settings-icon-font-size: 1.2em;
+        --label-font-size: 1.2em;
+        --button-font-size: 1em;
+        --form-padding: 1.3em;
 
-.error button:hover {
-    background-color: #E2EFFF;
-    color: #21528B;
+        /* Changing error message sizing */
+        --error-font-size: 10px;
+        --error-button-font-size: 10px;
+    }
+    #try-again-button {
+        display: inline-block;
+    }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    :root {
+        /* Changing form sizing */
+        --form-width: 400px;
+        --header-font-size: 1.8em;
+        --settings-font-size: 1em;
+        --settings-icon-font-size: 1.2em;
+        --label-font-size: 1.2em;
+        --button-font-size: 1em;
+        --form-padding: 1.3em;
+
+        /* Changing error message sizing */
+        --error-font-size: 13px;
+        --error-button-font-size: 13px;
+    }
+
+    /* Try-again button on same line as error message */
+    #try-again-button {
+        display: inline-block;
+    }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    :root {
+        /* Changing form sizing */
+        --form-width: 600px;
+        --header-font-size: 2em;
+        --settings-font-size: 1em;
+        --settings-icon-font-size: 1.2em;
+        --label-font-size: 1.2em;
+        --button-font-size: 1em;
+        --input-padding: 1em;
+
+        /* Changing error message sizing */
+        --error-font-size: 15px;
+        --error-button-font-size: 15px;
+    }
+    /* Try-again button on same line as error message */
+    #try-again-button {
+        display: inline-block;
+    }
 }

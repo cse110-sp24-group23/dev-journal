@@ -2,9 +2,10 @@ import "dotenv/config";
 
 //This should point to your local liveserver
 //Note that liveserver will be running at the root level, so requires /src/, while the hosted will be at the src/ level already.
-let url = "http://127.0.0.1:5501/src/notes/notes.html";
+let filepath = "/notes/notes.html";
+let url = "http://127.0.0.1:5501/src" + filepath;
 if (process.env.DEPLOYMENT_URL) {
-    url = process.env.DEPLOYMENT_URL;
+    url = process.env.DEPLOYMENT_URL + filepath;
 }
 
 describe("Testing Notes Page functionality", () => {

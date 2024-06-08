@@ -155,8 +155,39 @@ describe("Accomplishments Unit Tests", () => {
             yearFilteredResult
         );
         expect(unfilteredMatches).toBe(true);
-        console.log(monthFilteredExpected, monthFilteredResult);
         expect(monthFilteredMatches).toBe(true);
         expect(yearFilteredMatches).toBe(true);
+    });
+    test("Test sortAccomplishments", () => {
+        // get unsorted, unfiltered accomplishments
+        const unsortedAccomplishments = getAccomplishmentsObjArr();
+        const sortedAccomplishmentsByOldest = sortAccomplishments(
+            unsortedAccomplishments,
+            { byOldest: true, alreadySortedByOldest: false }
+        );
+        const sortedAccomplishmentsByNewest = sortAccomplishments(
+            unsortedAccomplishments,
+            { byOldest: false, alreadySortedByOldest: false }
+        );
+        // Check that it correctly got sorted by oldest
+        let previousDate = sortedAccomplishmentsByOldest[0].date.getTime();
+        for (const accomplishemntsObj of sortedAccomplishmentsByOldest) {
+            // check that the sorting order is correct
+            let thisDate = accomplishemntsObj.date.getTime();
+            let isOlderThanPrev = thisDate < previousDate;
+            expect(isOlderThanPrev).toBe(false);
+            // update previousDate
+            previousDate = thisDate;
+        }
+        // Check that it correctly got sorted by newest
+        previousDate = sortedAccomplishmentsByNewest[0].date.getTime();
+        for (const accomplishemntsObj of sortedAccomplishmentsByNewest) {
+            // check that the sorting order is correct
+            let thisDate = accomplishemntsObj.date.getTime();
+            let isNewerThanPrev = thisDate > previousDate;
+            expect(isNewerThanPrev).toBe(false);
+            // update previousDate
+            previousDate = thisDate;
+        }
     });
 });

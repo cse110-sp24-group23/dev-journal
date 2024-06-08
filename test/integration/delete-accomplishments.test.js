@@ -8,6 +8,8 @@ describe("Delete AccomplishmentsObj", () => {
     beforeAll(() => {
         localStorage.clear();
     });
+
+    // Test case for deleting an existing AccomplishmentsObj
     it("Delete exsisting AccomplishmentsObj", () => {
         const date = new Date();
         const accomplishmentsObj = new AccomplishmentsObj(["test"], date);
@@ -25,6 +27,7 @@ describe("Delete AccomplishmentsObj", () => {
         expect(accomplishments.length).toBe(0);
     });
 
+    // Test case for deleting a non-existing AccomplishmentsObj
     it("AccomplishmentsObj not found", () => {
         const date = new Date();
         const errorMessage = `Could not delete accomplishments object, object not found for date:`;

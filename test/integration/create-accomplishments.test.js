@@ -5,12 +5,15 @@ import LocalStorageMock from "../../tools/localStorage-mock.js";
 global.localStorage = new LocalStorageMock();
 
 describe("Create AccomplishmentsObj", () => {
+    // Test case for creating a new AccomplishmentsObj
     it("Create new AccomplishmentsObj", () => {
         const date = new Date();
         const accomplishmentsObj = new AccomplishmentsObj(["test"], date);
         Storage.createAccomplishmentsObj(accomplishmentsObj);
         expect(Storage.hasAccomplishmentsObjByDate(date)).toBe(true);
     });
+
+    // Test case for attempting to create an existing AccomplishmentsObj
     it("Create existing AccomplishmentsObj", () => {
         const date = new Date();
         const accomplishmentsObj = new AccomplishmentsObj(["test"], date);

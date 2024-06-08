@@ -20,6 +20,17 @@ function init() {
             },
             promptURLs: true,
             tabSize: 4,
+            toolbar: [
+                "bold",
+                "heading",
+                "unordered-list",
+                "ordered-list",
+                "link",
+                "preview",
+                "side-by-side",
+                "fullscreen",
+                "guide",
+            ],
         });
         const recordString = sessionStorage.getItem("current record");
         let record;
@@ -46,6 +57,17 @@ function init() {
             },
             promptURLs: true,
             tabSize: 4,
+            toolbar: [
+                "bold",
+                "heading",
+                "unordered-list",
+                "ordered-list",
+                "link",
+                "preview",
+                "side-by-side",
+                "fullscreen",
+                "guide",
+            ],
         });
         // Record field2
         simplemde_reflection.value(record.field2);

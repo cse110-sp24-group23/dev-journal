@@ -1,7 +1,9 @@
 import { setStatusMDE, getStatusMDE } from "../backend-storage/mde-mode-api.js";
-
+/**
+ * Wait for the password to be submitted.
+ * @param {Event} event - The submit event.
+ */
 function setPassword() {
-    //Wait for the password to be submitted
     document
         .getElementById("password-form")
         .addEventListener("submit", async function (event) {
@@ -9,33 +11,32 @@ function setPassword() {
             const newPassword = document.getElementById("new-password").value;
             const confirmPassword =
                 document.getElementById("confirm-password").value;
-            //Check if new password and confirmed password are the same. If they are, hash the password and store it in
-            //local storage.
+
+            // Check if passwords match
+            // If they are, hash the password and store it in local storage.
             if (newPassword === confirmPassword) {
-                const hashedPassword = await _hashPassword(confirmPassword);
+                const hashedPassword = await hashPassword(confirmPassword);
                 localStorage.setItem("storedHashedPassword", hashedPassword);
-                window.location.href = "/src/calendar/calendar.html";
-            }
-            //console log incorrect password if the passwords do not match
-            //TODO: show incorrect password error on the page
-            else {
+                window.location.href = "../calendar/calendar.html";
+            } else {
                 const errorMessage = document.getElementById("error-message");
                 errorMessage.style.display = "block";
             }
         });
 }
-
+/**
+ * Toggles visibility of the try again button when an error message is shown.
+ */
+const tryAgainBtn = document.getElementById("try-again-button");
+tryAgainBtn.addEventListener("click", function () {
+    const errorMessage = document.querySelector(".error");
+    errorMessage.style.display = "none";
+});
+/**
+ * Changes the visibility of the password settings form.
+ * If the password protection option is checked, then the form is visible.
+ */
 function toggleErrorDisplay() {
-    //Toggles visibility of the try again button when an error message is shown.
-    const tryAgainBtn = document.getElementById("try-again-button");
-    tryAgainBtn.addEventListener("click", function () {
-        const errorMessage = document.querySelector(".error");
-        errorMessage.style.display = "none";
-    });
-}
-
-function displayPasswordForm() {
-    //Changes the visibility of the password settings form. If the password protection option is checked, then the form is visible.
     document
         .getElementById("toggle-password-form")
         .addEventListener("change", function () {
@@ -47,15 +48,19 @@ function displayPasswordForm() {
             }
         });
 }
+/**
+ * Redirects to landing page after clicking logout
+ */
+document.getElementById("logout-button").addEventListener("click", function () {
+    window.location.href = "../password/landing.html";
+});
 
-/*
-    Hashes the input password using SHA-256 algorithm
-    Parameters:
-        input password from user
-    Returns:
-        hashed input password
-    */
-async function _hashPassword(password) {
+/**
+ * Hashes the input password using SHA-256 algorithm.
+ * @param {string} password - The input password from the user.
+ * @returns {Promise<string>} The hashed input password.
+ */
+async function hashPassword(password) {
     const msgUint8 = new TextEncoder().encode(password);
     const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -91,7 +96,7 @@ function updateStatusMDE() {
  */
 window.onload = function () {
     const mdeCheckbox = document.querySelector(".js-mde-checkbox");
-    if (!getStatusMDE()){
+    if (!getStatusMDE()) {
         mdeCheckbox.checked = false;
     }
     setPassword();

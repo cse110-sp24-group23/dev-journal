@@ -68,7 +68,7 @@ function sortAccomplishments(
  */
 function filterAccomplishments(
     accomplishmentsObjArr,
-    options = { byCurrentMonth: true, byCurrentYear: false }
+    options = { byCurrentMonth: false, byCurrentYear: false }
 ) {
     if (options.byCurrentMonth && options.byCurrentYear) {
         throw Error("Cannot filter by year and month at the same time.");
@@ -77,10 +77,13 @@ function filterAccomplishments(
     let filteredAccomplishments = _copyAccomplishments(accomplishmentsObjArr);
     // filter by current month if requested
     if (options.byCurrentMonth) {
-        const currentMonth = new Date().getMonth();
+        const now = new Date();
+        const currentMonth = now.getMonth();
+        const currentYear = now.getFullYear();
         filteredAccomplishments = filteredAccomplishments.filter(
             (accomplishmentsObj) =>
-                _getDate(accomplishmentsObj).getMonth() === currentMonth
+                _getDate(accomplishmentsObj).getMonth() === currentMonth &&
+                _getDate(accomplishmentsObj).getFullYear() === currentYear
         );
     }
     // filter by current year if requested
@@ -177,7 +180,7 @@ function _getAccomplishmentsToDisplay(
         throw Error("options.sortByOldest must be true or false");
     }
     if (!["none", "month", "year"].includes(options.filterBy)) {
-        throw Error("options.filterByy must be 'none' or 'month' or 'year'");
+        throw Error("options.filterBy must be 'none' or 'month' or 'year'");
     }
     // assign filter settings
     // by default, no filtering

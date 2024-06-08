@@ -5,6 +5,9 @@ import LocalStorageMock from "../../tools/localStorage-mock.js";
 global.localStorage = new LocalStorageMock();
 
 describe("Delete AccomplishmentsObj", () => {
+    beforeAll(() => {
+        localStorage.clear();
+    });
     it("Delete exsisting AccomplishmentsObj", () => {
         const date = new Date();
         const accomplishmentsObj = new AccomplishmentsObj(["test"], date);
@@ -12,6 +15,11 @@ describe("Delete AccomplishmentsObj", () => {
             accomplishmentsObj
         );
         LocalStorageAccomplishmentsApi.deleteAccomplishmentsObj(date);
+
+        expect(
+            LocalStorageAccomplishmentsApi.hasAccomplishmentsObjByDate(date)
+        ).toBe(false);
+
         const accomplishments =
             LocalStorageAccomplishmentsApi.getAllAccomplishmentsObj();
         expect(accomplishments.length).toBe(0);
@@ -23,5 +31,9 @@ describe("Delete AccomplishmentsObj", () => {
         expect(() => {
             LocalStorageAccomplishmentsApi.deleteAccomplishmentsObj(date);
         }).toThrow(errorMessage);
+
+        expect(
+            LocalStorageAccomplishmentsApi.hasAccomplishmentsObjByDate(date)
+        ).toBe(false);
     });
 });

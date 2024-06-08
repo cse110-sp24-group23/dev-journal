@@ -1,7 +1,7 @@
 import {
     filterAccomplishments,
     sortAccomplishments,
-} from "../../src/accomplishments/accomplishments";
+} from "../../src/accomplishments/accomplishments-helpers";
 
 /*
 Takes in options (object containing byYear and byMonth)

@@ -14,6 +14,7 @@ describe("Testing Notes Page functionality", () => {
 
     test("Add a new note", async () => {
         // Click "Add Note" button
+        await page.waitForSelector("#add-note-btn");
         await page.click("#add-note-btn");
         // Wait for the note editor to appear
         await page.waitForSelector("#note-editor");

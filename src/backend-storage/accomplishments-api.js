@@ -1,9 +1,13 @@
-/**Class LocalStorageAccomplishmentsApi for creating, reading, updating and deleting accomplishments
+import { AccomplishmentsObj } from "./accomplishments-class";
+
+/**
+ * Class LocalStorageAccomplishmentsApi for creating, reading, updating and deleting accomplishments
  * @class
  */
 export default class LocalStorageAccomplishmentsApi {
-    /**Gets all accomplishments from LocalStorage
-     * @returns {Array} array of accoplishment objects
+    /**
+     * Gets all accomplishments from LocalStorage
+     * @returns {AccomplishmentsObj[]} array of accoplishment objects
      */
     static getAllAccomplishmentsObj() {
         try {
@@ -17,7 +21,8 @@ export default class LocalStorageAccomplishmentsApi {
         }
     }
 
-    /**Creates a new accomplishments object in LocalStorage
+    /**
+     * Creates a new accomplishments object in LocalStorage
      * @param {AccomplishmentsObj} accomplishmentsObj accomplishments object
      * @throws {Error} could not create accomplishments object due to date already existing
      */
@@ -39,7 +44,8 @@ export default class LocalStorageAccomplishmentsApi {
         );
     }
 
-    /**Updates an accomplishmentsObj in LocalStorage
+    /**
+     * Updates an accomplishmentsObj in LocalStorage
      * @param {AccomplishmentsObj} accomplishmentsObj accomplishments object
      * @throws {Error} could not update accomplishments object due to object date not found
      */
@@ -61,7 +67,8 @@ export default class LocalStorageAccomplishmentsApi {
         );
     }
 
-    /**Gets an accomplishmentsObj from LocalStorage by date
+    /**
+     * Gets an accomplishmentsObj from LocalStorage by date
      * @param {Date} date date ojbect (new Date(Year, Month, Day))
      * @throws {Error} accomplishments object not found for date if it doesn't exist
      * @returns {AccomplishmentsObj} accomplishments object
@@ -82,7 +89,8 @@ export default class LocalStorageAccomplishmentsApi {
         return accomplishmentsObj;
     }
 
-    /**Checks if an accomplishments object exists in localStorage by date
+    /**
+     * Checks if an accomplishments object exists in localStorage by date
      * @param {Date} date date object (new Date(Year, Month, Day))
      * @returns {Boolean} true if accomplishments object exists, false if it doesn't exist
      */
@@ -98,7 +106,8 @@ export default class LocalStorageAccomplishmentsApi {
         return true;
     }
 
-    /**Deletes an accomplishments object from localStorage
+    /**
+     * Deletes an accomplishments object from localStorage
      * @param {Date} date date object (new Date(Year, Month, Day))
      * @throws {Error} could not delete accomplishments object due to date not found
      */
@@ -120,7 +129,8 @@ export default class LocalStorageAccomplishmentsApi {
         );
     }
 
-    /**Turn a date object into a new date object that only contains year, month, date
+    /**
+     * Turn a date object into a new date object that only contains year, month, date
      * @param {Date} date date object (new Date(Year, Month, Day))
      * @returns {Date} returns a new date object with same Year, Month, Date
      */

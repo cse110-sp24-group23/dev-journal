@@ -1,6 +1,6 @@
+import {getStatusPassword } from "../backend-storage/password-mode-api.js";
 document.addEventListener('DOMContentLoaded', () => {
-if(localStorage.getItem('storedHashedPassword')){
-    document.getElementById('welcome-button').style.display = 'none'
+if(getStatusPassword()){
 //Wait for input password to be submitted
 document.getElementById('input-password-form').addEventListener('submit', async function(event){
     event.preventDefault();
@@ -12,6 +12,8 @@ document.getElementById('input-password-form').addEventListener('submit', async 
     //set the authentication key to the hashed input password. this will be hashed again to verify the user has logged in
     sessionStorage.setItem('authenticateKey', hashedInputPassword)
     //check if input password is the same as the stored password, and redirect to the calendar if they are
+    const welcomeBtn = document.getElementById('welcome-button');
+    welcomeBtn.style.display = 'none'
     if(hashedInputPassword === storedHashedPassword){
         window.location.href = '../calendar/calendar.html';
     }
@@ -24,7 +26,13 @@ document.getElementById('input-password-form').addEventListener('submit', async 
 }
 //go directly to the calendar page if there is no password set
 else{
-    window.location.href = '../calendar/calendar.html';
+    const passwordForm = document.getElementById("input-password-form");
+    passwordForm.style.display = 'none'
+    const welcomeBtn = document.getElementById('welcome-button');
+    welcomeBtn.style.display = 'block';
+    welcomeBtn.addEventListener('click', function(){
+        window.location.href = '../calendar/calendar.html';
+    })
 }
 });
 

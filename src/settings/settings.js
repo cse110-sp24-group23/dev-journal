@@ -1,4 +1,6 @@
 import { setStatusMDE, getStatusMDE } from "../backend-storage/mde-mode-api.js";
+import { setStatusPassword, getStatusPassword } from "../backend-storage/password-mode-api.js";
+
 /**
  * Wait for the password to be submitted.
  * @param {Event} event - The submit event.
@@ -32,6 +34,10 @@ function toggleErrorDisplay() {
     tryAgainBtn.addEventListener("click", function () {
         const errorMessage = document.querySelector(".error");
         errorMessage.style.display = "none";
+        const newPassword = document.getElementById('new-password');
+        newPassword.value = '';
+        const confirmPassword = document.getElementById('confirm-password');
+        confirmPassword.value = '';
     });
 }
 /**
@@ -72,6 +78,24 @@ async function hashPassword(password) {
     return hashHex;
 }
 /**
+ * Sets the status of password functionality based on the user's actions
+ */
+function updateStatusPassword() {
+    //select the checkbox input from the HTML
+    const passwordForm = document.querySelector(".js-password-form");
+    passwordForm.addEventListener("click", () => {
+        let statusPassword;
+        //check its status
+        if (passwordForm.checked == true) {
+            statusPassword = true;
+        } else {
+            statusPassword = false;
+        }
+        //update the status
+        setStatusPassword(statusPassword);
+    });
+}
+/**
  * Sets the status of markdown editing based on the user's actions
  */
 function updateStatusMDE() {
@@ -99,8 +123,13 @@ window.onload = function () {
     if (!getStatusMDE()) {
         mdeCheckbox.checked = false;
     }
+    const passwordForm = document.querySelector(".js-password-form")
+    if(!getStatusPassword()){
+        passwordForm.checked = false;
+    }
     setPassword();
     toggleErrorDisplay();
     displayPasswordForm();
     updateStatusMDE();
+    updateStatusPassword();
 };

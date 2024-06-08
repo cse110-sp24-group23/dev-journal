@@ -103,3 +103,22 @@ that has red text saying "Incorrect password. Please try again." With a Try Agai
     background-color: var(--button-hover-bg-color); 
     color: var(--button-hover-color); 
 }
+
+/* Styling for the welcome button */
+#welcome-button {
+    font-size: var(--button-font-size);
+    font-weight: bold;
+    background-color: var(--button-bg-color);
+    color: white;
+    border: none;
+    padding: var(--button-padding);
+    cursor: pointer;
+    border-radius: var(--input-border-radius);
+    display: none;
+}
+
+/* Styling for the welcome button on hover */
+#welcome-button:hover {
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-hover-color);
+}

@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Favicon link-->
-            <link
+        <link
             rel="icon"
             type="image/png"
             sizes="32x32"
@@ -13,11 +13,11 @@
         <title>Password Page Boilerplate</title>
 
         <!-- Stylesheet-->
-        <link rel="stylesheet" href="settings.css">
+        <link rel="stylesheet" href="settings.css" >
 
         <!-- Script -->
         <script src="../navbar/navbar.js"></script>
-        <script src="./settings.js" type = "module"></script>
+        <script src="./settings.js" type="module"></script>
     </head>
 
     <body>
@@ -28,6 +28,15 @@
         </div>
         <!-- Checkbox for deciding to use password protection -->
         <div class="settings">
+            <input
+                type="checkbox"
+                id="mde-checkbox"
+                class="js-mde-checkbox"
+                checked
+            >
+            <label for="mde-checkbox"
+                >Enable markdown editting for the Daily Logs</label
+            >
             <input
                 type="checkbox"
                 id="toggle-password-form"
@@ -58,7 +67,9 @@
         </form>
         <!-- Error message for passwords that don't match -->
         <div id="error-message" class="error">
-            <span id="error-text">Passwords do not match. Please try again.</span>
+            <span id="error-text"
+                >Passwords do not match. Please try again.</span
+            >
             <button id="try-again-button">Try Again</button>
         </div>
         <!-- Button for returning to welcome page -->

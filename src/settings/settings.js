@@ -27,16 +27,18 @@ function setPassword() {
 /**
  * Toggles visibility of the try again button when an error message is shown.
  */
-const tryAgainBtn = document.getElementById("try-again-button");
-tryAgainBtn.addEventListener("click", function () {
-    const errorMessage = document.querySelector(".error");
-    errorMessage.style.display = "none";
-});
+function toggleErrorDisplay() {
+    const tryAgainBtn = document.getElementById("try-again-button");
+    tryAgainBtn.addEventListener("click", function () {
+        const errorMessage = document.querySelector(".error");
+        errorMessage.style.display = "none";
+    });
+}
 /**
  * Changes the visibility of the password settings form.
  * If the password protection option is checked, then the form is visible.
  */
-function toggleErrorDisplay() {
+function displayPasswordForm() {
     document
         .getElementById("toggle-password-form")
         .addEventListener("change", function () {
@@ -70,9 +72,7 @@ async function hashPassword(password) {
     return hashHex;
 }
 /**
- * This function checks whether the user wants MD editing enabled or not
- * @function
- * @name updateStatusMDE
+ * Sets the status of markdown editing based on the user's actions
  */
 function updateStatusMDE() {
     //select the checkbox input from the HTML

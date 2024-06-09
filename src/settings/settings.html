@@ -33,24 +33,25 @@
         </div>
         <!-- Checkbox for deciding to use password protection -->
         <div class="settings">
-            <input
-                type="checkbox"
-                id="mde-checkbox"
-                class="js-mde-checkbox"
-                checked
-            >
-            <label for="mde-checkbox"
-                >Enable markdown editting for the Daily Logs</label
-            >
-            <input
+            <label for="mde-checkbox">
+                <input
+                    type="checkbox"
+                    id="mde-checkbox"
+                    class="js-mde-checkbox"
+                    checked
+                >
+                Enable markdown editing for Notes & Daily Logs
+            </label>
+            <label for="toggle-password-form">
+                <input
                 type="checkbox"
                 id="toggle-password-form"
                 name="toggle-password-form"
                 checked
-            >
-            <label for="toggle-password-form" class="settings-icon"
-                >Password Protection</label
-            >
+                >
+                Password Protection
+            </label>
+            
         </div>
         <!-- Input form for password functionality -->
         <form action="/submit-password" method="post" id="password-form">
@@ -77,7 +78,5 @@
             >
             <button id="try-again-button">Try Again</button>
         </div>
-        <!-- Button for returning to welcome page -->
-        <button id="logout-button">Logout</button>
     </body>
 </html>

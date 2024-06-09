@@ -41,7 +41,7 @@ function loadAllNotesFromStorage() {
  */
 function submitToStorage() {
     // The title of the note
-    const noteTitle = document.getElementById(EDITOR_TTILE_ID);
+    const noteTitle = document.getElementById(EDITOR_TITLE_ID);
     const noteTitleVal = noteTitle.value;
     // The textbox to enter notes in
     const noteContent = document.getElementById(EDITOR_CONTENT_ID);

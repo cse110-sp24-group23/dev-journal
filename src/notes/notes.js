@@ -1,6 +1,6 @@
 import { Record } from "../backend-storage/record-class.js";
 import RecordsStorage from "../backend-storage/records-api.js";
-import { init } from "simpleMDE-notes.js"
+import { initMDE } from "./simpleMDE-notes.js";
 
 // id of the most recently accessed (clicked, edited, etc.) note element
 let CURRENT_NOTE_ID = null;
@@ -188,18 +188,6 @@ function _displayNoteEditor(noteElem = null) {
         _createNoteEditor(noteElem);
         _addNoteEditorListeners();
     }
-    // apply simplemde to the editor content text area
-    const simplemde_done_today = new SimpleMDE({
-        element: document.getElementById(EDITOR_CONTENT_ID),
-        forceSync: true,
-        parsingConfig: {
-            allowAtxHeaderWithoutSpace: true,
-        },
-        promptURLs: true,
-        tabSize: 4,
-        toolbar: ["bold", "heading", "unordered-list", "ordered-list", "link", "preview", "side-by-side", "fullscreen", "guide"],
-    });
-    
 }
 
 /*
@@ -236,6 +224,8 @@ function _createNoteEditor(noteElem = null) {
     noteEditor.appendChild(noteContent);
     noteEditor.appendChild(saveBtn);
     noteEditor.appendChild(cancelBtn);
+    // make the note editor's content be a markdown editor
+    initMDE(noteContent);
     // don't reload the page when the form is submitted - minimize unnecessary loads from storage
     noteEditor.addEventListener("submit", (event) => {
         // prevent form from refreshing page upon submit
@@ -315,11 +305,12 @@ Parameters:
 Returns: None
 */
 function _updateNoteEditor(noteElem = null) {
+    console.log("updating note editor");
     // get note editor
     const noteEditor = document.getElementById(EDITOR_FORM_ID);
     // if it's hidden, show it
     noteEditor.classList.remove("hidden");
-    
+
     // if there was a note passed in, populate values
     _initNoteEditorValues(noteElem);
 }

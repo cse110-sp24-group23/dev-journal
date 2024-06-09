@@ -8,7 +8,7 @@ document.getElementById('input-password-form').addEventListener('submit', async 
     const storedHashedPassword = localStorage.getItem('storedHashedPassword');
     //check if input password is the same as the stored password
     if(hashedInputPassword === storedHashedPassword){
-        window.location.href = '../calendar/calendar.html';
+        window.location.href = '/src/calendar/calendar.html';
     }
     //console log incorrect password if they do not match
 
@@ -20,7 +20,7 @@ document.getElementById('input-password-form').addEventListener('submit', async 
 }
 //go directly to the calendar page if there is no password set
 else{
-    window.location.href = '../calendar/calendar.html';
+    window.location.href = '/src/calendar/calendar.html';
 }
 });
 

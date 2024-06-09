@@ -23,20 +23,23 @@
         <script type="module" src="./simpleMDE.js"></script>
         <script type="module" src="./dailyLog.js"></script>
 
-        <!-- Favicon link-->
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="../assets/icons/brand-logo.svg"
-        >
+        <style>
+            .noscript-warning {
+                background-color: #ffdddd; /* light red */
+                color: black;
+                text-align: center;
+                padding: 20px;
+                font-size: 24px;
+                border: 1px solid red;
+            }
+        </style>
     </head>
     <body>
         <noscript>
-            <p class="noscript-warning">
+            <div class="noscript-warning">
                 This application requires JavaScript to run. 
                 Please enable JavaScript in your browser settings.
-            </p>
+            </div>
         </noscript>
 
         <div id="navbar"></div>
@@ -45,14 +48,12 @@
             <!-- Heading: Date -->
             <div class="header-container">
                 <h1>Date:</h1>
-                <!-- button for deleting log -->
-                <button
-                    type="button"
-                    id="delete-button"
-                    class="js-delete-button"
-                >
-                    Delete Log
-                </button>
+                <div class="button-container">
+                    <!-- button to save log -->
+                    <button type="button" id="save-button">Submit</button>
+                    <!-- button for deleting log -->
+                    <button type="button" id="delete-button">Delete Log</button>
+                </div>
             </div>
 
             <form>
@@ -100,10 +101,6 @@ What things can you do in the future?"
             </button>
             <!-- paragraph element to display the list of accomplishments -->
             <p class="accomplishment--list js-accomplishment-list"></p>
-            <!-- button to save log -->
-            <button type="button" id="save-button" class="js-save-button">
-                Save Log
-            </button>
         </main>
     </body>
 </html>

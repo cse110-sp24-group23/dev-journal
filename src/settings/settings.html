@@ -1,83 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Favicon link-->
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="../assets/icons/brand-logo.svg"
-        >
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Password Page Boilerplate</title>
-
         <!-- Stylesheet-->
-        <link rel="stylesheet" href="settings.css" >
-
+        <link rel="stylesheet" href="settings.css">
         <!-- Script -->
         <script src="../navbar/navbar.js"></script>
-        <script src="./settings.js" type="module"></script>
     </head>
 
     <body>
         <div id="navbar"></div>
-        <noscript>
-            <p class="noscript-warning">
-                This application requires JavaScript to run. Please enable JavaScript in your browser settings.
-            </p>
-        </noscript>
-
-        <div class="header">
-            <h1>Settings</h1>
-        </div>
-        <!-- Checkbox for deciding to use password protection -->
-        <div class="settings">
-            <input
-                type="checkbox"
-                id="mde-checkbox"
-                class="js-mde-checkbox"
-                checked
-            >
-            <label for="mde-checkbox"
-                >Enable markdown editting for the Daily Logs</label
-            >
-            <input
-                type="checkbox"
-                id="toggle-password-form"
-                name="toggle-password-form"
-                checked
-            >
-            <label for="toggle-password-form" class="settings-icon"
-                >Password Protection</label
-            >
-        </div>
-        <!-- Input form for password functionality -->
-        <form action="/submit-password" method="post" id="password-form">
-            <label for="new-password">New Password:</label>
-            <input
-                type="password"
-                id="new-password"
-                name="new-password"
-                required
-            >
-            <label for="confirm-password">Confirm Password:</label>
-            <input
-                type="password"
-                id="confirm-password"
-                name="confirm-password"
-                required
-            >
-            <button type="submit">Update</button>
-        </form>
-        <!-- Error message for passwords that don't match -->
-        <div id="error-message" class="error">
-            <span id="error-text"
-                >Passwords do not match. Please try again.</span
-            >
-            <button id="try-again-button">Try Again</button>
-        </div>
-        <!-- Button for returning to welcome page -->
-        <button id="logout-button">Logout</button>
+            <div class="header">
+                <h1>Settings</h1>
+            </div>
+            <div class="settings">
+                <input
+                    type="checkbox"
+                    id="toggle-password-form"
+                    name="toggle-password-form"
+                    checked
+                />
+                <label for="toggle-password-form" class="settings-icon"
+                    >Password Protection</label
+                >
+            </div>
+            <form action="/submit-password" method="post" id="password-form">
+                <label for="new-password">New Password:</label>
+                <input
+                    type="password"
+                    id="new-password"
+                    name="new-password"
+                    required
+                />
+                <label for="confirm-password">Confirm Password:</label>
+                <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirm-password"
+                    required
+                />
+                <button type="submit">Update</button>
+            </form>
+            <div id="error-message" class="error">
+                <span id="error-text">Passwords do not match. Please try again.</span>
+                <button id="try-again-button">Try Again</button>
+            </div>
+            <script src="settings.js"></script>
     </body>
 </html>

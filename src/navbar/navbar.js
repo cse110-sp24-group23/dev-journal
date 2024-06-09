@@ -24,22 +24,20 @@ function loadNavbar() {
             const currentPath = window.location.pathname;
             const navLinks = document.querySelectorAll(".nav-link");
             navLinks.forEach((link) => {
-                // Split the href of the link and the current path by "/"
-                // and compare the last segments of both match
-                if (
-                    link.getAttribute("href").split("/").pop() ===
-                    currentPath.split("/").pop()
-                ) {
+                if (link.getAttribute("href") === currentPath) {
                     // get the record from session storage
                     const recordString =
                         sessionStorage.getItem("current record");
                     // parse the record from string to object using JSON
                     const record = JSON.parse(recordString);
                     // if the record is null, add active to classname
+                    // else check if the record date is today, add active to classname, if not do add active to classname
                     if (!record) {
                         link.classList.add("active");
                     } else {
+                        //get date from record object
                         const date = new Date(record.date);
+                        // make new Date for today's date
                         const today = new Date();
                         today.setHours(0, 0, 0, 0);
                         // if date of record is equal today's date, add active to addname

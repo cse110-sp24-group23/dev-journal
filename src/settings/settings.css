@@ -226,11 +226,11 @@ button:hover {
 /* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {
     :root {
-        --form-width: 130px;
+        --form-width: 60%;
         --header-font-size: 1em;
         --settings-font-size: 0.6em;
         --settings-icon-font-size: 1em;
-        --label-font-size: 0.7em;
+        --label-font-size: 1.5em;
         --button-font-size: 0.5em;
         --form-padding: 0.75em;
         --input-padding: 0.3em;
@@ -251,7 +251,7 @@ button:hover {
         /* Changing form sizing */
         --form-width: 300px;
         --header-font-size: 1.8em;
-        --settings-font-size: 1em;
+        --settings-font-size: 0.8em;
         --settings-icon-font-size: 1.2em;
         --label-font-size: 1.2em;
         --button-font-size: 1em;
@@ -271,7 +271,7 @@ button:hover {
         /* Changing form sizing */
         --form-width: 400px;
         --header-font-size: 1.8em;
-        --settings-font-size: 1em;
+        --settings-font-size: 0.9em;
         --settings-icon-font-size: 1.2em;
         --label-font-size: 1.2em;
         --button-font-size: 1em;
@@ -281,7 +281,10 @@ button:hover {
         --error-font-size: 13px;
         --error-button-font-size: 13px;
     }
-
+    /* Navbar extends at this screenwidth --> move form left to account for that */
+    form {
+        margin-left: 50px;
+    }
     /* Try-again button on same line as error message */
     #try-again-button {
         display: inline-block;

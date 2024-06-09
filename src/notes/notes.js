@@ -124,7 +124,10 @@ function _deleteCurrentNote(event) {
     }, 10);
 }
 
-// edit the current note (displays note editor popup) - to be used with add/remove event listeners
+/**
+ * Edit the current note (displays note editor popup)
+ * To be used with add/remove event listeners
+ */
 function _editCurrentNote(event) {
     // Only add listeners if the event was a click or Enter. If it was a random keypress, return.
     const listenerConditions =

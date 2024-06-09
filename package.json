@@ -20,5 +20,11 @@
     },
     "dependencies": {
         "dotenv": "^16.4.5"
+    },
+    "jest-puppeteer": {
+        "launch": {
+            "slowMo": 10
+      }
     }
+
 }

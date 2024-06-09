@@ -195,7 +195,6 @@ label {
     font-weight: var(--settings-font-weight);
     margin-top: var(--settings-margin-top);
     text-align: var(--settings-text-align);
-    display: var(--settings-display);
     align-items: var(--settings-align-items);
     justify-content: var(--settings-justify-content);
 }
@@ -205,10 +204,6 @@ label {
     color: var(--label-color);
     margin-left: var(--settings-margin-left);
     vertical-align: middle;
-}
-
-button:hover {
-    background-color: var(--button-hover-background-color);
 }
 
 /* Button styling */
@@ -221,6 +216,10 @@ button {
     cursor: var(--button-cursor);
     margin-top: var(--button-margin-top);
     font-size: var(--button-font-size);
+}
+
+button:hover {
+    background-color: var(--button-hover-background-color);
 }
 
 /* Responsive settings */

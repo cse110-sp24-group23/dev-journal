@@ -76,6 +76,11 @@ form {
     font-size: var(--font-size-form);
 }
 
+textarea {
+    width: 100%;
+    height: calc(5 * var(--font-size-text-input));
+}
+
 /* Basic button styling */
 button {
     padding: var(--button-padding);

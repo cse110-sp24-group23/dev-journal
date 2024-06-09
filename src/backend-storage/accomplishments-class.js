@@ -1,35 +1,15 @@
-/**
- * Represents an accomplishment object.
- * @class
- */
 export class AccomplishmentsObj {
-    /**
-     * Creates an instance of AccomplishmentsObj.
-     * @constructor
-     * @param {string} content - The content of the accomplishment.
-     * @param {Date} date - The date of the accomplishment. (Day Month Year Only)
-     */
+    content;
+    date;
+    id;
     constructor(content, date) {
-        /**
-         * The content of the accomplishment.
-         * @type {string}
-         */
         this.content = content;
-
-        /**
-         * The date of the accomplishment with Year, Month, Day Set (no time)
-         * @type {Date}
-         */
+        // make sure hours, minutes, seconds, milliseconds are all 0
         this.date = new Date(
             date.getFullYear(),
             date.getMonth(),
             date.getDate()
         );
-
-        /**
-         * The unique identifier of the accomplishment based on the time of the date.
-         * @type {number}
-         */
         this.id = this.date.getTime();
     }
 }

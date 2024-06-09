@@ -18,47 +18,6 @@
     --gap-between-buttons: 2px;
     --accomplishment-buttons-size: 10px;
 }
-/* Vary size of text based on screen size */
-/* Narrow devices (phones, 320px and up) */
-@media only screen and (min-width: 320px) {
-    :root {
-        --font-size-form: 17px;
-        --font-size-text-input: 16px;
-        --margin-right: 18px;
-        --button-padding: 11px;
-        --accomplishment-buttons-size: 10px;
-    }
-}
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    :root {
-        --font-size-form: 22px;
-        --font-size-text-input: 19px;
-        --margin-right: 20px;
-        --button-padding: 12px;
-        --accomplishment-buttons-size: 12px;
-    }
-}
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    :root {
-        --font-size-form: 23px;
-        --font-size-text-input: 20px;
-        --margin-right: 22px;
-        --button-padding: 14px;
-        --accomplishment-buttons-size: 13px;
-    }
-}
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-    :root {
-        --font-size-form: 24px;
-        --font-size-text-input: 22px;
-        --margin-right: 24px;
-        --button-padding: 15px;
-        --accomplishment-buttons-size: 15px;
-    }
-}
 
 /* Setting the font and margin for the whole body */
 body {
@@ -164,4 +123,46 @@ form input[type="number"],
 /* Add margin between the delete and other buttons */
 #delete {
     margin-left: var(--gap-between-buttons);
+}
+
+/* Vary size of text based on screen size */
+/* Narrow devices (phones, 320px and up) */
+@media only screen and (min-width: 320px) {
+    :root {
+        --font-size-form: 17px;
+        --font-size-text-input: 16px;
+        --margin-right: 18px;
+        --button-padding: 11px;
+        --accomplishment-buttons-size: 10px;
+    }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    :root {
+        --font-size-form: 22px;
+        --font-size-text-input: 19px;
+        --margin-right: 20px;
+        --button-padding: 12px;
+        --accomplishment-buttons-size: 12px;
+    }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    :root {
+        --font-size-form: 23px;
+        --font-size-text-input: 20px;
+        --margin-right: 22px;
+        --button-padding: 14px;
+        --accomplishment-buttons-size: 13px;
+    }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    :root {
+        --font-size-form: 24px;
+        --font-size-text-input: 22px;
+        --margin-right: 24px;
+        --button-padding: 15px;
+        --accomplishment-buttons-size: 15px;
+    }
 }

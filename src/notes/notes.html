@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Notes Page</title>
 
         <!-- Stylesheet-->
-        <link rel="stylesheet" href="notes.css" />
+        <link rel="stylesheet" href="notes.css">
 
         <!-- Script -->
         <script src="../navbar/navbar.js"></script>
         <script src="notes.js" type="module"></script>
         <script src="note-element.js"></script>
+
+        <!-- Favicon link-->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../assets/icons/brand-logo.svg"
+        >
     </head>
+
     <body>
         <div id="navbar"></div>
+        
+        <noscript>
+            <p class="noscript-warning">
+                This application requires JavaScript to run. Please enable JavaScript in your browser settings.
+            </p>
+        </noscript>
+
         <main>
             <div class="content">
                 <h1>Notes</h1>
+                <!-- Buttons to add and delete notes -->
                 <div class="buttons">
                     <button id="add-note-btn">Add Note</button>
-                    <button id="delete-note-btn" display="block">
-                        Delete Note
-                    </button>
+                    <button id="delete-note-btn">Delete Note</button>
+                    <!-- Hidden button becomes visible after clicking delete -->
                     <button id="done-deleting-note-btn" class="hidden">
                         Done Deleting
                     </button>
                 </div>
+                <!-- Container for notes elements -->
                 <div class="js-notes-container"></div>
                 <div class="notes-display"></div>
             </div>

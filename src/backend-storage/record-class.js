@@ -1,7 +1,13 @@
+/**
+ * Class Record for creating Record objects to store logs or notes
+ * @class
+ */
 export class Record {
+    // Type of record being stored
     type;
     title;
     hours;
+    // Text fields for record
     field1;
     field2;
     created;
@@ -9,6 +15,17 @@ export class Record {
     id;
     date;
     hasAccomplishment;
+
+    /*
+    ================================================
+                    PUBLIC METHODS
+    ================================================
+    */
+
+    /*
+    Given a type of record, text fields, or hours, title, or date, 
+    create a Record object.
+    */
     constructor(
         type,
         options = {
@@ -20,6 +37,7 @@ export class Record {
         }
     ) {
         const types = ["log", "note"];
+        // Ensure the information given matches the type of record
         if (!types.includes(type)) {
             throw Error("The parameter type must be 'log' or 'note'.");
         }
@@ -32,6 +50,7 @@ export class Record {
         if (type === "log" && !options.date) {
             throw Error("Logs must have date.");
         }
+        // Initialize member variables
         this.type = type;
         this.hours = options.hours;
         this.field1 = options.field1;

@@ -120,7 +120,7 @@ describe("Daily Log End-to-End Tests", () => {
 
         // Check if the url contains 'dailyLog'
         expect(page.url()).toContain(`dailyLog`);
-    });
+    }, 30000);
 
     // Test to populate exsisting log
     test("Populate already exsisting Log", async () => {

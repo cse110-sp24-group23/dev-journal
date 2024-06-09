@@ -26,12 +26,12 @@ h1 {
     font-weight: normal;
 }
 
-label[for=filter-options] {
+label[for="filter-options"] {
     font-size: var(--filter-font-size);
     margin: var(--filter-margin);
 }
 
-label[for=sort-options] {
+label[for="sort-options"] {
     font-size: var(--filter-font-size);
 }
 
@@ -60,6 +60,16 @@ tbody {
     color: var(--table-text-color);
 }
 
+/* Style for noscript warning message */
+.noscript-warning {
+    background-color: #ffdddd;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    border: 1px solid red;
+}
+
 .accomplishments-table {
     border-collapse: collapse;
     width: 100%;
@@ -69,7 +79,6 @@ tbody {
 .content-cell {
     word-break: break-word;
 }
-
 
 .accomplishments-table th {
     background-color: var(--table-header-background-color);
@@ -82,4 +91,3 @@ tbody {
     font-size: var(--filter-font-size);
     text-align: center;
 }
-

@@ -50,12 +50,6 @@ function displayPasswordForm() {
             }
         });
 }
-/**
- * Redirects to landing page after clicking logout
- */
-document.getElementById("logout-button").addEventListener("click", function () {
-    window.location.href = "../password/landing.html";
-});
 
 /**
  * Hashes the input password using SHA-256 algorithm.

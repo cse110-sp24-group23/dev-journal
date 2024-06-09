@@ -50,6 +50,16 @@ button {
     cursor: pointer;
 }
 
+/* Style for noscript warning message */
+.noscript-warning {
+    background-color: #ffdddd;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    border: 1px solid red;
+}
+
 /* Flex box with the heading and delete button */
 .header-container {
     display: flex;

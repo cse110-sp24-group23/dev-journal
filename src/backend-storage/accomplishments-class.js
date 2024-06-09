@@ -6,13 +6,13 @@ export class AccomplishmentsObj {
     /**
      * Creates an instance of AccomplishmentsObj.
      * @constructor
-     * @param {string} content - The content of the accomplishment.
+     * @param {string[]} content - The content of the accomplishment(s).
      * @param {Date} date - The date of the accomplishment. (Day Month Year Only)
      */
     constructor(content, date) {
         /**
          * The content of the accomplishment.
-         * @type {string}
+         * @type {string[]}
          */
         this.content = content;
 

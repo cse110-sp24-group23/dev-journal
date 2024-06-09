@@ -4,6 +4,7 @@ import { initMDE } from "./simpleMDE-notes.js";
 
 // id of the most recently accessed (clicked, edited, etc.) note element
 let CURRENT_NOTE_ID = null;
+let CONTENT_MDE;
 // ids of JS created elements in the note editor form
 const EDITOR_FORM_ID = "note-editor";
 const EDITOR_TITLE_ID = "note-editor-title";
@@ -225,7 +226,7 @@ function _createNoteEditor(noteElem = null) {
     noteEditor.appendChild(saveBtn);
     noteEditor.appendChild(cancelBtn);
     // make the note editor's content be a markdown editor
-    initMDE(noteContent);
+    CONTENT_MDE = initMDE(noteContent);
     // don't reload the page when the form is submitted - minimize unnecessary loads from storage
     noteEditor.addEventListener("submit", (event) => {
         // prevent form from refreshing page upon submit
@@ -277,24 +278,36 @@ initialize the title and content displays of the popup note editor to be the tit
 and content of the noteELem or empty if the noteElem is null.
 Parameters:
     - noteElem: the note-element that is being edited. If null, forms will be empty
-    - noteTitle: (optional) a reference to the element in the note editor popup for title input
-    - noteContent: (optional) a reference to the element in the note editor popup for title content
+    - editorTitle: (optional) a reference to the element in the note editor popup for title input
+    - eidtorContent: (optional) a reference to the element in the note editor popup for title content
 Returns: None
 */
-function _initNoteEditorValues(noteElem, noteTitle = null, noteContent = null) {
+function _initNoteEditorValues(
+    noteElem,
+    editorTitle = null,
+    editorContent = null
+) {
     // if either of note title or note content aren't given, define them
-    if (!noteTitle || !noteContent) {
-        noteTitle = document.getElementById(EDITOR_TITLE_ID);
-        noteContent = document.getElementById(EDITOR_CONTENT_ID);
+    if (!editorTitle || !editorContent) {
+        editorTitle = document.getElementById(EDITOR_TITLE_ID);
+        editorContent = document.getElementById(EDITOR_CONTENT_ID);
     }
     // if noteElem isn't null update the title and content of the note editor popup
     if (noteElem !== null) {
-        noteTitle.value = noteElem.title;
-        noteContent.value = noteElem.content;
+        editorTitle.value = noteElem.title;
+        editorContent.value = noteElem.content;
+        // if editor content is using markdown editing, set editor's value how simpleMDE requires
+        if (CONTENT_MDE) {
+            CONTENT_MDE.value(noteElem.content);
+        }
     } else {
         // if noteELem is null, clear the title and content of the note editor popup
-        noteTitle.value = "";
-        noteContent.value = "";
+        editorTitle.value = "";
+        editorContent.value = "";
+        // if editor content is using markdown editing, set editor's value how simpleMDE requires
+        if (CONTENT_MDE) {
+            CONTENT_MDE.value("");
+        }
     }
 }
 
@@ -305,7 +318,6 @@ Parameters:
 Returns: None
 */
 function _updateNoteEditor(noteElem = null) {
-    console.log("updating note editor");
     // get note editor
     const noteEditor = document.getElementById(EDITOR_FORM_ID);
     // if it's hidden, show it

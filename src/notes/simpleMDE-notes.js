@@ -1,9 +1,11 @@
+/*global SimpleMDE*/
+// ^^ show SimpleMDE is a global function to not aggravate linter
 import { getStatusMDE } from "../backend-storage/mde-mode-api.js";
 
 function initMDE(textarea) {
     const statusMDE = getStatusMDE();
     if (statusMDE) {
-        const simplemde_done_today = new SimpleMDE({
+        const content = new SimpleMDE({
             element: textarea,
             forceSync: true,
             parsingConfig: {
@@ -23,6 +25,7 @@ function initMDE(textarea) {
                 "guide",
             ],
         });
+        return content;
     }
 }
 

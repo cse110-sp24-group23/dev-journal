@@ -1,75 +1,79 @@
 import { Record } from "../backend-storage/record-class.js";
 import RecordsStorage from "../backend-storage/records-api.js";
+import { initMDE } from "./simpleMDE-notes.js";
 
-// id of the most recently accessed (clicked, edited, etc.) note element
+// ID of the most recently accessed (clicked, edited, etc.) note element
 let CURRENT_NOTE_ID = null;
-// ids of JS created elements in the note editor form
+let CONTENT_MDE;
+// IDs of JS created elements in the note editor form
 const EDITOR_FORM_ID = "note-editor";
-const EDITOR_TTILE_ID = "note-editor-title";
+const EDITOR_TITLE_ID = "note-editor-title";
 const EDITOR_CONTENT_ID = "note-editor-content";
 const EDITOR_SAVE_ID = "editor-save-btn";
 const EDITOR_CANCEL_ID = "editor-cancel-btn";
 
-/**Loads note records from storage and creates note-elements to display them in notes.html
+/**
+ * Loads note records from storage and creates note-elements to display them in notes.html
  */
 function loadAllNotesFromStorage() {
-    // get container where notes are displayed
+    // Get container where notes are displayed
     const notesDisplay = document.querySelector(".notes-display");
-    // retrieve notes from local storage
+    // Retrieve notes from local storage
     const notesList = RecordsStorage.getAllRecords("note");
-    // loop through retrieved notes, creating a note element for each one
+    // Loop through retrieved notes, creating a note element for each one
     for (const noteRecord of notesList) {
-        // create and initialize new note element
+        // Create and initialize new note element
         let noteElem = document.createElement("note-element");
         noteElem.id = noteRecord.id;
         noteElem.title = noteRecord.title;
         noteElem.date = noteRecord.created;
         noteElem.content = noteRecord.field1;
-        // add note element to html page
-        //notesDisplay.prepend(noteElem);
+        // Add note element to html page
         _addFadeIn(noteElem, notesDisplay);
-        // add listeners to note element that check if it is clicked to update it
+        // Add listeners to note element that check if it is clicked to update it
         _addListeners(noteElem);
     }
 }
 
-/**Checks if RecordsStorage has the ID, if it does, update the RecordStorage
+/**
+ * Checks if RecordsStorage has the ID, if it does, update the RecordStorage
  * Else create a new Record and store that into RecordStorage
  */
 function submitToStorage() {
-    // the title of the note
-    const noteTitle = document.getElementById(EDITOR_TTILE_ID);
+    // The title of the note
+    const noteTitle = document.getElementById(EDITOR_TITLE_ID);
     const noteTitleVal = noteTitle.value;
-    // the textbox to enter notes in
+    // The textbox to enter notes in
     const noteContent = document.getElementById(EDITOR_CONTENT_ID);
     const noteContentVal = noteContent.value;
-    // in local storage, update note record if it exists, otherwise create a new one
+    // In local storage, update note record if it exists, otherwise create a new one
     let noteRecord;
     if (
         CURRENT_NOTE_ID != null &&
         RecordsStorage.hasRecordById(CURRENT_NOTE_ID)
     ) {
-        // retrieve the record from storage
+        // Retrieve the record from storage
         noteRecord = RecordsStorage.getRecordById(CURRENT_NOTE_ID);
-        // update the record's information, then update it in storage.
+        // Update the record's information, then update it in storage.
         noteRecord.field1 = noteContentVal;
         noteRecord.title = noteTitleVal;
         RecordsStorage.updateRecord(noteRecord);
     } else {
-        // create a new record to store the note
+        // Create a new record to store the note
         noteRecord = new Record("note", {
             field1: noteContentVal,
             title: noteTitleVal,
         });
-        // create the new record in storage
+        // Create the new record in storage
         RecordsStorage.createRecord(noteRecord);
     }
 }
 
-/**Given a note id, delete the note from local storage and remove it from the html page
+/**
+ * Given a note id, delete the note from local storage and remove it from the html page
  * @param {String | Int} noteId
  */
-function _deleteFromStorage(noteId) {
+function deleteFromStorage(noteId) {
     // Comes in as string, so we convert to a Number
     RecordsStorage.deleteRecord(parseInt(noteId));
     const notesDisplay = document.querySelector(".notes-display");
@@ -77,17 +81,15 @@ function _deleteFromStorage(noteId) {
     _removeFadeOut(noteElem);
 }
 
-/*
-Given a note element, remove it from the page while fading it out
-Parameters:
-    - noteElem: custom note element - reference to the note that is being deleted
-Returns: None
-*/
+/**
+ * Given a note element, remove it from the page while fading it out
+ * @param {Note} noteElem: custom note element - reference to the note that is being deleted
+ */
 function _removeFadeOut(noteElem) {
-    //Fade out for 300 ms
+    // Fade out for 300 ms
     const milliseconds = 300;
     noteElem.style.transition = "opacity " + milliseconds + "ms ease";
-    //After the note had faded out, remove it from the page
+    // After the note had faded out, remove it from the page
     noteElem.style.opacity = 0;
     setTimeout(function () {
         noteElem.remove();
@@ -95,12 +97,15 @@ function _removeFadeOut(noteElem) {
 }
 
 /*
-Given a note element, add it to the page while fading it in
 Parameters:
-    - noteElem: custom note element - reference to the note that is being added
-    - parent: container that the note will be added to
+    - note (optional): custom note element - reference to the note that is being edited
 Returns: None
 */
+/**
+ * Given a note element, add it to the page while fading it in
+ * @param {Note} noteElem: custom note element - reference to the note that is being added
+ * @param {} parent: container that the note will be added to
+ */
 function _addFadeIn(noteElem, parent) {
     //Add the note onto the page at opacity 0
     parent.prepend(noteElem);
@@ -135,10 +140,7 @@ function _addListeners(noteElem) {
     noteElem.addEventListener("keypress", _editCurrentNote);
 }
 
-/**Delete the current note on a click of "trash button" or enter key press
- * To be used with add/remove event listeners
- * @param {event} event "click" or "keypress" on "Enter" key
- */
+// delete the current note - to be used with add/remove event listeners
 function _deleteCurrentNote(event) {
     // Only add listeners if the event was a click or Enter. If it was a random keypress, return.
     const listenerConditions =
@@ -152,13 +154,13 @@ function _deleteCurrentNote(event) {
     // this allows us to have _deleteCurrentNote be a function that doesn't take in any parameters
     // so that we can use it with addEventListener and deleteEventListener to add/remove it.
     setTimeout(() => {
-        _deleteFromStorage(CURRENT_NOTE_ID);
+        deleteFromStorage(CURRENT_NOTE_ID);
     }, 10);
 }
 
-/**Edit the current note (displays note editor popup)
+/**
+ * Edit the current note (displays note editor popup)
  * To be used with add/remove event listeners
- * @param {event} event
  */
 function _editCurrentNote(event) {
     // Only add listeners if the event was a click or Enter. If it was a random keypress, return.
@@ -183,7 +185,8 @@ function _editCurrentNote(event) {
     }, 100);
 }
 
-/**given the id of a note, load it from storage. If no id is given, it will load the most recently added note
+/**
+ * Given the id of a note, load it from storage. If no id is given, it will load the most recently added note
  * @param {String} id id of note, initialized as null (optional)
  */
 function _loadNotefromStorage(id = null) {
@@ -205,12 +208,12 @@ function _loadNotefromStorage(id = null) {
     noteElem.date = noteRecord.created;
     noteElem.content = noteRecord.field1;
     // add note element to page and add its event listeners
-    //notesDisplay.prepend(noteElem);
-    _addFadeIn(noteElem, notesDisplay);
+    notesDisplay.prepend(noteElem);
     _addListeners(noteElem);
 }
 
-/**Display the note editor and populate it with values of a note element if one is given
+/**
+ * Display the note editor and populate it with values of a note element if one is given
  * @param {Note} noteElem custom element Note, aka "note-elements" in HTML, reference to note that is being edited
  *                        initialized as null (optional)
  */
@@ -227,7 +230,8 @@ function _displayNoteEditor(noteElem = null) {
     }
 }
 
-/**Create the note editor and populate it with values of a note element if one is given
+/**
+ * Create the note editor and populate it with values of a note element if one is given
  * @param {Note} noteElem custom element Note, aka "note-elements" in HTML, reference to note that is being edited
  *                        initialized as null (optional)
  */
@@ -240,7 +244,7 @@ function _createNoteEditor(noteElem = null) {
     const cancelBtn = document.createElement("button");
     // add selectors to elements
     noteEditor.id = EDITOR_FORM_ID;
-    noteTitle.id = EDITOR_TTILE_ID;
+    noteTitle.id = EDITOR_TITLE_ID;
     noteContent.id = EDITOR_CONTENT_ID;
     saveBtn.id = EDITOR_SAVE_ID;
     cancelBtn.id = EDITOR_CANCEL_ID;
@@ -259,6 +263,8 @@ function _createNoteEditor(noteElem = null) {
     noteEditor.appendChild(noteContent);
     noteEditor.appendChild(saveBtn);
     noteEditor.appendChild(cancelBtn);
+    // make the note editor's content be a markdown editor
+    CONTENT_MDE = initMDE(noteContent);
     // don't reload the page when the form is submitted - minimize unnecessary loads from storage
     noteEditor.addEventListener("submit", (event) => {
         // prevent form from refreshing page upon submit
@@ -269,8 +275,8 @@ function _createNoteEditor(noteElem = null) {
     notesContainer.prepend(noteEditor);
 }
 
-
-/**Add event listeners for the note editor display's save and cancel buttons
+/**
+ * Add event listeners for the note editor display's save and cancel buttons
  */
 function _addNoteEditorListeners() {
     const noteEditor = document.getElementById(EDITOR_FORM_ID);
@@ -302,40 +308,55 @@ function _addNoteEditorListeners() {
     });
 }
 
-/**Given a note element, note title input (optional) and note content textarea (optional)
+/**
+ * Given a note element, note title input (optional) and note content textarea (optional)
  * initialize the title and content displays of the poopup note editor to be the title
  * and content of the noteELem or empty if the noteElem is null
  * @param {Note} noteElem custom element Note, aka "note-elements" in HTML, reference to note that is being edited
  *                        initialized as null (optional)
- * @param {HTMLInputElement} noteTitle title of the note based on user input (optional)
- * @param {HTMLTextAreaElement} noteContent content of the note based on user input (optional)
+ * @param {HTMLInputElement} editorTitle input element for the editor's title section (optional)
+ * @param {HTMLTextAreaElement} editorContent textarea element for editor's content section(optional)
  */
-function _initNoteEditorValues(noteElem, noteTitle = null, noteContent = null) {
-    // if either of note title or note content aren't given, define them
-    if (!noteTitle || !noteContent) {
-        noteTitle = document.getElementById(EDITOR_TTILE_ID);
-        noteContent = document.getElementById(EDITOR_CONTENT_ID);
+function _initNoteEditorValues(
+    noteElem,
+    editorTitle = null,
+    editorContent = null
+) {
+    // If either of note title or note content aren't given, define them
+    if (!editorTitle || !editorContent) {
+        editorTitle = document.getElementById(EDITOR_TITLE_ID);
+        editorContent = document.getElementById(EDITOR_CONTENT_ID);
     }
-    // if noteElem isn't null update the title and content of the note editor popup
+    // If noteElem isn't null update the title and content of the note editor popup
     if (noteElem !== null) {
-        noteTitle.value = noteElem.title;
-        noteContent.value = noteElem.content;
+        editorTitle.value = noteElem.title;
+        editorContent.value = noteElem.content;
+        // If editor content is using markdown editing, set editor's value how simpleMDE requires
+        if (CONTENT_MDE) {
+            CONTENT_MDE.value(noteElem.content);
+        }
     } else {
-        // if noteELem is null, clear the title and content of the note editor popup
-        noteTitle.value = "";
-        noteContent.value = "";
+        // If noteELem is null, clear the title and content of the note editor popup
+        editorTitle.value = "";
+        editorContent.value = "";
+        // If editor content is using markdown editing, set editor's value how simpleMDE requires
+        if (CONTENT_MDE) {
+            CONTENT_MDE.value("");
+        }
     }
 }
 
-/**update the note editor with values of a note element if one is given, otherwise clear the values
+/**
+ * Update the note editor with values of a note element if one is given, otherwise clear the values
  * @param {Note} noteElem custom element Note, aka "note-elements" in HTML, reference to note that is being edited
- *                        initialized as null (optional)
+ * noteElem initialized as null (optional) - clears editor values if it is null
  */
 function _updateNoteEditor(noteElem = null) {
     // get note editor
     const noteEditor = document.getElementById(EDITOR_FORM_ID);
     // if it's hidden, show it
     noteEditor.classList.remove("hidden");
+
     // if there was a note passed in, populate values
     _initNoteEditorValues(noteElem);
 }

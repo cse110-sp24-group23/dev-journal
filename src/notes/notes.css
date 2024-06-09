@@ -57,7 +57,7 @@
     --shadow-color: rgba(128, 128, 128, 0.507);
     --shadow-color-hover: rgb(128, 128, 128);
 
-    --notes-edit-color: #cc6677;
+    --notes-edit-color: #efeff7;
     --notes-edit-input-color: #ffffff;
     --notes-lavendar: #dcd5f859;
     --notes-peach: #fde3ac44;
@@ -142,6 +142,16 @@ h1 {
 /* meant to hide/show objects my adding/removing this class in js */
 .hidden {
     display: none;
+}
+
+/* Style for noscript warning message */
+.noscript-warning {
+    background-color: #ffdddd;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    border: 1px solid red;
 }
 
 .content {

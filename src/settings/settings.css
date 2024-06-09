@@ -66,6 +66,28 @@ body {
     margin: 0;
 }
 
+/* Styling password form */
+form {
+    background: var(--form-background-color);
+    padding: var(--form-padding);
+    border-radius: var(--form-border-radius);
+    box-shadow: var(--form-box-shadow);
+    width: var(--form-width);
+    text-align: center;
+    margin-top: var(--form-margin-top);
+}
+
+/* Input styling */
+input[type="password"] {
+    width: var(--input-width-calc);
+    padding: var(--input-padding);
+    margin-top: var(--input-margin-top);
+    margin-bottom: var(--input-margin-bottom);
+    border: var(--input-border-width) solid var(--border-color);
+    border-radius: var(--input-border-radius);
+    box-sizing: var(--input-box-sizing);
+}
+
 /* Label styling */
 label {
     display: var(--label-display);
@@ -74,6 +96,16 @@ label {
     text-align: var(--label-text-align);
     color: var(--label-color);
     font-size: var(--label-font-size);
+}
+
+/* Style for noscript warning message */
+.noscript-warning {
+    background-color: #ffdddd;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    border: 1px solid red;
 }
 
 /* Header styling */

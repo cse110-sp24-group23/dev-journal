@@ -140,6 +140,16 @@ body {
     font-family: "Lato", sans-serif;
 }
 
+/* Style for noscript warning message */
+.noscript-warning {
+    background-color: #ffdddd;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    border: 1px solid red;
+}
+
 /* Day of the Month  */
 .calendar-table td {
     text-align: center;

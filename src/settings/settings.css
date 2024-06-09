@@ -139,24 +139,6 @@ body {
     margin: 0;
 }
 
-/* Header styling */
-.header {
-    text-align: center;
-    margin-bottom: var(--header-margin-bottom);
-}
-
-/* Header font styling */
-.header h1 {
-    font-size: var(--header-font-size);
-    font-weight: var(--header-font-weight);
-    color: var(--label-color);
-}
-
-/* Hidden class */
-.hidden {
-    display: none;
-}
-
 /* Styling password form */
 form {
     background: var(--form-background-color);
@@ -187,6 +169,34 @@ label {
     text-align: var(--label-text-align);
     color: var(--label-color);
     font-size: var(--label-font-size);
+}
+
+/* Style for noscript warning message */
+.noscript-warning {
+    background-color: #ffdddd;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    border: 1px solid red;
+}
+
+/* Header styling */
+.header {
+    text-align: center;
+    margin-bottom: var(--header-margin-bottom);
+}
+
+/* Header font styling */
+.header h1 {
+    font-size: var(--header-font-size);
+    font-weight: var(--header-font-weight);
+    color: var(--label-color);
+}
+
+/* Hidden class */
+.hidden {
+    display: none;
 }
 
 /* Settings section */

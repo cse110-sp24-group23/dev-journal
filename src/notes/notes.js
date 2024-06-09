@@ -41,7 +41,7 @@ function loadAllNotesFromStorage() {
  */
 function submitToStorage() {
     // The title of the note
-    const noteTitle = document.getElementById(EDITOR_TTILE_ID);
+    const noteTitle = document.getElementById(EDITOR_TITLE_ID);
     const noteTitleVal = noteTitle.value;
     // The textbox to enter notes in
     const noteContent = document.getElementById(EDITOR_CONTENT_ID);
@@ -73,7 +73,7 @@ function submitToStorage() {
  * Given a note id, delete the note from local storage and remove it from the html page
  * @param {String | Int} noteId
  */
-function _deleteFromStorage(noteId) {
+function deleteFromStorage(noteId) {
     // Comes in as string, so we convert to a Number
     RecordsStorage.deleteRecord(parseInt(noteId));
     const notesDisplay = document.querySelector(".notes-display");
@@ -161,7 +161,6 @@ function _deleteCurrentNote(event) {
 /**
  * Edit the current note (displays note editor popup)
  * To be used with add/remove event listeners
- * @param {event} event
  */
 function _editCurrentNote(event) {
     // Only add listeners if the event was a click or Enter. If it was a random keypress, return.
@@ -315,28 +314,32 @@ function _addNoteEditorListeners() {
  * and content of the noteELem or empty if the noteElem is null
  * @param {Note} noteElem custom element Note, aka "note-elements" in HTML, reference to note that is being edited
  *                        initialized as null (optional)
- * @param {HTMLInputElement} noteTitle title of the note based on user input (optional)
- * @param {HTMLTextAreaElement} noteContent content of the note based on user input (optional)
+ * @param {HTMLInputElement} editorTitle input element for the editor's title section (optional)
+ * @param {HTMLTextAreaElement} editorContent textarea element for editor's content section(optional)
  */
-function _initNoteEditorValues(noteElem, noteTitle = null, noteContent = null) {
-    // if either of note title or note content aren't given, define them
+function _initNoteEditorValues(
+    noteElem,
+    editorTitle = null,
+    editorContent = null
+) {
+    // If either of note title or note content aren't given, define them
     if (!editorTitle || !editorContent) {
         editorTitle = document.getElementById(EDITOR_TITLE_ID);
         editorContent = document.getElementById(EDITOR_CONTENT_ID);
     }
-    // if noteElem isn't null update the title and content of the note editor popup
+    // If noteElem isn't null update the title and content of the note editor popup
     if (noteElem !== null) {
         editorTitle.value = noteElem.title;
         editorContent.value = noteElem.content;
-        // if editor content is using markdown editing, set editor's value how simpleMDE requires
+        // If editor content is using markdown editing, set editor's value how simpleMDE requires
         if (CONTENT_MDE) {
             CONTENT_MDE.value(noteElem.content);
         }
     } else {
-        // if noteELem is null, clear the title and content of the note editor popup
+        // If noteELem is null, clear the title and content of the note editor popup
         editorTitle.value = "";
         editorContent.value = "";
-        // if editor content is using markdown editing, set editor's value how simpleMDE requires
+        // If editor content is using markdown editing, set editor's value how simpleMDE requires
         if (CONTENT_MDE) {
             CONTENT_MDE.value("");
         }
@@ -346,7 +349,7 @@ function _initNoteEditorValues(noteElem, noteTitle = null, noteContent = null) {
 /**
  * Update the note editor with values of a note element if one is given, otherwise clear the values
  * @param {Note} noteElem custom element Note, aka "note-elements" in HTML, reference to note that is being edited
- *                        initialized as null (optional)
+ * noteElem initialized as null (optional) - clears editor values if it is null
  */
 function _updateNoteEditor(noteElem = null) {
     // get note editor
@@ -358,6 +361,11 @@ function _updateNoteEditor(noteElem = null) {
     _initNoteEditorValues(noteElem);
 }
 
+/**
+ * This function is called when the window is loaded.
+ * @function
+ * @name window.onload
+ */
 window.onload = function () {
     // make sure there aren't any faulty records in storage, then load records in as note elements
     RecordsStorage.cleanse_records();

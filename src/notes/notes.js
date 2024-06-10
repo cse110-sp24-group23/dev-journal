@@ -218,6 +218,8 @@ function _loadNotefromStorage(id = null) {
  *                        initialized as null (optional)
  */
 function _displayNoteEditor(noteElem = null) {
+    // Scroll to top of page to see the the editor once it is created
+    window.scrollTo(0, 0);
     // set editorCreated as a boolean of if there is a noteEditor created yet
     // if the note editor exists, it won't be null
     const editorCreated = document.getElementById(EDITOR_FORM_ID) != null;
@@ -284,6 +286,8 @@ function _addNoteEditorListeners() {
     const cancelBtn = document.getElementById(EDITOR_CANCEL_ID);
     // when the save is clicked, save to storage, update display
     saveBtn.addEventListener("click", () => {
+        // Scroll to top of page
+        window.scrollTo(0, 0);
         // put note in storage and hide the form
         submitToStorage();
         noteEditor.classList.add("hidden");
@@ -305,6 +309,8 @@ function _addNoteEditorListeners() {
         // clear note editor form values
         _initNoteEditorValues(null);
         noteEditor.classList.add("hidden");
+        // Scroll to top of page
+        window.scrollTo(0, 0);
     });
 }
 

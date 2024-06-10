@@ -36,6 +36,7 @@ function calendarFunctionality(calendar) {
 function addClickToDays(calendar) {
     const calendarDays = document.querySelectorAll(".js-calendar-day");
     for (let day of calendarDays) {
+        // Listen for click
         day.addEventListener("click", () => {
             let record;
             // Date of the Clicked Cell
@@ -52,6 +53,29 @@ function addClickToDays(calendar) {
             sessionStorage.setItem("current record", JSON.stringify(record));
             // Redirects to daily log page for clicked date
             window.location.href = "../daily-log/daily-log.html";
+        });
+        // Listen for Enter key for keyboards
+        day.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                let record;
+                // Date of the Clicked Cell
+                const dateObject = calendar.getDateOfDayCell(day);
+
+                // Get Record Object corresponding to date (if it exists),
+                // Else make a new record object.
+                if (RecordsStorage.hasRecordByDate(dateObject)) {
+                    record = RecordsStorage.getRecordByDate(dateObject);
+                } else {
+                    record = new Record("log", { date: dateObject });
+                }
+                // Stores current record from the cell date into session storage
+                sessionStorage.setItem(
+                    "current record",
+                    JSON.stringify(record)
+                );
+                // Redirects to daily log page for clicked date
+                window.location.href = "../daily-log/daily-log.html";
+            }
         });
     }
 }

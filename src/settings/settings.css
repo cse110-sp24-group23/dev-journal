@@ -109,7 +109,6 @@ label {
     font-weight: var(--settings-font-weight);
     margin-top: var(--settings-margin-top);
     text-align: var(--settings-text-align);
-    /* align-items: var(--settings-align-items); */
     justify-content: var(--settings-justify-content);
     max-width: var(--settings-max-width);
     margin-left: var(--settings-margin-left);

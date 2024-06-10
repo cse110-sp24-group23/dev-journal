@@ -33,6 +33,13 @@ function loadAllNotesFromStorage() {
         // Add listeners to note element that check if it is clicked to update it
         _addListeners(noteElem);
     }
+    // don't have delete note button if there are no notes to delete.
+    const deleteNoteBtn = document.getElementById("delete-note-btn");
+    if (notesList.length === 0) {
+        deleteNoteBtn.classList.add("hidden");
+    } else {
+        deleteNoteBtn.classList.remove("hidden");
+    }
 }
 
 /**
@@ -210,6 +217,9 @@ function _loadNotefromStorage(id = null) {
     // add note element to page and add its event listeners
     notesDisplay.prepend(noteElem);
     _addListeners(noteElem);
+    // Make sure delete note button is visible
+    const deleteNoteBtn = document.getElementById("delete-note-btn");
+    deleteNoteBtn.classList.remove("hidden");
 }
 
 /**
@@ -424,6 +434,10 @@ window.onload = function () {
             // add edit popup listener back - assures editor popup can display when note is clicked
             noteElem.addEventListener("click", _editCurrentNote);
             noteElem.addEventListener("keypress", _editCurrentNote);
+        }
+        // If there are no notes left, don't show the delete note button
+        if (noteElems.length === 0) {
+            deleteNoteBtn.classList.add("hidden");
         }
     });
 };

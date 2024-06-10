@@ -1,3 +1,4 @@
+import expect from "expect";
 import { Calendar } from "../../src/calendar/calendar-class.js";
 
 describe("Calendar Class Unit Tests", () => {
@@ -225,9 +226,9 @@ describe("Calendar Class Unit Tests", () => {
             "November",
             "December",
         ];
-        //test that each int from 0-11 returns the correct corresponding string of the month
-        for (let i = 0; i < 12; i++) {
-            expect(calendar._getMonthStrFromInt(i)).toBe(months[i]);
+        //test that each int from 0-11 returns the correct corresponding string of the month 
+        for (let i = 0; i < 12; i++){
+            expect(calendar._getMonthStrFromInt(i)).toBe(months[i])
         }
-    });
+    })
 });

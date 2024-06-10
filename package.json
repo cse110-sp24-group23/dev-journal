@@ -1,6 +1,6 @@
 {
     "name": "dev-journal",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Dev Journal Project CSE 110",
     "scripts": {
         "unittest": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/unit/",
@@ -26,5 +26,4 @@
             "slowMo": 10
       }
     }
-
 }

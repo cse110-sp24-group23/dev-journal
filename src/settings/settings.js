@@ -6,6 +6,7 @@ import { setStatusMDE, getStatusMDE } from "../backend-storage/mde-mode-api.js";
 function updateStatusMDE() {
     //select the checkbox input from the HTML
     const mdeCheckbox = document.querySelector(".js-mde-checkbox");
+    // Add listener for Click
     mdeCheckbox.addEventListener("click", () => {
         let statusMDE;
         //check its status
@@ -16,6 +17,21 @@ function updateStatusMDE() {
         }
         //update the status
         setStatusMDE(statusMDE);
+    });
+    // Add listener for spacebar key - it's what is default for checkboxes
+    mdeCheckbox.addEventListener("keypress", (event) => {
+        // check if spacebar pressed
+        if (event.key === " ") {
+            let statusMDE;
+            //check its status
+            if (mdeCheckbox.checked == true) {
+                statusMDE = true;
+            } else {
+                statusMDE = false;
+            }
+            //update the status
+            setStatusMDE(statusMDE);
+        }
     });
 }
 /**

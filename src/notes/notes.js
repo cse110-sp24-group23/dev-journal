@@ -240,6 +240,9 @@ function _displayNoteEditor(noteElem = null) {
         _createNoteEditor(noteElem);
         _addNoteEditorListeners();
     }
+    // Make sure you can't delete notes while editor is open.
+    const deleteNoteBtn = document.getElementById("delete-note-btn");
+    deleteNoteBtn.classList.add("hidden");
 }
 
 /**
@@ -296,6 +299,9 @@ function _addNoteEditorListeners() {
     const cancelBtn = document.getElementById(EDITOR_CANCEL_ID);
     // When the save is clicked, save to storage, update display
     saveBtn.addEventListener("click", () => {
+        // Make sure you can delete notes now that editor is closed.
+        const deleteNoteBtn = document.getElementById("delete-note-btn");
+        deleteNoteBtn.classList.remove("hidden");
         // Scroll to top of page
         window.scrollTo(0, 0);
         // Put note in storage and hide the form
@@ -316,6 +322,9 @@ function _addNoteEditorListeners() {
     });
     // When the cancel button is clicked, clear the form and hide it.
     cancelBtn.addEventListener("click", () => {
+        // Make sure you can delete notes now that editor is closed.
+        const deleteNoteBtn = document.getElementById("delete-note-btn");
+        deleteNoteBtn.classList.remove("hidden");
         // Clear note editor form values
         _initNoteEditorValues(null);
         noteEditor.classList.add("hidden");
@@ -395,6 +404,8 @@ window.onload = function () {
     // Get delete note and done delete note buttons
     const deleteNoteBtn = document.getElementById("delete-note-btn");
     const doneDelNoteBtn = document.getElementById("done-deleting-note-btn");
+    // Make sure delete button is displayed
+    deleteNoteBtn.classList.remove("hidden");
     // Allow for deleting when delete button is clicked - display trash icons, edit event listeners
     deleteNoteBtn.addEventListener("click", () => {
         // Hide 'delete note', 'add note' buttons and show 'done deleting' button

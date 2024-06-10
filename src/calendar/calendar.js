@@ -51,7 +51,7 @@ function addClickToDays(calendar) {
             // Stores current record from the cell date into session storage
             sessionStorage.setItem("current record", JSON.stringify(record));
             // Redirects to daily log page for clicked date
-            window.location.href = "../dailyLog/index.html";
+            window.location.href = "../daily-log/daily-log.html";
         });
     }
 }

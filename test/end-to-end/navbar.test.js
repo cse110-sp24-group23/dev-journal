@@ -36,7 +36,7 @@ describe("Basic user flow for Navbar", () => {
         await page.click(todaySelector);
 
         // Assert if the URL matches the Today page URL
-        expect(page.url()).toContain("/dailyLog");
+        expect(page.url()).toContain("/daily-log");
     });
 
     // Test for Notes page

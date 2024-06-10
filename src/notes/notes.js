@@ -33,7 +33,7 @@ function loadAllNotesFromStorage() {
         // Add listeners to note element that check if it is clicked to update it
         _addListeners(noteElem);
     }
-    // don't have delete note button if there are no notes to delete.
+    // Don't have delete note button if there are no notes to delete.
     const deleteNoteBtn = document.getElementById("delete-note-btn");
     if (notesList.length === 0) {
         deleteNoteBtn.classList.add("hidden");
@@ -130,24 +130,24 @@ function _addFadeIn(noteElem, parent) {
  * @param {Note} noteElem custom element Note, aka "note-elements" in HTML, reference to note that is being edited
  */
 function _addListeners(noteElem) {
-    // when this note is clicked, update the global CURRENT_NOTE_ID variable to be this note's id
+    // When this note is clicked, update the global CURRENT_NOTE_ID variable to be this note's id
     noteElem.addEventListener("click", () => {
         CURRENT_NOTE_ID = noteElem.id;
     });
-    // when note is selected with Enter, update global CURRENT_NOTE_ID variable to be note's id
+    // When note is selected with Enter, update global CURRENT_NOTE_ID variable to be note's id
     noteElem.addEventListener("keypress", (event) => {
-        // only add listener if the enter key was pressed, not some random key
+        // Only add listener if the enter key was pressed, not some random key
         if (event.key != "Enter") {
             return;
         }
         CURRENT_NOTE_ID = noteElem.id;
     });
-    // when a note is clicked, open the editor for it
+    // When a note is clicked, open the editor for it
     noteElem.addEventListener("click", _editCurrentNote);
     noteElem.addEventListener("keypress", _editCurrentNote);
 }
 
-// delete the current note - to be used with add/remove event listeners
+// Delete the current note - to be used with add/remove event listeners
 function _deleteCurrentNote(event) {
     // Only add listeners if the event was a click or Enter. If it was a random keypress, return.
     const listenerConditions =
@@ -157,8 +157,8 @@ function _deleteCurrentNote(event) {
         return;
     }
     // HACK (ish) - seems to be the cleanest way to do this in vanilla JS
-    // wait 0.01s for the CURRENT_NOTE_ID to be updated by the noteElem event listener that updates CURRENT_NOTE_ID
-    // this allows us to have _deleteCurrentNote be a function that doesn't take in any parameters
+    // Wait 0.01s for the CURRENT_NOTE_ID to be updated by the noteElem event listener that updates CURRENT_NOTE_ID
+    // This allows us to have _deleteCurrentNote be a function that doesn't take in any parameters
     // so that we can use it with addEventListener and deleteEventListener to add/remove it.
     setTimeout(() => {
         deleteFromStorage(CURRENT_NOTE_ID);
@@ -178,16 +178,16 @@ function _editCurrentNote(event) {
         return;
     }
     // HACK (ish) - seems to be the cleanest way to do this in vanilla JS
-    // wait 0.1s for the CURRENT_NOTE_ID to be updated by the noteElem event listener that updates CURRENT_NOTE_ID
-    // this allows us to have _editCurrentNote be a function that doesn't take in any parameters
+    // Wait 0.1s for the CURRENT_NOTE_ID to be updated by the noteElem event listener that updates CURRENT_NOTE_ID
+    // This allows us to have _editCurrentNote be a function that doesn't take in any parameters
     // so that we can use it with addEventListener and deleteEventListener to add/remove it.
     setTimeout(() => {
-        // get the note element that was clicked on
+        // Get the note element that was clicked on
         const notesDisplay = document.querySelector(".notes-display");
         const noteElem = notesDisplay.querySelector(
             `note-element[id="${CURRENT_NOTE_ID}"]`
         );
-        // display the note editor of the newly retrieved current note
+        // Display the note editor of the newly retrieved current note
         _displayNoteEditor(noteElem);
     }, 100);
 }
@@ -199,22 +199,22 @@ function _editCurrentNote(event) {
 function _loadNotefromStorage(id = null) {
     const notesDisplay = document.querySelector(".notes-display");
     let noteRecord;
-    // get the note record from storage
+    // Get the note record from storage
     if (id !== null) {
-        // if an id is passed in, get the note record by id
+        // If an id is passed in, get the note record by id
         noteRecord = RecordsStorage.getRecordById(parseInt(id));
     } else {
-        // if id is null, get the most recently added note record
+        // If id is null, get the most recently added note record
         const notesList = RecordsStorage.getAllRecords("note");
         noteRecord = notesList[notesList.length - 1];
     }
-    // create a note element to display the noteRecord's info
+    // Create a note element to display the noteRecord's info
     let noteElem = document.createElement("note-element");
     noteElem.id = noteRecord.id;
     noteElem.title = noteRecord.title;
     noteElem.date = noteRecord.created;
     noteElem.content = noteRecord.field1;
-    // add note element to page and add its event listeners
+    // Add note element to page and add its event listeners
     notesDisplay.prepend(noteElem);
     _addListeners(noteElem);
     // Make sure delete note button is visible
@@ -225,15 +225,15 @@ function _loadNotefromStorage(id = null) {
 /**
  * Display the note editor and populate it with values of a note element if one is given
  * @param {Note} noteElem custom element Note, aka "note-elements" in HTML, reference to note that is being edited
- *                        initialized as null (optional)
+ * initialized as null (optional)
  */
 function _displayNoteEditor(noteElem = null) {
     // Scroll to top of page to see the the editor once it is created
     window.scrollTo(0, 0);
-    // set editorCreated as a boolean of if there is a noteEditor created yet
-    // if the note editor exists, it won't be null
+    // Set editorCreated as a boolean of if there is a noteEditor created yet
+    // If the note editor exists, it won't be null
     const editorCreated = document.getElementById(EDITOR_FORM_ID) != null;
-    // if the note Editor has already been created, update it, otherwise, create it
+    // If the note Editor has already been created, update it, otherwise, create it
     if (editorCreated) {
         _updateNoteEditor(noteElem);
     } else {
@@ -245,7 +245,7 @@ function _displayNoteEditor(noteElem = null) {
 /**
  * Create the note editor and populate it with values of a note element if one is given
  * @param {Note} noteElem custom element Note, aka "note-elements" in HTML, reference to note that is being edited
- *                        initialized as null (optional)
+ * initialized as null (optional)
  */
 function _createNoteEditor(noteElem = null) {
     // Elements for the note editor
@@ -254,32 +254,32 @@ function _createNoteEditor(noteElem = null) {
     const noteContent = document.createElement("textarea");
     const saveBtn = document.createElement("button");
     const cancelBtn = document.createElement("button");
-    // add selectors to elements
+    // Add selectors to elements
     noteEditor.id = EDITOR_FORM_ID;
     noteTitle.id = EDITOR_TITLE_ID;
     noteContent.id = EDITOR_CONTENT_ID;
     saveBtn.id = EDITOR_SAVE_ID;
     cancelBtn.id = EDITOR_CANCEL_ID;
-    // add formats/attributes to elements
+    // Add formats/attributes to elements
     noteTitle.type = "text";
     noteTitle.maxLength = "50"; // define a max amount of characters users can input
     noteTitle.placeholder = "Title"; // make it a text input
     noteContent.placeholder = "Notes";
-    // update button texts
+    // Update button texts
     saveBtn.innerText = "Save";
     cancelBtn.innerText = "Cancel";
-    // if there was a note passed in, populate values
+    // If there was a note passed in, populate values
     _initNoteEditorValues(noteElem, noteTitle, noteContent);
     // Populate note editor
     noteEditor.appendChild(noteTitle);
     noteEditor.appendChild(noteContent);
     noteEditor.appendChild(saveBtn);
     noteEditor.appendChild(cancelBtn);
-    // make the note editor's content be a markdown editor
+    // Make the note editor's content be a markdown editor
     CONTENT_MDE = initMDE(noteContent);
-    // don't reload the page when the form is submitted - minimize unnecessary loads from storage
+    // Don't reload the page when the form is submitted - minimize unnecessary loads from storage
     noteEditor.addEventListener("submit", (event) => {
-        // prevent form from refreshing page upon submit
+        // Prevent form from refreshing page upon submit
         event.preventDefault();
     });
     // Put note editor in the main notes container to be displayed
@@ -294,29 +294,29 @@ function _addNoteEditorListeners() {
     const noteEditor = document.getElementById(EDITOR_FORM_ID);
     const saveBtn = document.getElementById(EDITOR_SAVE_ID);
     const cancelBtn = document.getElementById(EDITOR_CANCEL_ID);
-    // when the save is clicked, save to storage, update display
+    // When the save is clicked, save to storage, update display
     saveBtn.addEventListener("click", () => {
         // Scroll to top of page
         window.scrollTo(0, 0);
-        // put note in storage and hide the form
+        // Put note in storage and hide the form
         submitToStorage();
         noteEditor.classList.add("hidden");
-        // if we are editing a note
+        // If we are editing a note
         if (CURRENT_NOTE_ID != null) {
             const noteElem = document.querySelector(
                 `note-element[id="${CURRENT_NOTE_ID}"]`
             );
-            // display the updated note and remove the old note from view
+            // Display the updated note and remove the old note from view
             _loadNotefromStorage(CURRENT_NOTE_ID);
             noteElem.remove();
         } else {
-            // otherwise, show new note by loading in the most recently created note from storage
+            // Otherwise, show new note by loading in the most recently created note from storage
             _loadNotefromStorage();
         }
     });
-    // when the cancel button is clicked, clear the form and hide it.
+    // When the cancel button is clicked, clear the form and hide it.
     cancelBtn.addEventListener("click", () => {
-        // clear note editor form values
+        // Clear note editor form values
         _initNoteEditorValues(null);
         noteEditor.classList.add("hidden");
         // Scroll to top of page
@@ -368,12 +368,12 @@ function _initNoteEditorValues(
  * noteElem initialized as null (optional) - clears editor values if it is null
  */
 function _updateNoteEditor(noteElem = null) {
-    // get note editor
+    // Get note editor
     const noteEditor = document.getElementById(EDITOR_FORM_ID);
-    // if it's hidden, show it
+    // If it's hidden, show it
     noteEditor.classList.remove("hidden");
 
-    // if there was a note passed in, populate values
+    // If there was a note passed in, populate values
     _initNoteEditorValues(noteElem);
 }
 
@@ -383,55 +383,55 @@ function _updateNoteEditor(noteElem = null) {
  * @name window.onload
  */
 window.onload = function () {
-    // make sure there aren't any faulty records in storage, then load records in as note elements
+    // Make sure there aren't any faulty records in storage, then load records in as note elements
     RecordsStorage.cleanse_records();
     loadAllNotesFromStorage();
-    // display note editor when "Add Note" button clicked
+    // Display note editor when "Add Note" button clicked
     const addNoteBtn = document.getElementById("add-note-btn");
     addNoteBtn.addEventListener("click", () => {
         CURRENT_NOTE_ID = null;
         _displayNoteEditor();
     });
-    // get delete note and done delete note buttons
+    // Get delete note and done delete note buttons
     const deleteNoteBtn = document.getElementById("delete-note-btn");
     const doneDelNoteBtn = document.getElementById("done-deleting-note-btn");
-    // allow for deleting when delete button is clicked - display trash icons, edit event listeners
+    // Allow for deleting when delete button is clicked - display trash icons, edit event listeners
     deleteNoteBtn.addEventListener("click", () => {
-        // hide 'delete note', 'add note' buttons and show 'done deleting' button
+        // Hide 'delete note', 'add note' buttons and show 'done deleting' button
         deleteNoteBtn.classList.add("hidden");
         addNoteBtn.classList.add("hidden");
         doneDelNoteBtn.classList.remove("hidden");
-        // loop through note elements, adding trash listeners and removing note edit listeners
+        // Loop through note elements, adding trash listeners and removing note edit listeners
         const noteElems = document.getElementsByClassName("note");
         for (const noteElem of noteElems) {
-            // get note's trash button (icon)
+            // Get note's trash button (icon)
             const trashBtn = noteElem.shadowRoot.getElementById("js-trash");
-            // display trash button and add event listener that deletes its note when clicked
+            // Display trash button and add event listener that deletes its note when clicked
             trashBtn.classList.remove("hidden");
             trashBtn.addEventListener("click", _deleteCurrentNote);
             trashBtn.addEventListener("keypress", _deleteCurrentNote);
-            // remove edit popup listener while in delete mode
+            // Remove edit popup listener while in delete mode
             // - makes sure edit popup doesn't display when trash icons are clicked
             noteElem.removeEventListener("click", _editCurrentNote);
             noteElem.removeEventListener("keypress", _editCurrentNote);
         }
     });
-    // block deleting when 'done deleting' button clicked - hide trash icons, edit event listeners
+    // Block deleting when 'done deleting' button clicked - hide trash icons, edit event listeners
     doneDelNoteBtn.addEventListener("click", () => {
-        // hide 'done deleting' button, show 'delete notes' 'add note' buttons
+        // Hide 'done deleting' button, show 'delete notes' 'add note' buttons
         deleteNoteBtn.classList.remove("hidden");
         addNoteBtn.classList.remove("hidden");
         doneDelNoteBtn.classList.add("hidden");
-        // loop through note elements, removing trash listeners and adding note edit listeners
+        // Loop through note elements, removing trash listeners and adding note edit listeners
         const noteElems = document.getElementsByClassName("note");
         for (const noteElem of noteElems) {
-            // get note's trash button (icon)
+            // Get note's trash button (icon)
             const trashBtn = noteElem.shadowRoot.getElementById("js-trash");
-            // hide trash button and remove event listener that deletes its note when clicked
+            // Hide trash button and remove event listener that deletes its note when clicked
             trashBtn.classList.add("hidden");
             trashBtn.removeEventListener("click", _deleteCurrentNote);
             trashBtn.removeEventListener("keypress", _deleteCurrentNote);
-            // add edit popup listener back - assures editor popup can display when note is clicked
+            // Add edit popup listener back - assures editor popup can display when note is clicked
             noteElem.addEventListener("click", _editCurrentNote);
             noteElem.addEventListener("keypress", _editCurrentNote);
         }

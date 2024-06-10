@@ -2,20 +2,10 @@
 :root {
     /* General vars */
     --background-color: #f0f0f0;
-    --form-background-color: white;
     --box-shadow-color: rgba(0, 0, 0, 0.1);
     --border-color: #ccc;
-    --button-background-color: #003366;
-    --button-hover-background-color: #0056b3;
     --font: "Lato", sans-serif;
     --height: 100vh;
-
-    /* Form vars */
-    --form-padding: 1.5em;
-    --form-border-radius: 5px;
-    --form-width: 400px;
-    --form-margin-top: 1em;
-    --form-box-shadow: 0 0 10px var(--box-shadow-color);
 
     /* Label vars */
     --label-color: #003366;
@@ -34,15 +24,6 @@
     --input-box-sizing: border-box;
     --input-width-calc: calc(100% - 10px);
 
-    /* Button vars */
-    --button-padding: 0.5em 1em;
-    --button-color: white;
-    --button-border: none;
-    --button-border-radius: 3px;
-    --button-margin-top: 1em;
-    --button-cursor: pointer;
-    --button-font-size: 1em;
-
     /* Header vars */
     --header-margin-bottom: 1em;
     --header-font-size: 2em;
@@ -56,78 +37,23 @@
     --settings-display: flex;
     --settings-align-items: center;
     --settings-justify-content: center;
+    --settings-max-width: 100%;
+    --settings-margin-left: 0px;
 
     /* Settings icon vars*/
     --settings-icon-font-size: 1em;
     --settings-margin-left: 0.5em;
 
-    /* Error message vars */
-    --error-font-size: 15px;
-    --error-font-weight: bold;
-    --error-color: red;
-    --error-background-color: #f8d7da;
-    --error-border: 1px solid #f5c6cb;
-    --error-padding: 5px;
-    --error-margin-top: 1px;
-    --error-border-radius: 2px;
-    --error-text-align: center;
-
-    /* Error button vars */
-    --error-button-font-size: 15px;
-    --error-button-font-weight: bold;
-    --error-button-background-color: #21528b;
-    --error-button-color: white;
-    --error-button-border: none;
-    --error-button-padding: 5px 10px;
-    --error-button-cursor: pointer;
-    --error-button-border-radius: 5px;
-    --error-button-hover-background-color: #e2efff;
-    --error-button-hover-color: #21528b;
-
     /* Responsive vars */
     --cell-padding-small: 15px;
-    --prev-next-buttons-small: 32px;
     --font-size-heading-small: 32px;
     --cell-padding-medium: 18px;
-    --prev-next-buttons-medium: 35px;
     --font-size-heading-medium: 38px;
     --cell-padding-large: 20px;
-    --prev-next-buttons-large: 40px;
     --font-size-heading-large: 40px;
 }
 
-/* Styling error button */
-.error button:hover {
-    background-color: var(--error-button-background-color);
-    color: var(--error-button-hover-color);
-}
-
-.error button {
-    font-size: var(--error-button-font-size);
-    font-weight: var(--error-button-font-weight);
-    background-color: var(--error-button-background-color);
-    color: var(--error-button-color);
-    border: var(--error-button-border);
-    padding: var(--error-button-padding);
-    cursor: var(--error-button-cursor);
-    border-radius: var(--error-button-border-radius);
-}
-
-/* Error message styling */
-.error {
-    font-size: var(--error-font-size);
-    font-weight: var(--error-font-weight);
-    display: none; /* Hidden by default */
-    color: var(--error-color);
-    background-color: var(--error-background-color);
-    border: var(--error-border);
-    padding: var(--error-padding);
-    margin-top: var(--error-margin-top);
-    border-radius: var(--error-border-radius);
-    text-align: var(--error-text-align);
-}
-
-/* Styling elements of the body, such as the form, title, checkbox */
+/* Styling elements of the body, such as the title, checkbox */
 body {
     font-family: var(--font);
     display: flex;
@@ -137,28 +63,6 @@ body {
     height: var(--height);
     background-color: var(--background-color);
     margin: 0;
-}
-
-/* Styling password form */
-form {
-    background: var(--form-background-color);
-    padding: var(--form-padding);
-    border-radius: var(--form-border-radius);
-    box-shadow: var(--form-box-shadow);
-    width: var(--form-width);
-    text-align: center;
-    margin-top: var(--form-margin-top);
-}
-
-/* Input styling */
-input[type="password"] {
-    width: var(--input-width-calc);
-    padding: var(--input-padding);
-    margin-top: var(--input-margin-top);
-    margin-bottom: var(--input-margin-bottom);
-    border: var(--input-border-width) solid var(--border-color);
-    border-radius: var(--input-border-radius);
-    box-sizing: var(--input-box-sizing);
 }
 
 /* Label styling */
@@ -205,8 +109,9 @@ label {
     font-weight: var(--settings-font-weight);
     margin-top: var(--settings-margin-top);
     text-align: var(--settings-text-align);
-    align-items: var(--settings-align-items);
     justify-content: var(--settings-justify-content);
+    max-width: var(--settings-max-width);
+    margin-left: var(--settings-margin-left);
 }
 
 .settings-icon {
@@ -216,108 +121,54 @@ label {
     vertical-align: middle;
 }
 
-/* Button styling */
-button {
-    padding: var(--button-padding);
-    background-color: var(--button-background-color);
-    color: var(--button-color);
-    border: var(--button-border);
-    border-radius: var(--button-border-radius);
-    cursor: var(--button-cursor);
-    margin-top: var(--button-margin-top);
-    font-size: var(--button-font-size);
-}
-
-button:hover {
-    background-color: var(--button-hover-background-color);
-}
-
 /* Responsive settings */
 /* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {
     :root {
-        --form-width: 60%;
         --header-font-size: 1.8em;
-        --settings-font-size: 0.6em;
+        --settings-font-size: 0.7em;
         --settings-icon-font-size: 1em;
         --label-font-size: 1.5em;
-        --button-font-size: 0.5em;
-        --form-padding: 0.75em;
         --input-padding: 0.3em;
-
-        /* Changing error message sizing */
-        --error-font-size: 7px;
-        --error-button-font-size: 7px;
-    }
-
-    /* Place try-again button below text and center */
-    #try-again-button {
-        display: block;
+        /* Make sure text isn't hidden behind navbar */
+        --settings-max-width: 225px;
+        --settings-margin-left: 80px;
     }
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     :root {
-        /* Changing form sizing */
-        --form-width: 300px;
+        /* Changing page sizing */
         --header-font-size: 1.8em;
         --settings-font-size: 0.8em;
         --settings-icon-font-size: 1.2em;
         --label-font-size: 1.2em;
-        --button-font-size: 1em;
-        --form-padding: 1.3em;
-
-        /* Changing error message sizing */
-        --error-font-size: 10px;
-        --error-button-font-size: 10px;
-    }
-    #try-again-button {
-        display: inline-block;
+        --settings-max-width: 100%;
+        --settings-margin-left: 0px;
     }
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     :root {
-        /* Changing form sizing */
-        --form-width: 400px;
+        /* Changing page sizing */
         --header-font-size: 1.8em;
         --settings-font-size: 0.9em;
         --settings-icon-font-size: 1.2em;
         --label-font-size: 1.2em;
-        --button-font-size: 1em;
-        --form-padding: 1.3em;
-
-        /* Changing error message sizing */
-        --error-font-size: 13px;
-        --error-button-font-size: 13px;
-    }
-    /* Navbar extends at this screenwidth --> move form left to account for that */
-    form {
-        margin-left: 50px;
-    }
-    /* Try-again button on same line as error message */
-    #try-again-button {
-        display: inline-block;
+        --settings-max-width: 100%;
+        --settings-margin-left: 0px;
     }
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     :root {
-        /* Changing form sizing */
-        --form-width: 600px;
+        /* Changing page sizing */
         --header-font-size: 2em;
         --settings-font-size: 1em;
         --settings-icon-font-size: 1.2em;
         --label-font-size: 1.2em;
-        --button-font-size: 1em;
         --input-padding: 1em;
-
-        /* Changing error message sizing */
-        --error-font-size: 15px;
-        --error-button-font-size: 15px;
-    }
-    /* Try-again button on same line as error message */
-    #try-again-button {
-        display: inline-block;
+        --settings-max-width: 100%;
+        --settings-margin-left: 0px;
     }
 }

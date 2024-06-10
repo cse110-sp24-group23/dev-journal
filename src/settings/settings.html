@@ -10,7 +10,7 @@
             sizes="32x32"
             href="../assets/icons/brand-logo.svg"
         >
-        <title>Password Page Boilerplate</title>
+        <title>Settings Page</title>
 
         <!-- Stylesheet-->
         <link rel="stylesheet" href="settings.css" >
@@ -31,52 +31,17 @@
         <div class="header">
             <h1>Settings</h1>
         </div>
-        <!-- Checkbox for deciding to use password protection -->
+        <!-- Checkbox for deciding to use Markdown editing -->
         <div class="settings">
             <label for="mde-checkbox">
                 <input
-                    type="checkbox"
-                    id="mde-checkbox"
-                    class="js-mde-checkbox"
-                    checked
+                type="checkbox"
+                id="mde-checkbox"
+                class="js-mde-checkbox"
+                checked
                 >
                 Enable markdown editing for Notes & Daily Logs
             </label>
-            <label for="toggle-password-form">
-                <input
-                type="checkbox"
-                id="toggle-password-form"
-                name="toggle-password-form"
-                checked
-                >
-                Password Protection
-            </label>
-            
-        </div>
-        <!-- Input form for password functionality -->
-        <form action="/submit-password" method="post" id="password-form">
-            <label for="new-password">New Password:</label>
-            <input
-                type="password"
-                id="new-password"
-                name="new-password"
-                required
-            >
-            <label for="confirm-password">Confirm Password:</label>
-            <input
-                type="password"
-                id="confirm-password"
-                name="confirm-password"
-                required
-            >
-            <button type="submit">Update</button>
-        </form>
-        <!-- Error message for passwords that don't match -->
-        <div id="error-message" class="error">
-            <span id="error-text"
-                >Passwords do not match. Please try again.</span
-            >
-            <button id="try-again-button">Try Again</button>
         </div>
     </body>
 </html>

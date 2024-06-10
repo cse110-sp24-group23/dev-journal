@@ -18,47 +18,6 @@
     --gap-between-buttons: 2px;
     --accomplishment-buttons-size: 10px;
 }
-/* Vary size of text based on screen size */
-/* Narrow devices (phones, 320px and up) */
-@media only screen and (min-width: 320px) {
-    :root {
-        --font-size-form: 17px;
-        --font-size-text-input: 16px;
-        --margin-right: 18px;
-        --button-padding: 11px;
-        --accomplishment-buttons-size: 10px;
-    }
-}
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    :root {
-        --font-size-form: 22px;
-        --font-size-text-input: 19px;
-        --margin-right: 20px;
-        --button-padding: 12px;
-        --accomplishment-buttons-size: 12px;
-    }
-}
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    :root {
-        --font-size-form: 23px;
-        --font-size-text-input: 20px;
-        --margin-right: 22px;
-        --button-padding: 14px;
-        --accomplishment-buttons-size: 13px;
-    }
-}
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-    :root {
-        --font-size-form: 24px;
-        --font-size-text-input: 22px;
-        --margin-right: 24px;
-        --button-padding: 15px;
-        --accomplishment-buttons-size: 15px;
-    }
-}
 
 /* Setting the font and margin for the whole body */
 body {
@@ -76,6 +35,11 @@ form {
     font-size: var(--font-size-form);
 }
 
+textarea {
+    width: 100%;
+    height: calc(5 * var(--font-size-text-input));
+}
+
 /* Basic button styling */
 button {
     padding: var(--button-padding);
@@ -84,6 +48,16 @@ button {
     border-width: 0;
     border-radius: var(--input-button-radius);
     cursor: pointer;
+}
+
+/* Style for noscript warning message */
+.noscript-warning {
+    background-color: #ffdddd;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    border: 1px solid red;
 }
 
 /* Flex box with the heading and delete button */
@@ -161,12 +135,44 @@ form input[type="number"],
     margin-left: var(--gap-between-buttons);
 }
 
-/* Style for noscript warning message */
-.noscript-warning {
-    background-color: #ffdddd;
-    color: black;
-    text-align: center;
-    padding: 20px;
-    font-size: 24px;
-    border: 1px solid red;
+/* Vary size of text based on screen size */
+/* Narrow devices (phones, 320px and up) */
+@media only screen and (min-width: 320px) {
+    :root {
+        --font-size-form: 17px;
+        --font-size-text-input: 16px;
+        --margin-right: 18px;
+        --button-padding: 11px;
+        --accomplishment-buttons-size: 10px;
+    }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    :root {
+        --font-size-form: 22px;
+        --font-size-text-input: 19px;
+        --margin-right: 20px;
+        --button-padding: 12px;
+        --accomplishment-buttons-size: 12px;
+    }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    :root {
+        --font-size-form: 23px;
+        --font-size-text-input: 20px;
+        --margin-right: 22px;
+        --button-padding: 14px;
+        --accomplishment-buttons-size: 13px;
+    }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    :root {
+        --font-size-form: 24px;
+        --font-size-text-input: 22px;
+        --margin-right: 24px;
+        --button-padding: 15px;
+        --accomplishment-buttons-size: 15px;
+    }
 }

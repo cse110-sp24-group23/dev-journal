@@ -37,6 +37,8 @@
     --settings-display: flex;
     --settings-align-items: center;
     --settings-justify-content: center;
+    --settings-max-width: 100%;
+    --settings-margin-left: 0px;
 
     /* Settings icon vars*/
     --settings-icon-font-size: 1em;
@@ -44,17 +46,14 @@
 
     /* Responsive vars */
     --cell-padding-small: 15px;
-    --prev-next-buttons-small: 32px;
     --font-size-heading-small: 32px;
     --cell-padding-medium: 18px;
-    --prev-next-buttons-medium: 35px;
     --font-size-heading-medium: 38px;
     --cell-padding-large: 20px;
-    --prev-next-buttons-large: 40px;
     --font-size-heading-large: 40px;
 }
 
-/* Styling elements of the body, such as the form, title, checkbox */
+/* Styling elements of the body, such as the title, checkbox */
 body {
     font-family: var(--font);
     display: flex;
@@ -64,28 +63,6 @@ body {
     height: var(--height);
     background-color: var(--background-color);
     margin: 0;
-}
-
-/* Styling password form */
-form {
-    background: var(--form-background-color);
-    padding: var(--form-padding);
-    border-radius: var(--form-border-radius);
-    box-shadow: var(--form-box-shadow);
-    width: var(--form-width);
-    text-align: center;
-    margin-top: var(--form-margin-top);
-}
-
-/* Input styling */
-input[type="password"] {
-    width: var(--input-width-calc);
-    padding: var(--input-padding);
-    margin-top: var(--input-margin-top);
-    margin-bottom: var(--input-margin-bottom);
-    border: var(--input-border-width) solid var(--border-color);
-    border-radius: var(--input-border-radius);
-    box-sizing: var(--input-box-sizing);
 }
 
 /* Label styling */
@@ -132,9 +109,10 @@ label {
     font-weight: var(--settings-font-weight);
     margin-top: var(--settings-margin-top);
     text-align: var(--settings-text-align);
-    display: var(--settings-display);
-    align-items: var(--settings-align-items);
+    /* align-items: var(--settings-align-items); */
     justify-content: var(--settings-justify-content);
+    max-width: var(--settings-max-width);
+    margin-left: var(--settings-margin-left);
 }
 
 .settings-icon {
@@ -148,50 +126,50 @@ label {
 /* Narrow devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {
     :root {
-        --form-width: 130px;
-        --header-font-size: 1em;
-        --settings-font-size: 0.6em;
+        --header-font-size: 1.8em;
+        --settings-font-size: 0.7em;
         --settings-icon-font-size: 1em;
-        --label-font-size: 0.7em;
-        --button-font-size: 0.5em;
-        --form-padding: 0.75em;
+        --label-font-size: 1.5em;
         --input-padding: 0.3em;
+        /* Make sure text isn't hidden behind navbar */
+        --settings-max-width: 225px;
+        --settings-margin-left: 80px;
     }
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     :root {
-        /* Changing form sizing */
+        /* Changing page sizing */
         --header-font-size: 1.8em;
-        --settings-font-size: 1em;
+        --settings-font-size: 0.8em;
         --settings-icon-font-size: 1.2em;
         --label-font-size: 1.2em;
-        --button-font-size: 1em;
+        --settings-max-width: 100%;
+        --settings-margin-left: 0px;
     }
 }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     :root {
-        /* Changing form sizing */
-        --form-width: 400px;
+        /* Changing page sizing */
         --header-font-size: 1.8em;
-        --settings-font-size: 1em;
+        --settings-font-size: 0.9em;
         --settings-icon-font-size: 1.2em;
         --label-font-size: 1.2em;
-        --button-font-size: 1em;
-        --form-padding: 1.3em;
+        --settings-max-width: 100%;
+        --settings-margin-left: 0px;
     }
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     :root {
-        /* Changing form sizing */
-        --form-width: 600px;
+        /* Changing page sizing */
         --header-font-size: 2em;
         --settings-font-size: 1em;
         --settings-icon-font-size: 1.2em;
         --label-font-size: 1.2em;
-        --button-font-size: 1em;
         --input-padding: 1em;
+        --settings-max-width: 100%;
+        --settings-margin-left: 0px;
     }
 }

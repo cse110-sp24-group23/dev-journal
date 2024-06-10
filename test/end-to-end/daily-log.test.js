@@ -29,8 +29,8 @@ describe("Daily Log End-to-End Tests", () => {
         await dateSelector.click();
         await page.waitForNavigation();
 
-        // Check if the url contains 'dailyLog'
-        expect(page.url()).toContain(`dailyLog`);
+        // Check if the url contains 'daily-log'
+        expect(page.url()).toContain(`daily-log`);
     });
 
     // Test to see is today textarea is updated
@@ -118,8 +118,8 @@ describe("Daily Log End-to-End Tests", () => {
         await dateSelector.click();
         await page.waitForNavigation();
 
-        // Check if the url contains 'dailyLog'
-        expect(page.url()).toContain(`dailyLog`);
+        // Check if the url contains 'daily-log'
+        expect(page.url()).toContain(`daily-log`);
     }, 30000);
 
     // Test to populate exsisting log
@@ -239,7 +239,7 @@ describe("Daily Log End-to-End Tests", () => {
         const saveButton = await page.$(".js-save-button");
         await saveButton.click();
         await page.waitForNavigation();
-        // Check if the url contains 'dailyLog'
+        // Check if the url contains 'calendar'
         expect(page.url()).toContain(`calendar`);
         const localStorageLength = await page.evaluate(() => {
             return JSON.parse(localStorage.getItem("Records")).length;
@@ -250,7 +250,7 @@ describe("Daily Log End-to-End Tests", () => {
         const dateSelector = await page.$(".current-date");
         await dateSelector.click();
         await page.waitForNavigation();
-        expect(page.url()).toContain(`dailyLog`);
+        expect(page.url()).toContain(`daily-log`);
 
         const accomplishmentItem = await page.waitForSelector(
             ".accomplishment-text"
@@ -287,7 +287,6 @@ describe("Daily Log End-to-End Tests", () => {
 
     //test to delete accomplishment
     test("Delete accomplishment", async () => {
-        // Check if the URL contains 'dailyLog'
         page.on("dialog", async (dialog) => {
             await dialog.accept();
         });
@@ -308,7 +307,7 @@ describe("Daily Log End-to-End Tests", () => {
         await deleteLogButton.click();
 
         await page.waitForNavigation();
-        // Check if the URL contains 'dailyLog'
+        // Check if the URL contains 'calendar'
         expect(page.url()).toContain(`calendar`);
         const localStorageLength = await page.evaluate(() => {
             return JSON.parse(localStorage.getItem("Records")).length;

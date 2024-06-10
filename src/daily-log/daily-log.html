@@ -10,7 +10,7 @@
         <link
             rel="stylesheet"
             type="text/css"
-            href="../dailyLog/dailyLog.css"
+            href="../daily-log/daily-log.css"
         />
         <link
             rel="stylesheet"
@@ -21,25 +21,22 @@
         <script src="../navbar/navbar.js"></script>
         <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
         <script type="module" src="./simpleMDE.js"></script>
-        <script type="module" src="./dailyLog.js"></script>
+        <script type="module" src="./daily-log.js"></script>
 
-        <style>
-            .noscript-warning {
-                background-color: #ffdddd; /* light red */
-                color: black;
-                text-align: center;
-                padding: 20px;
-                font-size: 24px;
-                border: 1px solid red;
-            }
-        </style>
+        <!-- Favicon link-->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../assets/icons/brand-logo.svg"
+        >
     </head>
     <body>
         <noscript>
-            <div class="noscript-warning">
+            <p class="noscript-warning">
                 This application requires JavaScript to run. 
                 Please enable JavaScript in your browser settings.
-            </div>
+            </p>
         </noscript>
 
         <div id="navbar"></div>
@@ -48,12 +45,14 @@
             <!-- Heading: Date -->
             <div class="header-container">
                 <h1>Date:</h1>
-                <div class="button-container">
-                    <!-- button to save log -->
-                    <button type="button" id="save-button">Submit</button>
-                    <!-- button for deleting log -->
-                    <button type="button" id="delete-button">Delete Log</button>
-                </div>
+                <!-- button for deleting log -->
+                <button
+                    type="button"
+                    id="delete-button"
+                    class="js-delete-button"
+                >
+                    Delete Log
+                </button>
             </div>
 
             <form>
@@ -101,6 +100,10 @@ What things can you do in the future?"
             </button>
             <!-- paragraph element to display the list of accomplishments -->
             <p class="accomplishment--list js-accomplishment-list"></p>
+            <!-- button to save log -->
+            <button type="button" id="save-button" class="js-save-button">
+                Save Log
+            </button>
         </main>
     </body>
 </html>

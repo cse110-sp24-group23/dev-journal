@@ -1,123 +1,174 @@
+/* Root Variables */
 :root {
-    --background-color: #F0F0F0;
-    --form-background-color: white;
+    /* General vars */
+    --background-color: #f0f0f0;
     --box-shadow-color: rgba(0, 0, 0, 0.1);
     --border-color: #ccc;
-    --button-background-color: #003366;
-    --button-hover-background-color: #0056B3;
+    --font: "Lato", sans-serif;
+    --height: 100vh;
+
+    /* Label vars */
     --label-color: #003366;
+    --label-display: block;
+    --label-margin-top: 1em;
+    --label-font-weight: normal;
+    --label-text-align: left;
+    --label-font-size: 1em;
+
+    /* Input vars */
+    --input-padding: 0.5em;
+    --input-margin-top: 0.5em;
+    --input-margin-bottom: 1em;
+    --input-border-radius: 3px;
+    --input-border-width: 1px;
+    --input-box-sizing: border-box;
+    --input-width-calc: calc(100% - 10px);
+
+    /* Header vars */
+    --header-margin-bottom: 1em;
+    --header-font-size: 2em;
+    --header-font-weight: normal;
+
+    /* Settings vars */
+    --settings-font-size: 1.5em;
+    --settings-font-weight: normal;
+    --settings-margin-top: 1em;
+    --settings-text-align: center;
+    --settings-display: flex;
+    --settings-align-items: center;
+    --settings-justify-content: center;
+    --settings-max-width: 100%;
+    --settings-margin-left: 0px;
+
+    /* Settings icon vars*/
+    --settings-icon-font-size: 1em;
+    --settings-margin-left: 0.5em;
+
+    /* Responsive vars */
+    --cell-padding-small: 15px;
+    --font-size-heading-small: 32px;
+    --cell-padding-medium: 18px;
+    --font-size-heading-medium: 38px;
+    --cell-padding-large: 20px;
+    --font-size-heading-large: 40px;
 }
 
+/* Styling elements of the body, such as the title, checkbox */
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: var(--height);
     background-color: var(--background-color);
     margin: 0;
 }
 
-.header {
-    text-align: center;
-    margin-bottom: 1em;
+/* Label styling */
+label {
+    display: var(--label-display);
+    margin-top: var(--label-margin-top);
+    font-weight: var(--label-font-weight);
+    text-align: var(--label-text-align);
+    color: var(--label-color);
+    font-size: var(--label-font-size);
 }
 
+/* Style for noscript warning message */
+.noscript-warning {
+    background-color: #ffdddd;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    border: 1px solid red;
+}
+
+/* Header styling */
+.header {
+    text-align: center;
+    margin-bottom: var(--header-margin-bottom);
+}
+
+/* Header font styling */
 .header h1 {
-    font-size: 2em;
-    font-weight: bold;
+    font-size: var(--header-font-size);
+    font-weight: var(--header-font-weight);
     color: var(--label-color);
 }
 
-form {
-    background: var(--form-background-color);
-    padding: 2em;
-    border-radius: 5px;
-    box-shadow: 0 0 10px var(--box-shadow-color);
-    width: 300px;
-    text-align: center;
-    margin-top: 1em;
-}
-
+/* Hidden class */
 .hidden {
     display: none;
 }
 
-label {
-    display: block;
-    margin-top: 1em;
-    font-weight: bold;
-    text-align: left;
-    color: var(--label-color);
-}
-
-input[type="password"] {
-    width: calc(100% - 10px);
-    padding: 0.5em;
-    margin-top: 0.5em;
-    margin-bottom: 1em;
-    border: 1px solid var(--border-color);
-    border-radius: 3px;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 0.5em 1em;
-    background-color: var(--button-background-color);
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-top: 1em;
-}
-
-button:hover {
-    background-color: var(--button-hover-background-color);
-}
-
+/* Settings section */
 .settings {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-top: 1em;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: var(--settings-font-size);
+    font-weight: var(--settings-font-weight);
+    margin-top: var(--settings-margin-top);
+    text-align: var(--settings-text-align);
+    justify-content: var(--settings-justify-content);
+    max-width: var(--settings-max-width);
+    margin-left: var(--settings-margin-left);
 }
 
 .settings-icon {
-    font-size: 1em;
+    font-size: var(--settings-icon-font-size);
     color: var(--label-color);
-    margin-left: 0.5em;
+    margin-left: var(--settings-margin-left);
     vertical-align: middle;
 }
 
-.error{
-    font-size: 15px;
-    font-weight: bold;
-    display: none; /* Hidden by default */
-    color: red;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 5px;
-    margin-top: 1px;
-    border-radius: 2px;
-    text-align: center;
+/* Responsive settings */
+/* Narrow devices (phones, 320px and up) */
+@media only screen and (min-width: 320px) {
+    :root {
+        --header-font-size: 1.8em;
+        --settings-font-size: 0.7em;
+        --settings-icon-font-size: 1em;
+        --label-font-size: 1.5em;
+        --input-padding: 0.3em;
+        /* Make sure text isn't hidden behind navbar */
+        --settings-max-width: 225px;
+        --settings-margin-left: 80px;
+    }
 }
-
-.error button{
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #21528B;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    :root {
+        /* Changing page sizing */
+        --header-font-size: 1.8em;
+        --settings-font-size: 0.8em;
+        --settings-icon-font-size: 1.2em;
+        --label-font-size: 1.2em;
+        --settings-max-width: 100%;
+        --settings-margin-left: 0px;
+    }
 }
-
-.error button:hover {
-    background-color: #E2EFFF;
-    color: #21528B;
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    :root {
+        /* Changing page sizing */
+        --header-font-size: 1.8em;
+        --settings-font-size: 0.9em;
+        --settings-icon-font-size: 1.2em;
+        --label-font-size: 1.2em;
+        --settings-max-width: 100%;
+        --settings-margin-left: 0px;
+    }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    :root {
+        /* Changing page sizing */
+        --header-font-size: 2em;
+        --settings-font-size: 1em;
+        --settings-icon-font-size: 1.2em;
+        --label-font-size: 1.2em;
+        --input-padding: 1em;
+        --settings-max-width: 100%;
+        --settings-margin-left: 0px;
+    }
 }

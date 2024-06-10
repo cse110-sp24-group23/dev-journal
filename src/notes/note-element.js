@@ -1,12 +1,21 @@
+/**
+ * Represents a custom HTML element for a note.
+ * @extends HTMLElement
+ */
 class Note extends HTMLElement {
-    // all attributes that can be gotten from a note element
+    /**
+     * Returns an array of all attributes that can be observed for a note element.
+     * @returns {string[]} Array of attribute names
+     */
     static get ObservedAttributes() {
         return ["id", "date", "title", "content", "preview"];
     }
-    // initialize everything to null when note is first created
+
+    /**
+     * Initializes the note element.
+     */
     constructor() {
         super();
-        // keep shadow mode open for event Listeners to access trash icon
         this.shadow = this.attachShadow({ mode: "open" });
         this._id = null;
         this._date = null;
@@ -14,79 +23,96 @@ class Note extends HTMLElement {
         this._content = null;
         this._preview = null;
     }
-    /*
-    =======================
-        Get functions
-    =======================
-    */
-    // getter for id attribute - called by const value = noteElem.id
+
+    /**
+     * Gets the value of the `id` attribute.
+     * @returns {string} The value of the `id` attribute
+     */
     get id() {
         return this._id;
     }
-    // getter for date attribute - called by const value = noteElem.date
+
+    /**
+     * Gets the value of the `date` attribute.
+     * @returns {string} The value of the `date` attribute
+     */
     get date() {
         return this._date;
     }
-    // getter for title attribute - called by const value = noteElem.title
+
+    /**
+     * Gets the value of the `title` attribute.
+     * @returns {string} The value of the `title` attribute
+     */
     get title() {
         return this._title;
     }
-    // getter for content attribute - called by const value = noteElem.content
+
+    /**
+     * Gets the value of the `content` attribute.
+     * @returns {string} The value of the `content` attribute
+     */
     get content() {
         return this._content;
     }
-    // getter for preview attribute - called by const value = noteElem.preview
+
+    /**
+     * Gets the value of the `preview` attribute.
+     * @returns {string} The value of the `preview` attribute
+     */
     get preview() {
         return this._preview;
     }
 
-    /*
-    =======================
-        Set functions
-    =======================
-    */
-    // setter for id attribute - called by noteElem.id = "some-value"
+    /**
+     * Sets the value of the `id` attribute.
+     * @param {string} value - The new value for the `id` attribute
+     */
     set id(value) {
         this._id = value;
         this.setAttribute("id", value);
     }
-    // setter for title attribute - called by noteElem.title = "some value"
+
+    /**
+     * Sets the value of the `title` attribute.
+     * @param {string} value - The new value for the `title` attribute
+     */
     set title(value) {
         this._title = value;
         this.setAttribute("title", value);
     }
-    // setter for date attribute - called by noteElem.date = new Date(...);
+
+    /**
+     * Sets the value of the `date` attribute.
+     * @param {string} value - The new value for the `date` attribute
+     */
     set date(value) {
         this._date = value;
         this.setAttribute("date", value);
     }
-    // setter for title attribute - called by noteElem.content = "some value"
-    // also sets preview member variable (as a possibly truncated version of content)
+
+    /**
+     * Sets the value of the `content` attribute.
+     * @param {string} value - The new value for the `content` attribute
+     */
     set content(value) {
-        // set content
         this._content = value;
         this.setAttribute("content", value);
-        // set preview
-        // define a max length for the preview
         const maxPreviewLength = 50;
         const previewBody = this._content.slice(0, maxPreviewLength);
-        // suffix for preview is default empty, but an elipses if it's truncated from content
         let suffix = "";
         if (previewBody != this._content) {
             suffix = "...";
         }
-        // define preview to be the main body with a potential elipses
         this._preview = previewBody + suffix;
     }
 
-    /*
-    Change note attributes from oldValue to newValue
-    Parameters: name, oldValue, newValue
-        - name: attribute name
-        - oldValue: old content of attribute
-        - newValue: new content of attribute
-    return: None
-    */
+    /**
+     * Handles attribute changes for the note element.
+     * @param {string} name - The name of the attribute that changed
+     * @param {string} oldValue - The old value of the attribute
+     * @param {string} newValue - The new value of the attribute
+     */
     attributeChangeCallback(name, oldValue, newValue) {
         if (oldValue === newValue) {
             return;
@@ -107,30 +133,26 @@ class Note extends HTMLElement {
             this.preview = newValue;
         }
     }
-    /*
-    Given a date string like 2024-05-27T07:50:04.274Z, return a string in the form May 27, 2024
-    Parameters:
-        - dateString: String that represents a date
-    Return:
-        - String of the same date but in a readable form
-    */
+
+    /**
+     * Formats a date string into a readable form.
+     * @param {string} dateString - The date string to format
+     * @returns {string} The formatted date string
+     */
     _formatDate(dateString) {
         const date = new Date(dateString);
         const settings = { year: "numeric", month: "long", day: "numeric" };
         return date.toLocaleDateString("en-US", settings);
     }
-    /*
-    Initialize values when new note is added to DOM.
-    Parameters: None
-    Return: None
-    */
+
+    /**
+     * Initializes the note element when it is added to the DOM.
+     */
     connectedCallback() {
-        // once a new note element is added to the DOM, initialize its values
         this._id = this.getAttribute("id");
         this._title = this.getAttribute("title");
         this._date = this.getAttribute("date");
         this._content = this.getAttribute("content");
-        // set the shadow DOM for the note element to contain its displayed member variables
         this.shadow.innerHTML = `
         <p id="date">${this._formatDate(this._date)}</p>
         <p id="title">${this._title}</p>

@@ -24,6 +24,9 @@
     --font-size-heading: 30px;
     --border-calendar: 1.5px;
     --font-weight-table: 570;
+
+    --accomplishment-icon-width: 17px;
+    --calendar-icon-padding: 5px;
 }
 
 /* Adjustable Calendar */
@@ -118,7 +121,6 @@ thead {
     background-color: var(--table-head-background-color);
 }
 
-
 /* Making font lighter for heading */
 th {
     font-size: var(--font-size-calendar-heading);
@@ -136,6 +138,16 @@ th {
 /* Body */
 body {
     font-family: "Lato", sans-serif;
+}
+
+/* Style for noscript warning message */
+.noscript-warning {
+    background-color: #ffdddd;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    border: 1px solid red;
 }
 
 /* Day of the Month  */
@@ -157,4 +169,15 @@ td.current-date {
     background-color: var(--today-background-color);
     font-weight: bold;
 }
+/* Accomplishment icon */
+.accomplishment-icon {
+    width: var(--accomplishment-icon-width);
+    padding: var(--calendar-icon-padding);
+}
 
+/* Daily log icon */
+.logged-icon {
+    display: block;
+    margin: 0 auto;
+    padding: var(--calendar-icon-padding);
+}

@@ -1,5 +1,8 @@
 # Noted: A Journal for Developers
 
+[Final Video (Public)](https://www.youtube.com/watch?v=NOqpsQjIh7Q)
+[Final Video (Private)](https://youtu.be/okvZZtt5HLU)
+
 ## Quick Start
 Access our page through [GitHub Pages](https://cse110-sp24-group23.github.io/dev-journal/). For more details, check out our [Getting Started](https://github.com/cse110-sp24-group23/dev-journal/wiki/Getting-Started) page on our Wiki. 
 
